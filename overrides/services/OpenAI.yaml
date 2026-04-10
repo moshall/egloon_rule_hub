@@ -1,0 +1,7 @@
+append:
+  - type: DOMAIN-SUFFIX
+    value: chatgpt.com
+
+remove: []
+disable: []
+

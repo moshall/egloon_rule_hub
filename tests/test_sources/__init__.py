@@ -1,0 +1,2 @@
+"""Source adapter tests."""
+

@@ -1,0 +1,17 @@
+targets:
+  egern:
+    enabled: true
+    file_ext: yaml
+  loon:
+    enabled: true
+    file_ext: list
+  clash:
+    enabled: true
+    file_ext: yaml
+  quanx:
+    enabled: true
+    file_ext: list
+  shadowrocket:
+    enabled: true
+    file_ext: list
+

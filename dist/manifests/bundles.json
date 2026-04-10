@@ -1,0 +1,134 @@
+{
+  "ai": {
+    "enabled": true,
+    "services": [
+      "OpenAI",
+      "Claude",
+      "Gemini",
+      "Copilot"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "china": {
+    "enabled": true,
+    "services": [
+      "China",
+      "ChinaDNS",
+      "ChinaIPs",
+      "ChinaIPsBGP",
+      "ChinaMax"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "commerce": {
+    "enabled": true,
+    "services": [
+      "PayPal",
+      "Rakuten",
+      "Shopify",
+      "Shopee",
+      "Stripe",
+      "eBay"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "gaming": {
+    "enabled": true,
+    "services": [
+      "Nintendo",
+      "Nvidia",
+      "Sony",
+      "Steam",
+      "SteamCN",
+      "Xbox",
+      "EA"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "google": {
+    "enabled": true,
+    "services": [
+      "Google",
+      "GoogleVoice",
+      "GoogleEarth",
+      "GoogleSearch",
+      "YouTube",
+      "YouTubeMusic"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "social": {
+    "enabled": true,
+    "services": [
+      "Twitter",
+      "Instagram",
+      "Facebook",
+      "Reddit",
+      "TikTok",
+      "Tumblr",
+      "Twitch",
+      "Telegram",
+      "WhatsApp"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "streaming": {
+    "enabled": true,
+    "services": [
+      "Netflix",
+      "Spotify",
+      "HBO",
+      "HBOAsia",
+      "HBOHK",
+      "HBOUSA",
+      "FOXNOW",
+      "FOXPlus",
+      "Fox",
+      "SkyGO",
+      "Emby"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  }
+}

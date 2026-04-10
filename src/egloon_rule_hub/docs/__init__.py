@@ -1,0 +1,2 @@
+"""Markdown doc generation."""
+

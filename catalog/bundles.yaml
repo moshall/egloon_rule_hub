@@ -1,0 +1,38 @@
+all_targets: &all_targets [egern, loon, clash, quanx, shadowrocket]
+
+bundles:
+  ai:
+    enabled: true
+    targets: *all_targets
+    services: [OpenAI, Claude, Gemini, Copilot]
+
+  google:
+    enabled: true
+    targets: *all_targets
+    services: [Google, GoogleVoice, GoogleEarth, GoogleSearch, YouTube, YouTubeMusic]
+
+  social:
+    enabled: true
+    targets: *all_targets
+    services: [Twitter, Instagram, Facebook, Reddit, TikTok, Tumblr, Twitch, Telegram, WhatsApp]
+
+  streaming:
+    enabled: true
+    targets: *all_targets
+    services: [Netflix, Spotify, HBO, HBOAsia, HBOHK, HBOUSA, FOXNOW, FOXPlus, Fox, SkyGO, Emby]
+
+  gaming:
+    enabled: true
+    targets: *all_targets
+    services: [Nintendo, Nvidia, Sony, Steam, SteamCN, Xbox, EA]
+
+  commerce:
+    enabled: true
+    targets: *all_targets
+    services: [PayPal, Rakuten, Shopify, Shopee, Stripe, eBay]
+
+  china:
+    enabled: true
+    targets: *all_targets
+    services: [China, ChinaDNS, ChinaIPs, ChinaIPsBGP, ChinaMax]
+

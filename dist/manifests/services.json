@@ -1,0 +1,734 @@
+{
+  "Apple": {
+    "enabled": true,
+    "notes": "Apple services",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "China": {
+    "enabled": true,
+    "notes": "Regional routing",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "ChinaDNS": {
+    "enabled": true,
+    "notes": "Regional routing",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "ChinaIPs": {
+    "enabled": true,
+    "notes": "Regional routing",
+    "source_count": 1,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "ChinaIPsBGP": {
+    "enabled": true,
+    "notes": "Regional routing",
+    "source_count": 1,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "ChinaMax": {
+    "enabled": true,
+    "notes": "Regional routing",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Claude": {
+    "enabled": true,
+    "notes": "AI service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Cloudflare": {
+    "enabled": true,
+    "notes": "Infra service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Copilot": {
+    "enabled": true,
+    "notes": "AI service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Duolingo": {
+    "enabled": true,
+    "notes": "Education",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "EA": {
+    "enabled": true,
+    "notes": "Gaming",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "ESPN": {
+    "enabled": true,
+    "notes": "Sports media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Emby": {
+    "enabled": true,
+    "notes": "Media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "FOXNOW": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "FOXPlus": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Facebook": {
+    "enabled": true,
+    "notes": "Social service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Fox": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Gemini": {
+    "enabled": true,
+    "notes": "Google AI service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "GitHub": {
+    "enabled": true,
+    "notes": "Developer platform",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Google": {
+    "enabled": true,
+    "notes": "Google main services",
+    "source_count": 3,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "GoogleEarth": {
+    "enabled": true,
+    "notes": "Google Earth",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "GoogleSearch": {
+    "enabled": true,
+    "notes": "Google Search",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "GoogleVoice": {
+    "enabled": true,
+    "notes": "Google Voice",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "HBO": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "HBOAsia": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "HBOHK": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "HBOUSA": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Instagram": {
+    "enabled": true,
+    "notes": "Social service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Linux": {
+    "enabled": true,
+    "notes": "Linux ecosystems",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Netflix": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Nintendo": {
+    "enabled": true,
+    "notes": "Gaming",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Nvidia": {
+    "enabled": true,
+    "notes": "Gaming and cloud",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "OpenAI": {
+    "enabled": true,
+    "notes": "AI service",
+    "source_count": 3,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "PayPal": {
+    "enabled": true,
+    "notes": "Payments",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "PikPak": {
+    "enabled": true,
+    "notes": "Cloud storage",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Proxy": {
+    "enabled": true,
+    "notes": "Proxy related rules",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Rakuten": {
+    "enabled": true,
+    "notes": "Commerce",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Reddit": {
+    "enabled": true,
+    "notes": "Social service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Shopee": {
+    "enabled": true,
+    "notes": "Commerce",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Shopify": {
+    "enabled": true,
+    "notes": "Commerce",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "SkyGO": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Sony": {
+    "enabled": true,
+    "notes": "Gaming and media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Spotify": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Steam": {
+    "enabled": true,
+    "notes": "Gaming",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "SteamCN": {
+    "enabled": true,
+    "notes": "Gaming",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Stripe": {
+    "enabled": true,
+    "notes": "Payments",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Telegram": {
+    "enabled": true,
+    "notes": "Messaging",
+    "source_count": 3,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "TelegramNL": {
+    "enabled": true,
+    "notes": "Messaging",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "TelegramSG": {
+    "enabled": true,
+    "notes": "Messaging",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "TelegramUS": {
+    "enabled": true,
+    "notes": "Messaging",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "TikTok": {
+    "enabled": true,
+    "notes": "Social service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Tumblr": {
+    "enabled": true,
+    "notes": "Social service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Twitch": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Twitter": {
+    "enabled": true,
+    "notes": "Social service",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "WhatsApp": {
+    "enabled": true,
+    "notes": "Messaging",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Wikipedia": {
+    "enabled": true,
+    "notes": "Knowledge",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "Xbox": {
+    "enabled": true,
+    "notes": "Gaming",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "YYeTs": {
+    "enabled": true,
+    "notes": "Media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "YouTube": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 3,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "YouTubeMusic": {
+    "enabled": true,
+    "notes": "Streaming media",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "eBay": {
+    "enabled": true,
+    "notes": "Commerce",
+    "source_count": 2,
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  }
+}

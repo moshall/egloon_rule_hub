@@ -1,0 +1,2 @@
+[console_scripts]
+egloon-rule-hub = egloon_rule_hub.cli:main

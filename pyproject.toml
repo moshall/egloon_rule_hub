@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "egloon-rule-hub"
+version = "0.1.0"
+description = "Multi-source proxy rule hub for Egern, Loon, Clash, QuanX, and Shadowrocket."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "PyYAML>=6.0",
+]
+
+[project.scripts]
+egloon-rule-hub = "egloon_rule_hub.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

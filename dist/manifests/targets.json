@@ -1,0 +1,22 @@
+{
+  "clash": {
+    "enabled": true,
+    "file_ext": "yaml"
+  },
+  "egern": {
+    "enabled": true,
+    "file_ext": "yaml"
+  },
+  "loon": {
+    "enabled": true,
+    "file_ext": "list"
+  },
+  "quanx": {
+    "enabled": true,
+    "file_ext": "list"
+  },
+  "shadowrocket": {
+    "enabled": true,
+    "file_ext": "list"
+  }
+}
