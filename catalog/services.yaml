@@ -776,7 +776,7 @@ services:
         path: rule/Loon/Cloudflare/Cloudflare.list
         format: loon_list
         priority: 90
-    notes: "Infra service"
+    notes: "Infrastructure and CDN service"
   EA:
     enabled: true
     targets: *all_targets
