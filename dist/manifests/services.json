@@ -85,7 +85,7 @@
   },
   "Cloudflare": {
     "enabled": true,
-    "notes": "Infra service",
+    "notes": "Infrastructure and CDN service",
     "source_count": 2,
     "targets": [
       "egern",

@@ -11,7 +11,7 @@ Total services: 61
 | ChinaIPsBGP | True | egern, loon, clash, quanx, shadowrocket | 1 | Regional routing |
 | ChinaMax | True | egern, loon, clash, quanx, shadowrocket | 2 | Regional routing |
 | Claude | True | egern, loon, clash, quanx, shadowrocket | 2 | AI service |
-| Cloudflare | True | egern, loon, clash, quanx, shadowrocket | 2 | Infra service |
+| Cloudflare | True | egern, loon, clash, quanx, shadowrocket | 2 | Infrastructure and CDN service |
 | Copilot | True | egern, loon, clash, quanx, shadowrocket | 2 | AI service |
 | Duolingo | True | egern, loon, clash, quanx, shadowrocket | 2 | Education |
 | EA | True | egern, loon, clash, quanx, shadowrocket | 2 | Gaming |
