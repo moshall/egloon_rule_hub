@@ -100,6 +100,7 @@ Add or update tests to assert:
 - self-maintained TXT defaults use `quantumultx`, not `quanx`
 - generated directories are `Rule/QuantumultX/<Service>/`
 - stale `Rule/QuanX/` directories are pruned during render
+- stale bundle files such as `dist/bundles/ai/quanx.list` are pruned during render
 - upstream-doc manifests emit `target_dir == "QuantumultX"` for that target
 
 Use assertions like:
@@ -109,6 +110,7 @@ self.assertIn("quantumultx", catalog.targets)
 self.assertNotIn("quanx", catalog.targets)
 self.assertTrue((root / "Rule" / "QuantumultX" / "OpenAI" / "OpenAI.list").exists())
 self.assertFalse((root / "Rule" / "QuanX").exists())
+self.assertFalse((root / "dist" / "bundles" / "ai" / "quanx.list").exists())
 ```
 
 - [ ] **Step 2: Run targeted tests to verify they fail**
@@ -141,6 +143,7 @@ Make the rename in one coherent slice:
 - update `TARGET_RENDERERS`, `TARGET_DISPLAY_NAMES`, and stale-prune logic in `src/egloon_rule_hub/build.py`
 - update `TARGET_DISPLAY_NAMES`, usage examples, and path rendering in `src/egloon_rule_hub/docs/render.py`
 - update target-dir labeling in `src/egloon_rule_hub/upstream_docs/build.py`
+- prune stale bundle outputs that still use the old `quanx` target filename pattern
 - keep the existing parser/emitter modules (`parsers/quanx.py`, `emitters/quanx.py`) as implementation details; do not rename them yet unless the code requires it
 
 - [ ] **Step 4: Run tests to verify the rename passes**
@@ -182,6 +185,7 @@ git commit -m "feat: rename quanx target to quantumultx"
 Add catalog/build tests that assert:
 
 - the new services load into the runtime catalog
+- already supported strict-source services such as `ChinaDNS` and `ChinaIPs` remain present
 - `ChinaASN` is not added
 - `ai` includes `BardAI`
 - `china-bank` exists and contains `CCB`, `CEB`, `CGB`, `CMB`, `PSBC`
@@ -192,6 +196,8 @@ Suggested service assertions:
 ```python
 for name in ["Direct", "Discord", "Disney", "Notion", "BardAI", "Tesla"]:
     self.assertIn(name, catalog.services)
+self.assertIn("ChinaDNS", catalog.services)
+self.assertIn("ChinaIPs", catalog.services)
 self.assertNotIn("ChinaASN", catalog.services)
 self.assertEqual(
     catalog.bundles["china-bank"].services,
@@ -271,6 +277,7 @@ Create `tests/test_icons/test_sync.py` covering:
 - missing icon does not publish any guessed file
 - `dist/manifests/icons.json` records `matched: true` with `source_path`
 - missing icon records `matched: false` with `reason: "strict_match_not_found"`
+- icon source fetch failure records `matched: false` with `reason: "icon_sync_source_unavailable"` instead of aborting bootstrap
 - stale icons are pruned when a previously matched service no longer matches
 
 Update CLI/doc tests to assert:
@@ -317,6 +324,7 @@ Implementation requirements:
 - write `dist/manifests/icons.json`
 - copy matched files to `Rule/<Target>/<Service>/icon.png`
 - prune stale `icon.png` files when a service loses its match or output
+- if the upstream icon source is unavailable, do not fail the whole bootstrap; instead mark every unresolved service with `reason: "icon_sync_source_unavailable"` and continue publishing rules/READMEs without icons
 - update `src/egloon_rule_hub/cli.py` so `bootstrap` runs icon sync after rule artifacts exist and before README rendering
 - update `src/egloon_rule_hub/docs/render.py` so each service README includes exactly one icon line
 - keep icon metadata separate from rule-source provenance
@@ -362,6 +370,7 @@ Update tests to assert:
 - `bootstrap` writes root `ATTRIBUTION.md`
 - `bootstrap` no longer relies on top-level `docs/services.md`, `docs/sources.md`, or `docs/usage.md` as public outputs
 - `validate.yml` no longer executes `python -m unittest ...`
+- `sync-rules.yml` no longer executes `python -m unittest ...`
 - `sync-rules.yml` stages only public paths and does not stage `docs` or `tests`
 
 Suggested workflow assertions:
@@ -408,6 +417,7 @@ Update workflows:
   - `python -m egloon_rule_hub validate-catalog`
   - `python -m egloon_rule_hub bootstrap`
 - `sync-rules.yml` should refresh TXT, run bootstrap, and stage only:
+  - no `python -m unittest ...` step
   - `.github/workflows`
   - `catalog`
   - `src`
