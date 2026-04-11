@@ -19,8 +19,9 @@ class BootstrapCLITest(TestCase):
             mock.patch("egloon_rule_hub.cli.render_rule_artifacts"), \
             mock.patch("egloon_rule_hub.cli._render_manifests"), \
             mock.patch("egloon_rule_hub.cli.write_markdown_docs"), \
-            mock.patch("egloon_rule_hub.cli.build_upstream_docs") as build_upstream_docs:
-            status = cli.main(["--root", str(root), "bootstrap"])
+            mock.patch("egloon_rule_hub.cli.build_upstream_docs") as build_upstream_docs, \
+            mock.patch("egloon_rule_hub.cli._repo_root", return_value=root):
+            status = cli.main(["--root", ".", "bootstrap"])
 
         self.assertEqual(status, 0)
         build_upstream_docs.assert_called_once_with(catalog)
