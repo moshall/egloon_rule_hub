@@ -11,7 +11,11 @@ from unittest import mock, TestCase
 
 from egloon_rule_hub import cli
 from egloon_rule_hub.model.catalog import Catalog
-from egloon_rule_hub.model.publish import SelectedSourceEntry, TargetArtifact
+from egloon_rule_hub.model.publish import (
+    SelectedSourceEntry,
+    TargetArtifact,
+    TargetArtifactVariant,
+)
 from egloon_rule_hub.model.rules import Rule
 
 
@@ -248,6 +252,221 @@ class BootstrapCLITest(TestCase):
             for path in expected_paths:
                 with self.subTest(path=path):
                     self.assertTrue(path.exists(), f"{path} is missing from bootstrap output")
+
+    def test_bootstrap_generates_variant_files_and_variant_readme_links(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            catalog_dir = root / "catalog"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n  sample:\n    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  loon:\n"
+                "    enabled: true\n"
+                "    file_ext: lsr\n"
+                "    publish_mode: lsr\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "defaults:\n"
+                "  fallback_order: [native, shadowrocket, clash]\n"
+                "services:\n"
+                "  China:\n"
+                "    enabled: true\n"
+                "    outputs: [loon]\n"
+                "    target_sources:\n"
+                "      loon:\n"
+                "        variants:\n"
+                "          China:\n"
+                "            primary: true\n"
+                "            native: []\n"
+                "            shadowrocket: []\n"
+                "            clash: []\n"
+                "          China_Domain:\n"
+                "            primary: false\n"
+                "            native: []\n"
+                "            shadowrocket: []\n"
+                "            clash: []\n"
+                "          China_Resolve:\n"
+                "            primary: false\n"
+                "            native: []\n"
+                "            shadowrocket: []\n"
+                "            clash: []\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text("bundles: {}\n", encoding="utf-8")
+
+            generated_artifacts = {
+                "China": {
+                    "loon": TargetArtifact(
+                        service="China",
+                        target="loon",
+                        selected_family="native",
+                        selected_native_target="loon",
+                        publish_mode="lsr",
+                        is_native=True,
+                        is_converted=False,
+                        conversion_path=None,
+                        rules=[Rule("DOMAIN", "china-primary.example")],
+                        selected_entries=[
+                            SelectedSourceEntry(
+                                source_name="sample",
+                                family="native",
+                                format="loon_list",
+                                url="https://example.com/rule/Loon/China/China.list",
+                                priority=100,
+                                raw_text="DOMAIN,china-primary.example\n",
+                            )
+                        ],
+                        variants={
+                            "China": TargetArtifactVariant(
+                                name="China",
+                                primary=True,
+                                selected_family="native",
+                                selected_native_target="loon",
+                                publish_mode="lsr",
+                                is_native=True,
+                                is_converted=False,
+                                conversion_path=None,
+                                rules=[Rule("DOMAIN", "china-primary.example")],
+                                selected_entries=[
+                                    SelectedSourceEntry(
+                                        source_name="sample",
+                                        family="native",
+                                        format="loon_list",
+                                        url="https://example.com/rule/Loon/China/China.list",
+                                        priority=100,
+                                        raw_text="DOMAIN,china-primary.example\n",
+                                    )
+                                ],
+                            ),
+                            "China_Domain": TargetArtifactVariant(
+                                name="China_Domain",
+                                primary=False,
+                                selected_family="native",
+                                selected_native_target="loon",
+                                publish_mode="lsr",
+                                is_native=True,
+                                is_converted=False,
+                                conversion_path=None,
+                                rules=[Rule("DOMAIN", "china-domain.example")],
+                                selected_entries=[
+                                    SelectedSourceEntry(
+                                        source_name="sample",
+                                        family="native",
+                                        format="loon_list",
+                                        url="https://example.com/rule/Loon/China/China_Domain.list",
+                                        priority=100,
+                                        raw_text="DOMAIN,china-domain.example\n",
+                                    )
+                                ],
+                            ),
+                            "China_Resolve": TargetArtifactVariant(
+                                name="China_Resolve",
+                                primary=False,
+                                selected_family="native",
+                                selected_native_target="loon",
+                                publish_mode="lsr",
+                                is_native=True,
+                                is_converted=False,
+                                conversion_path=None,
+                                rules=[Rule("DOMAIN", "china-resolve.example")],
+                                selected_entries=[
+                                    SelectedSourceEntry(
+                                        source_name="sample",
+                                        family="native",
+                                        format="loon_list",
+                                        url="https://example.com/rule/Loon/China/China_Resolve.list",
+                                        priority=100,
+                                        raw_text="DOMAIN,china-resolve.example\n",
+                                    )
+                                ],
+                            ),
+                        },
+                    )
+                }
+            }
+
+            manifest = {
+                "China": [
+                    {
+                        "target": "loon",
+                        "target_dir": "Loon",
+                        "service": "China",
+                        "variant": "China",
+                        "variant_primary": True,
+                        "variant_file": "China.lsr",
+                        "source": "sample",
+                        "priority": 100,
+                        "rule_url": "https://example.com/rule/Loon/China/China.list",
+                        "readme_url": "https://example.com/rule/Loon/China/README.md",
+                        "status": "ok",
+                        "snapshot_path": None,
+                        "entry_key": "china-primary",
+                        "is_converted": False,
+                    },
+                    {
+                        "target": "loon",
+                        "target_dir": "Loon",
+                        "service": "China",
+                        "variant": "China_Domain",
+                        "variant_primary": False,
+                        "variant_file": "China_Domain.lsr",
+                        "source": "sample",
+                        "priority": 100,
+                        "rule_url": "https://example.com/rule/Loon/China/China_Domain.list",
+                        "readme_url": "https://example.com/rule/Loon/China/README.md",
+                        "status": "ok",
+                        "snapshot_path": None,
+                        "entry_key": "china-domain",
+                        "is_converted": False,
+                    },
+                    {
+                        "target": "loon",
+                        "target_dir": "Loon",
+                        "service": "China",
+                        "variant": "China_Resolve",
+                        "variant_primary": False,
+                        "variant_file": "China_Resolve.lsr",
+                        "source": "sample",
+                        "priority": 100,
+                        "rule_url": "https://example.com/rule/Loon/China/China_Resolve.list",
+                        "readme_url": "https://example.com/rule/Loon/China/README.md",
+                        "status": "ok",
+                        "snapshot_path": None,
+                        "entry_key": "china-resolve",
+                        "is_converted": False,
+                    },
+                ]
+            }
+
+            with ExitStack() as stack:
+                stack.enter_context(
+                    mock.patch(
+                        "egloon_rule_hub.cli.build_all_target_artifacts",
+                        return_value=generated_artifacts,
+                    )
+                )
+                stack.enter_context(
+                    mock.patch(
+                        "egloon_rule_hub.cli.build_upstream_docs",
+                        return_value=manifest,
+                    )
+                )
+                status = cli.main(["--root", str(root), "bootstrap"])
+
+            self.assertEqual(status, 0)
+            self.assertTrue((root / "Rule" / "Loon" / "China" / "China.lsr").exists())
+            self.assertTrue((root / "Rule" / "Loon" / "China" / "China_Domain.lsr").exists())
+            readme = (root / "Rule" / "Loon" / "China" / "README.md").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("./China_Domain.lsr", readme)
+            self.assertIn("China_Resolve", readme)
+            self.assertIn("rule/Loon/China/China_Domain.list", readme)
 
     def test_render_manifests_uses_distinct_target_source_count(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

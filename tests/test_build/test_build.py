@@ -16,6 +16,7 @@ from egloon_rule_hub.model.catalog import (
     ServiceDef,
     ServiceOrigin,
     ServiceTargetDef,
+    ServiceTargetVariantDef,
     SourceDef,
     SourceRef,
     TargetDef,
@@ -474,6 +475,159 @@ class BuildPipelineTests(unittest.TestCase):
         render_target_artifacts(self.root, self.self_maintained_catalog, empty_artifacts)
 
         self.assertFalse(output_path.exists())
+
+    def test_build_all_target_artifacts_supports_target_variants_and_bundle_uses_primary(
+        self,
+    ) -> None:
+        china_primary_path = self.root / "china-primary.list"
+        china_primary_path.write_text("DOMAIN,china-primary.example\n", encoding="utf-8")
+        china_domain_path = self.root / "china-domain.list"
+        china_domain_path.write_text("DOMAIN,china-domain.example\n", encoding="utf-8")
+        china_resolve_path = self.root / "china-resolve.list"
+        china_resolve_path.write_text("DOMAIN,china-resolve.example\n", encoding="utf-8")
+        openai_loon_path = self.root / "openai-variant.list"
+        openai_loon_path.write_text("DOMAIN,openai-variant.example\n", encoding="utf-8")
+
+        catalog = Catalog(
+            root=self.root,
+            sources={
+                "fixture": SourceDef(name="fixture", kind="remote"),
+            },
+            targets={
+                "loon": TargetDef(name="loon", enabled=True, file_ext="lsr", publish_mode="lsr"),
+            },
+            services={
+                "China": ServiceDef(
+                    name="China",
+                    enabled=True,
+                    targets=["loon"],
+                    target_sources={
+                        "loon": ServiceTargetDef(
+                            name="loon",
+                            variants={
+                                "China": ServiceTargetVariantDef(
+                                    name="China",
+                                    primary=True,
+                                    families={
+                                        "native": [
+                                            SourceRef(
+                                                source="fixture",
+                                                url=china_primary_path.as_uri(),
+                                                format="loon_list",
+                                                priority=100,
+                                            )
+                                        ],
+                                        "shadowrocket": [],
+                                        "clash": [],
+                                    },
+                                ),
+                                "China_Domain": ServiceTargetVariantDef(
+                                    name="China_Domain",
+                                    primary=False,
+                                    families={
+                                        "native": [
+                                            SourceRef(
+                                                source="fixture",
+                                                url=china_domain_path.as_uri(),
+                                                format="loon_list",
+                                                priority=100,
+                                            )
+                                        ],
+                                        "shadowrocket": [],
+                                        "clash": [],
+                                    },
+                                ),
+                                "China_Resolve": ServiceTargetVariantDef(
+                                    name="China_Resolve",
+                                    primary=False,
+                                    families={
+                                        "native": [
+                                            SourceRef(
+                                                source="fixture",
+                                                url=china_resolve_path.as_uri(),
+                                                format="loon_list",
+                                                priority=100,
+                                            )
+                                        ],
+                                        "shadowrocket": [],
+                                        "clash": [],
+                                    },
+                                ),
+                            },
+                        ),
+                    },
+                    notes="Regional bundle fixture",
+                ),
+                "OpenAI": ServiceDef(
+                    name="OpenAI",
+                    enabled=True,
+                    targets=["loon"],
+                    target_sources={
+                        "loon": ServiceTargetDef(
+                            name="loon",
+                            families={
+                                "native": [
+                                    SourceRef(
+                                        source="fixture",
+                                        url=openai_loon_path.as_uri(),
+                                        format="loon_list",
+                                        priority=100,
+                                    )
+                                ],
+                                "shadowrocket": [],
+                                "clash": [],
+                            },
+                        ),
+                    },
+                    notes="Single variant fixture",
+                ),
+            },
+            bundles={
+                "regional": BundleDef(
+                    name="regional",
+                    enabled=True,
+                    targets=["loon"],
+                    services=["China", "OpenAI"],
+                )
+            },
+            default_fallback_order=["native", "shadowrocket", "clash"],
+        )
+
+        artifacts = build_all_target_artifacts(catalog)
+
+        china_artifact = artifacts["China"]["loon"]
+        self.assertEqual(china_artifact.primary_variant_name, "China")
+        self.assertEqual(set(china_artifact.variants), {"China", "China_Domain", "China_Resolve"})
+        self.assertEqual(
+            [(rule.type, rule.value) for rule in china_artifact.rules],
+            [("DOMAIN", "china-primary.example")],
+        )
+        self.assertEqual(
+            [(rule.type, rule.value) for rule in china_artifact.variants["China_Domain"].rules],
+            [("DOMAIN", "china-domain.example")],
+        )
+        self.assertEqual(
+            [(rule.type, rule.value) for rule in china_artifact.variants["China_Resolve"].rules],
+            [("DOMAIN", "china-resolve.example")],
+        )
+
+        openai_artifact = artifacts["OpenAI"]["loon"]
+        self.assertEqual(openai_artifact.primary_variant_name, "OpenAI")
+        self.assertEqual(list(openai_artifact.variants), ["OpenAI"])
+
+        render_target_artifacts(self.root, catalog, artifacts)
+
+        self.assertTrue((self.root / "Rule" / "Loon" / "China" / "China.lsr").exists())
+        self.assertTrue((self.root / "Rule" / "Loon" / "China" / "China_Domain.lsr").exists())
+        self.assertTrue((self.root / "Rule" / "Loon" / "China" / "China_Resolve.lsr").exists())
+
+        bundle_text = (self.root / "dist" / "bundles" / "regional" / "loon.lsr").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("china-primary.example", bundle_text)
+        self.assertIn("openai-variant.example", bundle_text)
+        self.assertNotIn("china-domain.example", bundle_text)
+        self.assertNotIn("china-resolve.example", bundle_text)
 
 
 if __name__ == "__main__":

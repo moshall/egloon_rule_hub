@@ -37,9 +37,10 @@ def service_source_count(service: ServiceDef) -> int:
     distinct_refs: set[tuple[str, str | None, str | None, str | None]] = set()
     if service.target_sources:
         for target_source in service.target_sources.values():
-            for family_sources in target_source.families.values():
-                for source_ref in family_sources:
-                    distinct_refs.add(_source_ref_key(source_ref))
+            for variant in target_source.normalized_variants(service.name).values():
+                for family_sources in variant.families.values():
+                    for source_ref in family_sources:
+                        distinct_refs.add(_source_ref_key(source_ref))
     else:
         for source_ref in service.sources:
             distinct_refs.add(_source_ref_key(source_ref))
@@ -270,6 +271,48 @@ def _group_manifest_entries_by_target(
     return grouped
 
 
+def _artifact_output_ext(target: str, publish_mode: str | None) -> str:
+    if target == "loon" and publish_mode == "lsr":
+        return "lsr"
+    return {
+        "clash": "yaml",
+        "egern": "yaml",
+        "loon": "list",
+        "quanx": "list",
+        "shadowrocket": "list",
+    }.get(target, "list")
+
+
+def _entry_variant_name(entry: dict[str, Any], service_name: str) -> str:
+    variant = entry.get("variant")
+    if isinstance(variant, str) and variant.strip():
+        return variant
+    return service_name
+
+
+def _entry_variant_file(
+    entry: dict[str, Any],
+    target: str,
+    publish_mode: str | None,
+    variant_name: str,
+) -> str:
+    variant_file = entry.get("variant_file")
+    if isinstance(variant_file, str) and variant_file.strip():
+        return variant_file
+    return f"{variant_name}.{_artifact_output_ext(target, publish_mode)}"
+
+
+def _variant_usage_note(snapshot_text: str | None, variant_name: str, primary: bool) -> str:
+    if snapshot_text:
+        for raw_line in snapshot_text.splitlines():
+            line = raw_line.strip().lstrip("-*").strip()
+            if variant_name.lower() in line.lower():
+                return line
+    if primary:
+        return "Primary published variant used for bundle merges."
+    return "Additional published variant for manual selection."
+
+
 def _target_readme_markdown(
     root: Path,
     target: str,
@@ -278,26 +321,50 @@ def _target_readme_markdown(
     entries: list[dict[str, Any]],
     artifact: TargetArtifact | None = None,
 ) -> str:
+    primary_entry = next(
+        (entry for entry in entries if entry.get("variant_primary")),
+        entries[0] if entries else None,
+    )
+    primary_variant = None
+    if artifact is not None and artifact.primary_variant_name is not None:
+        primary_variant = artifact.variants.get(artifact.primary_variant_name)
+
     selected_family = (
-        str(entries[0].get("selected_family") or "-")
-        if entries
-        else artifact.selected_family if artifact is not None else "-"
+        str(primary_entry.get("selected_family") or "-")
+        if primary_entry is not None
+        else primary_variant.selected_family
+        if primary_variant is not None
+        else artifact.selected_family
+        if artifact is not None
+        else "-"
     )
     selected_native_target = (
-        str(entries[0].get("selected_native_target") or target)
-        if entries
-        else artifact.selected_native_target if artifact is not None else target
+        str(primary_entry.get("selected_native_target") or target)
+        if primary_entry is not None
+        else primary_variant.selected_native_target
+        if primary_variant is not None
+        else artifact.selected_native_target
+        if artifact is not None
+        else target
     )
     selected_native_target_dir = _target_display_name(selected_native_target)
     publish_mode = (
-        entries[0].get("publish_mode")
-        if entries
-        else artifact.publish_mode if artifact is not None else None
+        primary_entry.get("publish_mode")
+        if primary_entry is not None
+        else primary_variant.publish_mode
+        if primary_variant is not None
+        else artifact.publish_mode
+        if artifact is not None
+        else None
     )
     conversion_path = (
-        entries[0].get("conversion_path")
-        if entries
-        else artifact.conversion_path if artifact is not None else None
+        primary_entry.get("conversion_path")
+        if primary_entry is not None
+        else primary_variant.conversion_path
+        if primary_variant is not None
+        else artifact.conversion_path
+        if artifact is not None
+        else None
     )
     lines: list[str] = [
         f"# {service_name} for {target_dir}",
@@ -332,6 +399,98 @@ def _target_readme_markdown(
         lines.append(f"- Conversion path: `{conversion_path}`")
     lines.append("")
 
+    variant_entries: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for entry in entries:
+        variant_entries[_entry_variant_name(entry, service_name)].append(entry)
+
+    variant_names: list[str] = []
+    if artifact is not None:
+        variant_names.extend(artifact.variants.keys())
+    for variant_name in variant_entries:
+        if variant_name not in variant_names:
+            variant_names.append(variant_name)
+    if not variant_names:
+        variant_names.append(service_name)
+
+    lines.extend(
+        [
+            "## Published Variants",
+            "",
+        ]
+    )
+    for variant_name in variant_names:
+        variant = artifact.variants.get(variant_name) if artifact is not None else None
+        manifest_entries = variant_entries.get(variant_name, [])
+        variant_primary = variant.primary if variant is not None else any(
+            bool(entry.get("variant_primary")) for entry in manifest_entries
+        )
+        variant_publish_mode = (
+            variant.publish_mode
+            if variant is not None
+            else manifest_entries[0].get("publish_mode")
+            if manifest_entries
+            else publish_mode
+        )
+        variant_file = (
+            _entry_variant_file(manifest_entries[0], target, variant_publish_mode, variant_name)
+            if manifest_entries
+            else f"{variant_name}.{_artifact_output_ext(target, variant_publish_mode)}"
+        )
+        variant_selected_family = (
+            variant.selected_family
+            if variant is not None
+            else str(manifest_entries[0].get("selected_family") or "-")
+            if manifest_entries
+            else "-"
+        )
+        variant_native_target = (
+            variant.selected_native_target
+            if variant is not None
+            else str(manifest_entries[0].get("selected_native_target") or target)
+            if manifest_entries
+            else target
+        )
+        variant_conversion_path = (
+            variant.conversion_path
+            if variant is not None
+            else manifest_entries[0].get("conversion_path")
+            if manifest_entries
+            else None
+        )
+        snapshot_text = None
+        for entry in manifest_entries:
+            snapshot_path = entry.get("snapshot_path")
+            snapshot_text = _read_snapshot_text(
+                root,
+                snapshot_path if isinstance(snapshot_path, str) else None,
+            )
+            if snapshot_text is not None:
+                break
+
+        lines.extend(
+            [
+                f"### {variant_name}",
+                "",
+                f"- File: [{variant_file}](./{variant_file})",
+                f"- Primary variant: `{'yes' if variant_primary else 'no'}`",
+                f"- Usage note: {_variant_usage_note(snapshot_text, variant_name, variant_primary)}",
+                f"- Selected source family: `{variant_selected_family}`",
+                f"- Upstream native target: `{_target_display_name(variant_native_target)}`",
+            ]
+        )
+        if variant_conversion_path:
+            lines.append(f"- Conversion path: `{variant_conversion_path}`")
+        rule_urls = [
+            str(entry.get("rule_url") or "-")
+            for entry in manifest_entries
+            if str(entry.get("rule_url") or "-") != "-"
+        ]
+        if not rule_urls and variant is not None:
+            rule_urls = [selected_entry.url for selected_entry in variant.selected_entries]
+        for rule_url in rule_urls:
+            lines.append(f"- Rule file: [{rule_url}]({rule_url})")
+        lines.append("")
+
     lines.extend(
         [
             "## Upstream README Sources",
@@ -345,6 +504,7 @@ def _target_readme_markdown(
         rule_url = str(entry.get("rule_url") or "-")
         readme_url = str(entry.get("readme_url") or "-")
         status = str(entry.get("status") or "unknown")
+        variant_name = _entry_variant_name(entry, service_name)
         entry_native_target = str(entry.get("selected_native_target") or selected_native_target)
         entry_native_target_dir = _target_display_name(entry_native_target)
         snapshot_path = entry.get("snapshot_path")
@@ -355,7 +515,7 @@ def _target_readme_markdown(
 
         lines.extend(
             [
-                f"### Upstream Entry {index} ({source})",
+                f"### Upstream Entry {index} ({source} / {variant_name})",
                 "",
                 f"- Upstream native target: `{entry_native_target_dir}`",
                 (

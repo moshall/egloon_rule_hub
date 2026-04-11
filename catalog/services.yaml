@@ -3757,21 +3757,42 @@ services:
             format: clash_yaml
             priority: 100
       loon:
-        native:
-          - source: blackmatrix7
-            path: rule/Loon/China/China.list
-            format: loon_list
-            priority: 90
-        shadowrocket:
-          - source: blackmatrix7
-            path: rule/Shadowrocket/China/China.list
-            format: shadowrocket_list
-            priority: 95
-        clash:
-          - source: blackmatrix7
-            path: rule/Clash/China/China.yaml
-            format: clash_yaml
-            priority: 100
+        variants:
+          China:
+            primary: true
+            native:
+              - source: blackmatrix7
+                path: rule/Loon/China/China.list
+                format: loon_list
+                priority: 90
+            shadowrocket:
+              - source: blackmatrix7
+                path: rule/Shadowrocket/China/China.list
+                format: shadowrocket_list
+                priority: 95
+            clash:
+              - source: blackmatrix7
+                path: rule/Clash/China/China.yaml
+                format: clash_yaml
+                priority: 100
+          China_Domain:
+            primary: false
+            native:
+              - source: blackmatrix7
+                path: rule/Loon/China/China_Domain.list
+                format: loon_list
+                priority: 90
+            shadowrocket: []
+            clash: []
+          China_Resolve:
+            primary: false
+            native:
+              - source: blackmatrix7
+                path: rule/Loon/China/China_Resolve.list
+                format: loon_list
+                priority: 90
+            shadowrocket: []
+            clash: []
       clash:
         native:
           - source: blackmatrix7

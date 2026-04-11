@@ -15,6 +15,7 @@ from egloon_rule_hub.model.catalog import (
     Catalog,
     ServiceDef,
     ServiceTargetDef,
+    ServiceTargetVariantDef,
     SourceDef,
     SourceRef,
     TargetDef,
@@ -245,6 +246,108 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         self.assertEqual(
             {entry["snapshot_path"] for entry in egern_entries + [clash_entry]},
             {clash_entry["snapshot_path"]},
+        )
+
+    def test_manifest_records_variant_level_rule_urls(self) -> None:
+        china_primary_url = "https://example.com/rule/Loon/China/China.list"
+        china_domain_url = "https://example.com/rule/Loon/China/China_Domain.list"
+        china_resolve_url = "https://example.com/rule/Loon/China/China_Resolve.list"
+
+        catalog = Catalog(
+            root=self.root,
+            sources={"fixture": SourceDef(name="fixture", kind="remote")},
+            targets={
+                "loon": TargetDef(name="loon", enabled=True, file_ext="lsr", publish_mode="lsr"),
+            },
+            services={
+                "China": ServiceDef(
+                    name="China",
+                    enabled=True,
+                    targets=["loon"],
+                    target_sources={
+                        "loon": ServiceTargetDef(
+                            name="loon",
+                            variants={
+                                "China": ServiceTargetVariantDef(
+                                    name="China",
+                                    primary=True,
+                                    families={
+                                        "native": [
+                                            SourceRef(
+                                                source="fixture",
+                                                url=china_primary_url,
+                                                format="loon_list",
+                                                priority=100,
+                                            )
+                                        ],
+                                        "shadowrocket": [],
+                                        "clash": [],
+                                    },
+                                ),
+                                "China_Domain": ServiceTargetVariantDef(
+                                    name="China_Domain",
+                                    primary=False,
+                                    families={
+                                        "native": [
+                                            SourceRef(
+                                                source="fixture",
+                                                url=china_domain_url,
+                                                format="loon_list",
+                                                priority=100,
+                                            )
+                                        ],
+                                        "shadowrocket": [],
+                                        "clash": [],
+                                    },
+                                ),
+                                "China_Resolve": ServiceTargetVariantDef(
+                                    name="China_Resolve",
+                                    primary=False,
+                                    families={
+                                        "native": [
+                                            SourceRef(
+                                                source="fixture",
+                                                url=china_resolve_url,
+                                                format="loon_list",
+                                                priority=100,
+                                            )
+                                        ],
+                                        "shadowrocket": [],
+                                        "clash": [],
+                                    },
+                                ),
+                            },
+                        )
+                    },
+                ),
+            },
+            bundles={},
+        )
+
+        def source_fetcher(url: str) -> str:
+            if url == china_primary_url:
+                return "DOMAIN,china-primary.example\n"
+            if url == china_domain_url:
+                return "DOMAIN,china-domain.example\n"
+            if url == china_resolve_url:
+                return "DOMAIN,china-resolve.example\n"
+            return "DOMAIN,unexpected.example\n"
+
+        artifacts = build_all_target_artifacts(catalog, fetcher=source_fetcher)
+        manifest = build_upstream_docs(catalog, artifacts, fetcher=self._fake_fetcher())
+
+        entries = manifest["China"]
+        self.assertEqual(
+            {entry["variant"] for entry in entries},
+            {"China", "China_Domain", "China_Resolve"},
+        )
+        self.assertEqual(
+            {entry["rule_url"] for entry in entries},
+            {china_primary_url, china_domain_url, china_resolve_url},
+        )
+        self.assertEqual(
+            {entry["variant"]: entry["variant_primary"] for entry in entries},
+            {"China": True, "China_Domain": False, "China_Resolve": False},
         )
 
     def _fake_fetcher(self):

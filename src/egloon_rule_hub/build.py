@@ -12,8 +12,8 @@ from egloon_rule_hub.emitters.loon import render_loon_rules
 from egloon_rule_hub.emitters.loon_lsr import render_loon_lsr
 from egloon_rule_hub.emitters.quanx import render_quanx_rules
 from egloon_rule_hub.emitters.shadowrocket import render_shadowrocket_rules
-from egloon_rule_hub.model.catalog import Catalog, ServiceDef, SourceRef, TargetDef
-from egloon_rule_hub.model.publish import SelectedSourceEntry, TargetArtifact
+from egloon_rule_hub.model.catalog import Catalog, ServiceDef, ServiceTargetVariantDef, SourceRef, TargetDef
+from egloon_rule_hub.model.publish import SelectedSourceEntry, TargetArtifact, TargetArtifactVariant
 from egloon_rule_hub.model.rules import Rule
 from egloon_rule_hub.normalize.dedupe import dedupe_rules
 from egloon_rule_hub.normalize.merge import merge_rule_streams
@@ -124,16 +124,18 @@ def build_all_service_rules(catalog: Catalog, fetcher=fetch_text) -> dict[str, l
 
 
 def _selected_family_sources(
-    catalog: Catalog, service: ServiceDef, target_name: str
+    catalog: Catalog,
+    service: ServiceDef,
+    target_name: str,
+    variant_def: ServiceTargetVariantDef,
+    target_fallback_order: list[str],
 ) -> tuple[str, list[SourceRef]]:
-    target_config = service.target_sources.get(target_name)
-    if target_config is None:
-        return "", []
-
-    for family in target_config.selected_order(
-        service.fallback_order, catalog.default_fallback_order
+    for family in variant_def.selected_order(
+        target_fallback_order,
+        service.fallback_order,
+        catalog.default_fallback_order,
     ):
-        candidates = target_config.families.get(family, [])
+        candidates = variant_def.families.get(family, [])
         if candidates:
             return family, candidates
     return "", []
@@ -174,60 +176,95 @@ def build_target_artifact(
             origin_source_url=service.origin.source_url,
             rules=list(canonical_rules),
             selected_entries=[],
+            primary_variant_name=service_name,
         )
 
-    family, source_refs = _selected_family_sources(catalog, service, target_name)
-    if not family or not source_refs:
+    target_config = service.target_sources.get(target_name)
+    if target_config is None:
         return None
 
-    streams: list[list[Rule]] = []
-    selected_entries: list[SelectedSourceEntry] = []
-    for source_ref in sorted(source_refs, key=lambda item: item.priority, reverse=True):
-        source_def = catalog.sources[source_ref.source]
-        resolved = resolve_source_ref(source_def, source_ref)
-        parser = FORMAT_PARSERS.get(resolved.format or "")
-        if parser is None:
-            raise ValueError(
-                f"Unsupported source format for {service_name}/{target_name}: {resolved.format!r}"
-            )
-        raw_text = fetcher(resolved.url)
-        streams.append(parser(raw_text))
-        selected_entries.append(
-            SelectedSourceEntry(
-                source_name=resolved.source_name,
-                family=family,
-                format=resolved.format,
-                url=resolved.url,
-                priority=resolved.priority,
-                raw_text=raw_text,
-            )
+    variants: dict[str, TargetArtifactVariant] = {}
+    primary_variant_name: str | None = None
+    for variant_name, variant_def in target_config.normalized_variants(service_name).items():
+        family, source_refs = _selected_family_sources(
+            catalog,
+            service,
+            target_name,
+            variant_def,
+            target_config.fallback_order,
         )
+        if not family or not source_refs:
+            continue
 
-    merged = merge_rule_streams(streams)
-    merged = _apply_override(catalog.root, merged, service.override)
-    selected_native_target = _family_native_target(target_name, family)
-    is_native = family == "native"
-    conversion_path = None
-    if not is_native:
-        conversion_path = (
-            f"{TARGET_DISPLAY_NAMES.get(selected_native_target, selected_native_target.capitalize())}"
-            f" -> {TARGET_DISPLAY_NAMES.get(target_name, target_name.capitalize())}"
+        streams: list[list[Rule]] = []
+        selected_entries: list[SelectedSourceEntry] = []
+        for source_ref in sorted(source_refs, key=lambda item: item.priority, reverse=True):
+            source_def = catalog.sources[source_ref.source]
+            resolved = resolve_source_ref(source_def, source_ref)
+            parser = FORMAT_PARSERS.get(resolved.format or "")
+            if parser is None:
+                raise ValueError(
+                    f"Unsupported source format for {service_name}/{target_name}/{variant_name}: {resolved.format!r}"
+                )
+            raw_text = fetcher(resolved.url)
+            streams.append(parser(raw_text))
+            selected_entries.append(
+                SelectedSourceEntry(
+                    source_name=resolved.source_name,
+                    family=family,
+                    format=resolved.format,
+                    url=resolved.url,
+                    priority=resolved.priority,
+                    raw_text=raw_text,
+                )
+            )
+
+        merged = merge_rule_streams(streams)
+        merged = _apply_override(catalog.root, merged, service.override)
+        selected_native_target = _family_native_target(target_name, family)
+        is_native = family == "native"
+        conversion_path = None
+        if not is_native:
+            conversion_path = (
+                f"{TARGET_DISPLAY_NAMES.get(selected_native_target, selected_native_target.capitalize())}"
+                f" -> {TARGET_DISPLAY_NAMES.get(target_name, target_name.capitalize())}"
+            )
+
+        variants[variant_name] = TargetArtifactVariant(
+            name=variant_name,
+            primary=variant_def.primary,
+            selected_family=family,
+            selected_native_target=selected_native_target,
+            publish_mode=target.publish_mode,
+            is_native=is_native,
+            is_converted=not is_native,
+            conversion_path=conversion_path,
+            rules=merged,
+            selected_entries=selected_entries,
         )
+        if variant_def.primary:
+            primary_variant_name = variant_name
 
+    if not variants or primary_variant_name is None or primary_variant_name not in variants:
+        return None
+
+    primary_variant = variants[primary_variant_name]
     return TargetArtifact(
         service=service_name,
         target=target_name,
-        selected_family=family,
-        selected_native_target=selected_native_target,
-        publish_mode=target.publish_mode,
-        is_native=is_native,
-        is_converted=not is_native,
-        conversion_path=conversion_path,
+        selected_family=primary_variant.selected_family,
+        selected_native_target=primary_variant.selected_native_target,
+        publish_mode=primary_variant.publish_mode,
+        is_native=primary_variant.is_native,
+        is_converted=primary_variant.is_converted,
+        conversion_path=primary_variant.conversion_path,
         origin_kind=service.origin.kind,
         origin_source_path=service.origin.source_path,
         origin_source_url=service.origin.source_url,
-        rules=merged,
-        selected_entries=selected_entries,
+        rules=list(primary_variant.rules),
+        selected_entries=list(primary_variant.selected_entries),
+        primary_variant_name=primary_variant_name,
+        variants=variants,
     )
 
 
@@ -276,6 +313,22 @@ def _prune_stale_output_variants(output_path: Path, target_name: str, target: Ta
             continue
         if candidate.is_file():
             candidate.unlink()
+
+
+def _prune_stale_service_variant_outputs(
+    service_dir: Path,
+    live_basenames: set[str],
+    target_name: str,
+    target: TargetDef | None,
+) -> None:
+    if not service_dir.exists():
+        return
+    for ext in _target_output_ext_candidates(target_name, target):
+        for candidate in service_dir.glob(f"*.{ext}"):
+            if candidate.stem in live_basenames or candidate.name == "README.md":
+                continue
+            if candidate.is_file():
+                candidate.unlink()
 
 
 def _render_target_output(
@@ -373,18 +426,22 @@ def render_target_artifacts(
             ext = _target_output_ext(target_name, target)
             service_dir = root / "Rule" / display_target / service_name
             service_dir.mkdir(parents=True, exist_ok=True)
-            output_path = service_dir / f"{service_name}.{ext}"
-            _prune_stale_output_variants(output_path, target_name, target)
-            output_path.write_text(
-                _render_target_output(
-                    service_name,
-                    target_name,
-                    target,
-                    artifact.rules,
-                    [entry.raw_text for entry in artifact.selected_entries],
-                ),
-                encoding="utf-8",
-            )
+            live_basenames: set[str] = set()
+            for variant_name, variant in artifact.variants.items():
+                output_path = service_dir / f"{variant_name}.{ext}"
+                live_basenames.add(variant_name)
+                _prune_stale_output_variants(output_path, target_name, target)
+                output_path.write_text(
+                    _render_target_output(
+                        variant_name,
+                        target_name,
+                        target,
+                        variant.rules,
+                        [entry.raw_text for entry in variant.selected_entries],
+                    ),
+                    encoding="utf-8",
+                )
+            _prune_stale_service_variant_outputs(service_dir, live_basenames, target_name, target)
 
     for service_name, service in catalog.services.items():
         service_targets = target_artifacts.get(service_name, {})
@@ -401,11 +458,7 @@ def render_target_artifacts(
             service_dir = root / "Rule" / display_target / service_name
             if not service_dir.exists():
                 continue
-            base_output_path = service_dir / f"{service_name}.{_target_output_ext(target_name, target)}"
-            for ext in _target_output_ext_candidates(target_name, target):
-                candidate = base_output_path.with_suffix(f".{ext}")
-                if candidate.exists() and candidate.is_file():
-                    candidate.unlink()
+            _prune_stale_service_variant_outputs(service_dir, set(), target_name, target)
 
     for bundle_name, bundle in catalog.bundles.items():
         if not bundle.enabled:

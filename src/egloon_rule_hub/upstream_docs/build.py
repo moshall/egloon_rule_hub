@@ -54,6 +54,18 @@ def _snapshot_key(readme_url: str) -> str:
     return f"{slug}-{digest}"
 
 
+def _artifact_output_ext(target: str, publish_mode: str | None) -> str:
+    if target == "loon" and publish_mode == "lsr":
+        return "lsr"
+    return {
+        "clash": "yaml",
+        "egern": "yaml",
+        "loon": "list",
+        "quanx": "list",
+        "shadowrocket": "list",
+    }.get(target, "list")
+
+
 def _prune_stale_snapshots(docs_root: Path, live_snapshot_paths: set[Path]) -> None:
     if not docs_root.exists():
         return
@@ -94,53 +106,58 @@ def build_upstream_docs(
             if artifact is None:
                 continue
             display_name = _target_display_name(target_name)
-            for selected_entry in artifact.selected_entries:
-                readme_url = derive_readme_url(selected_entry.url)
-                cached_result = readme_cache.get(readme_url)
-                if cached_result is None:
-                    result = fetch_readme(selected_entry.url, fetcher=fetcher)
-                    snapshot_path: str | None = None
-                    if result.status == "ok" and result.content is not None:
-                        snapshot_file = docs_root / _snapshot_key(result.readme_url) / "README.md"
-                        snapshot_file.parent.mkdir(parents=True, exist_ok=True)
-                        snapshot_file.write_bytes(result.content)
-                        live_snapshot_paths.add(snapshot_file)
-                        snapshot_path = snapshot_file.relative_to(root).as_posix()
-                    readme_cache[readme_url] = (result.readme_url, result.status, snapshot_path)
-                else:
-                    result_readme_url, result_status, snapshot_path = cached_result
-                    if snapshot_path is not None:
-                        live_snapshot_paths.add(root / snapshot_path)
-                key = _entry_key(
-                    selected_entry.priority,
-                    selected_entry.source_name,
-                    selected_entry.url,
-                    entry_index,
-                )
-                entry_index += 1
-                if cached_result is None:
-                    result_readme_url = result.readme_url
-                    result_status = result.status
-                manifest_entries.append(
-                    {
-                        "target": target_name,
-                        "target_dir": display_name,
-                        "service": service_name,
-                        "publish_mode": artifact.publish_mode,
-                        "selected_family": artifact.selected_family,
-                        "selected_native_target": artifact.selected_native_target,
-                        "is_native": artifact.is_native,
-                        "is_converted": artifact.is_converted,
-                        "conversion_path": artifact.conversion_path,
-                        "source": selected_entry.source_name,
-                        "priority": selected_entry.priority,
-                        "rule_url": selected_entry.url,
-                        "readme_url": result_readme_url,
-                        "status": result_status,
-                        "snapshot_path": snapshot_path,
-                        "entry_key": key,
-                    }
-                )
+            for variant_name, variant in artifact.variants.items():
+                variant_file = f"{variant_name}.{_artifact_output_ext(target_name, variant.publish_mode)}"
+                for selected_entry in variant.selected_entries:
+                    readme_url = derive_readme_url(selected_entry.url)
+                    cached_result = readme_cache.get(readme_url)
+                    if cached_result is None:
+                        result = fetch_readme(selected_entry.url, fetcher=fetcher)
+                        snapshot_path: str | None = None
+                        if result.status == "ok" and result.content is not None:
+                            snapshot_file = docs_root / _snapshot_key(result.readme_url) / "README.md"
+                            snapshot_file.parent.mkdir(parents=True, exist_ok=True)
+                            snapshot_file.write_bytes(result.content)
+                            live_snapshot_paths.add(snapshot_file)
+                            snapshot_path = snapshot_file.relative_to(root).as_posix()
+                        readme_cache[readme_url] = (result.readme_url, result.status, snapshot_path)
+                    else:
+                        result_readme_url, result_status, snapshot_path = cached_result
+                        if snapshot_path is not None:
+                            live_snapshot_paths.add(root / snapshot_path)
+                    key = _entry_key(
+                        selected_entry.priority,
+                        selected_entry.source_name,
+                        selected_entry.url,
+                        entry_index,
+                    )
+                    entry_index += 1
+                    if cached_result is None:
+                        result_readme_url = result.readme_url
+                        result_status = result.status
+                    manifest_entries.append(
+                        {
+                            "target": target_name,
+                            "target_dir": display_name,
+                            "service": service_name,
+                            "variant": variant_name,
+                            "variant_primary": variant.primary,
+                            "variant_file": variant_file,
+                            "publish_mode": variant.publish_mode,
+                            "selected_family": variant.selected_family,
+                            "selected_native_target": variant.selected_native_target,
+                            "is_native": variant.is_native,
+                            "is_converted": variant.is_converted,
+                            "conversion_path": variant.conversion_path,
+                            "source": selected_entry.source_name,
+                            "priority": selected_entry.priority,
+                            "rule_url": selected_entry.url,
+                            "readme_url": result_readme_url,
+                            "status": result_status,
+                            "snapshot_path": snapshot_path,
+                            "entry_key": key,
+                        }
+                    )
         manifest[service_name] = manifest_entries
 
     _prune_stale_snapshots(docs_root, live_snapshot_paths)

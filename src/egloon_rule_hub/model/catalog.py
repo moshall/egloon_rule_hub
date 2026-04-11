@@ -32,9 +32,27 @@ class SourceRef:
 
 
 @dataclass(slots=True)
+class ServiceTargetVariantDef:
+    name: str
+    primary: bool
+    families: dict[str, list[SourceRef]] = field(default_factory=dict)
+    fallback_order: list[str] = field(default_factory=list)
+
+    def selected_order(self, target_fallback_order: list[str], service_fallback_order: list[str], default_order: list[str]) -> list[str]:
+        if self.fallback_order:
+            return self.fallback_order
+        if target_fallback_order:
+            return target_fallback_order
+        if service_fallback_order:
+            return service_fallback_order
+        return default_order
+
+
+@dataclass(slots=True)
 class ServiceTargetDef:
     name: str
     families: dict[str, list[SourceRef]] = field(default_factory=dict)
+    variants: dict[str, ServiceTargetVariantDef] = field(default_factory=dict)
     fallback_order: list[str] = field(default_factory=list)
 
     def selected_order(self, service_fallback_order: list[str], default_order: list[str]) -> list[str]:
@@ -43,6 +61,18 @@ class ServiceTargetDef:
         if service_fallback_order:
             return service_fallback_order
         return default_order
+
+    def normalized_variants(self, service_name: str) -> dict[str, ServiceTargetVariantDef]:
+        if self.variants:
+            return self.variants
+        return {
+            service_name: ServiceTargetVariantDef(
+                name=service_name,
+                primary=True,
+                families=self.families,
+                fallback_order=self.fallback_order,
+            )
+        }
 
 
 @dataclass(slots=True)
@@ -123,13 +153,6 @@ class Catalog:
                     raise ValueError(
                         f"Service {service.name} target_sources references unknown target: {target_name}"
                     )
-                unknown_families = sorted(
-                    family for family in target_def.families if family not in ALLOWED_SOURCE_FAMILIES
-                )
-                if unknown_families:
-                    raise ValueError(
-                        f"Service {service.name} target {target_name} has unknown families: {unknown_families}"
-                    )
                 unknown_target_families = sorted(
                     family
                     for family in target_def.fallback_order
@@ -139,6 +162,29 @@ class Catalog:
                     raise ValueError(
                         f"Service {service.name} target {target_name} has unknown fallback order families: {unknown_target_families}"
                     )
+                variants = target_def.normalized_variants(service.name)
+                primary_variants = [variant.name for variant in variants.values() if variant.primary]
+                if len(primary_variants) != 1:
+                    raise ValueError(
+                        f"Service {service.name} target {target_name} must define exactly one primary variant"
+                    )
+                for variant in variants.values():
+                    unknown_families = sorted(
+                        family for family in variant.families if family not in ALLOWED_SOURCE_FAMILIES
+                    )
+                    if unknown_families:
+                        raise ValueError(
+                            f"Service {service.name} target {target_name} variant {variant.name} has unknown families: {unknown_families}"
+                        )
+                    unknown_variant_families = sorted(
+                        family
+                        for family in variant.fallback_order
+                        if family not in ALLOWED_SOURCE_FAMILIES
+                    )
+                    if unknown_variant_families:
+                        raise ValueError(
+                            f"Service {service.name} target {target_name} variant {variant.name} has unknown fallback order families: {unknown_variant_families}"
+                        )
 
             for source_ref in service.sources:
                 if source_ref.source not in known_sources:
@@ -201,18 +247,47 @@ def load_catalog(root: Path) -> Catalog:
         target_sources_payload = payload.get("target_sources", {})
         for target_name, target_payload in target_sources_payload.items():
             target_fallback_order = list(target_payload.get("fallback_order", []))
-            families = {
-                family_name: [SourceRef(**item) for item in family_payload]
-                for family_name, family_payload in target_payload.items()
-                if family_name != "fallback_order"
-            }
+            variants_payload = target_payload.get("variants", {})
+            variants: dict[str, ServiceTargetVariantDef] = {}
+            families = {}
+            if variants_payload:
+                for variant_name, variant_payload in variants_payload.items():
+                    variant_fallback_order = list(variant_payload.get("fallback_order", []))
+                    variant_families = {
+                        family_name: [SourceRef(**item) for item in family_payload]
+                        for family_name, family_payload in variant_payload.items()
+                        if family_name not in {"primary", "fallback_order"}
+                    }
+                    variants[variant_name] = ServiceTargetVariantDef(
+                        name=variant_name,
+                        primary=bool(variant_payload.get("primary", False)),
+                        families=variant_families,
+                        fallback_order=variant_fallback_order,
+                    )
+                    for family_sources in variant_families.values():
+                        flat_sources.extend(family_sources)
+            else:
+                families = {
+                    family_name: [SourceRef(**item) for item in family_payload]
+                    for family_name, family_payload in target_payload.items()
+                    if family_name != "fallback_order"
+                }
+                variants = {
+                    name: ServiceTargetVariantDef(
+                        name=name,
+                        primary=True,
+                        families=families,
+                        fallback_order=target_fallback_order,
+                    )
+                }
+                for family_sources in families.values():
+                    flat_sources.extend(family_sources)
             target_sources[target_name] = ServiceTargetDef(
                 name=target_name,
                 families=families,
+                variants=variants,
                 fallback_order=target_fallback_order,
             )
-            for family_sources in families.values():
-                flat_sources.extend(family_sources)
         services[name] = ServiceDef(
             name=name,
             enabled=bool(payload.get("enabled", True)),

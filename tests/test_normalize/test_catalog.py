@@ -12,6 +12,7 @@ from egloon_rule_hub.model.catalog import (
     ServiceDef,
     ServiceOrigin,
     ServiceTargetDef,
+    ServiceTargetVariantDef,
     SourceDef,
     SourceRef,
     TargetDef,
@@ -27,12 +28,18 @@ class CatalogTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[2]
         catalog = load_catalog(root)
         self.assertIn("OpenAI", catalog.services)
+        self.assertIn("China", catalog.services)
         self.assertIn("ai", catalog.bundles)
         self.assertIn("egern", catalog.targets)
         self.assertIn("blackmatrix7", catalog.sources)
         self.assertEqual(catalog.targets["loon"].publish_mode, "lsr")
         self.assertIn("clash", catalog.services["OpenAI"].target_sources)
         self.assertIn("native", catalog.services["OpenAI"].target_sources["clash"].families)
+        self.assertEqual(
+            set(catalog.services["China"].target_sources["loon"].variants),
+            {"China", "China_Domain", "China_Resolve"},
+        )
+        self.assertTrue(catalog.services["China"].target_sources["loon"].variants["China"].primary)
         self.assertEqual(
             catalog.services["OpenAI"].target_sources["egern"].selected_order(
                 catalog.services["OpenAI"].fallback_order,
@@ -143,6 +150,199 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(catalog.services["OpenAI"].outputs, ["loon", "clash", "egern"])
         self.assertIn("native", catalog.services["OpenAI"].target_sources["loon"].families)
         self.assertIn("clash", catalog.services["OpenAI"].target_sources["egern"].families)
+
+    def test_load_catalog_normalizes_variant_targets_and_single_variant_targets(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n"
+                "  sample:\n"
+                "    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  loon:\n"
+                "    enabled: true\n"
+                "    file_ext: lsr\n"
+                "    publish_mode: lsr\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "defaults:\n"
+                "  fallback_order: [native, shadowrocket, clash]\n"
+                "services:\n"
+                "  China:\n"
+                "    enabled: true\n"
+                "    outputs: [loon]\n"
+                "    target_sources:\n"
+                "      loon:\n"
+                "        variants:\n"
+                "          China:\n"
+                "            primary: true\n"
+                "            native:\n"
+                "              - source: sample\n"
+                "                url: https://example.com/rule/Loon/China/China.list\n"
+                "                format: loon_list\n"
+                "          China_Domain:\n"
+                "            primary: false\n"
+                "            native:\n"
+                "              - source: sample\n"
+                "                url: https://example.com/rule/Loon/China/China_Domain.list\n"
+                "                format: loon_list\n"
+                "          China_Resolve:\n"
+                "            primary: false\n"
+                "            native:\n"
+                "              - source: sample\n"
+                "                url: https://example.com/rule/Loon/China/China_Resolve.list\n"
+                "                format: loon_list\n"
+                "  OpenAI:\n"
+                "    enabled: true\n"
+                "    outputs: [clash]\n"
+                "    target_sources:\n"
+                "      clash:\n"
+                "        native:\n"
+                "          - source: sample\n"
+                "            url: https://example.com/rule/Clash/OpenAI/OpenAI.yaml\n"
+                "            format: clash_yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text("bundles: {}\n", encoding="utf-8")
+
+            catalog = load_catalog(root)
+
+        china_target = catalog.services["China"].target_sources["loon"]
+        self.assertEqual(set(china_target.variants), {"China", "China_Domain", "China_Resolve"})
+        self.assertTrue(china_target.variants["China"].primary)
+        self.assertFalse(china_target.variants["China_Domain"].primary)
+        self.assertEqual(
+            china_target.variants["China_Domain"].families["native"][0].url,
+            "https://example.com/rule/Loon/China/China_Domain.list",
+        )
+
+        openai_target = catalog.services["OpenAI"].target_sources["clash"]
+        self.assertEqual(list(openai_target.variants), ["OpenAI"])
+        self.assertTrue(openai_target.variants["OpenAI"].primary)
+
+    def test_write_markdown_docs_lists_variant_files_and_upstream_urls(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog = Catalog(
+                root=root,
+                sources={"sample": SourceDef(name="sample", kind="remote")},
+                targets={
+                    "loon": TargetDef(name="loon", enabled=True, file_ext="lsr", publish_mode="lsr"),
+                },
+                services={
+                    "China": ServiceDef(
+                        name="China",
+                        enabled=True,
+                        targets=["loon"],
+                        target_sources={
+                            "loon": ServiceTargetDef(
+                                name="loon",
+                                variants={
+                                    "China": ServiceTargetVariantDef(
+                                        name="China",
+                                        primary=True,
+                                        families={"native": [], "shadowrocket": [], "clash": []},
+                                    ),
+                                    "China_Domain": ServiceTargetVariantDef(
+                                        name="China_Domain",
+                                        primary=False,
+                                        families={"native": [], "shadowrocket": [], "clash": []},
+                                    ),
+                                    "China_Resolve": ServiceTargetVariantDef(
+                                        name="China_Resolve",
+                                        primary=False,
+                                        families={"native": [], "shadowrocket": [], "clash": []},
+                                    ),
+                                },
+                            )
+                        },
+                    )
+                },
+                bundles={},
+            )
+
+            manifest_path = root / "dist" / "manifests" / "upstream_docs.json"
+            manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            manifest_path.write_text(
+                json.dumps(
+                    {
+                        "China": [
+                            {
+                                "target": "loon",
+                                "target_dir": "Loon",
+                                "service": "China",
+                                "variant": "China",
+                                "variant_primary": True,
+                                "variant_file": "China.lsr",
+                                "source": "sample",
+                                "priority": 100,
+                                "rule_url": "https://example.com/rule/Loon/China/China.list",
+                                "readme_url": "https://example.com/rule/Loon/China/README.md",
+                                "status": "ok",
+                                "snapshot_path": None,
+                                "entry_key": "china",
+                                "is_converted": False,
+                            },
+                            {
+                                "target": "loon",
+                                "target_dir": "Loon",
+                                "service": "China",
+                                "variant": "China_Domain",
+                                "variant_primary": False,
+                                "variant_file": "China_Domain.lsr",
+                                "source": "sample",
+                                "priority": 100,
+                                "rule_url": "https://example.com/rule/Loon/China/China_Domain.list",
+                                "readme_url": "https://example.com/rule/Loon/China/README.md",
+                                "status": "ok",
+                                "snapshot_path": None,
+                                "entry_key": "china-domain",
+                                "is_converted": False,
+                            },
+                            {
+                                "target": "loon",
+                                "target_dir": "Loon",
+                                "service": "China",
+                                "variant": "China_Resolve",
+                                "variant_primary": False,
+                                "variant_file": "China_Resolve.lsr",
+                                "source": "sample",
+                                "priority": 100,
+                                "rule_url": "https://example.com/rule/Loon/China/China_Resolve.list",
+                                "readme_url": "https://example.com/rule/Loon/China/README.md",
+                                "status": "ok",
+                                "snapshot_path": None,
+                                "entry_key": "china-resolve",
+                                "is_converted": False,
+                            },
+                        ]
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            write_markdown_docs(root, catalog)
+            readme = (root / "Rule" / "Loon" / "China" / "README.md").read_text(
+                encoding="utf-8"
+            )
+
+        self.assertIn("China_Domain.lsr", readme)
+        self.assertIn("./China_Domain.lsr", readme)
+        self.assertIn("China_Resolve", readme)
+        self.assertIn("rule/Loon/China/China_Domain.list", readme)
 
     def test_load_target_first_catalog_rejects_unknown_family(self) -> None:
         with tempfile.TemporaryDirectory() as temp_root:
