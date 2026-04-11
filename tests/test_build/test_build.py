@@ -13,6 +13,7 @@ from egloon_rule_hub.model.catalog import (
     SourceRef,
     TargetDef,
 )
+from egloon_rule_hub.model.rules import Rule
 
 
 class BuildPipelineTests(unittest.TestCase):
@@ -138,6 +139,32 @@ class BuildPipelineTests(unittest.TestCase):
         )
         self.assertIn("DOMAIN,openai.com", loon_bundle)
         self.assertIn("DOMAIN-SUFFIX,chatgpt.com", loon_bundle)
+
+    def test_render_rule_artifacts_requires_target_display_name(self) -> None:
+        simple_catalog = Catalog(
+            root=self.root,
+            sources={},
+            targets={
+                "unknown": TargetDef(name="unknown", enabled=True, file_ext="yaml"),
+            },
+            services={
+                "OpenAI": ServiceDef(
+                    name="OpenAI",
+                    enabled=True,
+                    targets=["unknown"],
+                    sources=[],
+                    override=None,
+                    notes="",
+                )
+            },
+            bundles={},
+        )
+        with self.assertRaises(ValueError):
+            render_rule_artifacts(
+                self.root,
+                simple_catalog,
+                {"OpenAI": [Rule(type="DOMAIN", value="example.com")]},
+            )
 
 
 if __name__ == "__main__":

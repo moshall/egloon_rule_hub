@@ -133,14 +133,16 @@ def render_rule_artifacts(
             continue
         service = catalog.services[service_name]
         for target_name in service.targets:
+            display_target = TARGET_DISPLAY_NAMES.get(target_name)
+            if display_target is None:
+                raise ValueError(
+                    f"Target {target_name!r} lacks a display name required to publish service {service_name!r}"
+                )
             target = catalog.targets.get(target_name)
             renderer_info = TARGET_RENDERERS.get(target_name)
             if target is None or not target.enabled or renderer_info is None:
                 continue
             ext, renderer = renderer_info
-            display_target = TARGET_DISPLAY_NAMES.get(target_name)
-            if display_target is None:
-                continue
             service_dir = root / "Rule" / display_target / service_name
             service_dir.mkdir(parents=True, exist_ok=True)
             output_path = service_dir / f"{service_name}.{ext}"
