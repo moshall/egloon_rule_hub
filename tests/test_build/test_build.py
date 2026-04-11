@@ -140,6 +140,23 @@ class BuildPipelineTests(unittest.TestCase):
         self.assertIn("DOMAIN,openai.com", loon_bundle)
         self.assertIn("DOMAIN-SUFFIX,chatgpt.com", loon_bundle)
 
+    def test_render_rule_artifacts_prunes_legacy_dist_targets(self) -> None:
+        legacy_target_dir = self.root / "dist" / "egern"
+        legacy_target_dir.mkdir(parents=True, exist_ok=True)
+        (legacy_target_dir / "OpenAI.yaml").write_text("legacy", encoding="utf-8")
+
+        service_rules = {
+            "OpenAI": build_service_rules(self.catalog, "OpenAI"),
+            "Claude": [],
+        }
+
+        render_rule_artifacts(self.root, self.catalog, service_rules)
+
+        self.assertFalse(legacy_target_dir.exists())
+        self.assertTrue(
+            (self.root / "dist" / "bundles" / "ai" / "loon.list").exists()
+        )
+
     def test_render_rule_artifacts_requires_target_display_name(self) -> None:
         simple_catalog = Catalog(
             root=self.root,

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -347,6 +348,12 @@ def _write_target_readmes(
 
 def write_markdown_docs(root: Path, catalog: Catalog) -> None:
     docs_dir = root / "docs"
+    legacy_services_dir = docs_dir / "services"
+    if legacy_services_dir.exists():
+        if legacy_services_dir.is_dir():
+            shutil.rmtree(legacy_services_dir)
+        else:
+            legacy_services_dir.unlink()
     docs_dir.mkdir(parents=True, exist_ok=True)
     upstream_docs_manifest = _load_upstream_docs_manifest(root)
 

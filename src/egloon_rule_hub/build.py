@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from urllib.request import Request, urlopen
+import shutil
 
 import yaml
 
@@ -10,7 +11,7 @@ from egloon_rule_hub.emitters.egern import render_egern_rule_set
 from egloon_rule_hub.emitters.loon import render_loon_rules
 from egloon_rule_hub.emitters.quanx import render_quanx_rules
 from egloon_rule_hub.emitters.shadowrocket import render_shadowrocket_rules
-from egloon_rule_hub.model.catalog import Catalog
+from egloon_rule_hub.model.catalog import Catalog, TargetDef
 from egloon_rule_hub.model.rules import Rule
 from egloon_rule_hub.normalize.dedupe import dedupe_rules
 from egloon_rule_hub.normalize.merge import merge_rule_streams
@@ -126,6 +127,7 @@ def render_rule_artifacts(
     service_rules: dict[str, list[Rule]],
 ) -> None:
     dist_dir = root / "dist"
+    _prune_legacy_dist_targets(dist_dir, catalog.targets)
     dist_dir.mkdir(parents=True, exist_ok=True)
 
     for service_name, rules in service_rules.items():
@@ -166,3 +168,18 @@ def render_rule_artifacts(
             ext, renderer = renderer_info
             output_path = bundle_dir / f"{target_name}.{ext}"
             output_path.write_text(renderer(merged), encoding="utf-8")
+
+
+def _prune_legacy_dist_targets(
+    dist_dir: Path, targets: dict[str, TargetDef]
+) -> None:
+    if not dist_dir.exists():
+        return
+    for target_name in targets:
+        legacy_dir = dist_dir / target_name
+        if not legacy_dir.exists():
+            continue
+        if legacy_dir.is_dir():
+            shutil.rmtree(legacy_dir)
+        else:
+            legacy_dir.unlink()

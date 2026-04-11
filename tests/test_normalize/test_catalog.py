@@ -209,6 +209,16 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self.assertIn("Rule/Clash/OpenAI/README.md", services_doc)
         self.assertNotIn("services/OpenAI.md", services_doc)
 
+    def test_write_markdown_docs_prunes_legacy_services_directory(self) -> None:
+        legacy_file = self.root / "docs" / "services" / "OpenAI.md"
+        legacy_file.parent.mkdir(parents=True, exist_ok=True)
+        legacy_file.write_text("legacy", encoding="utf-8")
+
+        write_markdown_docs(self.root, self.catalog)
+
+        self.assertFalse((self.root / "docs" / "services").exists())
+        self.assertTrue((self.root / "docs" / "services.md").exists())
+
     def test_usage_markdown_highlights_rule_directories(self) -> None:
         write_markdown_docs(self.root, self.catalog)
         usage_doc = (self.root / "docs" / "usage.md").read_text(encoding="utf-8")
