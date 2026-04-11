@@ -9,7 +9,7 @@ targets:
   clash:
     enabled: true
     file_ext: yaml
-  quanx:
+  quantumultx:
     enabled: true
     file_ext: list
   shadowrocket:

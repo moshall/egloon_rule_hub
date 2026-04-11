@@ -476,6 +476,62 @@ class BuildPipelineTests(unittest.TestCase):
 
         self.assertFalse(output_path.exists())
 
+    def test_render_target_artifacts_writes_quantumultx_and_prunes_quanx_directory(self) -> None:
+        quantumultx_path = self.root / "openai-quantumultx.list"
+        quantumultx_path.write_text("DOMAIN,quantumultx.example\n", encoding="utf-8")
+
+        catalog = Catalog(
+            root=self.root,
+            sources={"fixture": SourceDef(name="fixture", kind="remote")},
+            targets={
+                "quantumultx": TargetDef(name="quantumultx", enabled=True, file_ext="list"),
+            },
+            services={
+                "OpenAI": ServiceDef(
+                    name="OpenAI",
+                    enabled=True,
+                    targets=["quantumultx"],
+                    target_sources={
+                        "quantumultx": ServiceTargetDef(
+                            name="quantumultx",
+                            families={
+                                "native": [
+                                    SourceRef(
+                                        source="fixture",
+                                        url=quantumultx_path.as_uri(),
+                                        format="quanx_list",
+                                        priority=100,
+                                    )
+                                ],
+                                "shadowrocket": [],
+                                "clash": [],
+                            },
+                        )
+                    },
+                )
+            },
+            bundles={
+                "ai": BundleDef(
+                    name="ai",
+                    enabled=True,
+                    targets=["quantumultx"],
+                    services=["OpenAI"],
+                )
+            },
+        )
+
+        stale_dir = self.root / "Rule" / "QuanX" / "OpenAI"
+        stale_dir.mkdir(parents=True, exist_ok=True)
+        (stale_dir / "OpenAI.list").write_text("stale", encoding="utf-8")
+
+        artifacts = build_all_target_artifacts(catalog)
+        render_target_artifacts(self.root, catalog, artifacts)
+
+        self.assertTrue(
+            (self.root / "Rule" / "QuantumultX" / "OpenAI" / "OpenAI.list").exists()
+        )
+        self.assertFalse((self.root / "Rule" / "QuanX").exists())
+
     def test_build_all_target_artifacts_supports_target_variants_and_bundle_uses_primary(
         self,
     ) -> None:

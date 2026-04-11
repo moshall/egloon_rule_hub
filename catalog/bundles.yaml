@@ -1,4 +1,4 @@
-all_targets: &all_targets [egern, loon, clash, quanx, shadowrocket]
+all_targets: &all_targets [egern, loon, clash, quantumultx, shadowrocket]
 
 bundles:
   ai:

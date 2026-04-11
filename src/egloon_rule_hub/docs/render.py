@@ -15,7 +15,7 @@ TARGET_DISPLAY_NAMES = {
     "clash": "Clash",
     "egern": "Egern",
     "loon": "Loon",
-    "quanx": "QuanX",
+    "quantumultx": "QuantumultX",
     "shadowrocket": "Shadowrocket",
 }
 
@@ -117,7 +117,7 @@ def _usage_markdown(catalog: Catalog) -> str:
         "- `Rule/Clash/OpenAI/OpenAI.yaml`",
         "- `Rule/Loon/OpenAI/OpenAI.lsr`",
         "- `Rule/Egern/OpenAI/OpenAI.yaml`",
-        "- `Rule/QuanX/OpenAI/OpenAI.list`",
+        "- `Rule/QuantumultX/OpenAI/OpenAI.list`",
         "- `Rule/Shadowrocket/OpenAI/OpenAI.list`",
         "- `dist/bundles/<bundle>/<target>.<ext>`",
         "",
@@ -278,7 +278,7 @@ def _artifact_output_ext(target: str, publish_mode: str | None) -> str:
         "clash": "yaml",
         "egern": "yaml",
         "loon": "list",
-        "quanx": "list",
+        "quantumultx": "list",
         "shadowrocket": "list",
     }.get(target, "list")
 

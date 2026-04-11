@@ -350,6 +350,51 @@ class BuildUpstreamDocsTests(unittest.TestCase):
             {"China": True, "China_Domain": False, "China_Resolve": False},
         )
 
+    def test_manifest_uses_quantumultx_target_dir(self) -> None:
+        rule_url = "https://example.com/rule/QuantumultX/OpenAI/OpenAI.list"
+        catalog = Catalog(
+            root=self.root,
+            sources={"fixture": SourceDef(name="fixture", kind="remote")},
+            targets={
+                "quantumultx": TargetDef(name="quantumultx", enabled=True, file_ext="list"),
+            },
+            services={
+                "OpenAI": ServiceDef(
+                    name="OpenAI",
+                    enabled=True,
+                    targets=["quantumultx"],
+                    target_sources={
+                        "quantumultx": ServiceTargetDef(
+                            name="quantumultx",
+                            families={
+                                "native": [
+                                    SourceRef(
+                                        source="fixture",
+                                        url=rule_url,
+                                        format="quanx_list",
+                                        priority=100,
+                                    )
+                                ],
+                                "shadowrocket": [],
+                                "clash": [],
+                            },
+                        )
+                    },
+                ),
+            },
+            bundles={},
+        )
+
+        artifacts = build_all_target_artifacts(
+            catalog,
+            fetcher=lambda url: "DOMAIN,quantumultx.example\n",
+        )
+        manifest = build_upstream_docs(catalog, artifacts, fetcher=self._fake_fetcher())
+
+        entry = manifest["OpenAI"][0]
+        self.assertEqual(entry["target"], "quantumultx")
+        self.assertEqual(entry["target_dir"], "QuantumultX")
+
     def _fake_fetcher(self):
         def fetcher(url: str) -> bytes:
             return b"# README\n\nOriginal upstream text\n"

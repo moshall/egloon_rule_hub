@@ -37,7 +37,7 @@ TARGET_RENDERERS = {
     "egern": ("yaml", render_egern_rule_set),
     "loon": ("list", render_loon_rules),
     "clash": ("yaml", render_clash_rule_provider),
-    "quanx": ("list", render_quanx_rules),
+    "quantumultx": ("list", render_quanx_rules),
     "shadowrocket": ("list", render_shadowrocket_rules),
 }
 
@@ -46,7 +46,7 @@ TARGET_DISPLAY_NAMES = {
     "egern": "Egern",
     "loon": "Loon",
     "clash": "Clash",
-    "quanx": "QuanX",
+    "quantumultx": "QuantumultX",
     "shadowrocket": "Shadowrocket",
 }
 
@@ -352,6 +352,7 @@ def render_rule_artifacts(
     service_rules: dict[str, list[Rule]],
 ) -> None:
     dist_dir = root / "dist"
+    _prune_legacy_rule_targets(root / "Rule", catalog.targets)
     _prune_legacy_dist_targets(dist_dir, catalog.targets)
     dist_dir.mkdir(parents=True, exist_ok=True)
 
@@ -409,6 +410,7 @@ def render_target_artifacts(
     target_artifacts: dict[str, dict[str, TargetArtifact]],
 ) -> None:
     dist_dir = root / "dist"
+    _prune_legacy_rule_targets(root / "Rule", catalog.targets)
     _prune_legacy_dist_targets(dist_dir, catalog.targets)
     dist_dir.mkdir(parents=True, exist_ok=True)
 
@@ -508,6 +510,25 @@ def _prune_legacy_dist_targets(
     for target_name in targets:
         legacy_dir = dist_dir / target_name
         if not legacy_dir.exists():
+            continue
+        if legacy_dir.is_dir():
+            shutil.rmtree(legacy_dir)
+        else:
+            legacy_dir.unlink()
+
+
+def _prune_legacy_rule_targets(
+    rule_root: Path, targets: dict[str, TargetDef]
+) -> None:
+    if not rule_root.exists():
+        return
+    live_target_dirs = {
+        TARGET_DISPLAY_NAMES.get(target_name, target_name.capitalize())
+        for target_name in targets
+    }
+    for legacy_name in ("QuanX",):
+        legacy_dir = rule_root / legacy_name
+        if legacy_name in live_target_dirs or not legacy_dir.exists():
             continue
         if legacy_dir.is_dir():
             shutil.rmtree(legacy_dir)

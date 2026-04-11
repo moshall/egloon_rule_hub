@@ -21,7 +21,7 @@ TARGET_DISPLAY_NAMES = {
     "clash": "Clash",
     "egern": "Egern",
     "loon": "Loon",
-    "quanx": "QuanX",
+    "quantumultx": "QuantumultX",
     "shadowrocket": "Shadowrocket",
 }
 
@@ -61,7 +61,7 @@ def _artifact_output_ext(target: str, publish_mode: str | None) -> str:
         "clash": "yaml",
         "egern": "yaml",
         "loon": "list",
-        "quanx": "list",
+        "quantumultx": "list",
         "shadowrocket": "list",
     }.get(target, "list")
 

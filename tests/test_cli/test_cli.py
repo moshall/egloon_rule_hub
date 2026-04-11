@@ -468,6 +468,124 @@ class BootstrapCLITest(TestCase):
             self.assertIn("China_Resolve", readme)
             self.assertIn("rule/Loon/China/China_Domain.list", readme)
 
+    def test_bootstrap_writes_quantumultx_and_prunes_quanx_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            catalog_dir = root / "catalog"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n  sample:\n    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  quantumultx:\n"
+                "    enabled: true\n"
+                "    file_ext: list\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "defaults:\n"
+                "  fallback_order: [native, shadowrocket, clash]\n"
+                "services:\n"
+                "  OpenAI:\n"
+                "    enabled: true\n"
+                "    outputs: [quantumultx]\n"
+                "    target_sources:\n"
+                "      quantumultx:\n"
+                "        native: []\n"
+                "        shadowrocket: []\n"
+                "        clash: []\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text(
+                "bundles:\n  ai:\n    enabled: true\n    targets: [quantumultx]\n    services: [OpenAI]\n",
+                encoding="utf-8",
+            )
+
+            stale_dir = root / "Rule" / "QuanX" / "OpenAI"
+            stale_dir.mkdir(parents=True, exist_ok=True)
+            (stale_dir / "OpenAI.list").write_text("stale", encoding="utf-8")
+
+            generated_artifacts = {
+                "OpenAI": {
+                    "quantumultx": TargetArtifact(
+                        service="OpenAI",
+                        target="quantumultx",
+                        selected_family="native",
+                        selected_native_target="quantumultx",
+                        publish_mode=None,
+                        is_native=True,
+                        is_converted=False,
+                        conversion_path=None,
+                        rules=[Rule("DOMAIN", "openai.example")],
+                        selected_entries=[
+                            SelectedSourceEntry(
+                                source_name="sample",
+                                family="native",
+                                format="quanx_list",
+                                url="https://example.com/rule/QuantumultX/OpenAI/OpenAI.list",
+                                priority=100,
+                                raw_text="DOMAIN,openai.example\n",
+                            )
+                        ],
+                    )
+                }
+            }
+
+            manifest = {
+                "OpenAI": [
+                    {
+                        "target": "quantumultx",
+                        "target_dir": "QuantumultX",
+                        "service": "OpenAI",
+                        "variant": "OpenAI",
+                        "variant_primary": True,
+                        "variant_file": "OpenAI.list",
+                        "source": "sample",
+                        "priority": 100,
+                        "rule_url": "https://example.com/rule/QuantumultX/OpenAI/OpenAI.list",
+                        "readme_url": "https://example.com/rule/QuantumultX/OpenAI/README.md",
+                        "status": "ok",
+                        "snapshot_path": None,
+                        "entry_key": "quantumultx-openai",
+                        "is_converted": False,
+                    }
+                ]
+            }
+
+            def fake_build_upstream_docs(
+                catalog: Catalog,
+                artifacts: dict[str, dict[str, TargetArtifact]],
+            ) -> dict[str, list[dict[str, object]]]:
+                self.assertEqual(catalog.root, root)
+                self.assertEqual(artifacts, generated_artifacts)
+                manifest_path = root / "dist" / "manifests" / "upstream_docs.json"
+                manifest_path.parent.mkdir(parents=True, exist_ok=True)
+                manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+                return manifest
+
+            with ExitStack() as stack:
+                stack.enter_context(
+                    mock.patch(
+                        "egloon_rule_hub.cli.build_all_target_artifacts",
+                        return_value=generated_artifacts,
+                    )
+                )
+                stack.enter_context(
+                    mock.patch(
+                        "egloon_rule_hub.cli.build_upstream_docs",
+                        side_effect=fake_build_upstream_docs,
+                    )
+                )
+                status = cli.main(["--root", str(root), "bootstrap"])
+
+            self.assertEqual(status, 0)
+            self.assertTrue(
+                (root / "Rule" / "QuantumultX" / "OpenAI" / "OpenAI.list").exists()
+            )
+            self.assertFalse((root / "Rule" / "QuanX").exists())
+
     def test_render_manifests_uses_distinct_target_source_count(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)

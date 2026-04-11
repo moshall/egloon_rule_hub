@@ -31,6 +31,8 @@ class CatalogTests(unittest.TestCase):
         self.assertIn("China", catalog.services)
         self.assertIn("ai", catalog.bundles)
         self.assertIn("egern", catalog.targets)
+        self.assertIn("quantumultx", catalog.targets)
+        self.assertNotIn("quanx", catalog.targets)
         self.assertIn("blackmatrix7", catalog.sources)
         self.assertEqual(catalog.targets["loon"].publish_mode, "lsr")
         self.assertIn("clash", catalog.services["OpenAI"].target_sources)
@@ -410,7 +412,7 @@ class CatalogTests(unittest.TestCase):
                 "  clash:\n"
                 "    enabled: true\n"
                 "    file_ext: yaml\n"
-                "  quanx:\n"
+                "  quantumultx:\n"
                 "    enabled: true\n"
                 "    file_ext: conf\n"
                 "  shadowrocket:\n"
@@ -452,7 +454,7 @@ class CatalogTests(unittest.TestCase):
         self.assertIn("IyfTv", catalog.services)
         self.assertEqual(
             catalog.services["IyfTv"].targets,
-            ["egern", "loon", "clash", "quanx", "shadowrocket"],
+            ["egern", "loon", "clash", "quantumultx", "shadowrocket"],
         )
         self.assertEqual(catalog.services["Feishu"].origin.kind, "self_maintained")
         self.assertEqual(
@@ -549,7 +551,7 @@ class CatalogTests(unittest.TestCase):
                 "  loon:\n"
                 "    enabled: true\n"
                 "    file_ext: lsr\n"
-                "  quanx:\n"
+                "  quantumultx:\n"
                 "    enabled: true\n"
                 "    file_ext: conf\n"
                 "  shadowrocket:\n"
@@ -931,25 +933,27 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self.assertNotIn("dist/loon/OpenAI", usage_doc)
 
     def test_missing_target_dir_uses_native_display_name_mapping(self) -> None:
-        self.catalog.targets["quanx"] = TargetDef(name="quanx", enabled=True, file_ext="list")
+        self.catalog.targets["quantumultx"] = TargetDef(
+            name="quantumultx", enabled=True, file_ext="list"
+        )
         self.catalog.targets["shadowrocket"] = TargetDef(
             name="shadowrocket", enabled=True, file_ext="list"
         )
-        self.catalog.services["OpenAI"].targets.extend(["quanx", "shadowrocket"])
+        self.catalog.services["OpenAI"].targets.extend(["quantumultx", "shadowrocket"])
         self._write_upstream_manifest(
             {
                 "OpenAI": [
                     {
                         **self._manifest_entry(
-                            target="quanx",
+                            target="quantumultx",
                             status="missing",
                             snapshot_path=None,
                             is_converted=True,
                             selected_family="native",
-                            selected_native_target="quanx",
+                            selected_native_target="quantumultx",
                             conversion_path=None,
                             publish_mode=None,
-                            entry_key="quanx-missing",
+                            entry_key="quantumultx-missing",
                         ),
                         "target_dir": None,
                     },
@@ -973,7 +977,9 @@ class ServiceDocsRenderTests(unittest.TestCase):
 
         write_markdown_docs(self.root, self.catalog)
 
-        self.assertTrue((self.root / "Rule" / "QuanX" / "OpenAI" / "README.md").exists())
+        self.assertTrue(
+            (self.root / "Rule" / "QuantumultX" / "OpenAI" / "README.md").exists()
+        )
         self.assertTrue(
             (self.root / "Rule" / "Shadowrocket" / "OpenAI" / "README.md").exists()
         )
@@ -1083,6 +1089,8 @@ class ServiceDocsRenderTests(unittest.TestCase):
             if target == self.TARGET_CLASH
             else self.TARGET_EGERN_DIR
             if target == self.TARGET_EGERN
+            else "QuantumultX"
+            if target == "quantumultx"
             else target.capitalize()
         )
         return {

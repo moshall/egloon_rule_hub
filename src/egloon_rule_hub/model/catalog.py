@@ -10,7 +10,7 @@ from egloon_rule_hub.txt_sources import discover_txt_services
 
 DEFAULT_FALLBACK_ORDER = ["native", "shadowrocket", "clash"]
 ALLOWED_SOURCE_FAMILIES = frozenset(DEFAULT_FALLBACK_ORDER)
-DEFAULT_TXT_TARGETS = ["egern", "loon", "clash", "quanx", "shadowrocket"]
+DEFAULT_TXT_TARGETS = ["egern", "loon", "clash", "quantumultx", "shadowrocket"]
 
 
 @dataclass(slots=True)
