@@ -229,6 +229,55 @@ class ServiceDocsRenderTests(unittest.TestCase):
         detail = self._read_detail_page("OpenAI")
         self.assertEqual(detail.count("### Upstream Entry"), 2)
 
+    def test_traversal_style_snapshot_path_is_rejected(self) -> None:
+        outside_file = self.root.parent / f"{self.root.name}-outside-README.md"
+        outside_file.write_text("SHOULD NOT BE INLINED\n", encoding="utf-8")
+        self._write_upstream_manifest(
+            {
+                "OpenAI": [
+                    {
+                        "source": "fixture",
+                        "rule_url": self.RULE_URL_PRIMARY,
+                        "readme_url": self.README_URL_PRIMARY,
+                        "status": "ok",
+                        "snapshot_path": f"../{outside_file.name}",
+                    }
+                ]
+            }
+        )
+
+        write_markdown_docs(self.root, self.catalog)
+
+        detail = self._read_detail_page("OpenAI")
+        self.assertIn("upstream README missing snapshot", detail)
+        self.assertNotIn("SHOULD NOT BE INLINED", detail)
+
+    def test_snapshot_with_backticks_uses_safe_outer_code_fence(self) -> None:
+        self._write_snapshot(
+            self.SNAPSHOT_PATH_PRIMARY,
+            "# README\n\n```bash\necho hi\n```\n",
+        )
+        self._write_upstream_manifest(
+            {
+                "OpenAI": [
+                    {
+                        "source": "fixture",
+                        "rule_url": self.RULE_URL_PRIMARY,
+                        "readme_url": self.README_URL_PRIMARY,
+                        "status": "ok",
+                        "snapshot_path": self.SNAPSHOT_PATH_PRIMARY,
+                    }
+                ]
+            }
+        )
+
+        write_markdown_docs(self.root, self.catalog)
+
+        detail = self._read_detail_page("OpenAI")
+        self.assertIn("````text", detail)
+        self.assertIn("```bash", detail)
+        self.assertIn("\n````\n", detail)
+
     def _write_upstream_manifest(self, manifest: dict[str, list[dict[str, object]]]) -> None:
         manifest_path = self.root / "dist" / "manifests" / "upstream_docs.json"
         manifest_path.parent.mkdir(parents=True, exist_ok=True)

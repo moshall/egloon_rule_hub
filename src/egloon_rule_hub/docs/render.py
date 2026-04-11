@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -161,7 +162,13 @@ def _read_snapshot_text(root: Path, snapshot_path: str | None) -> str | None:
     if rel_path.is_absolute():
         return None
 
-    snapshot_file = root / rel_path
+    root_resolved = root.resolve()
+    snapshot_file = (root / rel_path).resolve()
+    try:
+        snapshot_file.relative_to(root_resolved)
+    except ValueError:
+        return None
+
     if not snapshot_file.exists() or not snapshot_file.is_file():
         return None
 
@@ -169,6 +176,11 @@ def _read_snapshot_text(root: Path, snapshot_path: str | None) -> str | None:
         return snapshot_file.read_text(encoding="utf-8")
     except OSError:
         return None
+
+
+def _markdown_code_fence(text: str) -> str:
+    max_run = max((len(match.group(0)) for match in re.finditer(r"`+", text)), default=0)
+    return "`" * max(3, max_run + 1)
 
 
 def _service_detail_markdown(
@@ -239,9 +251,9 @@ def _service_detail_markdown(
                     [
                         "#### Upstream Original Text",
                         "",
-                        "```text",
+                        f"{_markdown_code_fence(snapshot_text)}text",
                         snapshot_text.rstrip("\n"),
-                        "```",
+                        _markdown_code_fence(snapshot_text),
                         "",
                     ]
                 )
