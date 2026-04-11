@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
+from typing import Any
 
 from egloon_rule_hub.model.catalog import Catalog
 
@@ -15,8 +17,9 @@ def _services_markdown(catalog: Catalog) -> str:
         "| --- | --- | --- | --- | --- |",
     ]
     for name, service in sorted(catalog.services.items()):
+        service_link = f"[{name}](services/{name}.md)"
         lines.append(
-            f"| {name} | {service.enabled} | {', '.join(service.targets)} |"
+            f"| {service_link} | {service.enabled} | {', '.join(service.targets)} |"
             f" {len(service.sources)} | {service.notes or '-'} |"
         )
     lines.append("")
@@ -125,12 +128,154 @@ def _attribution_markdown(catalog: Catalog) -> str:
     return "\n".join(lines)
 
 
+def _load_upstream_docs_manifest(root: Path) -> dict[str, list[dict[str, Any]]]:
+    manifest_file = root / "dist" / "manifests" / "upstream_docs.json"
+    if not manifest_file.exists():
+        return {}
+
+    try:
+        payload = json.loads(manifest_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    if not isinstance(payload, dict):
+        return {}
+
+    manifest: dict[str, list[dict[str, Any]]] = {}
+    for service_name, entries in payload.items():
+        if not isinstance(service_name, str):
+            continue
+        if not isinstance(entries, list):
+            manifest[service_name] = []
+            continue
+        manifest[service_name] = [
+            entry for entry in entries if isinstance(entry, dict)
+        ]
+    return manifest
+
+
+def _read_snapshot_text(root: Path, snapshot_path: str | None) -> str | None:
+    if not snapshot_path:
+        return None
+    rel_path = Path(snapshot_path)
+    if rel_path.is_absolute():
+        return None
+
+    snapshot_file = root / rel_path
+    if not snapshot_file.exists() or not snapshot_file.is_file():
+        return None
+
+    try:
+        return snapshot_file.read_text(encoding="utf-8")
+    except OSError:
+        return None
+
+
+def _service_detail_markdown(
+    root: Path,
+    service_name: str,
+    catalog: Catalog,
+    entries: list[dict[str, Any]],
+) -> str:
+    service = catalog.services[service_name]
+    lines = [
+        f"# {service_name}",
+        "",
+        "## Service Summary",
+        "",
+        f"- Enabled: {service.enabled}",
+        f"- Targets: {', '.join(service.targets)}",
+        f"- Sources (catalog): {len(service.sources)}",
+        f"- Notes: {service.notes or '-'}",
+        "",
+        "## Upstream README Sources",
+        "",
+    ]
+    if not entries:
+        lines.extend(
+            [
+                "- No upstream docs manifest entries.",
+                "",
+            ]
+        )
+        return "\n".join(lines)
+
+    for index, entry in enumerate(entries, start=1):
+        source = str(entry.get("source") or "-")
+        rule_url = str(entry.get("rule_url") or "-")
+        readme_url = str(entry.get("readme_url") or "-")
+        status = str(entry.get("status") or "unknown")
+        snapshot_path = entry.get("snapshot_path")
+        snapshot_text = _read_snapshot_text(
+            root,
+            snapshot_path if isinstance(snapshot_path, str) else None,
+        )
+
+        lines.extend(
+            [
+                f"### Upstream Entry {index} ({source})",
+                "",
+                (
+                    f"- Rule file: [{rule_url}]({rule_url})"
+                    if rule_url != "-"
+                    else "- Rule file: -"
+                ),
+                (
+                    f"- README: [{readme_url}]({readme_url})"
+                    if readme_url != "-"
+                    else "- README: -"
+                ),
+                f"- Status: `{status}`",
+                "",
+            ]
+        )
+
+        if status == "ok":
+            if snapshot_text is None:
+                lines.append("upstream README missing snapshot")
+                lines.append("")
+            else:
+                lines.extend(
+                    [
+                        "#### Upstream Original Text",
+                        "",
+                        "```text",
+                        snapshot_text.rstrip("\n"),
+                        "```",
+                        "",
+                    ]
+                )
+        elif status == "missing":
+            lines.append("upstream README missing")
+            lines.append("")
+        elif status == "fetch_error":
+            lines.append("upstream README fetch_error")
+            lines.append("")
+        else:
+            lines.append(f"upstream README {status}")
+            lines.append("")
+
+    return "\n".join(lines)
+
+
 def write_markdown_docs(root: Path, catalog: Catalog) -> None:
     docs_dir = root / "docs"
     docs_dir.mkdir(parents=True, exist_ok=True)
+    services_dir = docs_dir / "services"
+    services_dir.mkdir(parents=True, exist_ok=True)
+    upstream_docs_manifest = _load_upstream_docs_manifest(root)
+
     (docs_dir / "services.md").write_text(_services_markdown(catalog), encoding="utf-8")
     (docs_dir / "sources.md").write_text(_sources_markdown(catalog), encoding="utf-8")
     (docs_dir / "usage.md").write_text(_usage_markdown(catalog), encoding="utf-8")
     (docs_dir / "attribution.md").write_text(
         _attribution_markdown(catalog), encoding="utf-8"
     )
+    for service_name in sorted(catalog.services):
+        detail = _service_detail_markdown(
+            root,
+            service_name,
+            catalog,
+            upstream_docs_manifest.get(service_name, []),
+        )
+        (services_dir / f"{service_name}.md").write_text(detail, encoding="utf-8")
