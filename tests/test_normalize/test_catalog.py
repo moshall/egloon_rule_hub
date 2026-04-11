@@ -187,6 +187,28 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self.assertIn("upstream README fetch_error", readme)
         self.assertIn("Converted upstream text", readme)
 
+    def test_service_index_links_to_target_readmes(self) -> None:
+        self._write_snapshot(self.SNAPSHOT_PATH_PRIMARY, "Primary README\n")
+        self._write_upstream_manifest(
+            {
+                "OpenAI": [
+                    self._manifest_entry(
+                        target=self.TARGET_CLASH,
+                        status="ok",
+                        snapshot_path=self.SNAPSHOT_PATH_PRIMARY,
+                        is_converted=False,
+                    )
+                ]
+            }
+        )
+
+        write_markdown_docs(self.root, self.catalog)
+
+        services_doc = (self.root / "docs" / "services.md").read_text(encoding="utf-8")
+        self.assertIn("## Target READMEs", services_doc)
+        self.assertIn("Rule/Clash/OpenAI/README.md", services_doc)
+        self.assertNotIn("services/OpenAI.md", services_doc)
+
     def test_traversal_style_snapshot_path_is_rejected(self) -> None:
         outside_file = self.root.parent / f"{self.root.name}-outside-README.md"
         outside_file.write_text("SHOULD NOT BE INLINED\n", encoding="utf-8")

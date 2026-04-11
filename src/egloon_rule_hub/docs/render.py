@@ -9,7 +9,10 @@ from typing import Any
 from egloon_rule_hub.model.catalog import Catalog
 
 
-def _services_markdown(catalog: Catalog) -> str:
+def _services_markdown(
+    catalog: Catalog,
+    service_readme_paths: dict[str, list[str]],
+) -> str:
     lines = [
         "# Services",
         "",
@@ -19,12 +22,26 @@ def _services_markdown(catalog: Catalog) -> str:
         "| --- | --- | --- | --- | --- |",
     ]
     for name, service in sorted(catalog.services.items()):
-        service_link = f"[{name}](services/{name}.md)"
         lines.append(
-            f"| {service_link} | {service.enabled} | {', '.join(service.targets)} |"
+            f"| {name} | {service.enabled} | {', '.join(service.targets)} |"
             f" {len(service.sources)} | {service.notes or '-'} |"
         )
     lines.append("")
+    lines.extend(
+        [
+            "## Target READMEs",
+            "",
+        ]
+    )
+    for service_name in sorted(catalog.services):
+        readmes = service_readme_paths.get(service_name, [])
+        if readmes:
+            lines.append(f"- {service_name}")
+            for readme_path in readmes:
+                lines.append(f"  - [{readme_path}]({readme_path})")
+        else:
+            lines.append(f"- {service_name}: (no target README yet)")
+        lines.append("")
     return "\n".join(lines)
 
 
@@ -301,12 +318,15 @@ def _target_readme_markdown(
     return "\n".join(lines)
 
 
-def _write_target_readmes(root: Path, manifest: dict[str, list[dict[str, Any]]]) -> None:
+def _write_target_readmes(
+    root: Path, manifest: dict[str, list[dict[str, Any]]]
+) -> dict[str, list[str]]:
     grouped = _group_manifest_entries_by_target(manifest)
     if not grouped:
-        return
+        return {}
 
     rule_root = root / "Rule"
+    service_readme_paths: dict[str, list[str]] = defaultdict(list)
     for (target, target_dir, service_name), entries in sorted(grouped.items()):
         service_dir = rule_root / target_dir / service_name
         service_dir.mkdir(parents=True, exist_ok=True)
@@ -315,6 +335,12 @@ def _write_target_readmes(root: Path, manifest: dict[str, list[dict[str, Any]]])
             _target_readme_markdown(root, target, target_dir, service_name, entries),
             encoding="utf-8",
         )
+        rel_readme = Path("Rule") / target_dir / service_name / "README.md"
+        rel_path = rel_readme.as_posix()
+        if rel_path not in service_readme_paths[service_name]:
+            service_readme_paths[service_name].append(rel_path)
+
+    return dict(service_readme_paths)
 
 
 def write_markdown_docs(root: Path, catalog: Catalog) -> None:
@@ -322,10 +348,12 @@ def write_markdown_docs(root: Path, catalog: Catalog) -> None:
     docs_dir.mkdir(parents=True, exist_ok=True)
     upstream_docs_manifest = _load_upstream_docs_manifest(root)
 
-    (docs_dir / "services.md").write_text(_services_markdown(catalog), encoding="utf-8")
+    service_readme_paths = _write_target_readmes(root, upstream_docs_manifest)
+    (docs_dir / "services.md").write_text(
+        _services_markdown(catalog, service_readme_paths), encoding="utf-8"
+    )
     (docs_dir / "sources.md").write_text(_sources_markdown(catalog), encoding="utf-8")
     (docs_dir / "usage.md").write_text(_usage_markdown(catalog), encoding="utf-8")
     (docs_dir / "attribution.md").write_text(
         _attribution_markdown(catalog), encoding="utf-8"
     )
-    _write_target_readmes(root, upstream_docs_manifest)
