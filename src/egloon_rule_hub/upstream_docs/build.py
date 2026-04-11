@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -10,7 +11,7 @@ from urllib.parse import urlparse
 
 from egloon_rule_hub.model.catalog import Catalog
 from egloon_rule_hub.sources.registry import resolve_source_ref
-from egloon_rule_hub.upstream_docs.fetch import ReadmeFetchResult, ReadmeFetcher, fetch_readme
+from egloon_rule_hub.upstream_docs.fetch import ReadmeFetcher, fetch_readme
 
 
 def _slugify_path(path: str) -> str:
@@ -21,7 +22,8 @@ def _slugify_path(path: str) -> str:
 def _entry_key(priority: int, source_name: str, rule_url: str) -> str:
     path = urlparse(rule_url).path or "/"
     slug = _slugify_path(path)
-    return f"{priority}-{source_name}-{slug}"
+    digest = hashlib.sha1(rule_url.encode("utf-8")).hexdigest()[:8]
+    return f"{priority}-{source_name}-{slug}-{digest}"
 
 
 def build_upstream_docs(
