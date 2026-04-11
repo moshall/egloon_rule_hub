@@ -14,6 +14,7 @@ The project goal is simple:
 This repository can be published as a public GitHub repository.
 
 - upstream attribution is tracked in [docs/attribution.md](/home/dev/dev/repos/egloon_rule_hub/docs/attribution.md)
+- upstream README snapshots are generated during `bootstrap` so source provenance stays visible over time
 - generated artifacts in `dist/` are transformed outputs built from upstream rule sources
 - the repository should continue to keep upstream references visible in both the README and generated docs
 
@@ -64,7 +65,7 @@ python -m egloon_rule_hub render-docs
 python -m egloon_rule_hub bootstrap
 ```
 
-`bootstrap` runs validation, source fetch, rule rendering, manifest rendering, and markdown doc rendering in one pass.
+`bootstrap` runs validation, source fetch, rule rendering, manifest rendering, upstream README snapshot rendering, and markdown doc rendering in one pass.
 
 ## Seeded Real Sources
 
