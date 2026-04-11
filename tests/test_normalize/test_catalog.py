@@ -209,6 +209,15 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self.assertIn("Rule/Clash/OpenAI/README.md", services_doc)
         self.assertNotIn("services/OpenAI.md", services_doc)
 
+    def test_usage_markdown_highlights_rule_directories(self) -> None:
+        write_markdown_docs(self.root, self.catalog)
+        usage_doc = (self.root / "docs" / "usage.md").read_text(encoding="utf-8")
+        self.assertIn("Rule/Clash/OpenAI/OpenAI.yaml", usage_doc)
+        self.assertIn("Rule/Loon/OpenAI/OpenAI.list", usage_doc)
+        self.assertIn("Rule/Egern/OpenAI/OpenAI.yaml", usage_doc)
+        self.assertNotIn("dist/clash/OpenAI", usage_doc)
+        self.assertNotIn("dist/loon/OpenAI", usage_doc)
+
     def test_traversal_style_snapshot_path_is_rejected(self) -> None:
         outside_file = self.root.parent / f"{self.root.name}-outside-README.md"
         outside_file.write_text("SHOULD NOT BE INLINED\n", encoding="utf-8")

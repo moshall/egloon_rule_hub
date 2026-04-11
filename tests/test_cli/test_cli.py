@@ -38,3 +38,12 @@ class BootstrapCLITest(TestCase):
 
         self.assertEqual(status, 0)
         build_upstream_docs.assert_called_once_with(catalog)
+
+
+class WorkflowConfigTests(TestCase):
+    def test_sync_workflow_stages_rule_directory(self) -> None:
+        workflow_path = (
+            Path(__file__).resolve().parents[2] / ".github" / "workflows" / "sync-rules.yml"
+        )
+        workflow_text = workflow_path.read_text(encoding="utf-8")
+        self.assertIn("git add Rule docs dist", workflow_text)

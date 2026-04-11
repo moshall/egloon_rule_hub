@@ -39,6 +39,10 @@ The current implementation already fetches and renders a first batch of real ser
 - Rule-set metadata lives at the rule-set level, not on every rule line.
 - Bundles reference services instead of duplicating rules.
 
+## Published Layout
+
+Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing the service README with the native file (for example `Rule/Clash/OpenAI/OpenAI.yaml`, `Rule/Loon/OpenAI/OpenAI.list`, and `Rule/Egern/OpenAI/OpenAI.yaml`). Bundles continue to publish under `dist/bundles/<bundle>/<target>.<ext>` so automation can refresh documentation and bundle outputs together.
+
 ## Supported Target Formats
 
 - Egern rule-set YAML
