@@ -13,17 +13,27 @@ from egloon_rule_hub.model.catalog import Catalog
 from egloon_rule_hub.sources.registry import resolve_source_ref
 from egloon_rule_hub.upstream_docs.fetch import ReadmeFetcher, fetch_readme
 
+MAX_SLUG_LENGTH = 40
+MAX_SOURCE_SEGMENT_LENGTH = 24
+MAX_SERVICE_SEGMENT_LENGTH = 32
+
+
+def _sanitize_segment(value: str, default: str, max_length: int) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    slug = slug[:max_length]
+    return slug or default
+
 
 def _slugify_path(path: str) -> str:
-    slug = re.sub(r"[^a-z0-9]+", "-", path.lower()).strip("-")
-    return slug or "root"
+    return _sanitize_segment(path, "root", MAX_SLUG_LENGTH)
 
 
-def _entry_key(priority: int, source_name: str, rule_url: str) -> str:
+def _entry_key(priority: int, source_name: str, rule_url: str, entry_index: int) -> str:
     path = urlparse(rule_url).path or "/"
     slug = _slugify_path(path)
+    source_segment = _sanitize_segment(source_name, "source", MAX_SOURCE_SEGMENT_LENGTH)
     digest = hashlib.sha1(rule_url.encode("utf-8")).hexdigest()[:8]
-    return f"{priority}-{source_name}-{slug}-{digest}"
+    return f"{priority}-{source_segment}-{slug}-{digest}-{entry_index}"
 
 
 def build_upstream_docs(
@@ -38,17 +48,18 @@ def build_upstream_docs(
     manifest: dict[str, list[dict[str, Any]]] = {}
     for service_name, service in sorted(catalog.services.items()):
         entries: list[dict[str, Any]] = []
-        for source_ref in service.sources:
+        service_dir = _sanitize_segment(service_name, "service", MAX_SERVICE_SEGMENT_LENGTH)
+        for index, source_ref in enumerate(service.sources):
             source_def = catalog.sources[source_ref.source]
             resolved = resolve_source_ref(source_def, source_ref)
             result = fetch_readme(resolved.url, fetcher=fetcher)
-            key = _entry_key(resolved.priority, resolved.source_name, resolved.url)
+            key = _entry_key(resolved.priority, resolved.source_name, resolved.url, index)
             snapshot_path: str | None = None
             if result.status == "ok" and result.content is not None:
-                snapshot_file = docs_root / service_name / key / "README.md"
+                snapshot_file = docs_root / service_dir / key / "README.md"
                 snapshot_file.parent.mkdir(parents=True, exist_ok=True)
                 snapshot_file.write_bytes(result.content)
-                snapshot_path = str(snapshot_file.relative_to(root))
+                snapshot_path = snapshot_file.relative_to(root).as_posix()
             entries.append(
                 {
                     "source": resolved.source_name,

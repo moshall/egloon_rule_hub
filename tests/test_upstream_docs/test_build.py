@@ -26,11 +26,11 @@ def _slugify_path(path: str) -> str:
     return slug or "root"
 
 
-def _expected_entry_key(priority: int, source: str, rule_url: str) -> str:
+def _expected_entry_key(priority: int, source: str, rule_url: str, entry_index: int) -> str:
     parsed = urlparse(rule_url)
     slug = _slugify_path(parsed.path or "/")
     digest = hashlib.sha1(rule_url.encode("utf-8")).hexdigest()[:8]
-    return f"{priority}-{source}-{slug}-{digest}"
+    return f"{priority}-{source}-{slug}-{digest}-{entry_index}"
 
 
 class BuildUpstreamDocsTests(unittest.TestCase):
@@ -66,6 +66,12 @@ class BuildUpstreamDocsTests(unittest.TestCase):
                             format="loon_list",
                             priority=100,
                         ),
+                        SourceRef(
+                            source="fixture",
+                            url=self.RULE_URL,
+                            format="some_other",
+                            priority=100,
+                        ),
                     ],
                 ),
             },
@@ -85,6 +91,7 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         snapshot_path = self.root / entry["snapshot_path"]
         self.assertTrue(snapshot_path.exists())
         self.assertTrue(snapshot_path.is_file())
+        self.assertEqual(snapshot_path.read_bytes(), b"# README\n\nOriginal upstream text\n")
 
         manifest_file = self.root / "dist" / "manifests" / "upstream_docs.json"
         self.assertTrue(manifest_file.exists())
@@ -92,8 +99,8 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         file_manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
         self.assertEqual(file_manifest, manifest)
 
-        expected_key = _expected_entry_key(100, "fixture", self.RULE_URL)
-        self.assertEqual(entry["entry_key"], expected_key)
+        self.assertEqual(entry["readme_url"], "https://example.com/rule/Clash/OpenAI/README.md")
+        self.assertEqual(entry["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 0))
 
     def test_manifest_snapshot_path_is_relative_to_root(self) -> None:
         manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
@@ -107,16 +114,11 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
         entries = manifest["OpenAI"]
 
-        self.assertGreater(len(entries), 1)
-        expected_key0 = _expected_entry_key(100, "fixture", self.RULE_URL)
-        expected_key1 = _expected_entry_key(100, "fixture", self.RULE_URL_ALT)
-        self.assertEqual(entries[0]["entry_key"], expected_key0)
-        self.assertEqual(entries[1]["entry_key"], expected_key1)
-        self.assertNotEqual(entries[0]["entry_key"], entries[1]["entry_key"])
-
-        first_snapshot = self.root / entries[0]["snapshot_path"]
-        second_snapshot = self.root / entries[1]["snapshot_path"]
-        self.assertNotEqual(first_snapshot, second_snapshot)
+        self.assertGreater(len(entries), 2)
+        self.assertEqual(entries[0]["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 0))
+        self.assertEqual(entries[1]["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL_ALT, 1))
+        self.assertEqual(entries[2]["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 2))
+        self.assertNotEqual(entries[0]["entry_key"], entries[2]["entry_key"], "same URL should still get unique key per entry")
 
     def _fake_fetcher(self):
         def fetcher(url: str) -> bytes:
