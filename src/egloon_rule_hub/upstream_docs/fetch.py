@@ -5,6 +5,7 @@ from typing import Callable, Optional
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 from urllib.parse import urlparse, urlunparse
+import posixpath
 
 
 ReadmeFetcher = Callable[[str], bytes]
@@ -22,17 +23,23 @@ class ReadmeFetchResult:
 def derive_readme_url(rule_url: str) -> str:
     """Derive the README.md URL from a resolved upstream rule URL."""
     parsed = urlparse(rule_url)
-    path = parsed.path.rstrip("/")
-    if "/" in path:
-        base_dir, _ = path.rsplit("/", 1)
+    path = parsed.path or "/"
+    if path.endswith("/"):
+        directory = path
     else:
-        base_dir = ""
-    readme_path = f"{base_dir}/README.md" if base_dir else "/README.md"
+        directory = posixpath.dirname(path)
+        if not directory:
+            directory = "/"
+        if not directory.endswith("/"):
+            directory = f"{directory}/"
+    readme_path = posixpath.join(directory, "README.md")
+    if not readme_path.startswith("/"):
+        readme_path = f"/{readme_path}"
     return urlunparse(parsed._replace(path=readme_path))
 
 
 def _default_fetcher(url: str) -> bytes:
-    with urlopen(url) as response:
+    with urlopen(url, timeout=10) as response:
         return response.read()
 
 
