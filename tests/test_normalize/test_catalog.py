@@ -64,6 +64,11 @@ class CatalogTests(unittest.TestCase):
 
 
 class ServiceDocsRenderTests(unittest.TestCase):
+    TARGET_CLASH = "clash"
+    TARGET_CLASH_DIR = "Clash"
+    TARGET_EGERN = "egern"
+    TARGET_EGERN_DIR = "Egern"
+
     RULE_URL_PRIMARY = "https://example.com/rules/OpenAI/OpenAI.yaml"
     RULE_URL_SECONDARY = "https://mirror.example.net/rules/OpenAI/OpenAI.list"
     README_URL_PRIMARY = "https://example.com/rules/OpenAI/README.md"
@@ -81,13 +86,18 @@ class ServiceDocsRenderTests(unittest.TestCase):
                 "mirror": SourceDef(name="mirror", kind="remote"),
             },
             targets={
-                "dummy": TargetDef(name="dummy", enabled=True, file_ext="yaml"),
+                self.TARGET_CLASH: TargetDef(
+                    name=self.TARGET_CLASH, enabled=True, file_ext="yaml"
+                ),
+                self.TARGET_EGERN: TargetDef(
+                    name=self.TARGET_EGERN, enabled=True, file_ext="yaml"
+                ),
             },
             services={
                 "OpenAI": ServiceDef(
                     name="OpenAI",
                     enabled=True,
-                    targets=["dummy"],
+                    targets=[self.TARGET_CLASH, self.TARGET_EGERN],
                     sources=[
                         SourceRef(
                             source="fixture",
@@ -111,123 +121,71 @@ class ServiceDocsRenderTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temp_dir.cleanup()
 
-    def test_service_index_links_to_service_detail_page(self) -> None:
-        self._write_upstream_manifest({})
-
-        write_markdown_docs(self.root, self.catalog)
-
-        services_doc = (self.root / "docs" / "services.md").read_text(encoding="utf-8")
-        self.assertIn("[OpenAI](services/OpenAI.md)", services_doc)
-
-    def test_detail_page_contains_original_upstream_text_from_snapshot(self) -> None:
-        self._write_snapshot(self.SNAPSHOT_PATH_PRIMARY, "# README\n\nOriginal upstream text\n")
+    def test_clash_readme_includes_native_target_and_snapshot(self) -> None:
+        self._write_snapshot(
+            self.SNAPSHOT_PATH_PRIMARY, "# README\n\nOriginal upstream text\n"
+        )
         self._write_upstream_manifest(
             {
                 "OpenAI": [
-                    {
-                        "source": "fixture",
-                        "rule_url": self.RULE_URL_PRIMARY,
-                        "readme_url": self.README_URL_PRIMARY,
-                        "status": "ok",
-                        "snapshot_path": self.SNAPSHOT_PATH_PRIMARY,
-                    }
+                    self._manifest_entry(
+                        target=self.TARGET_CLASH,
+                        status="ok",
+                        snapshot_path=self.SNAPSHOT_PATH_PRIMARY,
+                        is_converted=False,
+                    )
                 ]
             }
         )
 
         write_markdown_docs(self.root, self.catalog)
 
-        detail = self._read_detail_page("OpenAI")
-        self.assertIn("Original upstream text", detail)
+        readme = self._read_target_readme(self.TARGET_CLASH_DIR, "OpenAI")
+        self.assertIn("# OpenAI for Clash", readme)
+        self.assertIn("direct upstream target", readme)
+        self.assertIn("Original upstream text", readme)
+        self.assertIn(self.RULE_URL_PRIMARY, readme)
+        self.assertIn(self.README_URL_PRIMARY, readme)
 
-    def test_detail_page_contains_readme_and_rule_links(self) -> None:
-        self._write_snapshot(self.SNAPSHOT_PATH_PRIMARY, "Primary README\n")
-        self._write_snapshot(self.SNAPSHOT_PATH_SECONDARY, "Secondary README\n")
+    def test_egern_readme_includes_converted_wording_and_missing_states(self) -> None:
+        self._write_snapshot(self.SNAPSHOT_PATH_SECONDARY, "Converted upstream text\n")
         self._write_upstream_manifest(
             {
                 "OpenAI": [
-                    {
-                        "source": "fixture",
-                        "rule_url": self.RULE_URL_PRIMARY,
-                        "readme_url": self.README_URL_PRIMARY,
-                        "status": "ok",
-                        "snapshot_path": self.SNAPSHOT_PATH_PRIMARY,
-                    },
-                    {
-                        "source": "mirror",
-                        "rule_url": self.RULE_URL_SECONDARY,
-                        "readme_url": self.README_URL_SECONDARY,
-                        "status": "ok",
-                        "snapshot_path": self.SNAPSHOT_PATH_SECONDARY,
-                    },
+                    self._manifest_entry(
+                        target=self.TARGET_EGERN,
+                        status="ok",
+                        snapshot_path=self.SNAPSHOT_PATH_SECONDARY,
+                        is_converted=True,
+                    ),
+                    self._manifest_entry(
+                        target=self.TARGET_EGERN,
+                        status="missing",
+                        snapshot_path=None,
+                        source="mirror",
+                        is_converted=True,
+                    ),
+                    self._manifest_entry(
+                        target=self.TARGET_EGERN,
+                        status="fetch_error",
+                        snapshot_path=None,
+                        source="mirror",
+                        is_converted=True,
+                        entry_key="mirror-fetch_error",
+                    ),
                 ]
             }
         )
 
         write_markdown_docs(self.root, self.catalog)
 
-        detail = self._read_detail_page("OpenAI")
-        self.assertIn(self.RULE_URL_PRIMARY, detail)
-        self.assertIn(self.RULE_URL_SECONDARY, detail)
-        self.assertIn(self.README_URL_PRIMARY, detail)
-        self.assertIn(self.README_URL_SECONDARY, detail)
-
-    def test_detail_page_shows_missing_and_fetch_error_states(self) -> None:
-        self._write_upstream_manifest(
-            {
-                "OpenAI": [
-                    {
-                        "source": "fixture",
-                        "rule_url": self.RULE_URL_PRIMARY,
-                        "readme_url": self.README_URL_PRIMARY,
-                        "status": "missing",
-                        "snapshot_path": None,
-                    },
-                    {
-                        "source": "mirror",
-                        "rule_url": self.RULE_URL_SECONDARY,
-                        "readme_url": self.README_URL_SECONDARY,
-                        "status": "fetch_error",
-                        "snapshot_path": None,
-                    },
-                ]
-            }
-        )
-
-        write_markdown_docs(self.root, self.catalog)
-
-        detail = self._read_detail_page("OpenAI")
-        self.assertIn("upstream README missing", detail)
-        self.assertIn("upstream README fetch_error", detail)
-
-    def test_multi_entry_manifest_renders_multiple_upstream_blocks(self) -> None:
-        self._write_snapshot(self.SNAPSHOT_PATH_PRIMARY, "Primary README\n")
-        self._write_snapshot(self.SNAPSHOT_PATH_SECONDARY, "Secondary README\n")
-        self._write_upstream_manifest(
-            {
-                "OpenAI": [
-                    {
-                        "source": "fixture",
-                        "rule_url": self.RULE_URL_PRIMARY,
-                        "readme_url": self.README_URL_PRIMARY,
-                        "status": "ok",
-                        "snapshot_path": self.SNAPSHOT_PATH_PRIMARY,
-                    },
-                    {
-                        "source": "mirror",
-                        "rule_url": self.RULE_URL_SECONDARY,
-                        "readme_url": self.README_URL_SECONDARY,
-                        "status": "ok",
-                        "snapshot_path": self.SNAPSHOT_PATH_SECONDARY,
-                    },
-                ]
-            }
-        )
-
-        write_markdown_docs(self.root, self.catalog)
-
-        detail = self._read_detail_page("OpenAI")
-        self.assertEqual(detail.count("### Upstream Entry"), 2)
+        readme = self._read_target_readme(self.TARGET_EGERN_DIR, "OpenAI")
+        self.assertIn("generated by egloon_rule_hub", readme)
+        self.assertIn("not a native upstream Egern artifact", readme)
+        self.assertEqual(readme.count("### Upstream Entry"), 3)
+        self.assertIn("upstream README missing", readme)
+        self.assertIn("upstream README fetch_error", readme)
+        self.assertIn("Converted upstream text", readme)
 
     def test_traversal_style_snapshot_path_is_rejected(self) -> None:
         outside_file = self.root.parent / f"{self.root.name}-outside-README.md"
@@ -235,22 +193,21 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self._write_upstream_manifest(
             {
                 "OpenAI": [
-                    {
-                        "source": "fixture",
-                        "rule_url": self.RULE_URL_PRIMARY,
-                        "readme_url": self.README_URL_PRIMARY,
-                        "status": "ok",
-                        "snapshot_path": f"../{outside_file.name}",
-                    }
+                    self._manifest_entry(
+                        target=self.TARGET_CLASH,
+                        status="ok",
+                        snapshot_path=f"../{outside_file.name}",
+                        is_converted=False,
+                    )
                 ]
             }
         )
 
         write_markdown_docs(self.root, self.catalog)
 
-        detail = self._read_detail_page("OpenAI")
-        self.assertIn("upstream README missing snapshot", detail)
-        self.assertNotIn("SHOULD NOT BE INLINED", detail)
+        readme = self._read_target_readme(self.TARGET_CLASH_DIR, "OpenAI")
+        self.assertIn("upstream README missing snapshot", readme)
+        self.assertNotIn("SHOULD NOT BE INLINED", readme)
 
     def test_snapshot_with_backticks_uses_safe_outer_code_fence(self) -> None:
         self._write_snapshot(
@@ -260,44 +217,92 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self._write_upstream_manifest(
             {
                 "OpenAI": [
-                    {
-                        "source": "fixture",
-                        "rule_url": self.RULE_URL_PRIMARY,
-                        "readme_url": self.README_URL_PRIMARY,
-                        "status": "ok",
-                        "snapshot_path": self.SNAPSHOT_PATH_PRIMARY,
-                    }
+                    self._manifest_entry(
+                        target=self.TARGET_CLASH,
+                        status="ok",
+                        snapshot_path=self.SNAPSHOT_PATH_PRIMARY,
+                        is_converted=False,
+                    )
                 ]
             }
         )
 
         write_markdown_docs(self.root, self.catalog)
 
-        detail = self._read_detail_page("OpenAI")
-        self.assertIn("````text", detail)
-        self.assertIn("```bash", detail)
-        self.assertIn("\n````\n", detail)
+        readme = self._read_target_readme(self.TARGET_CLASH_DIR, "OpenAI")
+        self.assertIn("````text", readme)
+        self.assertIn("```bash", readme)
+        self.assertIn("\n````\n", readme)
 
     def test_invalid_utf8_snapshot_bytes_render_as_missing_snapshot(self) -> None:
         self._write_snapshot_bytes(self.SNAPSHOT_PATH_PRIMARY, b"\xff\xfe\x80")
         self._write_upstream_manifest(
             {
                 "OpenAI": [
-                    {
-                        "source": "fixture",
-                        "rule_url": self.RULE_URL_PRIMARY,
-                        "readme_url": self.README_URL_PRIMARY,
-                        "status": "ok",
-                        "snapshot_path": self.SNAPSHOT_PATH_PRIMARY,
-                    }
+                    self._manifest_entry(
+                        target=self.TARGET_CLASH,
+                        status="ok",
+                        snapshot_path=self.SNAPSHOT_PATH_PRIMARY,
+                        is_converted=False,
+                    )
                 ]
             }
         )
 
         write_markdown_docs(self.root, self.catalog)
 
-        detail = self._read_detail_page("OpenAI")
-        self.assertIn("upstream README missing snapshot", detail)
+        readme = self._read_target_readme(self.TARGET_CLASH_DIR, "OpenAI")
+        self.assertIn("upstream README missing snapshot", readme)
+
+    def _manifest_entry(
+        self,
+        *,
+        target: str,
+        status: str,
+        is_converted: bool,
+        snapshot_path: str | None = None,
+        source: str = "fixture",
+        priority: int | None = None,
+        rule_url: str | None = None,
+        readme_url: str | None = None,
+        entry_key: str | None = None,
+    ) -> dict[str, object]:
+        if priority is None:
+            priority = 100 if source == "fixture" else 200
+        if rule_url is None:
+            rule_url = (
+                self.RULE_URL_PRIMARY
+                if source == "fixture"
+                else self.RULE_URL_SECONDARY
+            )
+        if readme_url is None:
+            readme_url = (
+                self.README_URL_PRIMARY
+                if source == "fixture"
+                else self.README_URL_SECONDARY
+            )
+        if entry_key is None:
+            entry_key = f"{target}-{source}-{status}"
+        target_dir = (
+            self.TARGET_CLASH_DIR
+            if target == self.TARGET_CLASH
+            else self.TARGET_EGERN_DIR
+            if target == self.TARGET_EGERN
+            else target.capitalize()
+        )
+        return {
+            "target": target,
+            "target_dir": target_dir,
+            "service": "OpenAI",
+            "source": source,
+            "priority": priority,
+            "rule_url": rule_url,
+            "readme_url": readme_url,
+            "status": status,
+            "snapshot_path": snapshot_path,
+            "entry_key": entry_key,
+            "is_converted": is_converted,
+        }
 
     def _write_upstream_manifest(self, manifest: dict[str, list[dict[str, object]]]) -> None:
         manifest_path = self.root / "dist" / "manifests" / "upstream_docs.json"
@@ -317,8 +322,8 @@ class ServiceDocsRenderTests(unittest.TestCase):
         snapshot_file.parent.mkdir(parents=True, exist_ok=True)
         snapshot_file.write_bytes(content)
 
-    def _read_detail_page(self, service_name: str) -> str:
-        return (self.root / "docs" / "services" / f"{service_name}.md").read_text(
+    def _read_target_readme(self, target_dir: str, service_name: str) -> str:
+        return (self.root / "Rule" / target_dir / service_name / "README.md").read_text(
             encoding="utf-8"
         )
 
