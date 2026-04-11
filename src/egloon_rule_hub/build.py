@@ -39,6 +39,15 @@ TARGET_RENDERERS = {
 }
 
 
+TARGET_DISPLAY_NAMES = {
+    "egern": "Egern",
+    "loon": "Loon",
+    "clash": "Clash",
+    "quanx": "QuanX",
+    "shadowrocket": "Shadowrocket",
+}
+
+
 def fetch_text(url: str) -> str:
     request = Request(url, headers={"User-Agent": "egloon-rule-hub/0.1"})
     with urlopen(request, timeout=30) as response:  # noqa: S310
@@ -129,9 +138,12 @@ def render_rule_artifacts(
             if target is None or not target.enabled or renderer_info is None:
                 continue
             ext, renderer = renderer_info
-            target_dir = dist_dir / target_name
-            target_dir.mkdir(parents=True, exist_ok=True)
-            output_path = target_dir / f"{service_name}.{ext}"
+            display_target = TARGET_DISPLAY_NAMES.get(target_name)
+            if display_target is None:
+                continue
+            service_dir = root / "Rule" / display_target / service_name
+            service_dir.mkdir(parents=True, exist_ok=True)
+            output_path = service_dir / f"{service_name}.{ext}"
             output_path.write_text(renderer(rules), encoding="utf-8")
 
     for bundle_name, bundle in catalog.bundles.items():

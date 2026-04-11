@@ -122,9 +122,15 @@ class BuildPipelineTests(unittest.TestCase):
 
         render_rule_artifacts(self.root, self.catalog, service_rules)
 
-        self.assertTrue((self.root / "dist" / "loon" / "OpenAI.list").exists())
-        self.assertTrue((self.root / "dist" / "clash" / "OpenAI.yaml").exists())
-        self.assertTrue((self.root / "dist" / "egern" / "OpenAI.yaml").exists())
+        self.assertTrue(
+            (self.root / "Rule" / "Loon" / "OpenAI" / "OpenAI.list").exists()
+        )
+        self.assertTrue(
+            (self.root / "Rule" / "Clash" / "OpenAI" / "OpenAI.yaml").exists()
+        )
+        self.assertTrue(
+            (self.root / "Rule" / "Egern" / "OpenAI" / "OpenAI.yaml").exists()
+        )
         self.assertTrue((self.root / "dist" / "bundles" / "ai" / "loon.list").exists())
 
         loon_bundle = (self.root / "dist" / "bundles" / "ai" / "loon.list").read_text(
@@ -136,4 +142,3 @@ class BuildPipelineTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
