@@ -6,11 +6,14 @@ This directory mirrors the direct upstream Clash target for YouTube.
 
 This layout documents a direct upstream target.
 
+- Selected source family: `native`
+- Upstream native target: `Clash`
+
 ## Upstream README Sources
 
 ### Upstream Entry 1 (acl4ssr)
 
-- Target: `clash`
+- Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list](https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list)
 - README: [https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/README.md](https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/README.md)
 - Status: `missing`
@@ -19,7 +22,7 @@ upstream README missing
 
 ### Upstream Entry 2 (blackmatrix7)
 
-- Target: `clash`
+- Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml)
 - README: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/README.md](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/README.md)
 - Status: `ok`

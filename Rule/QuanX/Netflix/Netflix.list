@@ -35,7 +35,6 @@ DOMAIN-KEYWORD,apiproxy-device-prod-nlb-
 DOMAIN-KEYWORD,dualstack.apiproxy-
 DOMAIN-KEYWORD,dualstack.ichnaea-web-
 DOMAIN-KEYWORD,netflixdnstest
-PROCESS-NAME,com.netflix.mediaclient
 USER-AGENT,Argo*
 IP-CIDR,103.87.204.0/22,no-resolve
 IP-CIDR,107.23.255.0/26,no-resolve
@@ -541,6 +540,10 @@ IP-CIDR,219.76.0.0/17,no-resolve
 IP-CIDR,23.23.189.144/28,no-resolve
 IP-CIDR,23.246.0.0/18,no-resolve
 IP-CIDR,23.78.0.0/16,no-resolve
+IP-CIDR,2607:fb10::/32,no-resolve
+IP-CIDR,2620:10c:7000::/44,no-resolve
+IP-CIDR,2a00:86c0::/32,no-resolve
+IP-CIDR,2a03:5640::/32,no-resolve
 IP-CIDR,3.0.5.224/27,no-resolve
 IP-CIDR,3.0.5.32/29,no-resolve
 IP-CIDR,3.10.127.32/27,no-resolve
@@ -1152,7 +1155,3 @@ IP-CIDR,99.79.20.192/26,no-resolve
 IP-CIDR,99.80.34.48/28,no-resolve
 IP-CIDR,99.80.34.64/26,no-resolve
 IP-CIDR,99.80.88.0/25,no-resolve
-IP-CIDR6,2607:fb10::/32,no-resolve
-IP-CIDR6,2620:10c:7000::/44,no-resolve
-IP-CIDR6,2a00:86c0::/32,no-resolve
-IP-CIDR6,2a03:5640::/32,no-resolve

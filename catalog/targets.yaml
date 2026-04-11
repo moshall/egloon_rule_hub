@@ -4,7 +4,8 @@ targets:
     file_ext: yaml
   loon:
     enabled: true
-    file_ext: list
+    file_ext: lsr
+    publish_mode: lsr
   clash:
     enabled: true
     file_ext: yaml
@@ -14,4 +15,3 @@ targets:
   shadowrocket:
     enabled: true
     file_ext: list
-

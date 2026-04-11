@@ -1,8 +1,36 @@
 {
   "Apple": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Apple services",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -13,8 +41,36 @@
   },
   "China": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Regional routing",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -25,8 +81,36 @@
   },
   "ChinaDNS": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Regional routing",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -37,8 +121,36 @@
   },
   "ChinaIPs": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Regional routing",
-    "source_count": 1,
+    "source_count": 2,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 0,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 0,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -49,8 +161,36 @@
   },
   "ChinaIPsBGP": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Regional routing",
-    "source_count": 1,
+    "source_count": 2,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 0,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 0,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -61,8 +201,36 @@
   },
   "ChinaMax": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Regional routing",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -73,8 +241,36 @@
   },
   "Claude": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "AI service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -85,8 +281,36 @@
   },
   "Cloudflare": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Infrastructure and CDN service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -97,8 +321,36 @@
   },
   "Copilot": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "AI service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -109,8 +361,36 @@
   },
   "Duolingo": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Education",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -121,8 +401,36 @@
   },
   "EA": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Gaming",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -133,8 +441,36 @@
   },
   "ESPN": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Sports media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -145,8 +481,36 @@
   },
   "Emby": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -157,8 +521,36 @@
   },
   "FOXNOW": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -169,8 +561,36 @@
   },
   "FOXPlus": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -181,8 +601,36 @@
   },
   "Facebook": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Social service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -193,8 +641,36 @@
   },
   "Fox": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -205,8 +681,36 @@
   },
   "Gemini": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Google AI service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -217,8 +721,36 @@
   },
   "GitHub": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Developer platform",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -229,8 +761,36 @@
   },
   "Google": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Google main services",
-    "source_count": 3,
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 2,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -241,8 +801,36 @@
   },
   "GoogleEarth": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Google Earth",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -253,8 +841,36 @@
   },
   "GoogleSearch": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Google Search",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -265,8 +881,36 @@
   },
   "GoogleVoice": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Google Voice",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -277,8 +921,36 @@
   },
   "HBO": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -289,8 +961,36 @@
   },
   "HBOAsia": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -301,8 +1001,36 @@
   },
   "HBOHK": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -313,8 +1041,36 @@
   },
   "HBOUSA": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -325,8 +1081,36 @@
   },
   "Instagram": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Social service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -337,8 +1121,36 @@
   },
   "Linux": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Linux ecosystems",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -349,8 +1161,36 @@
   },
   "Netflix": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -361,8 +1201,36 @@
   },
   "Nintendo": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Gaming",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -373,8 +1241,36 @@
   },
   "Nvidia": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Gaming and cloud",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -385,8 +1281,36 @@
   },
   "OpenAI": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "AI service",
-    "source_count": 3,
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 2,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -397,8 +1321,36 @@
   },
   "PayPal": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Payments",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -409,8 +1361,36 @@
   },
   "PikPak": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Cloud storage",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -421,8 +1401,36 @@
   },
   "Proxy": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Proxy related rules",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -433,8 +1441,36 @@
   },
   "Rakuten": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Commerce",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -445,8 +1481,36 @@
   },
   "Reddit": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Social service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -457,8 +1521,36 @@
   },
   "Shopee": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Commerce",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -469,8 +1561,36 @@
   },
   "Shopify": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Commerce",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -481,8 +1601,36 @@
   },
   "SkyGO": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -493,8 +1641,36 @@
   },
   "Sony": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Gaming and media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -505,8 +1681,36 @@
   },
   "Spotify": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -517,8 +1721,36 @@
   },
   "Steam": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Gaming",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -529,8 +1761,36 @@
   },
   "SteamCN": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Gaming",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -541,8 +1801,36 @@
   },
   "Stripe": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Payments",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -553,8 +1841,36 @@
   },
   "Telegram": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Messaging",
-    "source_count": 3,
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 2,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -565,8 +1881,36 @@
   },
   "TelegramNL": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Messaging",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -577,8 +1921,36 @@
   },
   "TelegramSG": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Messaging",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -589,8 +1961,36 @@
   },
   "TelegramUS": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Messaging",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -601,8 +2001,36 @@
   },
   "TikTok": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Social service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -613,8 +2041,36 @@
   },
   "Tumblr": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Social service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -625,8 +2081,36 @@
   },
   "Twitch": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -637,8 +2121,36 @@
   },
   "Twitter": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Social service",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -649,8 +2161,36 @@
   },
   "WhatsApp": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Messaging",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -661,8 +2201,36 @@
   },
   "Wikipedia": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Knowledge",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -673,8 +2241,36 @@
   },
   "Xbox": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Gaming",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -685,8 +2281,36 @@
   },
   "YYeTs": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -697,8 +2321,36 @@
   },
   "YouTube": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 3,
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 2,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 2,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 2,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -709,8 +2361,36 @@
   },
   "YouTubeMusic": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",
@@ -721,8 +2401,36 @@
   },
   "eBay": {
     "enabled": true,
+    "fallback_order": [],
     "notes": "Commerce",
-    "source_count": 2,
+    "source_count": 3,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quanx": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
     "targets": [
       "egern",
       "loon",

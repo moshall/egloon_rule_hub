@@ -246,7 +246,6 @@ payload:
 - DOMAIN-SUFFIX,xoom.us
 - DOMAIN-SUFFIX,xoomcom.com
 - DOMAIN-KEYWORD,paypal
-- USER-AGENT,PayPal*
 - DOMAIN-SUFFIX,ebates.com
 - DOMAIN-SUFFIX,infoseek.co.jp
 - DOMAIN-SUFFIX,o50.jp

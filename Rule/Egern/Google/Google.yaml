@@ -692,14 +692,6 @@ domain_suffix_set:
 - zynamics.com
 - googledrive.com
 - googleusercontent.com
-- ggpht.com
-- gvt1.com
-- gvt2.com
-- youtu.be
-- youtube-nocookie.com
-- youtube.com
-- yt.be
-- ytimg.com
 domain_keyword_set:
 - appspot
 - blogspot
@@ -710,6 +702,5 @@ ip_cidr_set:
 - 172.110.32.0/21
 - 173.194.0.0/16
 - 216.73.80.0/20
-- 74.125.0.0/16
-ip_cidr6_set:
 - 2620:120:e000::/40
+- 74.125.0.0/16

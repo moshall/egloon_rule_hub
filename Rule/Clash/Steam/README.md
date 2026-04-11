@@ -6,11 +6,14 @@ This directory mirrors the direct upstream Clash target for Steam.
 
 This layout documents a direct upstream target.
 
+- Selected source family: `native`
+- Upstream native target: `Clash`
+
 ## Upstream README Sources
 
 ### Upstream Entry 1 (blackmatrix7)
 
-- Target: `clash`
+- Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml)
 - README: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/README.md](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/README.md)
 - Status: `ok`

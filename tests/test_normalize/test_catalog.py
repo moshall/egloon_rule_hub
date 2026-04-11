@@ -9,6 +9,7 @@ from egloon_rule_hub.docs.render import write_markdown_docs
 from egloon_rule_hub.model.catalog import (
     Catalog,
     ServiceDef,
+    ServiceTargetDef,
     SourceDef,
     SourceRef,
     TargetDef,
@@ -27,6 +28,16 @@ class CatalogTests(unittest.TestCase):
         self.assertIn("ai", catalog.bundles)
         self.assertIn("egern", catalog.targets)
         self.assertIn("blackmatrix7", catalog.sources)
+        self.assertEqual(catalog.targets["loon"].publish_mode, "lsr")
+        self.assertIn("clash", catalog.services["OpenAI"].target_sources)
+        self.assertIn("native", catalog.services["OpenAI"].target_sources["clash"].families)
+        self.assertEqual(
+            catalog.services["OpenAI"].target_sources["egern"].selected_order(
+                catalog.services["OpenAI"].fallback_order,
+                catalog.default_fallback_order,
+            ),
+            ["native", "shadowrocket", "clash"],
+        )
 
     def test_dedupe_rules(self) -> None:
         rules = [
@@ -61,6 +72,115 @@ class CatalogTests(unittest.TestCase):
         self.assertIn("# Attribution", attribution)
         self.assertIn("blackmatrix7", attribution)
         self.assertIn("ACL4SSR", attribution)
+
+    def test_load_target_first_catalog(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n"
+                "  sample:\n"
+                "    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  loon:\n"
+                "    enabled: true\n"
+                "    file_ext: lsr\n"
+                "    publish_mode: lsr\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n"
+                "  egern:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "defaults:\n"
+                "  fallback_order: [native, shadowrocket, clash]\n"
+                "services:\n"
+                "  OpenAI:\n"
+                "    enabled: true\n"
+                "    outputs: [loon, clash, egern]\n"
+                "    target_sources:\n"
+                "      loon:\n"
+                "        native:\n"
+                "          - source: sample\n"
+                "            url: https://example.com/rule/Loon/OpenAI/OpenAI.list\n"
+                "            format: loon_list\n"
+                "      clash:\n"
+                "        native:\n"
+                "          - source: sample\n"
+                "            url: https://example.com/rule/Clash/OpenAI/OpenAI.yaml\n"
+                "            format: clash_yaml\n"
+                "      egern:\n"
+                "        native: []\n"
+                "        shadowrocket: []\n"
+                "        clash:\n"
+                "          - source: sample\n"
+                "            url: https://example.com/rule/Clash/OpenAI/OpenAI.yaml\n"
+                "            format: clash_yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text(
+                "bundles:\n"
+                "  ai:\n"
+                "    enabled: true\n"
+                "    targets: [loon, clash, egern]\n"
+                "    services: [OpenAI]\n",
+                encoding="utf-8",
+            )
+
+            catalog = load_catalog(root)
+
+        self.assertEqual(catalog.targets["loon"].publish_mode, "lsr")
+        self.assertEqual(catalog.services["OpenAI"].outputs, ["loon", "clash", "egern"])
+        self.assertIn("native", catalog.services["OpenAI"].target_sources["loon"].families)
+        self.assertIn("clash", catalog.services["OpenAI"].target_sources["egern"].families)
+
+    def test_load_target_first_catalog_rejects_unknown_family(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n"
+                "  sample:\n"
+                "    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "services:\n"
+                "  OpenAI:\n"
+                "    enabled: true\n"
+                "    outputs: [clash]\n"
+                "    target_sources:\n"
+                "      clash:\n"
+                "        invalid_family:\n"
+                "          - source: sample\n"
+                "            url: https://example.com/rule/Clash/OpenAI/OpenAI.yaml\n"
+                "            format: clash_yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text(
+                "bundles: {}\n",
+                encoding="utf-8",
+            )
+
+            with self.assertRaises(ValueError):
+                load_catalog(root)
 
 
 class ServiceDocsRenderTests(unittest.TestCase):
@@ -143,6 +263,8 @@ class ServiceDocsRenderTests(unittest.TestCase):
         readme = self._read_target_readme(self.TARGET_CLASH_DIR, "OpenAI")
         self.assertIn("# OpenAI for Clash", readme)
         self.assertIn("direct upstream target", readme)
+        self.assertIn("Selected source family: `native`", readme)
+        self.assertIn("Upstream native target: `Clash`", readme)
         self.assertIn("Original upstream text", readme)
         self.assertIn(self.RULE_URL_PRIMARY, readme)
         self.assertIn(self.README_URL_PRIMARY, readme)
@@ -182,6 +304,9 @@ class ServiceDocsRenderTests(unittest.TestCase):
         readme = self._read_target_readme(self.TARGET_EGERN_DIR, "OpenAI")
         self.assertIn("generated by egloon_rule_hub", readme)
         self.assertIn("not a native upstream Egern artifact", readme)
+        self.assertIn("Selected source family: `clash`", readme)
+        self.assertIn("Upstream native target: `Clash`", readme)
+        self.assertIn("Conversion path: `Clash -> Egern`", readme)
         self.assertEqual(readme.count("### Upstream Entry"), 3)
         self.assertIn("upstream README missing", readme)
         self.assertIn("upstream README fetch_error", readme)
@@ -209,6 +334,30 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self.assertIn("Rule/Clash/OpenAI/README.md", services_doc)
         self.assertNotIn("services/OpenAI.md", services_doc)
 
+    def test_services_markdown_uses_distinct_target_source_count(self) -> None:
+        duplicate_ref = SourceRef(
+            source="fixture",
+            url=self.RULE_URL_PRIMARY,
+            format="clash_yaml",
+            priority=100,
+        )
+        self.catalog.services["OpenAI"].sources = [duplicate_ref, duplicate_ref, duplicate_ref]
+        self.catalog.services["OpenAI"].target_sources = {
+            self.TARGET_CLASH: ServiceTargetDef(
+                name=self.TARGET_CLASH,
+                families={"native": [duplicate_ref], "shadowrocket": [], "clash": []},
+            ),
+            self.TARGET_EGERN: ServiceTargetDef(
+                name=self.TARGET_EGERN,
+                families={"native": [], "shadowrocket": [], "clash": [duplicate_ref]},
+            ),
+        }
+
+        write_markdown_docs(self.root, self.catalog)
+
+        services_doc = (self.root / "docs" / "services.md").read_text(encoding="utf-8")
+        self.assertIn("| OpenAI | True | clash, egern | 1 | AI service |", services_doc)
+
     def test_write_markdown_docs_prunes_legacy_services_directory(self) -> None:
         legacy_file = self.root / "docs" / "services" / "OpenAI.md"
         legacy_file.parent.mkdir(parents=True, exist_ok=True)
@@ -219,14 +368,82 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self.assertFalse((self.root / "docs" / "services").exists())
         self.assertTrue((self.root / "docs" / "services.md").exists())
 
+    def test_write_markdown_docs_prunes_stale_target_readmes_and_empty_dirs(self) -> None:
+        clash_dir = self.root / "Rule" / self.TARGET_CLASH_DIR / "OpenAI"
+        clash_dir.mkdir(parents=True, exist_ok=True)
+        (clash_dir / "README.md").write_text("stale clash", encoding="utf-8")
+        (clash_dir / "OpenAI.yaml").write_text("artifact", encoding="utf-8")
+
+        egern_dir = self.root / "Rule" / self.TARGET_EGERN_DIR / "OpenAI"
+        egern_dir.mkdir(parents=True, exist_ok=True)
+        (egern_dir / "README.md").write_text("stale egern", encoding="utf-8")
+
+        self._write_upstream_manifest({})
+
+        write_markdown_docs(self.root, self.catalog)
+
+        self.assertFalse((clash_dir / "README.md").exists())
+        self.assertTrue((clash_dir / "OpenAI.yaml").exists())
+        self.assertTrue(clash_dir.exists())
+        self.assertFalse(egern_dir.exists())
+        self.assertFalse((self.root / "Rule" / self.TARGET_EGERN_DIR).exists())
+
     def test_usage_markdown_highlights_rule_directories(self) -> None:
         write_markdown_docs(self.root, self.catalog)
         usage_doc = (self.root / "docs" / "usage.md").read_text(encoding="utf-8")
         self.assertIn("Rule/Clash/OpenAI/OpenAI.yaml", usage_doc)
-        self.assertIn("Rule/Loon/OpenAI/OpenAI.list", usage_doc)
+        self.assertIn("Rule/Loon/OpenAI/OpenAI.lsr", usage_doc)
         self.assertIn("Rule/Egern/OpenAI/OpenAI.yaml", usage_doc)
         self.assertNotIn("dist/clash/OpenAI", usage_doc)
         self.assertNotIn("dist/loon/OpenAI", usage_doc)
+
+    def test_missing_target_dir_uses_native_display_name_mapping(self) -> None:
+        self.catalog.targets["quanx"] = TargetDef(name="quanx", enabled=True, file_ext="list")
+        self.catalog.targets["shadowrocket"] = TargetDef(
+            name="shadowrocket", enabled=True, file_ext="list"
+        )
+        self.catalog.services["OpenAI"].targets.extend(["quanx", "shadowrocket"])
+        self._write_upstream_manifest(
+            {
+                "OpenAI": [
+                    {
+                        **self._manifest_entry(
+                            target="quanx",
+                            status="missing",
+                            snapshot_path=None,
+                            is_converted=True,
+                            selected_family="native",
+                            selected_native_target="quanx",
+                            conversion_path=None,
+                            publish_mode=None,
+                            entry_key="quanx-missing",
+                        ),
+                        "target_dir": None,
+                    },
+                    {
+                        **self._manifest_entry(
+                            target="shadowrocket",
+                            status="missing",
+                            snapshot_path=None,
+                            is_converted=True,
+                            selected_family="native",
+                            selected_native_target="shadowrocket",
+                            conversion_path=None,
+                            publish_mode=None,
+                            entry_key="shadowrocket-missing",
+                        ),
+                        "target_dir": None,
+                    },
+                ]
+            }
+        )
+
+        write_markdown_docs(self.root, self.catalog)
+
+        self.assertTrue((self.root / "Rule" / "QuanX" / "OpenAI" / "README.md").exists())
+        self.assertTrue(
+            (self.root / "Rule" / "Shadowrocket" / "OpenAI" / "README.md").exists()
+        )
 
     def test_traversal_style_snapshot_path_is_rejected(self) -> None:
         outside_file = self.root.parent / f"{self.root.name}-outside-README.md"
@@ -301,6 +518,10 @@ class ServiceDocsRenderTests(unittest.TestCase):
         target: str,
         status: str,
         is_converted: bool,
+        selected_family: str | None = None,
+        selected_native_target: str | None = None,
+        conversion_path: str | None = None,
+        publish_mode: str | None = None,
         snapshot_path: str | None = None,
         source: str = "fixture",
         priority: int | None = None,
@@ -335,6 +556,10 @@ class ServiceDocsRenderTests(unittest.TestCase):
             "target": target,
             "target_dir": target_dir,
             "service": "OpenAI",
+            "publish_mode": publish_mode,
+            "selected_family": selected_family or ("native" if not is_converted else "clash"),
+            "selected_native_target": selected_native_target
+            or (self.TARGET_CLASH if is_converted else target),
             "source": source,
             "priority": priority,
             "rule_url": rule_url,
@@ -342,7 +567,10 @@ class ServiceDocsRenderTests(unittest.TestCase):
             "status": status,
             "snapshot_path": snapshot_path,
             "entry_key": entry_key,
+            "is_native": not is_converted,
             "is_converted": is_converted,
+            "conversion_path": conversion_path
+            or ("Clash -> Egern" if is_converted and target == self.TARGET_EGERN else None),
         }
 
     def _write_upstream_manifest(self, manifest: dict[str, list[dict[str, object]]]) -> None:

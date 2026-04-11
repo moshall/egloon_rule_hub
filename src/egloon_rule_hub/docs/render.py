@@ -7,7 +7,41 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from egloon_rule_hub.model.catalog import Catalog
+from egloon_rule_hub.model.catalog import Catalog, ServiceDef, SourceRef
+
+TARGET_DISPLAY_NAMES = {
+    "clash": "Clash",
+    "egern": "Egern",
+    "loon": "Loon",
+    "quanx": "QuanX",
+    "shadowrocket": "Shadowrocket",
+}
+
+
+def _target_display_name(target: str) -> str:
+    return TARGET_DISPLAY_NAMES.get(target, target.capitalize())
+
+
+def _source_ref_key(source_ref: SourceRef) -> tuple[str, str | None, str | None, str | None]:
+    return (
+        source_ref.source,
+        source_ref.path,
+        source_ref.url,
+        source_ref.format,
+    )
+
+
+def service_source_count(service: ServiceDef) -> int:
+    distinct_refs: set[tuple[str, str | None, str | None, str | None]] = set()
+    if service.target_sources:
+        for target_source in service.target_sources.values():
+            for family_sources in target_source.families.values():
+                for source_ref in family_sources:
+                    distinct_refs.add(_source_ref_key(source_ref))
+    else:
+        for source_ref in service.sources:
+            distinct_refs.add(_source_ref_key(source_ref))
+    return len(distinct_refs)
 
 
 def _services_markdown(
@@ -25,7 +59,7 @@ def _services_markdown(
     for name, service in sorted(catalog.services.items()):
         lines.append(
             f"| {name} | {service.enabled} | {', '.join(service.targets)} |"
-            f" {len(service.sources)} | {service.notes or '-'} |"
+            f" {service_source_count(service)} | {service.notes or '-'} |"
         )
     lines.append("")
     lines.extend(
@@ -69,12 +103,16 @@ def _usage_markdown(catalog: Catalog) -> str:
         "",
         "This repository is designed to publish both per-service and per-bundle artifacts.",
         "",
-        "Each per-service target publishes a directory under `Rule/<TargetDir>/<Service>/` that bundles the README with the native artifact.",
+        (
+            "Each per-service target publishes a directory under "
+            "`Rule/<TargetDir>/<Service>/` that pairs the target artifact with a "
+            "README describing the selected source family and any conversion path."
+        ),
         "",
         "Expected artifact layout:",
         "",
         "- `Rule/Clash/OpenAI/OpenAI.yaml`",
-        "- `Rule/Loon/OpenAI/OpenAI.list`",
+        "- `Rule/Loon/OpenAI/OpenAI.lsr`",
         "- `Rule/Egern/OpenAI/OpenAI.yaml`",
         "- `Rule/QuanX/OpenAI/OpenAI.list`",
         "- `Rule/Shadowrocket/OpenAI/OpenAI.list`",
@@ -84,9 +122,11 @@ def _usage_markdown(catalog: Catalog) -> str:
         "",
         "```text",
         "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Clash/OpenAI/OpenAI.yaml",
-        "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Loon/OpenAI/OpenAI.list",
-        "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/dist/bundles/ai/loon.list",
+        "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Loon/OpenAI/OpenAI.lsr",
+        "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/dist/bundles/ai/loon.lsr",
         "```",
+        "",
+        "Selection policy: choose the first non-empty family in `native -> shadowrocket -> clash`, then merge only within that selected family.",
         "",
         f"Current bundles: {bundle_names}",
         "",
@@ -219,7 +259,7 @@ def _group_manifest_entries_by_target(
                 continue
             target_dir = entry.get("target_dir")
             if not isinstance(target_dir, str) or not target_dir.strip():
-                target_dir = target.capitalize()
+                target_dir = _target_display_name(target)
             service = entry.get("service")
             if not isinstance(service, str) or not service.strip():
                 service = service_name
@@ -235,6 +275,11 @@ def _target_readme_markdown(
     service_name: str,
     entries: list[dict[str, Any]],
 ) -> str:
+    selected_family = str(entries[0].get("selected_family") or "-") if entries else "-"
+    selected_native_target = str(entries[0].get("selected_native_target") or target)
+    selected_native_target_dir = _target_display_name(selected_native_target)
+    publish_mode = entries[0].get("publish_mode") if entries else None
+    conversion_path = entries[0].get("conversion_path") if entries else None
     lines: list[str] = [
         f"# {service_name} for {target_dir}",
         "",
@@ -256,6 +301,18 @@ def _target_readme_markdown(
 
     lines.extend(
         [
+            f"- Selected source family: `{selected_family}`",
+            f"- Upstream native target: `{selected_native_target_dir}`",
+        ]
+    )
+    if publish_mode:
+        lines.append(f"- Publish mode: `{publish_mode}`")
+    if conversion_path:
+        lines.append(f"- Conversion path: `{conversion_path}`")
+    lines.append("")
+
+    lines.extend(
+        [
             "## Upstream README Sources",
             "",
         ]
@@ -267,7 +324,8 @@ def _target_readme_markdown(
         rule_url = str(entry.get("rule_url") or "-")
         readme_url = str(entry.get("readme_url") or "-")
         status = str(entry.get("status") or "unknown")
-        entry_target = str(entry.get("target") or target)
+        entry_native_target = str(entry.get("selected_native_target") or selected_native_target)
+        entry_native_target_dir = _target_display_name(entry_native_target)
         snapshot_path = entry.get("snapshot_path")
         snapshot_text = _read_snapshot_text(
             root,
@@ -278,7 +336,7 @@ def _target_readme_markdown(
             [
                 f"### Upstream Entry {index} ({source})",
                 "",
-                f"- Target: `{entry_target}`",
+                f"- Upstream native target: `{entry_native_target_dir}`",
                 (
                     f"- Rule file: [{rule_url}]({rule_url})"
                     if rule_url != "-"
@@ -323,13 +381,14 @@ def _target_readme_markdown(
 
 def _write_target_readmes(
     root: Path, manifest: dict[str, list[dict[str, Any]]]
-) -> dict[str, list[str]]:
+) -> tuple[dict[str, list[str]], set[Path]]:
     grouped = _group_manifest_entries_by_target(manifest)
     if not grouped:
-        return {}
+        return {}, set()
 
     rule_root = root / "Rule"
     service_readme_paths: dict[str, list[str]] = defaultdict(list)
+    live_readme_paths: set[Path] = set()
     for (target, target_dir, service_name), entries in sorted(grouped.items()):
         service_dir = rule_root / target_dir / service_name
         service_dir.mkdir(parents=True, exist_ok=True)
@@ -338,12 +397,33 @@ def _write_target_readmes(
             _target_readme_markdown(root, target, target_dir, service_name, entries),
             encoding="utf-8",
         )
+        live_readme_paths.add(readme_path)
         rel_readme = Path("Rule") / target_dir / service_name / "README.md"
         rel_path = rel_readme.as_posix()
         if rel_path not in service_readme_paths[service_name]:
             service_readme_paths[service_name].append(rel_path)
 
-    return dict(service_readme_paths)
+    return dict(service_readme_paths), live_readme_paths
+
+
+def _prune_stale_target_readmes(root: Path, live_readme_paths: set[Path]) -> None:
+    rule_root = root / "Rule"
+    if not rule_root.exists():
+        return
+
+    for readme_path in sorted(rule_root.rglob("README.md")):
+        try:
+            rel_parts = readme_path.relative_to(rule_root).parts
+        except ValueError:
+            continue
+        if len(rel_parts) != 3:
+            continue
+        if readme_path not in live_readme_paths:
+            readme_path.unlink()
+
+    for path in sorted(rule_root.rglob("*"), reverse=True):
+        if path.is_dir() and not any(path.iterdir()):
+            path.rmdir()
 
 
 def write_markdown_docs(root: Path, catalog: Catalog) -> None:
@@ -357,7 +437,8 @@ def write_markdown_docs(root: Path, catalog: Catalog) -> None:
     docs_dir.mkdir(parents=True, exist_ok=True)
     upstream_docs_manifest = _load_upstream_docs_manifest(root)
 
-    service_readme_paths = _write_target_readmes(root, upstream_docs_manifest)
+    service_readme_paths, live_readme_paths = _write_target_readmes(root, upstream_docs_manifest)
+    _prune_stale_target_readmes(root, live_readme_paths)
     (docs_dir / "services.md").write_text(
         _services_markdown(catalog, service_readme_paths), encoding="utf-8"
     )

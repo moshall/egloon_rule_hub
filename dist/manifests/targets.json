@@ -1,22 +1,27 @@
 {
   "clash": {
     "enabled": true,
-    "file_ext": "yaml"
+    "file_ext": "yaml",
+    "publish_mode": null
   },
   "egern": {
     "enabled": true,
-    "file_ext": "yaml"
+    "file_ext": "yaml",
+    "publish_mode": null
   },
   "loon": {
     "enabled": true,
-    "file_ext": "list"
+    "file_ext": "lsr",
+    "publish_mode": "lsr"
   },
   "quanx": {
     "enabled": true,
-    "file_ext": "list"
+    "file_ext": "list",
+    "publish_mode": null
   },
   "shadowrocket": {
     "enabled": true,
-    "file_ext": "list"
+    "file_ext": "list",
+    "publish_mode": null
   }
 }

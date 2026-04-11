@@ -30,11 +30,6 @@ DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
 DOMAIN-SUFFIX,turn.livekit.cloud
 DOMAIN-KEYWORD,openai
-IP-CIDR,24.199.123.28/32
-IP-CIDR,64.23.132.171/32
-IP-ASN,20473
-IP-ASN,20473,no-resolve
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
-DOMAIN-SUFFIX,challenges.cloudflare.com
-DOMAIN-SUFFIX,sora.com
+IP-ASN,20473,no-resolve

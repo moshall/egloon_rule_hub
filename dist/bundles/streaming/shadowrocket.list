@@ -35,7 +35,6 @@ DOMAIN-KEYWORD,apiproxy-device-prod-nlb-
 DOMAIN-KEYWORD,dualstack.apiproxy-
 DOMAIN-KEYWORD,dualstack.ichnaea-web-
 DOMAIN-KEYWORD,netflixdnstest
-PROCESS-NAME,com.netflix.mediaclient
 USER-AGENT,Argo*
 IP-CIDR,103.87.204.0/22,no-resolve
 IP-CIDR,107.23.255.0/26,no-resolve
@@ -541,6 +540,10 @@ IP-CIDR,219.76.0.0/17,no-resolve
 IP-CIDR,23.23.189.144/28,no-resolve
 IP-CIDR,23.246.0.0/18,no-resolve
 IP-CIDR,23.78.0.0/16,no-resolve
+IP-CIDR,2607:fb10::/32,no-resolve
+IP-CIDR,2620:10c:7000::/44,no-resolve
+IP-CIDR,2a00:86c0::/32,no-resolve
+IP-CIDR,2a03:5640::/32,no-resolve
 IP-CIDR,3.0.5.224/27,no-resolve
 IP-CIDR,3.0.5.32/29,no-resolve
 IP-CIDR,3.10.127.32/27,no-resolve
@@ -1152,10 +1155,6 @@ IP-CIDR,99.79.20.192/26,no-resolve
 IP-CIDR,99.80.34.48/28,no-resolve
 IP-CIDR,99.80.34.64/26,no-resolve
 IP-CIDR,99.80.88.0/25,no-resolve
-IP-CIDR6,2607:fb10::/32,no-resolve
-IP-CIDR6,2620:10c:7000::/44,no-resolve
-IP-CIDR6,2a00:86c0::/32,no-resolve
-IP-CIDR6,2a03:5640::/32,no-resolve
 DOMAIN,audio4-ak-spotify-com.akamaized.net
 DOMAIN,cdn-spotify-experiments.conductrics.com
 DOMAIN,heads-ak-spotify-com.akamaized.net
@@ -1183,9 +1182,6 @@ DOMAIN-SUFFIX,spotifynewsroom.jp
 DOMAIN-SUFFIX,spotilocal.com
 DOMAIN-SUFFIX,tospotify.com
 DOMAIN-KEYWORD,spotify
-IP-CIDR,104.154.127.126/32
-IP-CIDR,35.186.224.47/32
-PROCESS-NAME,com.spotify.music
 USER-AGENT,Spotify*
 IP-CIDR,104.154.127.126/32,no-resolve
 IP-CIDR,35.186.224.47/32,no-resolve
@@ -1236,7 +1232,6 @@ DOMAIN-SUFFIX,nowe.hk
 DOMAIN-SUFFIX,players.brightcove.net
 DOMAIN-SUFFIX,warnermediacdn.com
 DOMAIN-SUFFIX,youboranqs01.com
-PROCESS-NAME,com.hbo.hbonow
 USER-AGENT,HBO%20NOW*
 USER-AGENT,HBOMAX*
 DOMAIN,44wilhpljf.execute-api.ap-southeast-1.amazonaws.com
@@ -1587,4 +1582,3 @@ DOMAIN-SUFFIX,xmsl.org
 DOMAIN-KEYWORD,emby.wtf
 DOMAIN-KEYWORD,jmsooo
 DOMAIN-KEYWORD,odysseyplus
-PROCESS-NAME,com.mb.android

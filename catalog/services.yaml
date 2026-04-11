@@ -1,805 +1,4254 @@
 all_targets: &all_targets [egern, loon, clash, quanx, shadowrocket]
-
+defaults:
+  fallback_order: [native, shadowrocket, clash]
 services:
   OpenAI:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/OpenAI/OpenAI.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/OpenAI/OpenAI.list
-        format: loon_list
-        priority: 90
-      - source: acl4ssr
-        path: Clash/Ruleset/OpenAi.list
-        format: clash_list
-        priority: 80
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/OpenAI/OpenAI.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/OpenAI/OpenAI.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/OpenAi.list
+            format: clash_list
+            priority: 80
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/OpenAI/OpenAI.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/OpenAI/OpenAI.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/OpenAI/OpenAI.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/OpenAi.list
+            format: clash_list
+            priority: 80
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/OpenAI/OpenAI.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/OpenAi.list
+            format: clash_list
+            priority: 80
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/OpenAI/OpenAI.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/OpenAI/OpenAI.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/OpenAI/OpenAI.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/OpenAi.list
+            format: clash_list
+            priority: 80
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/OpenAI/OpenAI.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/OpenAI/OpenAI.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/OpenAi.list
+            format: clash_list
+            priority: 80
     override: overrides/services/OpenAI.yaml
     notes: "AI service"
   Claude:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Claude/Claude.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Claude/Claude.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Claude/Claude.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Claude/Claude.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Claude/Claude.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Claude/Claude.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Claude/Claude.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Claude/Claude.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Claude/Claude.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Claude/Claude.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Claude/Claude.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Claude/Claude.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Claude/Claude.yaml
+            format: clash_yaml
+            priority: 100
     notes: "AI service"
   Twitter:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Twitter/Twitter.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Twitter/Twitter.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitter/Twitter.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitter/Twitter.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Twitter/Twitter.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitter/Twitter.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitter/Twitter.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Twitter/Twitter.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitter/Twitter.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitter/Twitter.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitter/Twitter.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitter/Twitter.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitter/Twitter.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Social service"
   GitHub:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/GitHub/GitHub.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/GitHub/GitHub.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GitHub/GitHub.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GitHub/GitHub.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/GitHub/GitHub.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GitHub/GitHub.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GitHub/GitHub.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/GitHub/GitHub.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GitHub/GitHub.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GitHub/GitHub.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GitHub/GitHub.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GitHub/GitHub.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GitHub/GitHub.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Developer platform"
   Netflix:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Netflix/Netflix.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Netflix/Netflix.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Netflix/Netflix.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Netflix/Netflix.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Netflix/Netflix.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Netflix/Netflix.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Netflix/Netflix.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Netflix/Netflix.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Netflix/Netflix.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Netflix/Netflix.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Netflix/Netflix.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Netflix/Netflix.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Netflix/Netflix.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   YouTube:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/YouTube/YouTube.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/YouTube/YouTube.list
-        format: loon_list
-        priority: 90
-      - source: acl4ssr
-        path: Clash/Ruleset/YouTube.list
-        format: clash_list
-        priority: 80
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTube/YouTube.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTube/YouTube.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/YouTube.list
+            format: clash_list
+            priority: 80
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/YouTube/YouTube.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTube/YouTube.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTube/YouTube.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/YouTube.list
+            format: clash_list
+            priority: 80
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/YouTube/YouTube.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/YouTube.list
+            format: clash_list
+            priority: 80
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTube/YouTube.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTube/YouTube.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTube/YouTube.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/YouTube.list
+            format: clash_list
+            priority: 80
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTube/YouTube.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTube/YouTube.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/YouTube.list
+            format: clash_list
+            priority: 80
     notes: "Streaming media"
   Google:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Google/Google.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Google/Google.list
-        format: loon_list
-        priority: 90
-      - source: acl4ssr
-        path: Clash/Ruleset/Google.list
-        format: clash_list
-        priority: 80
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Google.list
+            format: clash_list
+            priority: 80
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Google/Google.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Google.list
+            format: clash_list
+            priority: 80
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Google.list
+            format: clash_list
+            priority: 80
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Google.list
+            format: clash_list
+            priority: 80
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Google.list
+            format: clash_list
+            priority: 80
     notes: "Google main services"
   GoogleVoice:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/GoogleVoice/GoogleVoice.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/GoogleVoice/GoogleVoice.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleVoice/GoogleVoice.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleVoice/GoogleVoice.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/GoogleVoice/GoogleVoice.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleVoice/GoogleVoice.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleVoice/GoogleVoice.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleVoice/GoogleVoice.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleVoice/GoogleVoice.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleVoice/GoogleVoice.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleVoice/GoogleVoice.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleVoice/GoogleVoice.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleVoice/GoogleVoice.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Google Voice"
   GoogleEarth:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/GoogleEarth/GoogleEarth.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/GoogleEarth/GoogleEarth.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleEarth/GoogleEarth.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleEarth/GoogleEarth.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/GoogleEarth/GoogleEarth.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleEarth/GoogleEarth.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleEarth/GoogleEarth.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleEarth/GoogleEarth.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleEarth/GoogleEarth.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleEarth/GoogleEarth.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleEarth/GoogleEarth.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleEarth/GoogleEarth.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleEarth/GoogleEarth.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Google Earth"
   GoogleSearch:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/GoogleSearch/GoogleSearch.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/GoogleSearch/GoogleSearch.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleSearch/GoogleSearch.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleSearch/GoogleSearch.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/GoogleSearch/GoogleSearch.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleSearch/GoogleSearch.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleSearch/GoogleSearch.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleSearch/GoogleSearch.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleSearch/GoogleSearch.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleSearch/GoogleSearch.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleSearch/GoogleSearch.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/GoogleSearch/GoogleSearch.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/GoogleSearch/GoogleSearch.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Google Search"
   Gemini:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Gemini/Gemini.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Gemini/Gemini.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Gemini/Gemini.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Gemini/Gemini.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Gemini/Gemini.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Gemini/Gemini.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Gemini/Gemini.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Gemini/Gemini.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Gemini/Gemini.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Gemini/Gemini.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Gemini/Gemini.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Gemini/Gemini.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Gemini/Gemini.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Google AI service"
   Spotify:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Spotify/Spotify.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Spotify/Spotify.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Spotify/Spotify.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Spotify/Spotify.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Spotify/Spotify.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Spotify/Spotify.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Spotify/Spotify.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Spotify/Spotify.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Spotify/Spotify.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Spotify/Spotify.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Spotify/Spotify.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Spotify/Spotify.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Spotify/Spotify.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   Apple:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Apple/Apple.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Apple/Apple.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Apple/Apple.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Apple/Apple.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Apple/Apple.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Apple/Apple.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Apple/Apple.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Apple/Apple.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Apple/Apple.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Apple/Apple.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Apple/Apple.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Apple/Apple.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Apple/Apple.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Apple services"
   Copilot:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Copilot/Copilot.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Copilot/Copilot.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Copilot/Copilot.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Copilot/Copilot.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Copilot/Copilot.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Copilot/Copilot.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Copilot/Copilot.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Copilot/Copilot.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Copilot/Copilot.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Copilot/Copilot.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Copilot/Copilot.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Copilot/Copilot.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Copilot/Copilot.yaml
+            format: clash_yaml
+            priority: 100
     notes: "AI service"
   Nintendo:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Nintendo/Nintendo.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Nintendo/Nintendo.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nintendo/Nintendo.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nintendo/Nintendo.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Nintendo/Nintendo.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nintendo/Nintendo.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nintendo/Nintendo.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Nintendo/Nintendo.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nintendo/Nintendo.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nintendo/Nintendo.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nintendo/Nintendo.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nintendo/Nintendo.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nintendo/Nintendo.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Gaming"
   Nvidia:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Nvidia/Nvidia.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Nvidia/Nvidia.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nvidia/Nvidia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nvidia/Nvidia.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Nvidia/Nvidia.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nvidia/Nvidia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nvidia/Nvidia.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Nvidia/Nvidia.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nvidia/Nvidia.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nvidia/Nvidia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nvidia/Nvidia.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Nvidia/Nvidia.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Nvidia/Nvidia.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Gaming and cloud"
   PayPal:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/PayPal/PayPal.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/PayPal/PayPal.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PayPal/PayPal.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PayPal/PayPal.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/PayPal/PayPal.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PayPal/PayPal.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PayPal/PayPal.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/PayPal/PayPal.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PayPal/PayPal.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PayPal/PayPal.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PayPal/PayPal.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PayPal/PayPal.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PayPal/PayPal.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Payments"
   Rakuten:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Rakuten/Rakuten.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Rakuten/Rakuten.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Rakuten/Rakuten.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Rakuten/Rakuten.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Rakuten/Rakuten.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Rakuten/Rakuten.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Rakuten/Rakuten.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Rakuten/Rakuten.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Rakuten/Rakuten.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Rakuten/Rakuten.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Rakuten/Rakuten.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Rakuten/Rakuten.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Rakuten/Rakuten.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Commerce"
   Instagram:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Instagram/Instagram.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Instagram/Instagram.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Instagram/Instagram.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Instagram/Instagram.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Instagram/Instagram.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Instagram/Instagram.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Instagram/Instagram.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Instagram/Instagram.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Instagram/Instagram.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Instagram/Instagram.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Instagram/Instagram.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Instagram/Instagram.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Instagram/Instagram.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Social service"
   Facebook:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Facebook/Facebook.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Facebook/Facebook.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Facebook/Facebook.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Facebook/Facebook.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Facebook/Facebook.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Facebook/Facebook.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Facebook/Facebook.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Facebook/Facebook.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Facebook/Facebook.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Facebook/Facebook.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Facebook/Facebook.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Facebook/Facebook.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Facebook/Facebook.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Social service"
   Duolingo:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Duolingo/Duolingo.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Duolingo/Duolingo.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Duolingo/Duolingo.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Duolingo/Duolingo.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Duolingo/Duolingo.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Duolingo/Duolingo.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Duolingo/Duolingo.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Duolingo/Duolingo.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Duolingo/Duolingo.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Duolingo/Duolingo.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Duolingo/Duolingo.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Duolingo/Duolingo.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Duolingo/Duolingo.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Education"
   ESPN:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Espn/Espn.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Espn/Espn.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Espn/Espn.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Espn/Espn.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Espn/Espn.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Espn/Espn.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Espn/Espn.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Espn/Espn.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Espn/Espn.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Espn/Espn.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Espn/Espn.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Espn/Espn.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Espn/Espn.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Sports media"
   FOXNOW:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/FOXNOW/FOXNOW.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/FOXNOW/FOXNOW.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXNOW/FOXNOW.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXNOW/FOXNOW.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/FOXNOW/FOXNOW.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXNOW/FOXNOW.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXNOW/FOXNOW.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/FOXNOW/FOXNOW.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXNOW/FOXNOW.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXNOW/FOXNOW.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXNOW/FOXNOW.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXNOW/FOXNOW.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXNOW/FOXNOW.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   FOXPlus:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/FOXPlus/FOXPlus.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/FOXPlus/FOXPlus.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXPlus/FOXPlus.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXPlus/FOXPlus.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/FOXPlus/FOXPlus.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXPlus/FOXPlus.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXPlus/FOXPlus.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/FOXPlus/FOXPlus.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXPlus/FOXPlus.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXPlus/FOXPlus.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXPlus/FOXPlus.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/FOXPlus/FOXPlus.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/FOXPlus/FOXPlus.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   Fox:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Fox/Fox.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Fox/Fox.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Fox/Fox.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Fox/Fox.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Fox/Fox.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Fox/Fox.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Fox/Fox.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Fox/Fox.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Fox/Fox.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Fox/Fox.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Fox/Fox.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Fox/Fox.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Fox/Fox.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   HBO:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/HBO/HBO.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/HBO/HBO.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBO/HBO.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBO/HBO.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/HBO/HBO.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBO/HBO.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBO/HBO.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/HBO/HBO.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBO/HBO.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBO/HBO.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBO/HBO.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBO/HBO.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBO/HBO.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   HBOAsia:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/HBOAsia/HBOAsia.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/HBOAsia/HBOAsia.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOAsia/HBOAsia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOAsia/HBOAsia.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/HBOAsia/HBOAsia.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOAsia/HBOAsia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOAsia/HBOAsia.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/HBOAsia/HBOAsia.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOAsia/HBOAsia.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOAsia/HBOAsia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOAsia/HBOAsia.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOAsia/HBOAsia.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOAsia/HBOAsia.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   HBOHK:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/HBOHK/HBOHK.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/HBOHK/HBOHK.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOHK/HBOHK.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOHK/HBOHK.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/HBOHK/HBOHK.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOHK/HBOHK.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOHK/HBOHK.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/HBOHK/HBOHK.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOHK/HBOHK.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOHK/HBOHK.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOHK/HBOHK.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOHK/HBOHK.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOHK/HBOHK.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   HBOUSA:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/HBOUSA/HBOUSA.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/HBOUSA/HBOUSA.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOUSA/HBOUSA.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOUSA/HBOUSA.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/HBOUSA/HBOUSA.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOUSA/HBOUSA.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOUSA/HBOUSA.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/HBOUSA/HBOUSA.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOUSA/HBOUSA.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOUSA/HBOUSA.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOUSA/HBOUSA.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/HBOUSA/HBOUSA.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/HBOUSA/HBOUSA.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   Linux:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Linux/Linux.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Linux/Linux.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Linux/Linux.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Linux/Linux.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Linux/Linux.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Linux/Linux.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Linux/Linux.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Linux/Linux.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Linux/Linux.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Linux/Linux.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Linux/Linux.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Linux/Linux.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Linux/Linux.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Linux ecosystems"
   PikPak:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/PikPak/PikPak.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/PikPak/PikPak.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PikPak/PikPak.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PikPak/PikPak.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/PikPak/PikPak.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PikPak/PikPak.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PikPak/PikPak.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/PikPak/PikPak.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PikPak/PikPak.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PikPak/PikPak.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PikPak/PikPak.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/PikPak/PikPak.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/PikPak/PikPak.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Cloud storage"
   Proxy:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Proxy/Proxy.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Proxy/Proxy.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Proxy/Proxy.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Proxy/Proxy.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Proxy/Proxy.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Proxy/Proxy.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Proxy/Proxy.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Proxy/Proxy.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Proxy/Proxy.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Proxy/Proxy.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Proxy/Proxy.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Proxy/Proxy.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Proxy/Proxy.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Proxy related rules"
   Reddit:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Reddit/Reddit.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Reddit/Reddit.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Reddit/Reddit.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Reddit/Reddit.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Reddit/Reddit.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Reddit/Reddit.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Reddit/Reddit.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Reddit/Reddit.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Reddit/Reddit.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Reddit/Reddit.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Reddit/Reddit.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Reddit/Reddit.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Reddit/Reddit.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Social service"
   Shopify:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Shopify/Shopify.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Shopify/Shopify.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopify/Shopify.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopify/Shopify.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Shopify/Shopify.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopify/Shopify.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopify/Shopify.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Shopify/Shopify.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopify/Shopify.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopify/Shopify.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopify/Shopify.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopify/Shopify.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopify/Shopify.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Commerce"
   Shopee:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Shopee/Shopee.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Shopee/Shopee.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopee/Shopee.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopee/Shopee.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Shopee/Shopee.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopee/Shopee.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopee/Shopee.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Shopee/Shopee.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopee/Shopee.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopee/Shopee.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopee/Shopee.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Shopee/Shopee.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Shopee/Shopee.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Commerce"
   SkyGO:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/SkyGO/SkyGO.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/SkyGO/SkyGO.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SkyGO/SkyGO.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SkyGO/SkyGO.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/SkyGO/SkyGO.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SkyGO/SkyGO.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SkyGO/SkyGO.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/SkyGO/SkyGO.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SkyGO/SkyGO.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SkyGO/SkyGO.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SkyGO/SkyGO.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SkyGO/SkyGO.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SkyGO/SkyGO.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   Sony:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Sony/Sony.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Sony/Sony.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Sony/Sony.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Sony/Sony.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Sony/Sony.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Sony/Sony.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Sony/Sony.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Sony/Sony.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Sony/Sony.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Sony/Sony.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Sony/Sony.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Sony/Sony.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Sony/Sony.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Gaming and media"
   Steam:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Steam/Steam.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Steam/Steam.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Steam/Steam.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Steam/Steam.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Steam/Steam.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Steam/Steam.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Steam/Steam.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Steam/Steam.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Steam/Steam.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Steam/Steam.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Steam/Steam.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Steam/Steam.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Steam/Steam.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Gaming"
   SteamCN:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/SteamCN/SteamCN.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/SteamCN/SteamCN.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SteamCN/SteamCN.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SteamCN/SteamCN.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/SteamCN/SteamCN.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SteamCN/SteamCN.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SteamCN/SteamCN.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/SteamCN/SteamCN.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SteamCN/SteamCN.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SteamCN/SteamCN.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SteamCN/SteamCN.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/SteamCN/SteamCN.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/SteamCN/SteamCN.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Gaming"
   Stripe:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Stripe/Stripe.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Stripe/Stripe.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Stripe/Stripe.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Stripe/Stripe.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Stripe/Stripe.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Stripe/Stripe.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Stripe/Stripe.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Stripe/Stripe.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Stripe/Stripe.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Stripe/Stripe.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Stripe/Stripe.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Stripe/Stripe.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Stripe/Stripe.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Payments"
   Telegram:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Telegram/Telegram.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Telegram/Telegram.list
-        format: loon_list
-        priority: 90
-      - source: acl4ssr
-        path: Clash/Ruleset/Telegram.list
-        format: clash_list
-        priority: 80
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Telegram/Telegram.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Telegram/Telegram.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Telegram.list
+            format: clash_list
+            priority: 80
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Telegram/Telegram.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Telegram/Telegram.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Telegram/Telegram.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Telegram.list
+            format: clash_list
+            priority: 80
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Telegram/Telegram.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Telegram.list
+            format: clash_list
+            priority: 80
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Telegram/Telegram.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Telegram/Telegram.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Telegram/Telegram.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Telegram.list
+            format: clash_list
+            priority: 80
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Telegram/Telegram.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Telegram/Telegram.yaml
+            format: clash_yaml
+            priority: 100
+          - source: acl4ssr
+            path: Clash/Ruleset/Telegram.list
+            format: clash_list
+            priority: 80
     notes: "Messaging"
   TelegramNL:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/TelegramNL/TelegramNL.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/TelegramNL/TelegramNL.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramNL/TelegramNL.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramNL/TelegramNL.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/TelegramNL/TelegramNL.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramNL/TelegramNL.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramNL/TelegramNL.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramNL/TelegramNL.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramNL/TelegramNL.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramNL/TelegramNL.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramNL/TelegramNL.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramNL/TelegramNL.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramNL/TelegramNL.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Messaging"
   TelegramSG:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/TelegramSG/TelegramSG.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/TelegramSG/TelegramSG.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramSG/TelegramSG.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramSG/TelegramSG.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/TelegramSG/TelegramSG.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramSG/TelegramSG.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramSG/TelegramSG.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramSG/TelegramSG.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramSG/TelegramSG.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramSG/TelegramSG.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramSG/TelegramSG.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramSG/TelegramSG.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramSG/TelegramSG.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Messaging"
   TelegramUS:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/TelegramUS/TelegramUS.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/TelegramUS/TelegramUS.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramUS/TelegramUS.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramUS/TelegramUS.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/TelegramUS/TelegramUS.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramUS/TelegramUS.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramUS/TelegramUS.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramUS/TelegramUS.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramUS/TelegramUS.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramUS/TelegramUS.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramUS/TelegramUS.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TelegramUS/TelegramUS.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TelegramUS/TelegramUS.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Messaging"
   TikTok:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/TikTok/TikTok.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/TikTok/TikTok.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TikTok/TikTok.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TikTok/TikTok.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/TikTok/TikTok.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TikTok/TikTok.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TikTok/TikTok.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/TikTok/TikTok.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TikTok/TikTok.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TikTok/TikTok.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TikTok/TikTok.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/TikTok/TikTok.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/TikTok/TikTok.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Social service"
   Tumblr:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Tumblr/Tumblr.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Tumblr/Tumblr.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Tumblr/Tumblr.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Tumblr/Tumblr.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Tumblr/Tumblr.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Tumblr/Tumblr.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Tumblr/Tumblr.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Tumblr/Tumblr.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Tumblr/Tumblr.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Tumblr/Tumblr.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Tumblr/Tumblr.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Tumblr/Tumblr.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Tumblr/Tumblr.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Social service"
   Twitch:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Twitch/Twitch.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Twitch/Twitch.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitch/Twitch.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitch/Twitch.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Twitch/Twitch.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitch/Twitch.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitch/Twitch.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Twitch/Twitch.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitch/Twitch.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitch/Twitch.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitch/Twitch.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Twitch/Twitch.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Twitch/Twitch.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   WhatsApp:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Whatsapp/Whatsapp.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Whatsapp/Whatsapp.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Whatsapp/Whatsapp.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Whatsapp/Whatsapp.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Whatsapp/Whatsapp.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Whatsapp/Whatsapp.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Whatsapp/Whatsapp.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Whatsapp/Whatsapp.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Whatsapp/Whatsapp.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Whatsapp/Whatsapp.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Whatsapp/Whatsapp.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Whatsapp/Whatsapp.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Whatsapp/Whatsapp.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Messaging"
   Xbox:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Xbox/Xbox.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Xbox/Xbox.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Xbox/Xbox.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Xbox/Xbox.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Xbox/Xbox.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Xbox/Xbox.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Xbox/Xbox.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Xbox/Xbox.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Xbox/Xbox.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Xbox/Xbox.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Xbox/Xbox.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Xbox/Xbox.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Xbox/Xbox.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Gaming"
   YouTubeMusic:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/YouTubeMusic/YouTubeMusic.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/YouTubeMusic/YouTubeMusic.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTubeMusic/YouTubeMusic.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/YouTubeMusic/YouTubeMusic.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTubeMusic/YouTubeMusic.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTubeMusic/YouTubeMusic.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTubeMusic/YouTubeMusic.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YouTubeMusic/YouTubeMusic.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Streaming media"
   eBay:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/eBay/eBay.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/eBay/eBay.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/eBay/eBay.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/eBay/eBay.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/eBay/eBay.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/eBay/eBay.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/eBay/eBay.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/eBay/eBay.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/eBay/eBay.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/eBay/eBay.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/eBay/eBay.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/eBay/eBay.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/eBay/eBay.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Commerce"
   YYeTs:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/YYeTs/YYeTs.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/YYeTs/YYeTs.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YYeTs/YYeTs.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YYeTs/YYeTs.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/YYeTs/YYeTs.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YYeTs/YYeTs.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YYeTs/YYeTs.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/YYeTs/YYeTs.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YYeTs/YYeTs.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YYeTs/YYeTs.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YYeTs/YYeTs.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/YYeTs/YYeTs.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/YYeTs/YYeTs.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Media"
   Wikipedia:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Wikipedia/Wikipedia.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Wikipedia/Wikipedia.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Wikipedia/Wikipedia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Wikipedia/Wikipedia.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Wikipedia/Wikipedia.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Wikipedia/Wikipedia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Wikipedia/Wikipedia.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Wikipedia/Wikipedia.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Wikipedia/Wikipedia.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Wikipedia/Wikipedia.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Wikipedia/Wikipedia.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Wikipedia/Wikipedia.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Wikipedia/Wikipedia.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Knowledge"
   China:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/China/China.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/China/China.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/China/China.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/China/China.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/China/China.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/China/China.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/China/China.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/China/China.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/China/China.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/China/China.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/China/China.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/China/China.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/China/China.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Regional routing"
   ChinaDNS:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/ChinaDNS/ChinaDNS.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/ChinaDNS/ChinaDNS.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaDNS/ChinaDNS.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaDNS/ChinaDNS.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/ChinaDNS/ChinaDNS.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaDNS/ChinaDNS.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaDNS/ChinaDNS.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaDNS/ChinaDNS.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaDNS/ChinaDNS.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaDNS/ChinaDNS.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaDNS/ChinaDNS.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaDNS/ChinaDNS.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaDNS/ChinaDNS.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Regional routing"
   ChinaIPs:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Loon/ChinaIPs/ChinaIPs.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPs/ChinaIPs.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/ChinaIPs/ChinaIPs.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPs/ChinaIPs.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      clash:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPs/ChinaIPs.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPs/ChinaIPs.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPs/ChinaIPs.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash: []
     notes: "Regional routing"
   ChinaIPsBGP:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Loon/ChinaIPsBGP/ChinaIPsBGP.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPsBGP/ChinaIPsBGP.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/ChinaIPsBGP/ChinaIPsBGP.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPsBGP/ChinaIPsBGP.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      clash:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPsBGP/ChinaIPsBGP.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPsBGP/ChinaIPsBGP.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaIPsBGP/ChinaIPsBGP.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash: []
     notes: "Regional routing"
   ChinaMax:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/ChinaMax/ChinaMax.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/ChinaMax/ChinaMax.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaMax/ChinaMax.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaMax/ChinaMax.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/ChinaMax/ChinaMax.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaMax/ChinaMax.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaMax/ChinaMax.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaMax/ChinaMax.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaMax/ChinaMax.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaMax/ChinaMax.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaMax/ChinaMax.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/ChinaMax/ChinaMax.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/ChinaMax/ChinaMax.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Regional routing"
   Cloudflare:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Cloudflare/Cloudflare.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Cloudflare/Cloudflare.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Cloudflare/Cloudflare.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Cloudflare/Cloudflare.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Cloudflare/Cloudflare.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Cloudflare/Cloudflare.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Cloudflare/Cloudflare.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Cloudflare/Cloudflare.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Cloudflare/Cloudflare.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Cloudflare/Cloudflare.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Cloudflare/Cloudflare.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Cloudflare/Cloudflare.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Cloudflare/Cloudflare.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Infrastructure and CDN service"
   EA:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/EA/EA.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/EA/EA.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/EA/EA.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/EA/EA.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/EA/EA.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/EA/EA.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/EA/EA.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/EA/EA.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/EA/EA.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/EA/EA.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/EA/EA.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/EA/EA.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/EA/EA.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Gaming"
   Emby:
     enabled: true
-    targets: *all_targets
-    sources:
-      - source: blackmatrix7
-        path: rule/Clash/Emby/Emby.yaml
-        format: clash_yaml
-        priority: 100
-      - source: blackmatrix7
-        path: rule/Loon/Emby/Emby.list
-        format: loon_list
-        priority: 90
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Emby/Emby.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Emby/Emby.yaml
+            format: clash_yaml
+            priority: 100
+      loon:
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Emby/Emby.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Emby/Emby.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Emby/Emby.yaml
+            format: clash_yaml
+            priority: 100
+      clash:
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Emby/Emby.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Emby/Emby.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
+      quanx:
+        native: []
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Emby/Emby.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Emby/Emby.yaml
+            format: clash_yaml
+            priority: 100
+      shadowrocket:
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Emby/Emby.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Emby/Emby.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Media"

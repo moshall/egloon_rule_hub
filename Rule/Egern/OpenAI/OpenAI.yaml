@@ -31,13 +31,10 @@ domain_suffix_set:
 - sentry.io
 - stripe.com
 - turn.livekit.cloud
-- challenges.cloudflare.com
-- sora.com
 domain_keyword_set:
 - openai
 ip_cidr_set:
 - 24.199.123.28/32
 - 64.23.132.171/32
 asn_set:
-- '20473'
 - 20473,no-resolve

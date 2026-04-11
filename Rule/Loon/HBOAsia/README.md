@@ -6,11 +6,15 @@ This directory mirrors the direct upstream Loon target for HBOAsia.
 
 This layout documents a direct upstream target.
 
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Publish mode: `lsr`
+
 ## Upstream README Sources
 
 ### Upstream Entry 1 (blackmatrix7)
 
-- Target: `loon`
+- Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/HBOAsia/HBOAsia.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/HBOAsia/HBOAsia.list)
 - README: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/HBOAsia/README.md](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/HBOAsia/README.md)
 - Status: `ok`

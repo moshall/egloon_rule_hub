@@ -10,9 +10,11 @@ import unittest
 from pathlib import Path
 from urllib.parse import urlparse
 
+from egloon_rule_hub.build import build_all_target_artifacts
 from egloon_rule_hub.model.catalog import (
     Catalog,
     ServiceDef,
+    ServiceTargetDef,
     SourceDef,
     SourceRef,
     TargetDef,
@@ -35,7 +37,7 @@ def _expected_entry_key(priority: int, source: str, rule_url: str, entry_index: 
 
 class BuildUpstreamDocsTests(unittest.TestCase):
     RULE_URL = "https://example.com/rule/Clash/OpenAI/OpenAI.yaml"
-    RULE_URL_ALT = "https://mirror.example.org/rule/Clash/OpenAI/OpenAI.yaml"
+    RULE_URL_ALT = "https://mirror.example.org/rule/Loon/OpenAI/OpenAI.list"
 
     def setUp(self) -> None:
         self.temp_dir = tempfile.TemporaryDirectory()
@@ -55,26 +57,59 @@ class BuildUpstreamDocsTests(unittest.TestCase):
                     name="OpenAI",
                     enabled=True,
                     targets=["clash", "loon", "egern"],
-                    sources=[
-                        SourceRef(
-                            source="fixture",
-                            url=self.RULE_URL,
-                            format="clash_yaml",
-                            priority=100,
+                    target_sources={
+                        "clash": ServiceTargetDef(
+                            name="clash",
+                            families={
+                                "native": [
+                                    SourceRef(
+                                        source="fixture",
+                                        url=self.RULE_URL,
+                                        format="clash_yaml",
+                                        priority=100,
+                                    )
+                                ],
+                                "shadowrocket": [],
+                                "clash": [],
+                            },
                         ),
-                        SourceRef(
-                            source="fixture",
-                            url=self.RULE_URL_ALT,
-                            format="loon_list",
-                            priority=100,
+                        "loon": ServiceTargetDef(
+                            name="loon",
+                            families={
+                                "native": [
+                                    SourceRef(
+                                        source="fixture",
+                                        url=self.RULE_URL_ALT,
+                                        format="loon_list",
+                                        priority=100,
+                                    )
+                                ],
+                                "shadowrocket": [],
+                                "clash": [],
+                            },
                         ),
-                        SourceRef(
-                            source="fixture",
-                            url=self.RULE_URL,
-                            format="some_other",
-                            priority=100,
+                        "egern": ServiceTargetDef(
+                            name="egern",
+                            families={
+                                "native": [],
+                                "shadowrocket": [],
+                                "clash": [
+                                    SourceRef(
+                                        source="fixture",
+                                        url=self.RULE_URL,
+                                        format="clash_yaml",
+                                        priority=100,
+                                    ),
+                                    SourceRef(
+                                        source="fixture",
+                                        url=self.RULE_URL,
+                                        format="clash_yaml",
+                                        priority=100,
+                                    ),
+                                ],
+                            },
                         ),
-                    ],
+                    },
                 ),
             },
             bundles={},
@@ -84,7 +119,8 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         self.temp_dir.cleanup()
 
     def test_happy_path_writes_snapshot_and_manifest(self) -> None:
-        manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
+        artifacts = build_all_target_artifacts(self.catalog, fetcher=self._fake_source_fetcher())
+        manifest = build_upstream_docs(self.catalog, artifacts, fetcher=self._fake_fetcher())
 
         self.assertIn("OpenAI", manifest)
         entries = manifest["OpenAI"]
@@ -92,6 +128,10 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         self.assertEqual(clash_entry["status"], "ok")
         self.assertEqual(clash_entry["target_dir"], "Clash")
         self.assertFalse(clash_entry["is_converted"])
+        self.assertTrue(clash_entry["is_native"])
+        self.assertEqual(clash_entry["selected_family"], "native")
+        self.assertEqual(clash_entry["selected_native_target"], "clash")
+        self.assertIsNone(clash_entry["conversion_path"])
         self.assertEqual(clash_entry["service"], "OpenAI")
         self.assertEqual(clash_entry["readme_url"], "https://example.com/rule/Clash/OpenAI/README.md")
         self.assertEqual(
@@ -115,10 +155,15 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         )
         self.assertEqual(converted_entry["target_dir"], "Egern")
         self.assertTrue(converted_entry["is_converted"])
+        self.assertFalse(converted_entry["is_native"])
+        self.assertEqual(converted_entry["selected_family"], "clash")
+        self.assertEqual(converted_entry["selected_native_target"], "clash")
+        self.assertEqual(converted_entry["conversion_path"], "Clash -> Egern")
         self.assertEqual(converted_entry["service"], "OpenAI")
 
     def test_manifest_snapshot_path_is_relative_to_root(self) -> None:
-        manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
+        artifacts = build_all_target_artifacts(self.catalog, fetcher=self._fake_source_fetcher())
+        manifest = build_upstream_docs(self.catalog, artifacts, fetcher=self._fake_fetcher())
         entry = next(entry for entry in manifest["OpenAI"] if entry.get("snapshot_path"))
         snapshot_rel = Path(entry["snapshot_path"])
 
@@ -126,7 +171,8 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         self.assertTrue((self.root / snapshot_rel).exists())
 
     def test_entry_keys_differ_for_same_source_multiple_rules(self) -> None:
-        manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
+        artifacts = build_all_target_artifacts(self.catalog, fetcher=self._fake_source_fetcher())
+        manifest = build_upstream_docs(self.catalog, artifacts, fetcher=self._fake_fetcher())
         entries = manifest["OpenAI"]
 
         self.assertGreater(len(entries), 2)
@@ -151,22 +197,69 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         )
 
     def test_rebuild_prunes_stale_snapshot_files(self) -> None:
-        first_manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
+        artifacts = build_all_target_artifacts(self.catalog, fetcher=self._fake_source_fetcher())
+        first_manifest = build_upstream_docs(self.catalog, artifacts, fetcher=self._fake_fetcher())
 
-        key = _expected_entry_key(100, "fixture", self.RULE_URL, 2)
-        stale_entry = next(entry for entry in first_manifest["OpenAI"] if entry["entry_key"] == key)
+        stale_entry = next(
+            entry
+            for entry in first_manifest["OpenAI"]
+            if entry["target"] == "loon"
+        )
         stale_snapshot = self.root / stale_entry["snapshot_path"]
+        stale_dir = stale_snapshot.parent
         self.assertTrue(stale_snapshot.exists())
 
-        self.catalog.services["OpenAI"].sources = self.catalog.services["OpenAI"].sources[:2]
+        self.catalog.services["OpenAI"].target_sources["loon"].families["native"] = []
 
-        build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
+        artifacts = build_all_target_artifacts(self.catalog, fetcher=self._fake_source_fetcher())
+        build_upstream_docs(self.catalog, artifacts, fetcher=self._fake_fetcher())
 
         self.assertFalse(stale_snapshot.exists())
+        self.assertFalse(stale_dir.exists())
+
+    def test_duplicate_upstream_readmes_fetch_once_and_reuse_snapshot(self) -> None:
+        artifacts = build_all_target_artifacts(self.catalog, fetcher=self._fake_source_fetcher())
+        calls: list[str] = []
+
+        def fetcher(url: str) -> bytes:
+            calls.append(url)
+            return b"# README\n\nOriginal upstream text\n"
+
+        manifest = build_upstream_docs(self.catalog, artifacts, fetcher=fetcher)
+        entries = manifest["OpenAI"]
+        clash_entry = next(entry for entry in entries if entry["target"] == "clash")
+        egern_entries = [entry for entry in entries if entry["target"] == "egern"]
+
+        self.assertEqual(
+            calls,
+            [
+                "https://example.com/rule/Clash/OpenAI/README.md",
+                "https://mirror.example.org/rule/Loon/OpenAI/README.md",
+            ],
+        )
+        self.assertEqual(clash_entry["readme_url"], "https://example.com/rule/Clash/OpenAI/README.md")
+        self.assertEqual(
+            {entry["readme_url"] for entry in egern_entries},
+            {"https://example.com/rule/Clash/OpenAI/README.md"},
+        )
+        self.assertEqual(
+            {entry["snapshot_path"] for entry in egern_entries + [clash_entry]},
+            {clash_entry["snapshot_path"]},
+        )
 
     def _fake_fetcher(self):
         def fetcher(url: str) -> bytes:
             return b"# README\n\nOriginal upstream text\n"
+
+        return fetcher
+
+    def _fake_source_fetcher(self):
+        def fetcher(url: str) -> str:
+            if url == self.RULE_URL:
+                return "payload:\n  - DOMAIN,openai.com\n"
+            if url == self.RULE_URL_ALT:
+                return "# > OpenAI\nDOMAIN-SUFFIX,chatgpt.com\n"
+            return "payload:\n  - DOMAIN,other.example\n"
 
         return fetcher
 

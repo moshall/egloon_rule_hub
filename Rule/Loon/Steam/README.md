@@ -6,11 +6,15 @@ This directory mirrors the direct upstream Loon target for Steam.
 
 This layout documents a direct upstream target.
 
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Publish mode: `lsr`
+
 ## Upstream README Sources
 
 ### Upstream Entry 1 (blackmatrix7)
 
-- Target: `loon`
+- Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/Steam.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/Steam.list)
 - README: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/README.md](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/README.md)
 - Status: `ok`

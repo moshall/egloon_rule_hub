@@ -6,11 +6,14 @@ This directory mirrors the direct upstream Clash target for Tumblr.
 
 This layout documents a direct upstream target.
 
+- Selected source family: `native`
+- Upstream native target: `Clash`
+
 ## Upstream README Sources
 
 ### Upstream Entry 1 (blackmatrix7)
 
-- Target: `clash`
+- Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Tumblr/Tumblr.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Tumblr/Tumblr.yaml)
 - README: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Tumblr/README.md](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Tumblr/README.md)
 - Status: `ok`

@@ -6,11 +6,14 @@ This directory mirrors the direct upstream Clash target for ChinaMax.
 
 This layout documents a direct upstream target.
 
+- Selected source family: `native`
+- Upstream native target: `Clash`
+
 ## Upstream README Sources
 
 ### Upstream Entry 1 (blackmatrix7)
 
-- Target: `clash`
+- Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.yaml)
 - README: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/README.md](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/README.md)
 - Status: `ok`

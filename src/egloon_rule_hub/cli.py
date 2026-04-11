@@ -4,8 +4,8 @@ import argparse
 import json
 from pathlib import Path
 
-from egloon_rule_hub.build import build_all_service_rules, render_rule_artifacts
-from egloon_rule_hub.docs.render import write_markdown_docs
+from egloon_rule_hub.build import build_all_target_artifacts, render_target_artifacts
+from egloon_rule_hub.docs.render import service_source_count, write_markdown_docs
 from egloon_rule_hub.model.catalog import Catalog, load_catalog
 from egloon_rule_hub.upstream_docs.build import build_upstream_docs
 
@@ -21,8 +21,16 @@ def _render_manifests(root: Path, catalog: Catalog) -> None:
     services = {
         name: {
             "enabled": service.enabled,
-            "targets": service.targets,
-            "source_count": len(service.sources),
+            "targets": service.outputs,
+            "source_count": service_source_count(service),
+            "fallback_order": service.fallback_order,
+            "target_sources": {
+                target_name: {
+                    family: len(entries)
+                    for family, entries in target_source.families.items()
+                }
+                for target_name, target_source in service.target_sources.items()
+            },
             "notes": service.notes,
         }
         for name, service in catalog.services.items()
@@ -36,7 +44,11 @@ def _render_manifests(root: Path, catalog: Catalog) -> None:
         for name, bundle in catalog.bundles.items()
     }
     targets = {
-        name: {"enabled": target.enabled, "file_ext": target.file_ext}
+        name: {
+            "enabled": target.enabled,
+            "file_ext": target.file_ext,
+            "publish_mode": target.publish_mode,
+        }
         for name, target in catalog.targets.items()
     }
 
@@ -99,8 +111,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "render-rules":
         catalog = _run_validate(root)
-        service_rules = build_all_service_rules(catalog)
-        render_rule_artifacts(root, catalog, service_rules)
+        target_artifacts = build_all_target_artifacts(catalog)
+        render_target_artifacts(root, catalog, target_artifacts)
         print(f"Rendered rule artifacts to {root / 'dist'}")
         return 0
 
@@ -112,10 +124,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "bootstrap":
         catalog = _run_validate(root)
-        service_rules = build_all_service_rules(catalog)
-        render_rule_artifacts(root, catalog, service_rules)
+        target_artifacts = build_all_target_artifacts(catalog)
+        render_target_artifacts(root, catalog, target_artifacts)
         _render_manifests(root, catalog)
-        build_upstream_docs(catalog)
+        build_upstream_docs(catalog, target_artifacts)
         write_markdown_docs(root, catalog)
         print("Bootstrap complete")
         return 0

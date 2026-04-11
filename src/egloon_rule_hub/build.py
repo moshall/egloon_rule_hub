@@ -9,9 +9,11 @@ import yaml
 from egloon_rule_hub.emitters.clash import render_clash_rule_provider
 from egloon_rule_hub.emitters.egern import render_egern_rule_set
 from egloon_rule_hub.emitters.loon import render_loon_rules
+from egloon_rule_hub.emitters.loon_lsr import render_loon_lsr
 from egloon_rule_hub.emitters.quanx import render_quanx_rules
 from egloon_rule_hub.emitters.shadowrocket import render_shadowrocket_rules
-from egloon_rule_hub.model.catalog import Catalog, TargetDef
+from egloon_rule_hub.model.catalog import Catalog, ServiceDef, SourceRef, TargetDef
+from egloon_rule_hub.model.publish import SelectedSourceEntry, TargetArtifact
 from egloon_rule_hub.model.rules import Rule
 from egloon_rule_hub.normalize.dedupe import dedupe_rules
 from egloon_rule_hub.normalize.merge import merge_rule_streams
@@ -121,6 +123,153 @@ def build_all_service_rules(catalog: Catalog, fetcher=fetch_text) -> dict[str, l
     return built
 
 
+def _selected_family_sources(
+    catalog: Catalog, service: ServiceDef, target_name: str
+) -> tuple[str, list[SourceRef]]:
+    target_config = service.target_sources.get(target_name)
+    if target_config is None:
+        return "", []
+
+    for family in target_config.selected_order(
+        service.fallback_order, catalog.default_fallback_order
+    ):
+        candidates = target_config.families.get(family, [])
+        if candidates:
+            return family, candidates
+    return "", []
+
+
+def _family_native_target(target_name: str, family: str) -> str:
+    if family == "native":
+        return target_name
+    return family
+
+
+def build_target_artifact(
+    catalog: Catalog,
+    service_name: str,
+    target_name: str,
+    fetcher=fetch_text,
+) -> TargetArtifact | None:
+    service = catalog.services[service_name]
+    target = catalog.targets.get(target_name)
+    if target is None or not target.enabled:
+        return None
+
+    family, source_refs = _selected_family_sources(catalog, service, target_name)
+    if not family or not source_refs:
+        return None
+
+    streams: list[list[Rule]] = []
+    selected_entries: list[SelectedSourceEntry] = []
+    for source_ref in sorted(source_refs, key=lambda item: item.priority, reverse=True):
+        source_def = catalog.sources[source_ref.source]
+        resolved = resolve_source_ref(source_def, source_ref)
+        parser = FORMAT_PARSERS.get(resolved.format or "")
+        if parser is None:
+            raise ValueError(
+                f"Unsupported source format for {service_name}/{target_name}: {resolved.format!r}"
+            )
+        raw_text = fetcher(resolved.url)
+        streams.append(parser(raw_text))
+        selected_entries.append(
+            SelectedSourceEntry(
+                source_name=resolved.source_name,
+                family=family,
+                format=resolved.format,
+                url=resolved.url,
+                priority=resolved.priority,
+                raw_text=raw_text,
+            )
+        )
+
+    merged = merge_rule_streams(streams)
+    merged = _apply_override(catalog.root, merged, service.override)
+    selected_native_target = _family_native_target(target_name, family)
+    is_native = family == "native"
+    conversion_path = None
+    if not is_native:
+        conversion_path = (
+            f"{TARGET_DISPLAY_NAMES.get(selected_native_target, selected_native_target.capitalize())}"
+            f" -> {TARGET_DISPLAY_NAMES.get(target_name, target_name.capitalize())}"
+        )
+
+    return TargetArtifact(
+        service=service_name,
+        target=target_name,
+        selected_family=family,
+        selected_native_target=selected_native_target,
+        publish_mode=target.publish_mode,
+        is_native=is_native,
+        is_converted=not is_native,
+        conversion_path=conversion_path,
+        rules=merged,
+        selected_entries=selected_entries,
+    )
+
+
+def build_all_target_artifacts(
+    catalog: Catalog, fetcher=fetch_text
+) -> dict[str, dict[str, TargetArtifact]]:
+    built: dict[str, dict[str, TargetArtifact]] = {}
+    for service_name, service in catalog.services.items():
+        if not service.enabled:
+            continue
+        target_artifacts: dict[str, TargetArtifact] = {}
+        for target_name in service.targets:
+            artifact = build_target_artifact(
+                catalog, service_name, target_name, fetcher=fetcher
+            )
+            if artifact is not None:
+                target_artifacts[target_name] = artifact
+        if target_artifacts:
+            built[service_name] = target_artifacts
+    return built
+
+
+def _target_output_ext(target_name: str, target: TargetDef | None) -> str:
+    if target_name == "loon" and target is not None and target.publish_mode == "lsr":
+        return "lsr"
+    renderer_info = TARGET_RENDERERS.get(target_name)
+    if renderer_info is None:
+        raise ValueError(f"Unsupported target renderer for {target_name!r}")
+    return renderer_info[0]
+
+
+def _target_output_ext_candidates(target_name: str, target: TargetDef | None) -> set[str]:
+    candidates = {_target_output_ext(target_name, target)}
+    renderer_info = TARGET_RENDERERS.get(target_name)
+    if renderer_info is not None:
+        candidates.add(renderer_info[0])
+    if target is not None and target.file_ext:
+        candidates.add(target.file_ext)
+    return {candidate for candidate in candidates if candidate}
+
+
+def _prune_stale_output_variants(output_path: Path, target_name: str, target: TargetDef | None) -> None:
+    for ext in _target_output_ext_candidates(target_name, target):
+        candidate = output_path.with_suffix(f".{ext}")
+        if candidate == output_path or not candidate.exists():
+            continue
+        if candidate.is_file():
+            candidate.unlink()
+
+
+def _render_target_output(
+    service_name: str,
+    target_name: str,
+    target: TargetDef | None,
+    rules: list[Rule],
+    source_texts: list[str] | None = None,
+) -> str:
+    if target_name == "loon" and target is not None and target.publish_mode == "lsr":
+        return render_loon_lsr(service_name, rules, source_texts or [])
+    renderer_info = TARGET_RENDERERS.get(target_name)
+    if renderer_info is None:
+        raise ValueError(f"Unsupported target renderer for {target_name!r}")
+    return renderer_info[1](rules)
+
+
 def render_rule_artifacts(
     root: Path,
     catalog: Catalog,
@@ -144,11 +293,15 @@ def render_rule_artifacts(
             renderer_info = TARGET_RENDERERS.get(target_name)
             if target is None or not target.enabled or renderer_info is None:
                 continue
-            ext, renderer = renderer_info
+            ext = _target_output_ext(target_name, target)
             service_dir = root / "Rule" / display_target / service_name
             service_dir.mkdir(parents=True, exist_ok=True)
             output_path = service_dir / f"{service_name}.{ext}"
-            output_path.write_text(renderer(rules), encoding="utf-8")
+            _prune_stale_output_variants(output_path, target_name, target)
+            output_path.write_text(
+                _render_target_output(service_name, target_name, target, rules),
+                encoding="utf-8",
+            )
 
     for bundle_name, bundle in catalog.bundles.items():
         if not bundle.enabled:
@@ -165,9 +318,89 @@ def render_rule_artifacts(
             renderer_info = TARGET_RENDERERS.get(target_name)
             if target is None or not target.enabled or renderer_info is None:
                 continue
-            ext, renderer = renderer_info
+            ext = _target_output_ext(target_name, target)
             output_path = bundle_dir / f"{target_name}.{ext}"
-            output_path.write_text(renderer(merged), encoding="utf-8")
+            _prune_stale_output_variants(output_path, target_name, target)
+            output_path.write_text(
+                _render_target_output(bundle_name, target_name, target, merged),
+                encoding="utf-8",
+            )
+
+
+def render_target_artifacts(
+    root: Path,
+    catalog: Catalog,
+    target_artifacts: dict[str, dict[str, TargetArtifact]],
+) -> None:
+    dist_dir = root / "dist"
+    _prune_legacy_dist_targets(dist_dir, catalog.targets)
+    dist_dir.mkdir(parents=True, exist_ok=True)
+
+    for service_name, service_targets in target_artifacts.items():
+        for target_name, artifact in service_targets.items():
+            display_target = TARGET_DISPLAY_NAMES.get(target_name)
+            if display_target is None:
+                raise ValueError(
+                    f"Target {target_name!r} lacks a display name required to publish service {service_name!r}"
+                )
+            renderer_info = TARGET_RENDERERS.get(target_name)
+            target = catalog.targets.get(target_name)
+            if target is None or not target.enabled or renderer_info is None:
+                continue
+            ext = _target_output_ext(target_name, target)
+            service_dir = root / "Rule" / display_target / service_name
+            service_dir.mkdir(parents=True, exist_ok=True)
+            output_path = service_dir / f"{service_name}.{ext}"
+            _prune_stale_output_variants(output_path, target_name, target)
+            output_path.write_text(
+                _render_target_output(
+                    service_name,
+                    target_name,
+                    target,
+                    artifact.rules,
+                    [entry.raw_text for entry in artifact.selected_entries],
+                ),
+                encoding="utf-8",
+            )
+
+    for bundle_name, bundle in catalog.bundles.items():
+        if not bundle.enabled:
+            continue
+        bundle_dir = dist_dir / "bundles" / bundle_name
+        bundle_dir.mkdir(parents=True, exist_ok=True)
+        for target_name in bundle.targets:
+            merged = merge_rule_streams(
+                [
+                    target_artifacts.get(service_name, {})
+                    .get(target_name, TargetArtifact(
+                        service=service_name,
+                        target=target_name,
+                        selected_family="",
+                        selected_native_target=target_name,
+                        publish_mode=None,
+                        is_native=False,
+                        is_converted=False,
+                        conversion_path=None,
+                        rules=[],
+                        selected_entries=[],
+                    ))
+                    .rules
+                    for service_name in bundle.services
+                ]
+            )
+            if not merged:
+                continue
+            target = catalog.targets.get(target_name)
+            renderer_info = TARGET_RENDERERS.get(target_name)
+            if target is None or not target.enabled or renderer_info is None:
+                continue
+            ext = _target_output_ext(target_name, target)
+            output_path = bundle_dir / f"{target_name}.{ext}"
+            _prune_stale_output_variants(output_path, target_name, target)
+            output_path.write_text(
+                _render_target_output(bundle_name, target_name, target, merged),
+                encoding="utf-8",
+            )
 
 
 def _prune_legacy_dist_targets(

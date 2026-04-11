@@ -1,12 +1,13 @@
 # egloon_rule_hub
 
-Multi-source proxy rule hub for Egern, Loon, Clash, QuanX, and Shadowrocket.
+Target-first proxy rule hub for Egern, Loon, Clash, QuanX, and Shadowrocket.
 
 The project goal is simple:
 
 - track only the rule sets we actually use
 - keep a light internal model instead of hard-wiring one client format
 - publish stable per-service rule URLs and bundle URLs
+- publish one selected upstream family per service/target directory
 - run sync and validation in GitHub Actions instead of consuming VPS resources
 
 ## Public Repo Note
@@ -30,23 +31,24 @@ This repository is initialized with:
 - real source fetching and rule rendering for an initial `blackmatrix7` subset
 - baseline GitHub Actions workflows
 
-The current implementation already fetches and renders a first batch of real service artifacts. It does not yet implement full upstream coverage, advanced merge policy controls, or a complete adapter set for every planned source.
+The current implementation fetches and renders the seeded real service artifacts with strict family selection and target-aware publication. It does not yet implement full upstream coverage or every planned adapter.
 
 ## Design Direction
 
-- Multiple upstreams are supported at the data model level.
+- Multiple upstreams are supported, but each published service/target now selects exactly one source family.
+- Family selection is strict: `native -> shadowrocket -> clash`, stop at the first non-empty family, then merge only within that family.
 - Services are the main entrypoint, direct source paths and remote URLs are also supported.
 - Rule-set metadata lives at the rule-set level, not on every rule line.
 - Bundles reference services instead of duplicating rules.
 
 ## Published Layout
 
-Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing the service README with the native file (for example `Rule/Clash/OpenAI/OpenAI.yaml`, `Rule/Loon/OpenAI/OpenAI.list`, and `Rule/Egern/OpenAI/OpenAI.yaml`). Bundles continue to publish under `dist/bundles/<bundle>/<target>.<ext>` so automation can refresh documentation and bundle outputs together.
+Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing the service README with the published file and selected-family provenance (for example `Rule/Clash/OpenAI/OpenAI.yaml`, `Rule/Loon/OpenAI/OpenAI.lsr`, and `Rule/Egern/OpenAI/OpenAI.yaml`). Bundles continue to publish under `dist/bundles/<bundle>/<target>.<ext>` so automation can refresh documentation and bundle outputs together.
 
 ## Supported Target Formats
 
 - Egern rule-set YAML
-- Loon `.list`
+- Loon `.lsr` by default
 - Clash / mihomo classical rule-provider YAML
 - QuanX `.list`
 - Shadowrocket `.list`
@@ -55,7 +57,7 @@ Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing th
 
 - `catalog/sources.yaml`: upstream definitions
 - `catalog/targets.yaml`: enabled output clients
-- `catalog/services.yaml`: service-level rule catalog
+- `catalog/services.yaml`: service catalog grouped by output target and source family
 - `catalog/bundles.yaml`: grouped rule bundles
 
 ## CLI
@@ -70,7 +72,7 @@ python -m egloon_rule_hub render-docs
 python -m egloon_rule_hub bootstrap
 ```
 
-`bootstrap` runs validation, source fetch, rule rendering, manifest rendering, upstream README snapshot rendering, and markdown doc rendering in one pass.
+`bootstrap` runs validation, target-artifact build/render, manifest rendering, upstream README snapshot rendering, and markdown doc rendering in one pass.
 
 ## Seeded Real Sources
 
@@ -81,12 +83,12 @@ The catalog is now wired to real upstreams:
 
 Current state:
 
-- all 61 requested services are cataloged
-- 61 per-service artifacts are generated for each target format
+- all cataloged services publish target-first artifacts
+- Loon publishes `.lsr` by default, preserving selected-family headings/comments when available
 - bundle artifacts are generated for `ai`, `china`, `commerce`, `gaming`, `google`, `social`, and `streaming`
-- multi-source merge is active on the seeded overlap services listed above
+- within-family multi-source merge remains active on the seeded overlap services listed above
 
-This is enough to validate the first real end-to-end generation path for per-service files, bundle files, and upstream-priority merge behavior.
+This is enough to validate the real end-to-end generation path for per-service files, bundle files, selected-family provenance, and target adaptation behavior.
 
 ## GitHub Actions
 

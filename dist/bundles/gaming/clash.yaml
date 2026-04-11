@@ -126,7 +126,6 @@ payload:
 - DOMAIN-SUFFIX,xn--mts47c3w9b1qr.net
 - DOMAIN-SUFFIX,yoshisnewisland.com
 - IP-CIDR,35.192.0.0/12
-- IP-CIDR,35.192.0.0/12,no-resolve
 - DOMAIN-SUFFIX,geforce.cn
 - DOMAIN-SUFFIX,geforce.co.kr
 - DOMAIN-SUFFIX,geforce.co.uk

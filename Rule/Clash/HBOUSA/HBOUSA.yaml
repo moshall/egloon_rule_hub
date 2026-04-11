@@ -10,4 +10,3 @@ payload:
 - DOMAIN-SUFFIX,max.com
 - DOMAIN-SUFFIX,maxgo.com
 - PROCESS-NAME,com.hbo.hbonow
-- USER-AGENT,HBOMAX*
