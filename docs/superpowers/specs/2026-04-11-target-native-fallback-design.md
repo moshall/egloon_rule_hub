@@ -26,8 +26,9 @@ It should cover:
 - redesigning the service catalog so source definitions are grouped by target
 - introducing default target fallback order of `native -> shadowrocket -> clash`
 - allowing per-target or per-service fallback override only when explicitly configured
+- adding configurable Loon publish modes with default mode `lsr`
 - changing build selection from "merge every listed source for the service" to "select one source family for the service/target output"
-- preserving direct copy behavior for native outputs when source format already matches the target format
+- preserving native/direct classification for outputs that stay within the same target family
 - preserving adapter-based conversion when the selected source family does not match the output target
 - updating README provenance so it states the selected source family and conversion path
 - updating manifests and tests to reflect the selected source family instead of service-wide merged provenance
@@ -81,7 +82,7 @@ After `python -m egloon_rule_hub bootstrap`, each published service/target direc
 Examples:
 
 - `Rule/Clash/Apple/Apple.yaml` should normally select the native Clash source family
-- `Rule/Loon/Apple/Apple.list` should normally select the native Loon source family
+- `Rule/Loon/Apple/Apple.lsr` should normally select the native Loon source family when `publish_mode=lsr`
 - `Rule/Egern/Apple/Apple.yaml` should normally select the best available fallback family for Egern, based on configured order
 
 If `Egern` has no native upstream source but has Shadowrocket and Clash source families configured, the generated artifact should:
@@ -197,6 +198,16 @@ That means:
 
 This matters for README semantics more than for internal implementation detail.
 
+Loon is the special case in this slice:
+
+- a native Loon family may still publish as `.lsr` instead of mirroring an upstream `.list` file byte-for-byte
+- that should still be classified as native Loon publication, not as a cross-target conversion
+
+The important distinction is:
+
+- `list <-> lsr` is an intra-Loon publish-format choice
+- `shadowrocket -> loon` or `clash -> loon` is a cross-family conversion
+
 ### 7. Converted outputs must describe the actual source family
 
 If an output target uses a non-native selected family, the README must say:
@@ -209,6 +220,54 @@ If an output target uses a non-native selected family, the README must say:
 Example:
 
 `This Egern artifact is generated from the selected Shadowrocket source family for Apple.`
+
+### 8. Loon output mode is configurable and defaults to `lsr`
+
+Loon should support two publish modes:
+
+- `lsr`
+- `list`
+
+The default mode for Loon in this repository should be `lsr`.
+
+This affects published filename and formatting:
+
+- `lsr` publishes `Rule/Loon/<Service>/<Service>.lsr`
+- `list` publishes `Rule/Loon/<Service>/<Service>.list`
+
+This is a Loon publishing concern, not a source-family concern.
+
+### 9. `lsr` should preserve upstream section comments when the selected family supports it
+
+The first version of `lsr` output should be close to the style used in repositories such as `Tartarus2014/Loon-Script`:
+
+- rule collection file
+- comment headings separating sections
+- readable top-level file structure
+
+The renderer should prefer inheriting section comments from the selected source family.
+
+That means:
+
+- if the selected source text contains usable comment headings and comment-group boundaries, retain them when rendering `.lsr`
+- only inherit from the selected family, never from lower-priority fallback families
+
+This requires preserving more structure than the current flat `Rule(type, value)` list in at least the Loon `.lsr` path.
+
+### 10. `lsr` fallback formatting is a single file header
+
+If the selected source family does not expose usable section comments, `.lsr` should degrade to a minimal but valid structure:
+
+- one file header line: `# > <ServiceName>`
+- then the rendered rule lines
+
+It should not invent deeper automatic categories in this slice.
+
+Examples of explicitly out-of-scope fallback behavior:
+
+- grouping by rule type
+- synthesizing fake product subsections
+- merging headings from multiple source families
 
 ## Catalog Model
 
@@ -277,6 +336,26 @@ The exact key names may vary in implementation, but the behavior must encode:
 - available source families for that output target
 - zero or more source refs per family
 - optional override of fallback order when explicitly needed
+- optional output-mode configuration where the target requires it
+
+### Target output options
+
+`catalog/targets.yaml` should support target-specific publish options where needed.
+
+For this slice, the required option is:
+
+- `loon.publish_mode`
+
+Supported values:
+
+- `lsr`
+- `list`
+
+Default:
+
+- `loon.publish_mode = lsr`
+
+This option may live directly on the target definition or in a small target-options object, as long as the model remains easy to reason about.
 
 ### Validation requirements
 
@@ -345,7 +424,8 @@ After this slice, the build pipeline should:
 2. select one source family for that service/target pair
 3. resolve and parse only the source refs in that family
 4. merge and dedupe only those rules
-5. emit the target artifact
+5. apply any target-specific publish-mode formatting
+6. emit the target artifact
 
 This means there is no single universal service rule set anymore.
 
@@ -362,6 +442,7 @@ Examples:
 - if selected family is `native` for `clash`, parse as Clash and emit Clash
 - if selected family is `shadowrocket` for `egern`, parse as Shadowrocket and emit Egern
 - if selected family is `clash` for `egern`, parse as Clash and emit Egern
+- if selected family is `native` for `loon`, parse as Loon and emit Loon in configured publish mode
 
 The important semantic distinction is:
 
@@ -369,6 +450,29 @@ The important semantic distinction is:
 - different-family target output is classified as converted
 
 This classification should be explicit in manifests and READMEs.
+
+### Loon `lsr` structure handling
+
+The current flat parser result is not sufficient to preserve upstream section comments.
+
+The implementation should introduce a lightweight structured representation for the selected source family when Loon `.lsr` output is requested.
+
+At minimum, the Loon `.lsr` path should be able to represent:
+
+- heading/comment blocks from the selected source text
+- ordered rules within each block
+- ungrouped rules when no headings exist
+
+Comment inheritance priority:
+
+1. selected family source comments, if parseable
+2. fallback single header `# > <ServiceName>`
+
+This slice does not require:
+
+- comment preservation for every emitter
+- round-tripping every original comment line exactly
+- preserving comments from unselected fallback families
 
 ## README Contract
 
@@ -379,6 +483,7 @@ Each `Rule/<Target>/<Service>/README.md` should clearly state the selected famil
 If `native` is selected:
 
 - say the directory mirrors the native upstream target
+- for Loon, also state the selected publish mode when useful
 - show the native upstream rule and README URLs
 - do not describe the artifact as converted
 
@@ -389,6 +494,7 @@ If `shadowrocket` or `clash` is selected for a different output target:
 - say the directory is generated by `egloon_rule_hub`
 - say which family was selected
 - say which conversion path was used, for example `Shadowrocket -> Egern`
+- for Loon, say whether the published artifact is emitted as `.lsr` or `.list`
 - show only the selected family's upstream sources
 
 ### Selected-family-only provenance
@@ -408,6 +514,7 @@ The upstream docs manifest and any related internal manifests should be updated 
 - `target`
 - `target_dir`
 - `service`
+- `publish_mode`
 - `selected_family`
 - `selected_native_target`
 - `is_native`
@@ -451,18 +558,31 @@ The redesign should add or update tests for:
 - skipping publish when all families are empty
 - ensuring lower fallback families are not included after a higher family wins
 
+### Loon publish modes
+
+- default Loon mode emits `.lsr`
+- explicit Loon `list` mode emits `.list`
+- native Loon family plus `lsr` mode remains classified as native
+- selected-family comments feed the `.lsr` renderer when available
+- missing selected-family headings fall back to `# > <ServiceName>`
+
 ### Rendering
 
 - native target README wording
 - converted target README wording
 - selected-family-only provenance in README
 - correct conversion path labeling
+- Loon README wording for `publish_mode=lsr`
+- `.lsr` rendering with inherited headings
+- `.lsr` rendering with single-header fallback
 
 ### End-to-end bootstrap
 
 - representative native case
 - representative fallback-to-shadowrocket case
 - representative fallback-to-clash case
+- representative Loon native-to-`.lsr` case
+- representative Loon fallback-family-to-`.lsr` case
 - stable publish layout under `Rule/<Target>/<Service>/`
 
 ## Open Implementation Decisions
@@ -504,4 +624,13 @@ This design is complete when all of the following are true:
 6. `Rule/<Target>/<Service>/README.md` names the selected family and conversion path correctly.
 7. A converted target README never lists lower-priority families that were not selected.
 8. A native target README is classified as native/direct, not converted.
-9. Bootstrap and tests cover native selection, fallback selection, and skipped targets.
+9. Default Loon publish mode emits `.lsr` artifacts.
+10. Loon `.lsr` output inherits selected-family headings when available.
+11. Loon `.lsr` output falls back to a single `# > <ServiceName>` header when headings are unavailable.
+12. Bootstrap and tests cover native selection, fallback selection, skipped targets, and Loon publish-mode behavior.
+
+## References
+
+- Loon intro: https://nsloon.app/docs/intro
+- Loon subscription rules: https://nsloon.app/docs/Rule/sub_rule/
+- Tartarus2014 Loon-Script: https://github.com/Tartarus2014/Loon-Script?tab=readme-ov-file
