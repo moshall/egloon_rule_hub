@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Turn `main` into a publish-first rule repository by renaming `QuanX` to `QuantumultX`, expanding the strict-source service catalog and grouped bundles, adding strict upstream icon publication, and removing public development-only folders.
+**Goal:** Turn `main` into a publish-first rule repository by preserving multi-variant service directories, renaming `QuanX` to `QuantumultX`, expanding the strict-source service catalog and grouped bundles, adding strict upstream icon publication, and removing public development-only folders.
 
-**Architecture:** First migrate the target model and public path surface from `quanx` to `quantumultx` so every downstream builder, renderer, and catalog entry agrees on one target identity. Then expand catalog coverage and bundle definitions, add a dedicated strict icon synchronization pipeline with a separate icon manifest plus per-service README integration, move public metadata away from top-level `docs/`, and only after all verification is done cut the branch over to the minimal publish-repo layout by removing `docs/` and `tests/`.
+**Architecture:** First fix the core publishing model so one service/target directory can emit multiple variant files instead of collapsing everything to `<Service>.<ext>`. Once variant-aware publishing exists, migrate the target model and public path surface from `quanx` to `quantumultx`, expand catalog coverage and bundle definitions, add bundle README/index files plus strict icon synchronization, move public metadata away from top-level `docs/`, and only after all verification is done cut the branch over to the minimal publish-repo layout by removing `docs/` and `tests/`.
 
 **Tech Stack:** Python 3.12, setuptools package layout, `unittest`, YAML catalogs, markdown/manifest generation, GitHub Actions
 
@@ -34,19 +34,21 @@
 - `catalog/targets.yaml`
   - Rename target key from `quanx` to `quantumultx`.
 - `catalog/services.yaml`
-  - Replace every `quanx` target block/output with `quantumultx`, update native source paths to `rule/QuantumultX/...`, and add the newly approved strict-source services.
+  - Add variant-aware source entries where needed, replace every `quanx` target block/output with `quantumultx`, update native source paths to `rule/QuantumultX/...`, and add the newly approved strict-source services.
 - `catalog/bundles.yaml`
-  - Rename bundle target references to `quantumultx`, expand `ai`, and add `china-bank`.
+  - Rename bundle target references to `quantumultx`, expand `ai`, add `china-bank`, and define bundle README/index expectations against primary service artifacts.
 - `catalog/sources.yaml`
   - Add icon upstream source metadata if the icon sync implementation needs a first-class catalog source entry.
 - `src/egloon_rule_hub/model/catalog.py`
-  - Update default TXT target allowlist and any target-name assumptions from `quanx` to `quantumultx`.
+  - Update default TXT target allowlist, add any variant-aware source metadata fields, and replace target-name assumptions from `quanx` to `quantumultx`.
+- `src/egloon_rule_hub/model/publish.py`
+  - Extend publication models so one service/target can represent multiple published artifact variants and one primary artifact for bundle merging.
 - `src/egloon_rule_hub/build.py`
-  - Teach target rendering, stale-output pruning, and display names about `quantumultx` and `Rule/QuantumultX/`.
+  - Teach target rendering, stale-output pruning, bundle primary-artifact selection, and display names about variant-aware service directories and `Rule/QuantumultX/`.
 - `src/egloon_rule_hub/docs/render.py`
-  - Remove dependence on top-level `docs/` as a public output, add icon lines into per-service READMEs, and write root-level attribution instead of `docs/attribution.md`.
+  - Remove dependence on top-level `docs/` as a public output, add variant and icon lines into per-service READMEs, emit bundle README/index files, and write root-level attribution instead of `docs/attribution.md`.
 - `src/egloon_rule_hub/upstream_docs/build.py`
-  - Update target display names and manifest target-dir emission for `QuantumultX`.
+  - Update target display names and manifest target-dir emission for `QuantumultX`, plus variant-aware upstream README manifest records.
 - `src/egloon_rule_hub/cli.py`
   - Run icon sync as part of `bootstrap`; keep `render-docs` aligned with the new root/public metadata shape.
 - `README.md`
@@ -56,13 +58,13 @@
 - `.github/workflows/validate.yml`
   - Narrow validation to commands that still exist after `tests/` is removed.
 - `tests/test_build/test_build.py`
-  - Update target rename expectations and stale-prune assertions.
+  - Cover multi-variant service outputs, bundle primary-artifact merges, target rename expectations, and stale-prune assertions.
 - `tests/test_cli/test_cli.py`
-  - Cover icon sync, public staging scope, and root attribution generation.
+  - Cover variant-aware bootstrap output, bundle README/index output, icon sync, public staging scope, and root attribution generation.
 - `tests/test_normalize/test_catalog.py`
-  - Cover `quantumultx` target identity, expanded service catalog load, and bundle membership.
+  - Cover variant-aware catalog load, `quantumultx` target identity, expanded service catalog load, and bundle membership.
 - `tests/test_upstream_docs/test_build.py`
-  - Cover `QuantumultX` target-dir naming in upstream README manifest generation.
+  - Cover `QuantumultX` target-dir naming and per-variant upstream README manifest generation.
 
 ### Files to remove in the final cleanup task
 
@@ -76,7 +78,133 @@ Important:
 
 ---
 
-### Task 1: Rename `QuanX` To `QuantumultX` End-To-End
+### Task 1: Add Variant-Aware Service Directory Publishing
+
+**Files:**
+- Modify: `catalog/services.yaml`
+- Modify: `src/egloon_rule_hub/model/catalog.py`
+- Modify: `src/egloon_rule_hub/model/publish.py`
+- Modify: `src/egloon_rule_hub/build.py`
+- Modify: `src/egloon_rule_hub/docs/render.py`
+- Modify: `src/egloon_rule_hub/upstream_docs/build.py`
+- Test: `tests/test_build/test_build.py`
+- Test: `tests/test_cli/test_cli.py`
+- Test: `tests/test_normalize/test_catalog.py`
+- Test: `tests/test_upstream_docs/test_build.py`
+
+- [ ] **Step 1: Write failing tests for multi-variant service directories**
+
+Add or update tests using a real pattern such as `Loon/China` to assert:
+
+- one service/target directory can emit more than one artifact file
+- published variant basenames stay aligned to upstream basenames
+- `Rule/Loon/China/China.lsr` and `Rule/Loon/China/China_Domain.lsr` can coexist
+- service README lists all published variants and their intended usage differences
+- service README links each local published variant file
+- service README links the upstream source file URL for each variant
+- upstream-doc manifest records variant-level rule URLs instead of assuming one file per service/target
+- bundle merging still chooses one primary artifact for each service
+- an existing single-file service such as `OpenAI` still flows through the same variant-aware runtime path and emits exactly one primary artifact
+
+Use assertions like:
+
+```python
+self.assertTrue((root / "Rule" / "Loon" / "China" / "China.lsr").exists())
+self.assertTrue((root / "Rule" / "Loon" / "China" / "China_Domain.lsr").exists())
+self.assertIn("China_Domain.lsr", readme_text)
+self.assertIn("China_Resolve", readme_text)
+self.assertIn("./China_Domain.lsr", readme_text)
+self.assertIn("rule/Loon/China/China_Domain.list", readme_text)
+```
+
+- [ ] **Step 2: Run targeted tests to verify they fail**
+
+Run:
+
+```bash
+PYTHONPATH=src python3 -m unittest \
+  tests.test_build.test_build \
+  tests.test_cli.test_cli \
+  tests.test_normalize.test_catalog \
+  tests.test_upstream_docs.test_build -v
+```
+
+Expected:
+
+- FAIL because the current model only emits `<Service>.<ext>`
+- FAIL because publication models do not represent multiple artifact variants
+- FAIL because service README generation assumes one target artifact per service/target
+
+- [ ] **Step 3: Implement variant-aware service publishing**
+
+Make the model change in one coherent slice:
+
+- lock one explicit catalog shape for variants in `catalog/services.yaml`, for example:
+
+```yaml
+target_sources:
+  loon:
+    variants:
+      China:
+        primary: true
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/China/China.list
+            format: loon_list
+      China_Domain:
+        primary: false
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/China/China_Domain.list
+            format: loon_list
+      China_Resolve:
+        primary: false
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/China/China_Resolve.list
+            format: loon_list
+```
+
+- extend the catalog/runtime model so a service target can carry multiple publishable upstream file variants when needed
+- extend `TargetArtifact` or adjacent publication models to represent:
+  - variant basename
+  - variant rules
+  - whether the variant is the primary artifact for bundle merges
+  - variant-level provenance and selected upstream entries
+- update rendering so one service directory can publish multiple files
+- keep the directory boundary stable:
+  - `Rule/<Target>/<Service>/<Variant>.<ext>`
+- update README generation to list variant files and usage notes
+- update README generation to include local file links and upstream source-file URLs for each variant
+- preserve upstream README wording for file differences when available
+- update bundle merging so it uses only the primary artifact for each member service
+
+- [ ] **Step 4: Run tests to verify variant-aware publishing passes**
+
+Run:
+
+```bash
+PYTHONPATH=src python3 -m unittest \
+  tests.test_build.test_build \
+  tests.test_cli.test_cli \
+  tests.test_normalize.test_catalog \
+  tests.test_upstream_docs.test_build -v
+```
+
+Expected: PASS
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add catalog/services.yaml src/egloon_rule_hub/model/catalog.py \
+  src/egloon_rule_hub/model/publish.py src/egloon_rule_hub/build.py \
+  src/egloon_rule_hub/docs/render.py src/egloon_rule_hub/upstream_docs/build.py \
+  tests/test_build/test_build.py tests/test_cli/test_cli.py \
+  tests/test_normalize/test_catalog.py tests/test_upstream_docs/test_build.py
+git commit -m "feat: support variant-aware service publishing"
+```
+
+### Task 2: Rename `QuanX` To `QuantumultX` End-To-End
 
 **Files:**
 - Modify: `catalog/targets.yaml`
@@ -172,13 +300,16 @@ git add catalog/targets.yaml catalog/services.yaml catalog/bundles.yaml \
 git commit -m "feat: rename quanx target to quantumultx"
 ```
 
-### Task 2: Expand Strict-Source Services And Bundle Membership
+### Task 3: Expand Strict-Source Services, Bundle Membership, And Bundle Indexes
 
 **Files:**
 - Modify: `catalog/services.yaml`
 - Modify: `catalog/bundles.yaml`
+- Modify: `src/egloon_rule_hub/build.py`
+- Modify: `src/egloon_rule_hub/docs/render.py`
 - Test: `tests/test_normalize/test_catalog.py`
 - Test: `tests/test_build/test_build.py`
+- Test: `tests/test_cli/test_cli.py`
 
 - [ ] **Step 1: Write failing tests for service expansion and new bundles**
 
@@ -190,6 +321,9 @@ Add catalog/build tests that assert:
 - `ai` includes `BardAI`
 - `china-bank` exists and contains `CCB`, `CEB`, `CGB`, `CMB`, `PSBC`
 - bundle builds for `quantumultx` emit `dist/bundles/china-bank/quantumultx.list` or the target-appropriate filename
+- each bundle directory emits `README.md`
+- bundle README links to member service directories under `Rule/<Target>/<Service>/`
+- when a member service has additional variants, bundle README explains which primary artifact is merged and which extra variants remain available for manual control
 
 Suggested service assertions:
 
@@ -212,7 +346,8 @@ Run:
 ```bash
 PYTHONPATH=src python3 -m unittest \
   tests.test_normalize.test_catalog \
-  tests.test_build.test_build -v
+  tests.test_build.test_build \
+  tests.test_cli.test_cli -v
 ```
 
 Expected:
@@ -238,6 +373,14 @@ Update `catalog/bundles.yaml`:
 - keep `Twitter` in `ai`
 - add `china-bank` with the requested bank services
 
+Update bundle publishing:
+
+- keep one merged artifact per target under `dist/bundles/<bundle>/`
+- generate `dist/bundles/<bundle>/README.md`
+- document that merged bundle outputs are deduplicated normalized merges, not raw concatenation
+- link each member service directory from the bundle README
+- when a service has multiple variants, state which primary artifact participates in the merged bundle and list the additional variants for manual selection
+
 - [ ] **Step 4: Run tests to verify catalog and bundles pass**
 
 Run:
@@ -245,7 +388,8 @@ Run:
 ```bash
 PYTHONPATH=src python3 -m unittest \
   tests.test_normalize.test_catalog \
-  tests.test_build.test_build -v
+  tests.test_build.test_build \
+  tests.test_cli.test_cli -v
 ```
 
 Expected: PASS
@@ -254,11 +398,13 @@ Expected: PASS
 
 ```bash
 git add catalog/services.yaml catalog/bundles.yaml \
-  tests/test_normalize/test_catalog.py tests/test_build/test_build.py
-git commit -m "feat: expand strict-source services and bundles"
+  src/egloon_rule_hub/build.py src/egloon_rule_hub/docs/render.py \
+  tests/test_normalize/test_catalog.py tests/test_build/test_build.py \
+  tests/test_cli/test_cli.py
+git commit -m "feat: expand strict-source services and bundle indexes"
 ```
 
-### Task 3: Add Strict Icon Sync And Per-Service Icon Metadata
+### Task 4: Add Strict Icon Sync And Per-Service Icon Metadata
 
 **Files:**
 - Create: `src/egloon_rule_hub/icons/__init__.py`
@@ -352,7 +498,7 @@ git add src/egloon_rule_hub/icons/__init__.py src/egloon_rule_hub/icons/sync.py 
 git commit -m "feat: publish strict upstream icons"
 ```
 
-### Task 4: Move Public Metadata Out Of Top-Level `docs/`
+### Task 5: Move Public Metadata Out Of Top-Level `docs/`
 
 **Files:**
 - Create: `ATTRIBUTION.md`
@@ -369,6 +515,7 @@ Update tests to assert:
 
 - `bootstrap` writes root `ATTRIBUTION.md`
 - `bootstrap` no longer relies on top-level `docs/services.md`, `docs/sources.md`, or `docs/usage.md` as public outputs
+- `bootstrap` keeps writing per-service README files and per-bundle `README.md` index files as public outputs
 - `validate.yml` no longer executes `python -m unittest ...`
 - `sync-rules.yml` no longer executes `python -m unittest ...`
 - `sync-rules.yml` stages only public paths and does not stage `docs` or `tests`
@@ -401,6 +548,7 @@ Expected:
 Update `src/egloon_rule_hub/docs/render.py` so it:
 
 - continues writing per-service README files under `Rule/<Target>/<Service>/`
+- continues writing per-bundle `README.md` files under `dist/bundles/<bundle>/`
 - writes root `ATTRIBUTION.md`
 - stops producing `docs/services.md`, `docs/sources.md`, and `docs/usage.md` as required public artifacts
 - prunes stale top-level `docs/` outputs if they still exist
@@ -448,7 +596,7 @@ git add ATTRIBUTION.md src/egloon_rule_hub/docs/render.py README.md \
 git commit -m "feat: switch public metadata to publish repo layout"
 ```
 
-### Task 5: Cut `main` Over To The Minimal Publish Repository
+### Task 6: Cut `main` Over To The Minimal Publish Repository
 
 **Files:**
 - Remove: `docs/`

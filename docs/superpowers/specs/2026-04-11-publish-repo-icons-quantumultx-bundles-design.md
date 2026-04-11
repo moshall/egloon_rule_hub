@@ -6,6 +6,7 @@ Change `egloon_rule_hub` from a mixed development-and-publish repository into a 
 
 This slice combines five related changes that should ship together:
 
+- support multi-variant service directories instead of forcing one file per service/target
 - convert the public repository into a lean publish repository
 - replace public `QuanX` naming with `QuantumultX`
 - add a new batch of upstream-backed services
@@ -15,7 +16,9 @@ This slice combines five related changes that should ship together:
 The result should be a repository whose public branch is easy to consume:
 
 - stable per-service directories
+- stable per-service variant files when upstream provides them
 - stable bundle outputs
+- bundle README/index files that explain merged bundles versus independently controllable service files
 - optional per-service `icon.png`
 - strict provenance
 - no public development-only folders such as `docs/` or `tests/`
@@ -24,6 +27,9 @@ The result should be a repository whose public branch is easy to consume:
 
 This slice should cover:
 
+- supporting multiple published artifact files inside one service/target directory
+- preserving upstream file distinctions when a target directory contains more than one meaningful rule file
+- documenting those per-service variants in the service README
 - renaming the published `QuanX` target to `QuantumultX`
 - updating upstream source resolution so the QuantumultX target reads from `rule/QuantumultX/...`
 - expanding the service catalog with the newly requested upstream-backed services that have real source coverage
@@ -42,6 +48,7 @@ This slice should not cover:
 - synthetic rule creation for services that do not exist in upstream
 - introducing a separate development branch or separate repository
 - preserving backward compatibility for `Rule/QuanX/`
+- flattening upstream multi-file directories into independent top-level service names such as `China_Domain`
 
 ## User Decisions Locked In
 
@@ -58,7 +65,7 @@ These decisions are binding for this slice.
 
 The repository currently still behaves like an internal build workspace even though the user wants it to serve as a clean public publish repository.
 
-That creates five concrete problems.
+That creates six concrete problems.
 
 ### 1. The public branch contains development-only material
 
@@ -115,6 +122,22 @@ The current bundle model already exists, but it does not yet expose the user-req
 
 The missing grouped bundles mean downstream clients still need to subscribe to more service-level feeds manually than the user wants.
 
+### 6. The current service model incorrectly assumes one published file per service/target
+
+Some upstream service directories contain multiple meaningful rule files with explicit usage differences.
+
+Example:
+
+- `blackmatrix7/rule/Loon/China/China.list`
+- `blackmatrix7/rule/Loon/China/China_Domain.list`
+- `blackmatrix7/rule/Loon/China/China_Resolve.list`
+
+The current repository collapses that directory into one published file:
+
+- `Rule/Loon/China/China.lsr`
+
+That loses real upstream distinctions and makes the generated repository less trustworthy for advanced users who need those variant files.
+
 ## Strict-Mode Product Rules
 
 This slice uses strict mode everywhere unless the user changes the policy later.
@@ -133,6 +156,10 @@ Instead:
 - rules may still publish if upstream rules exist
 - `icon.png` is only published when a strict match exists
 - README should state when icon data is unavailable
+
+Strict mode also means:
+
+- if upstream intentionally provides multiple rule files in one service directory, we preserve those files instead of collapsing them or inventing new top-level service names
 
 ## Public Repository Shape After This Change
 
@@ -198,6 +225,155 @@ When rendering artifacts:
 
 - stale `Rule/QuanX/` directories must be pruned
 - stale bundle files using the old target name must be pruned if they exist
+
+## Multi-Variant Service Directory Design
+
+### Core rule
+
+A published service directory is no longer limited to one artifact file.
+
+The new model is:
+
+- one logical service directory per target
+- one README for that directory
+- one or more published artifact files inside the directory
+
+Examples:
+
+- `Rule/Loon/China/China.lsr`
+- `Rule/Loon/China/China_Domain.lsr`
+- `Rule/Loon/China/China_Resolve.lsr`
+- `Rule/Loon/China/README.md`
+
+### Why this is the right boundary
+
+The upstream repository already treats these files as one conceptual service directory with documented usage differences.
+
+Preserving them inside one published directory is better than:
+
+- collapsing them into one file
+- inventing fake service names such as `China_Domain`
+
+This keeps the public repository aligned with upstream mental models while still allowing our own normalized outputs.
+
+### Variant identity
+
+Each published variant should preserve its upstream base filename where possible.
+
+For example:
+
+- `China.list` -> `China.lsr`
+- `China_Domain.list` -> `China_Domain.lsr`
+- `China_Resolve.list` -> `China_Resolve.lsr`
+
+The extension may still change for the target emitter, but the variant basename should remain stable.
+
+### Catalog shape for variants
+
+The multi-variant model must be explicit in `catalog/services.yaml`, not inferred ad hoc from filenames during rendering.
+
+One concrete YAML shape should be:
+
+```yaml
+services:
+  China:
+    enabled: true
+    outputs: [loon, clash, egern, quantumultx, shadowrocket]
+    target_sources:
+      loon:
+        variants:
+          China:
+            primary: true
+            native:
+              - source: blackmatrix7
+                path: rule/Loon/China/China.list
+                format: loon_list
+                priority: 90
+            shadowrocket:
+              - source: blackmatrix7
+                path: rule/Shadowrocket/China/China.list
+                format: shadowrocket_list
+                priority: 95
+            clash:
+              - source: blackmatrix7
+                path: rule/Clash/China/China.yaml
+                format: clash_yaml
+                priority: 100
+          China_Domain:
+            primary: false
+            native:
+              - source: blackmatrix7
+                path: rule/Loon/China/China_Domain.list
+                format: loon_list
+                priority: 90
+            shadowrocket: []
+            clash: []
+          China_Resolve:
+            primary: false
+            native:
+              - source: blackmatrix7
+                path: rule/Loon/China/China_Resolve.list
+                format: loon_list
+                priority: 90
+            shadowrocket: []
+            clash: []
+```
+
+Rules:
+
+- `variants` keys are published basenames
+- exactly one variant per target should be marked `primary: true`
+- bundle merges use that primary variant only
+- additional variants remain separately published and documented
+
+Single-file services may continue using the simpler existing shape, but the runtime model must normalize both forms into the same variant-aware structure.
+
+### Runtime model shape
+
+The runtime model should become explicit enough that an implementer does not need to invent semantics mid-stream.
+
+Conceptually:
+
+- `ServiceTargetDef` should hold `variants: dict[str, ServiceTargetVariantDef]`
+- `ServiceTargetVariantDef` should hold:
+  - `name`
+  - `primary`
+  - `families`
+  - `fallback_order` when needed
+- publication output should represent one service/target directory containing multiple published variant artifacts
+- each variant artifact should retain:
+  - variant basename
+  - selected source family
+  - selected native target
+  - selected upstream source entries
+  - rendered normalized rules
+
+The main point is that variant identity is a first-class model concept, not just a file-naming side effect.
+
+### Variant README behavior
+
+The service README should explicitly list the variant files published in that directory.
+
+For each variant it should expose:
+
+- variant filename
+- a short usage note when the upstream README provides one
+- a link to the local published file
+- the upstream source file URL for that variant
+
+When upstream README text already explains file differences, we should preserve or summarize that wording rather than inventing our own interpretation.
+
+### Primary artifact for merging
+
+Bundle merging should use the primary/default artifact for each service.
+
+For a service directory with multiple variants:
+
+- the primary artifact is the canonical top-level variant for that service, usually the file whose basename equals the service name
+- variant artifacts remain separately published for manual use
+- variant artifacts are linked from bundle README/index files so users can compare merged behavior with manual selection behavior
+
+This avoids silently merging multiple mutually-exclusive variants into one bundle.
 
 ## Icon Synchronization Design
 
@@ -382,12 +558,59 @@ The bundle path should remain filesystem-stable and lowercase:
 
 - `dist/bundles/china-bank/`
 
+## Bundle Directory Design
+
+Bundles should contain two layers:
+
+### 1. Merged target artifacts
+
+Each bundle still publishes one merged artifact per target, for example:
+
+- `dist/bundles/ai/clash.yaml`
+- `dist/bundles/ai/loon.lsr`
+- `dist/bundles/ai/quantumultx.list`
+
+Those merged artifacts are produced by:
+
+- reading the selected primary artifact from each bundle member service
+- normalizing through the existing parser/emitter pipeline
+- deduplicating the merged result
+
+This is not raw file concatenation.
+
+### 2. Bundle README/index
+
+Each bundle directory should also publish a `README.md` that explains:
+
+- which services are included in the merged bundle
+- links to each service directory under `Rule/<Target>/<Service>/`
+- when a service has multiple published variants, which one is used for the merged bundle
+- which additional variants are available for manual control
+
+This gives users two clear modes:
+
+- use the merged bundle for convenience
+- inspect or subscribe to individual service files for more control
+
+### Example bundle layout
+
+```text
+dist/bundles/ai/
+  README.md
+  clash.yaml
+  egern.yaml
+  loon.lsr
+  quantumultx.list
+  shadowrocket.list
+```
+
 ## README and Public Documentation Behavior
 
 The repository will no longer publish `docs/` in the final public form, so public-facing explanation should move to:
 
 - root `README.md`
 - per-service `Rule/<Target>/<Service>/README.md`
+- per-bundle `dist/bundles/<bundle>/README.md`
 - generated manifests under `dist/manifests/`
 
 That means:
@@ -395,6 +618,8 @@ That means:
 - the root README must explain the publish-first repository model
 - the root README must use `QuantumultX` instead of `QuanX`
 - per-service README files must surface icon availability
+- per-service README files must surface variant differences when present
+- per-bundle README files must explain merged versus independent usage
 - manifest files become the structured machine-readable public metadata layer
 
 ## Workflow Behavior
@@ -488,6 +713,28 @@ Rule/QuantumultX/Discord/
   icon.png
 ```
 
+### Multi-variant service directory
+
+```text
+Rule/Loon/China/
+  China.lsr
+  China_Domain.lsr
+  China_Resolve.lsr
+  README.md
+```
+
+### Bundle directory with index
+
+```text
+dist/bundles/ai/
+  README.md
+  clash.yaml
+  egern.yaml
+  loon.lsr
+  quantumultx.list
+  shadowrocket.list
+```
+
 ## Migration Notes
 
 This slice is allowed to be breaking in public path shape.
@@ -506,14 +753,17 @@ After `python -m egloon_rule_hub bootstrap`:
 
 - `Rule/QuantumultX/` exists
 - `Rule/QuanX/` does not remain
+- upstream multi-file service directories such as `Loon/China/` preserve their published variants instead of collapsing to one file
 - newly added strict-source services publish for all enabled targets they support
 - unsupported requested services such as `ChinaASN` are absent rather than guessed
 - matched icons appear as `icon.png` inside each published service target directory
 - unmatched icons do not create guessed files
 - per-service README files state icon availability
+- per-service README files list variant files when they exist
 - `dist/manifests/icons.json` exists
 - the `ai` bundle includes `BardAI`
 - the `china-bank` bundle exists and contains the requested bank services
+- bundle directories publish `README.md` index files that link to member service directories and explain merged versus manual usage
 - public repository staging excludes `docs/` and `tests/`
 
 ## Risks
