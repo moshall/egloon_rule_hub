@@ -7,6 +7,7 @@ from pathlib import Path
 from egloon_rule_hub.build import build_all_target_artifacts, render_target_artifacts
 from egloon_rule_hub.docs.render import service_source_count, write_markdown_docs
 from egloon_rule_hub.model.catalog import Catalog, load_catalog
+from egloon_rule_hub.txt_sources import refresh_txt_sources
 from egloon_rule_hub.upstream_docs.build import build_upstream_docs
 
 
@@ -88,6 +89,10 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("render-manifests", help="Render JSON manifests")
     subparsers.add_parser("render-docs", help="Render markdown docs")
     subparsers.add_parser(
+        "refresh-txt-sources",
+        help="Refresh generated TXT source files",
+    )
+    subparsers.add_parser(
         "bootstrap",
         help="Validate catalog and render generated docs and manifests",
     )
@@ -122,13 +127,18 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Rendered docs to {root / 'docs'}")
         return 0
 
+    if args.command == "refresh-txt-sources":
+        refreshed = refresh_txt_sources(root)
+        print(f"Refreshed TXT sources: {len(refreshed)}")
+        return 0
+
     if args.command == "bootstrap":
         catalog = _run_validate(root)
         target_artifacts = build_all_target_artifacts(catalog)
         render_target_artifacts(root, catalog, target_artifacts)
         _render_manifests(root, catalog)
         build_upstream_docs(catalog, target_artifacts)
-        write_markdown_docs(root, catalog)
+        write_markdown_docs(root, catalog, target_artifacts)
         print("Bootstrap complete")
         return 0
 

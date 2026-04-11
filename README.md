@@ -8,6 +8,7 @@ The project goal is simple:
 - keep a light internal model instead of hard-wiring one client format
 - publish stable per-service rule URLs and bundle URLs
 - publish one selected upstream family per service/target directory
+- support self-maintained TXT services under `Source/TXT/` as a first-class source path
 - run sync and validation in GitHub Actions instead of consuming VPS resources
 
 ## Public Repo Note
@@ -17,7 +18,7 @@ This repository can be published as a public GitHub repository.
 - upstream attribution is tracked in [docs/attribution.md](docs/attribution.md)
 - upstream README tracking outputs are generated during `bootstrap` in [dist/manifests/upstream_docs.json](dist/manifests/upstream_docs.json) and [dist/upstream-readmes/](dist/upstream-readmes/)
 - when an upstream README is unavailable, the manifest records `status: missing` with `snapshot_path: null`
-- generated artifacts in `dist/` are transformed outputs built from upstream rule sources
+- generated artifacts in `dist/` are transformed outputs built from upstream rule sources or self-maintained TXT inputs
 - the repository should continue to keep upstream references visible in both the README and generated docs
 
 ## Current Stage
@@ -38,6 +39,7 @@ The current implementation fetches and renders the seeded real service artifacts
 - Multiple upstreams are supported, but each published service/target now selects exactly one source family.
 - Family selection is strict: `native -> shadowrocket -> clash`, stop at the first non-empty family, then merge only within that family.
 - Services are the main entrypoint, direct source paths and remote URLs are also supported.
+- Self-maintained services can also originate from `Source/TXT/<Service>.txt`; those TXT files are treated as canonical service inputs and generate target READMEs from current artifact metadata.
 - Rule-set metadata lives at the rule-set level, not on every rule line.
 - Bundles reference services instead of duplicating rules.
 
@@ -59,6 +61,7 @@ Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing th
 - `catalog/targets.yaml`: enabled output clients
 - `catalog/services.yaml`: service catalog grouped by output target and source family
 - `catalog/bundles.yaml`: grouped rule bundles
+- `Source/TXT/`: self-maintained service sources that publish to the preferred target allowlist intersected with configured targets (`egern`, `loon`, `clash`, `quanx`, `shadowrocket`)
 
 ## CLI
 
@@ -69,8 +72,15 @@ python -m egloon_rule_hub validate-catalog
 python -m egloon_rule_hub render-rules
 python -m egloon_rule_hub render-manifests
 python -m egloon_rule_hub render-docs
+python -m egloon_rule_hub refresh-txt-sources
 python -m egloon_rule_hub bootstrap
 ```
+
+`refresh-txt-sources` updates generated TXT inputs under `Source/TXT/`, currently including the official Feishu whitelist snapshot at `Source/TXT/Feishu.txt`.
+
+`render-docs` is docs-only: it renders upstream-backed READMEs from the available upstream manifest data and renders self-maintained TXT READMEs from catalog origin metadata without rebuilding rule artifacts.
+
+`bootstrap` renders fresh target artifacts first, then uses that artifact graph to render target READMEs. Upstream-backed services still attach upstream README manifest data when available, while self-maintained TXT services render README metadata directly from `Source/TXT/<Service>.txt`.
 
 `bootstrap` runs validation, target-artifact build/render, manifest rendering, upstream README snapshot rendering, and markdown doc rendering in one pass.
 
@@ -93,7 +103,7 @@ This is enough to validate the real end-to-end generation path for per-service f
 ## GitHub Actions
 
 - `validate.yml`: runs on push, pull request, and manual dispatch
-- `sync-rules.yml`: scheduled and manual bootstrap workflow, designed to grow into the full sync pipeline
+- `sync-rules.yml`: scheduled and manual sync workflow that refreshes generated TXT sources, runs bootstrap, and commits refreshed outputs
 
 ## References
 

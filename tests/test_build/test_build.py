@@ -14,6 +14,7 @@ from egloon_rule_hub.model.catalog import (
     BundleDef,
     Catalog,
     ServiceDef,
+    ServiceOrigin,
     ServiceTargetDef,
     SourceDef,
     SourceRef,
@@ -198,6 +199,59 @@ class BuildPipelineTests(unittest.TestCase):
             default_fallback_order=["native", "shadowrocket", "clash"],
         )
 
+        self.self_maintained_catalog = Catalog(
+            root=self.root,
+            sources={},
+            targets={
+                "egern": TargetDef(name="egern", enabled=True, file_ext="yaml"),
+                "loon": TargetDef(name="loon", enabled=True, file_ext="list"),
+                "clash": TargetDef(name="clash", enabled=True, file_ext="yaml"),
+            },
+            services={
+                "TXTService": ServiceDef(
+                    name="TXTService",
+                    enabled=True,
+                    targets=["egern", "loon", "clash"],
+                    origin=ServiceOrigin(
+                        kind="self_maintained",
+                        source_path="Source/TXT/TXTService.txt",
+                        source_url="https://example.com/txt-service",
+                        source_note="txt-backed service",
+                    ),
+                ),
+            },
+            bundles={},
+            self_maintained_rules={
+                "TXTService": [
+                    Rule(type="DOMAIN", value="txt.example"),
+                    Rule(type="DOMAIN-SUFFIX", value="txt-suffix.example"),
+                ]
+            },
+        )
+
+        self.self_maintained_empty_rules_catalog = Catalog(
+            root=self.root,
+            sources={},
+            targets={
+                "egern": TargetDef(name="egern", enabled=True, file_ext="yaml"),
+                "loon": TargetDef(name="loon", enabled=True, file_ext="list"),
+                "clash": TargetDef(name="clash", enabled=True, file_ext="yaml"),
+            },
+            services={
+                "TXTEmpty": ServiceDef(
+                    name="TXTEmpty",
+                    enabled=True,
+                    targets=["egern", "loon", "clash"],
+                    origin=ServiceOrigin(
+                        kind="self_maintained",
+                        source_path="Source/TXT/TXTEmpty.txt",
+                    ),
+                ),
+            },
+            bundles={},
+            self_maintained_rules={"TXTEmpty": []},
+        )
+
     def tearDown(self) -> None:
         self.temp_dir.cleanup()
 
@@ -353,6 +407,73 @@ class BuildPipelineTests(unittest.TestCase):
         self.assertFalse(stale_bundle_output.exists())
         self.assertTrue((self.root / "dist" / "bundles" / "ai" / "loon.lsr").exists())
         self.assertTrue(unrelated_bundle_output.exists())
+
+    def test_build_all_target_artifacts_self_maintained_emits_all_targets(self) -> None:
+        artifacts = build_all_target_artifacts(self.self_maintained_catalog)
+
+        self.assertIn("TXTService", artifacts)
+        self.assertEqual(set(artifacts["TXTService"].keys()), {"egern", "loon", "clash"})
+        for target_name in ("egern", "loon", "clash"):
+            artifact = artifacts["TXTService"][target_name]
+            self.assertEqual(
+                [(rule.type, rule.value) for rule in artifact.rules],
+                [
+                    ("DOMAIN", "txt.example"),
+                    ("DOMAIN-SUFFIX", "txt-suffix.example"),
+                ],
+            )
+            self.assertEqual(artifact.selected_family, "self_maintained")
+            self.assertEqual(artifact.selected_native_target, target_name)
+            self.assertTrue(artifact.is_native)
+            self.assertFalse(artifact.is_converted)
+
+    def test_build_all_target_artifacts_self_maintained_includes_origin_metadata(self) -> None:
+        artifacts = build_all_target_artifacts(self.self_maintained_catalog)
+        egern_artifact = artifacts["TXTService"]["egern"]
+
+        self.assertEqual(egern_artifact.origin_kind, "self_maintained")
+        self.assertEqual(
+            egern_artifact.origin_source_path,
+            "Source/TXT/TXTService.txt",
+        )
+        self.assertEqual(
+            egern_artifact.origin_source_url,
+            "https://example.com/txt-service",
+        )
+
+    def test_build_all_target_artifacts_self_maintained_skips_empty_rule_services(self) -> None:
+        artifacts = build_all_target_artifacts(self.self_maintained_empty_rules_catalog)
+
+        self.assertNotIn("TXTEmpty", artifacts)
+
+    def test_render_target_artifacts_self_maintained_writes_outputs(self) -> None:
+        artifacts = build_all_target_artifacts(self.self_maintained_catalog)
+
+        render_target_artifacts(self.root, self.self_maintained_catalog, artifacts)
+
+        self.assertTrue(
+            (self.root / "Rule" / "Loon" / "TXTService" / "TXTService.list").exists()
+        )
+        self.assertIn(
+            "DOMAIN,txt.example",
+            (self.root / "Rule" / "Loon" / "TXTService" / "TXTService.list").read_text(
+                encoding="utf-8"
+            ),
+        )
+
+    def test_render_target_artifacts_self_maintained_prunes_stale_outputs_after_empty_transition(
+        self,
+    ) -> None:
+        initial_artifacts = build_all_target_artifacts(self.self_maintained_catalog)
+        render_target_artifacts(self.root, self.self_maintained_catalog, initial_artifacts)
+        output_path = self.root / "Rule" / "Loon" / "TXTService" / "TXTService.list"
+        self.assertTrue(output_path.exists())
+
+        self.self_maintained_catalog.self_maintained_rules["TXTService"] = []
+        empty_artifacts = build_all_target_artifacts(self.self_maintained_catalog)
+        render_target_artifacts(self.root, self.self_maintained_catalog, empty_artifacts)
+
+        self.assertFalse(output_path.exists())
 
 
 if __name__ == "__main__":

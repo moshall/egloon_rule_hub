@@ -156,6 +156,26 @@ def build_target_artifact(
     if target is None or not target.enabled:
         return None
 
+    if service.origin.kind == "self_maintained":
+        canonical_rules = catalog.self_maintained_rules.get(service_name)
+        if not canonical_rules:
+            return None
+        return TargetArtifact(
+            service=service_name,
+            target=target_name,
+            selected_family="self_maintained",
+            selected_native_target=target_name,
+            publish_mode=target.publish_mode,
+            is_native=True,
+            is_converted=False,
+            conversion_path=None,
+            origin_kind=service.origin.kind,
+            origin_source_path=service.origin.source_path,
+            origin_source_url=service.origin.source_url,
+            rules=list(canonical_rules),
+            selected_entries=[],
+        )
+
     family, source_refs = _selected_family_sources(catalog, service, target_name)
     if not family or not source_refs:
         return None
@@ -203,6 +223,9 @@ def build_target_artifact(
         is_native=is_native,
         is_converted=not is_native,
         conversion_path=conversion_path,
+        origin_kind=service.origin.kind,
+        origin_source_path=service.origin.source_path,
+        origin_source_url=service.origin.source_url,
         rules=merged,
         selected_entries=selected_entries,
     )
@@ -362,6 +385,27 @@ def render_target_artifacts(
                 ),
                 encoding="utf-8",
             )
+
+    for service_name, service in catalog.services.items():
+        service_targets = target_artifacts.get(service_name, {})
+        for target_name in service.targets:
+            if target_name in service_targets:
+                continue
+            display_target = TARGET_DISPLAY_NAMES.get(target_name)
+            if display_target is None:
+                continue
+            target = catalog.targets.get(target_name)
+            renderer_info = TARGET_RENDERERS.get(target_name)
+            if target is None or not target.enabled or renderer_info is None:
+                continue
+            service_dir = root / "Rule" / display_target / service_name
+            if not service_dir.exists():
+                continue
+            base_output_path = service_dir / f"{service_name}.{_target_output_ext(target_name, target)}"
+            for ext in _target_output_ext_candidates(target_name, target):
+                candidate = base_output_path.with_suffix(f".{ext}")
+                if candidate.exists() and candidate.is_file():
+                    candidate.unlink()
 
     for bundle_name, bundle in catalog.bundles.items():
         if not bundle.enabled:

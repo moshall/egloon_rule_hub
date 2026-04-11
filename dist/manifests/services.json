@@ -639,6 +639,20 @@
       "shadowrocket"
     ]
   },
+  "Feishu": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "",
+    "source_count": 0,
+    "target_sources": {},
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
   "Fox": {
     "enabled": true,
     "fallback_order": [],
@@ -1111,6 +1125,20 @@
         "shadowrocket": 0
       }
     },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quanx",
+      "shadowrocket"
+    ]
+  },
+  "IyfTv": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "",
+    "source_count": 0,
+    "target_sources": {},
     "targets": [
       "egern",
       "loon",

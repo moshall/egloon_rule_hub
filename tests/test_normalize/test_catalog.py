@@ -4,11 +4,13 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from egloon_rule_hub.docs.render import write_markdown_docs
 from egloon_rule_hub.model.catalog import (
     Catalog,
     ServiceDef,
+    ServiceOrigin,
     ServiceTargetDef,
     SourceDef,
     SourceRef,
@@ -181,6 +183,266 @@ class CatalogTests(unittest.TestCase):
 
             with self.assertRaises(ValueError):
                 load_catalog(root)
+
+    def test_load_catalog_injects_self_maintained_txt_services(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            txt_dir = root / "Source" / "TXT"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+            txt_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n"
+                "  sample:\n"
+                "    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  egern:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n"
+                "  loon:\n"
+                "    enabled: true\n"
+                "    file_ext: lsr\n"
+                "    publish_mode: lsr\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n"
+                "  quanx:\n"
+                "    enabled: true\n"
+                "    file_ext: conf\n"
+                "  shadowrocket:\n"
+                "    enabled: true\n"
+                "    file_ext: conf\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "services:\n"
+                "  OpenAI:\n"
+                "    enabled: true\n"
+                "    outputs: [clash]\n"
+                "    sources:\n"
+                "      - source: sample\n"
+                "        url: https://example.com/rule/Clash/OpenAI/OpenAI.yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text("bundles: {}\n", encoding="utf-8")
+
+            (txt_dir / "Feishu.txt").write_text(
+                "# @source_url: https://www.feishu.cn/hc/zh-CN/articles/360044683233\n"
+                "# @source_note: Feishu official help center\n"
+                "# @generated_by: refresh_feishu_txt\n"
+                "DOMAIN-SUFFIX,feishu.cn\n"
+                "IP-CIDR,1.1.1.0/24\n",
+                encoding="utf-8",
+            )
+            (txt_dir / "IyfTv.txt").write_text(
+                "# @source_url: https://github.com/example/manual\n"
+                "iyf.tv\n"
+                "DOMAIN-SUFFIX,yfsp.tv\n",
+                encoding="utf-8",
+            )
+
+            catalog = load_catalog(root)
+
+        self.assertIn("OpenAI", catalog.services)
+        self.assertIn("Feishu", catalog.services)
+        self.assertIn("IyfTv", catalog.services)
+        self.assertEqual(
+            catalog.services["IyfTv"].targets,
+            ["egern", "loon", "clash", "quanx", "shadowrocket"],
+        )
+        self.assertEqual(catalog.services["Feishu"].origin.kind, "self_maintained")
+        self.assertEqual(
+            catalog.services["Feishu"].origin.source_path, "Source/TXT/Feishu.txt"
+        )
+        self.assertEqual(
+            catalog.services["Feishu"].origin.source_url,
+            "https://www.feishu.cn/hc/zh-CN/articles/360044683233",
+        )
+        self.assertEqual(
+            catalog.services["Feishu"].origin.source_note,
+            "Feishu official help center",
+        )
+        self.assertEqual(
+            catalog.services["Feishu"].origin.generated_by, "refresh_feishu_txt"
+        )
+        self.assertIn("Feishu", catalog.self_maintained_rules)
+        self.assertIn("IyfTv", catalog.self_maintained_rules)
+        self.assertEqual(
+            [(rule.type, rule.value) for rule in catalog.self_maintained_rules["Feishu"]],
+            [("DOMAIN-SUFFIX", "feishu.cn"), ("IP-CIDR", "1.1.1.0/24")],
+        )
+        self.assertEqual(
+            [(rule.type, rule.value) for rule in catalog.self_maintained_rules["IyfTv"]],
+            [("DOMAIN-SUFFIX", "iyf.tv"), ("DOMAIN-SUFFIX", "yfsp.tv")],
+        )
+
+    def test_load_catalog_records_txt_discovery_failures(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n"
+                "  sample:\n"
+                "    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "services:\n"
+                "  OpenAI:\n"
+                "    enabled: true\n"
+                "    outputs: [clash]\n"
+                "    sources:\n"
+                "      - source: sample\n"
+                "        url: https://example.com/rule/Clash/OpenAI/OpenAI.yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text("bundles: {}\n", encoding="utf-8")
+
+            with patch(
+                "egloon_rule_hub.model.catalog.discover_txt_services",
+                side_effect=ValueError("failed to parse TXT service"),
+            ):
+                catalog = load_catalog(root)
+
+        self.assertIn("OpenAI", catalog.services)
+        self.assertEqual(
+            catalog.self_maintained_failures["Source/TXT"],
+            "failed to parse TXT service",
+        )
+        self.assertEqual(catalog.self_maintained_rules, {})
+
+    def test_load_catalog_skips_txt_conflict_with_yaml_service(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            txt_dir = root / "Source" / "TXT"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+            txt_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text(
+                "sources:\n"
+                "  sample:\n"
+                "    kind: remote\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n"
+                "  egern:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n"
+                "  loon:\n"
+                "    enabled: true\n"
+                "    file_ext: lsr\n"
+                "  quanx:\n"
+                "    enabled: true\n"
+                "    file_ext: conf\n"
+                "  shadowrocket:\n"
+                "    enabled: true\n"
+                "    file_ext: conf\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text(
+                "services:\n"
+                "  Feishu:\n"
+                "    enabled: true\n"
+                "    outputs: [clash]\n"
+                "    sources:\n"
+                "      - source: sample\n"
+                "        url: https://example.com/rule/Clash/Feishu/Feishu.yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "bundles.yaml").write_text("bundles: {}\n", encoding="utf-8")
+            (txt_dir / "Feishu.txt").write_text(
+                "DOMAIN-SUFFIX,feishu.cn\n",
+                encoding="utf-8",
+            )
+
+            catalog = load_catalog(root)
+
+        self.assertEqual(catalog.services["Feishu"].targets, ["clash"])
+        self.assertEqual(catalog.services["Feishu"].origin.kind, "upstream")
+        self.assertNotIn("Feishu", catalog.self_maintained_rules)
+        self.assertIn("Source/TXT/Feishu.txt", catalog.self_maintained_failures)
+        self.assertIn(
+            "conflicts with existing YAML service",
+            catalog.self_maintained_failures["Source/TXT/Feishu.txt"],
+        )
+
+    def test_load_catalog_validates_static_yaml_before_txt_injection(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            txt_dir = root / "Source" / "TXT"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+            txt_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text("sources: {}\n", encoding="utf-8")
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text("services: {}\n", encoding="utf-8")
+            (catalog_dir / "bundles.yaml").write_text(
+                "bundles:\n"
+                "  bad:\n"
+                "    enabled: true\n"
+                "    targets: [clash]\n"
+                "    services: [IyfTv]\n",
+                encoding="utf-8",
+            )
+            (txt_dir / "IyfTv.txt").write_text("DOMAIN-SUFFIX,iyf.tv\n", encoding="utf-8")
+
+            with self.assertRaises(ValueError):
+                load_catalog(root)
+
+    def test_load_catalog_injects_txt_targets_intersected_with_known_targets(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            root = Path(temp_root)
+            catalog_dir = root / "catalog"
+            txt_dir = root / "Source" / "TXT"
+            catalog_dir.mkdir(parents=True, exist_ok=True)
+            txt_dir.mkdir(parents=True, exist_ok=True)
+
+            (catalog_dir / "sources.yaml").write_text("sources: {}\n", encoding="utf-8")
+            (catalog_dir / "targets.yaml").write_text(
+                "targets:\n"
+                "  clash:\n"
+                "    enabled: true\n"
+                "    file_ext: yaml\n"
+                "  shadowrocket:\n"
+                "    enabled: true\n"
+                "    file_ext: conf\n"
+                "  surge:\n"
+                "    enabled: true\n"
+                "    file_ext: conf\n",
+                encoding="utf-8",
+            )
+            (catalog_dir / "services.yaml").write_text("services: {}\n", encoding="utf-8")
+            (catalog_dir / "bundles.yaml").write_text("bundles: {}\n", encoding="utf-8")
+            (txt_dir / "IyfTv.txt").write_text("DOMAIN-SUFFIX,iyf.tv\n", encoding="utf-8")
+
+            catalog = load_catalog(root)
+
+        self.assertEqual(catalog.services["IyfTv"].targets, ["clash", "shadowrocket"])
 
 
 class ServiceDocsRenderTests(unittest.TestCase):
@@ -357,6 +619,77 @@ class ServiceDocsRenderTests(unittest.TestCase):
 
         services_doc = (self.root / "docs" / "services.md").read_text(encoding="utf-8")
         self.assertIn("| OpenAI | True | clash, egern | 1 | AI service |", services_doc)
+
+    def test_self_maintained_target_readme_uses_catalog_origin_metadata_without_artifacts(
+        self,
+    ) -> None:
+        self.catalog.services["Feishu"] = ServiceDef(
+            name="Feishu",
+            enabled=True,
+            targets=[self.TARGET_CLASH],
+            notes="Feishu official help center",
+            origin=ServiceOrigin(
+                kind="self_maintained",
+                source_path="Source/TXT/Feishu.txt",
+                source_url="https://www.feishu.cn/hc/zh-CN/articles/360044683233",
+                source_note="Feishu official help center",
+            ),
+        )
+        self.catalog.self_maintained_rules["Feishu"] = [
+            Rule("DOMAIN-SUFFIX", "feishu.cn"),
+        ]
+
+        write_markdown_docs(self.root, self.catalog)
+
+        readme = self._read_target_readme(self.TARGET_CLASH_DIR, "Feishu")
+        self.assertIn("# Feishu for Clash", readme)
+        self.assertIn("self-maintained", readme)
+        self.assertIn("https://www.feishu.cn/hc/zh-CN/articles/360044683233", readme)
+        self.assertIn(
+            "- TXT source: [Source/TXT/Feishu.txt](../../../Source/TXT/Feishu.txt)",
+            readme,
+        )
+        self.assertNotIn("Selected source family", readme)
+        self.assertNotIn("Upstream README Sources", readme)
+
+    def test_self_maintained_docs_skip_disabled_targets_without_artifacts(self) -> None:
+        self.catalog.targets[self.TARGET_CLASH].enabled = False
+        self.catalog.services["Feishu"] = ServiceDef(
+            name="Feishu",
+            enabled=True,
+            targets=[self.TARGET_CLASH],
+            origin=ServiceOrigin(
+                kind="self_maintained",
+                source_path="Source/TXT/Feishu.txt",
+            ),
+        )
+        self.catalog.self_maintained_rules["Feishu"] = [
+            Rule("DOMAIN-SUFFIX", "feishu.cn"),
+        ]
+
+        write_markdown_docs(self.root, self.catalog)
+
+        self.assertFalse((self.root / "Rule" / self.TARGET_CLASH_DIR / "Feishu").exists())
+        services_doc = (self.root / "docs" / "services.md").read_text(encoding="utf-8")
+        self.assertIn("- Feishu: (no target README yet)", services_doc)
+
+    def test_self_maintained_docs_skip_empty_rule_services_without_artifacts(self) -> None:
+        self.catalog.services["Empty"] = ServiceDef(
+            name="Empty",
+            enabled=True,
+            targets=[self.TARGET_CLASH],
+            origin=ServiceOrigin(
+                kind="self_maintained",
+                source_path="Source/TXT/Empty.txt",
+            ),
+        )
+        self.catalog.self_maintained_rules["Empty"] = []
+
+        write_markdown_docs(self.root, self.catalog)
+
+        self.assertFalse((self.root / "Rule" / self.TARGET_CLASH_DIR / "Empty").exists())
+        services_doc = (self.root / "docs" / "services.md").read_text(encoding="utf-8")
+        self.assertIn("- Empty: (no target README yet)", services_doc)
 
     def test_write_markdown_docs_prunes_legacy_services_directory(self) -> None:
         legacy_file = self.root / "docs" / "services" / "OpenAI.md"

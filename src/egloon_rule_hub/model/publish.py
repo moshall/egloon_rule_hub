@@ -25,5 +25,8 @@ class TargetArtifact:
     is_native: bool
     is_converted: bool
     conversion_path: str | None
+    origin_kind: str = "upstream"
+    origin_source_path: str | None = None
+    origin_source_url: str | None = None
     rules: list[Rule] = field(default_factory=list)
     selected_entries: list[SelectedSourceEntry] = field(default_factory=list)

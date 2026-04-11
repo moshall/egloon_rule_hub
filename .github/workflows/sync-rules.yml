@@ -27,6 +27,9 @@ jobs:
       - name: Run tests
         run: python -m unittest discover -s tests -p 'test_*.py' -t . -v
 
+      - name: Refresh TXT sources
+        run: python -m egloon_rule_hub refresh-txt-sources
+
       - name: Bootstrap repository artifacts
         run: python -m egloon_rule_hub bootstrap
 
@@ -34,7 +37,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Rule docs dist
+          git add Rule docs dist Source/TXT
           git diff --cached --quiet && exit 0
           git commit -m "chore: refresh generated rule docs and manifests"
           git push

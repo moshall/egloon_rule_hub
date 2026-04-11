@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 from collections import defaultdict
@@ -8,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from egloon_rule_hub.model.catalog import Catalog, ServiceDef, SourceRef
+from egloon_rule_hub.model.publish import TargetArtifact
 
 TARGET_DISPLAY_NAMES = {
     "clash": "Clash",
@@ -274,19 +276,38 @@ def _target_readme_markdown(
     target_dir: str,
     service_name: str,
     entries: list[dict[str, Any]],
+    artifact: TargetArtifact | None = None,
 ) -> str:
-    selected_family = str(entries[0].get("selected_family") or "-") if entries else "-"
-    selected_native_target = str(entries[0].get("selected_native_target") or target)
+    selected_family = (
+        str(entries[0].get("selected_family") or "-")
+        if entries
+        else artifact.selected_family if artifact is not None else "-"
+    )
+    selected_native_target = (
+        str(entries[0].get("selected_native_target") or target)
+        if entries
+        else artifact.selected_native_target if artifact is not None else target
+    )
     selected_native_target_dir = _target_display_name(selected_native_target)
-    publish_mode = entries[0].get("publish_mode") if entries else None
-    conversion_path = entries[0].get("conversion_path") if entries else None
+    publish_mode = (
+        entries[0].get("publish_mode")
+        if entries
+        else artifact.publish_mode if artifact is not None else None
+    )
+    conversion_path = (
+        entries[0].get("conversion_path")
+        if entries
+        else artifact.conversion_path if artifact is not None else None
+    )
     lines: list[str] = [
         f"# {service_name} for {target_dir}",
         "",
         f"This README documents the {target_dir} target derived for {service_name}.",
         "",
     ]
-    if any(not entry.get("is_converted") for entry in entries):
+    if any(not entry.get("is_converted") for entry in entries) or (
+        artifact is not None and not artifact.is_converted
+    ):
         lines.append(
             f"This directory mirrors the direct upstream {target_dir} target for {service_name}."
         )
@@ -379,6 +400,145 @@ def _target_readme_markdown(
     return "\n".join(lines)
 
 
+def _self_maintained_target_readme_markdown(
+    target_dir: str,
+    service_name: str,
+    artifact: TargetArtifact,
+) -> str:
+    source_link = None
+    if artifact.origin_source_path:
+        source_link = os.path.relpath(
+            artifact.origin_source_path,
+            start=(Path("Rule") / target_dir / service_name).as_posix(),
+        )
+    lines = [
+        f"# {service_name} for {target_dir}",
+        "",
+        f"This README documents the {target_dir} target derived for {service_name}.",
+        "",
+        "This directory is self-maintained by egloon_rule_hub.",
+        "",
+        "- Source type: `self_maintained`",
+    ]
+    if artifact.origin_source_path and source_link:
+        lines.append(f"- TXT source: [{artifact.origin_source_path}]({source_link})")
+    if artifact.origin_source_url:
+        lines.append(f"- Source URL: [{artifact.origin_source_url}]({artifact.origin_source_url})")
+    lines.extend(
+        [
+            "",
+            "The rules in this directory are generated from the current self-maintained TXT source, not from upstream README manifests.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def _group_manifest_entries_by_service_target(
+    manifest: dict[str, list[dict[str, Any]]]
+) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for service_name, entries in manifest.items():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            target = entry.get("target")
+            if not isinstance(target, str) or not target.strip():
+                continue
+            service = entry.get("service")
+            if not isinstance(service, str) or not service.strip():
+                service = service_name
+            grouped[(service, target)].append(entry)
+    return grouped
+
+
+def _write_target_readmes_from_artifacts(
+    root: Path,
+    target_artifacts: dict[str, dict[str, TargetArtifact]],
+    manifest: dict[str, list[dict[str, Any]]],
+) -> tuple[dict[str, list[str]], set[Path]]:
+    manifest_by_service_target = _group_manifest_entries_by_service_target(manifest)
+    rule_root = root / "Rule"
+    service_readme_paths: dict[str, list[str]] = defaultdict(list)
+    live_readme_paths: set[Path] = set()
+
+    for service_name, artifacts_by_target in sorted(target_artifacts.items()):
+        for target_name, artifact in sorted(artifacts_by_target.items()):
+            manifest_entries = manifest_by_service_target.get((service_name, target_name), [])
+            target_dir = _target_display_name(target_name)
+            if manifest_entries:
+                manifest_target_dir = manifest_entries[0].get("target_dir")
+                if isinstance(manifest_target_dir, str) and manifest_target_dir.strip():
+                    target_dir = manifest_target_dir
+
+            service_dir = rule_root / target_dir / service_name
+            service_dir.mkdir(parents=True, exist_ok=True)
+            readme_path = service_dir / "README.md"
+            if artifact.origin_kind == "self_maintained":
+                readme_text = _self_maintained_target_readme_markdown(
+                    target_dir, service_name, artifact
+                )
+            else:
+                readme_text = _target_readme_markdown(
+                    root, target_name, target_dir, service_name, manifest_entries, artifact
+                )
+            readme_path.write_text(readme_text, encoding="utf-8")
+            live_readme_paths.add(readme_path)
+            rel_path = (Path("Rule") / target_dir / service_name / "README.md").as_posix()
+            if rel_path not in service_readme_paths[service_name]:
+                service_readme_paths[service_name].append(rel_path)
+
+    return dict(service_readme_paths), live_readme_paths
+
+
+def _self_maintained_target_artifacts_from_catalog(
+    catalog: Catalog,
+) -> dict[str, dict[str, TargetArtifact]]:
+    synthesized: dict[str, dict[str, TargetArtifact]] = {}
+    for service_name, service in sorted(catalog.services.items()):
+        if service.origin.kind != "self_maintained" or not service.enabled:
+            continue
+        canonical_rules = catalog.self_maintained_rules.get(service_name)
+        if not canonical_rules:
+            continue
+        artifacts_by_target: dict[str, TargetArtifact] = {}
+        for target_name in service.targets:
+            target = catalog.targets.get(target_name)
+            if target is None or not target.enabled:
+                continue
+            artifacts_by_target[target_name] = TargetArtifact(
+                service=service_name,
+                target=target_name,
+                selected_family="self_maintained",
+                selected_native_target=target_name,
+                publish_mode=target.publish_mode,
+                is_native=True,
+                is_converted=False,
+                conversion_path=None,
+                origin_kind=service.origin.kind,
+                origin_source_path=service.origin.source_path,
+                origin_source_url=service.origin.source_url,
+                rules=list(canonical_rules),
+            )
+        if artifacts_by_target:
+            synthesized[service_name] = artifacts_by_target
+    return synthesized
+
+
+def _merge_service_readme_paths(
+    *path_maps: dict[str, list[str]],
+) -> dict[str, list[str]]:
+    merged: dict[str, list[str]] = defaultdict(list)
+    for path_map in path_maps:
+        for service_name, paths in path_map.items():
+            for rel_path in paths:
+                if rel_path not in merged[service_name]:
+                    merged[service_name].append(rel_path)
+    return dict(merged)
+
+
 def _write_target_readmes(
     root: Path, manifest: dict[str, list[dict[str, Any]]]
 ) -> tuple[dict[str, list[str]], set[Path]]:
@@ -426,7 +586,11 @@ def _prune_stale_target_readmes(root: Path, live_readme_paths: set[Path]) -> Non
             path.rmdir()
 
 
-def write_markdown_docs(root: Path, catalog: Catalog) -> None:
+def write_markdown_docs(
+    root: Path,
+    catalog: Catalog,
+    target_artifacts: dict[str, dict[str, TargetArtifact]] | None = None,
+) -> None:
     docs_dir = root / "docs"
     legacy_services_dir = docs_dir / "services"
     if legacy_services_dir.exists():
@@ -437,7 +601,26 @@ def write_markdown_docs(root: Path, catalog: Catalog) -> None:
     docs_dir.mkdir(parents=True, exist_ok=True)
     upstream_docs_manifest = _load_upstream_docs_manifest(root)
 
-    service_readme_paths, live_readme_paths = _write_target_readmes(root, upstream_docs_manifest)
+    if target_artifacts is None:
+        service_readme_paths, live_readme_paths = _write_target_readmes(
+            root, upstream_docs_manifest
+        )
+        self_maintained_artifacts = _self_maintained_target_artifacts_from_catalog(catalog)
+        if self_maintained_artifacts:
+            (
+                self_maintained_readme_paths,
+                self_maintained_live_paths,
+            ) = _write_target_readmes_from_artifacts(
+                root, self_maintained_artifacts, upstream_docs_manifest
+            )
+            service_readme_paths = _merge_service_readme_paths(
+                service_readme_paths, self_maintained_readme_paths
+            )
+            live_readme_paths |= self_maintained_live_paths
+    else:
+        service_readme_paths, live_readme_paths = _write_target_readmes_from_artifacts(
+            root, target_artifacts, upstream_docs_manifest
+        )
     _prune_stale_target_readmes(root, live_readme_paths)
     (docs_dir / "services.md").write_text(
         _services_markdown(catalog, service_readme_paths), encoding="utf-8"

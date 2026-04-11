@@ -1,6 +1,6 @@
 # Services
 
-Total services: 61
+Total services: 63
 
 | Service | Enabled | Targets | Sources | Notes |
 | --- | --- | --- | --- | --- |
@@ -20,6 +20,7 @@ Total services: 61
 | FOXNOW | True | egern, loon, clash, quanx, shadowrocket | 3 | Streaming media |
 | FOXPlus | True | egern, loon, clash, quanx, shadowrocket | 3 | Streaming media |
 | Facebook | True | egern, loon, clash, quanx, shadowrocket | 3 | Social service |
+| Feishu | True | egern, loon, clash, quanx, shadowrocket | 0 | - |
 | Fox | True | egern, loon, clash, quanx, shadowrocket | 3 | Streaming media |
 | Gemini | True | egern, loon, clash, quanx, shadowrocket | 3 | Google AI service |
 | GitHub | True | egern, loon, clash, quanx, shadowrocket | 3 | Developer platform |
@@ -32,6 +33,7 @@ Total services: 61
 | HBOHK | True | egern, loon, clash, quanx, shadowrocket | 3 | Streaming media |
 | HBOUSA | True | egern, loon, clash, quanx, shadowrocket | 3 | Streaming media |
 | Instagram | True | egern, loon, clash, quanx, shadowrocket | 3 | Social service |
+| IyfTv | True | egern, loon, clash, quanx, shadowrocket | 0 | - |
 | Linux | True | egern, loon, clash, quanx, shadowrocket | 3 | Linux ecosystems |
 | Netflix | True | egern, loon, clash, quanx, shadowrocket | 3 | Streaming media |
 | Nintendo | True | egern, loon, clash, quanx, shadowrocket | 3 | Gaming |
@@ -180,6 +182,13 @@ Total services: 61
   - [Rule/QuanX/Facebook/README.md](Rule/QuanX/Facebook/README.md)
   - [Rule/Shadowrocket/Facebook/README.md](Rule/Shadowrocket/Facebook/README.md)
 
+- Feishu
+  - [Rule/Clash/Feishu/README.md](Rule/Clash/Feishu/README.md)
+  - [Rule/Egern/Feishu/README.md](Rule/Egern/Feishu/README.md)
+  - [Rule/Loon/Feishu/README.md](Rule/Loon/Feishu/README.md)
+  - [Rule/QuanX/Feishu/README.md](Rule/QuanX/Feishu/README.md)
+  - [Rule/Shadowrocket/Feishu/README.md](Rule/Shadowrocket/Feishu/README.md)
+
 - Fox
   - [Rule/Clash/Fox/README.md](Rule/Clash/Fox/README.md)
   - [Rule/Egern/Fox/README.md](Rule/Egern/Fox/README.md)
@@ -263,6 +272,13 @@ Total services: 61
   - [Rule/Loon/Instagram/README.md](Rule/Loon/Instagram/README.md)
   - [Rule/QuanX/Instagram/README.md](Rule/QuanX/Instagram/README.md)
   - [Rule/Shadowrocket/Instagram/README.md](Rule/Shadowrocket/Instagram/README.md)
+
+- IyfTv
+  - [Rule/Clash/IyfTv/README.md](Rule/Clash/IyfTv/README.md)
+  - [Rule/Egern/IyfTv/README.md](Rule/Egern/IyfTv/README.md)
+  - [Rule/Loon/IyfTv/README.md](Rule/Loon/IyfTv/README.md)
+  - [Rule/QuanX/IyfTv/README.md](Rule/QuanX/IyfTv/README.md)
+  - [Rule/Shadowrocket/IyfTv/README.md](Rule/Shadowrocket/IyfTv/README.md)
 
 - Linux
   - [Rule/Clash/Linux/README.md](Rule/Clash/Linux/README.md)

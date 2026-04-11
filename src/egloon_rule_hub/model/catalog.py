@@ -5,8 +5,12 @@ from pathlib import Path
 
 import yaml
 
+from egloon_rule_hub.model.rules import Rule
+from egloon_rule_hub.txt_sources import discover_txt_services
+
 DEFAULT_FALLBACK_ORDER = ["native", "shadowrocket", "clash"]
 ALLOWED_SOURCE_FAMILIES = frozenset(DEFAULT_FALLBACK_ORDER)
+DEFAULT_TXT_TARGETS = ["egern", "loon", "clash", "quanx", "shadowrocket"]
 
 
 @dataclass(slots=True)
@@ -42,6 +46,15 @@ class ServiceTargetDef:
 
 
 @dataclass(slots=True)
+class ServiceOrigin:
+    kind: str = "upstream"
+    source_path: str | None = None
+    source_url: str | None = None
+    source_note: str | None = None
+    generated_by: str | None = None
+
+
+@dataclass(slots=True)
 class ServiceDef:
     name: str
     enabled: bool
@@ -51,6 +64,7 @@ class ServiceDef:
     fallback_order: list[str] = field(default_factory=list)
     override: str | None = None
     notes: str = ""
+    origin: ServiceOrigin = field(default_factory=ServiceOrigin)
 
     @property
     def outputs(self) -> list[str]:
@@ -81,6 +95,8 @@ class Catalog:
     services: dict[str, ServiceDef]
     bundles: dict[str, BundleDef]
     default_fallback_order: list[str] = field(default_factory=lambda: DEFAULT_FALLBACK_ORDER.copy())
+    self_maintained_rules: dict[str, list[Rule]] = field(default_factory=dict)
+    self_maintained_failures: dict[str, str] = field(default_factory=dict)
 
     def validate(self) -> None:
         known_targets = set(self.targets)
@@ -154,6 +170,13 @@ def _load_yaml(path: Path) -> dict:
     return data or {}
 
 
+def _relative_catalog_path(root: Path, source_path: Path) -> str:
+    try:
+        return source_path.relative_to(root).as_posix()
+    except ValueError:
+        return str(source_path)
+
+
 def load_catalog(root: Path) -> Catalog:
     catalog_dir = root / "catalog"
     sources_doc = _load_yaml(catalog_dir / "sources.yaml").get("sources", {})
@@ -222,4 +245,47 @@ def load_catalog(root: Path) -> Catalog:
         ),
     )
     catalog.validate()
+
+    try:
+        txt_snapshots = discover_txt_services(
+            root, failures=catalog.self_maintained_failures
+        )
+    except Exception as exc:  # pragma: no cover - defensive fallback for runtime robustness
+        txt_snapshots = []
+        catalog.self_maintained_failures["Source/TXT"] = str(exc)
+
+    for snapshot in txt_snapshots:
+        metadata = snapshot.metadata
+        service_name = snapshot.service_name
+        source_path = _relative_catalog_path(root, snapshot.source_path)
+        if service_name in catalog.services:
+            catalog.self_maintained_failures[source_path] = (
+                f"TXT service {service_name} conflicts with existing YAML service"
+            )
+            continue
+        known_targets = set(catalog.targets)
+        service_targets = [
+            target_name
+            for target_name in DEFAULT_TXT_TARGETS
+            if target_name in known_targets
+        ]
+        if not service_targets:
+            catalog.self_maintained_failures[source_path] = (
+                "TXT service has no supported targets in configured catalog targets"
+            )
+            continue
+        catalog.services[service_name] = ServiceDef(
+            name=service_name,
+            enabled=True,
+            targets=service_targets,
+            notes=metadata.get("source_note", ""),
+            origin=ServiceOrigin(
+                kind="self_maintained",
+                source_path=source_path,
+                source_url=metadata.get("source_url"),
+                source_note=metadata.get("source_note"),
+                generated_by=metadata.get("generated_by"),
+            ),
+        )
+        catalog.self_maintained_rules[service_name] = list(snapshot.rules)
     return catalog
