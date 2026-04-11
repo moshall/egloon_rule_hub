@@ -174,7 +174,7 @@ def _read_snapshot_text(root: Path, snapshot_path: str | None) -> str | None:
 
     try:
         return snapshot_file.read_text(encoding="utf-8")
-    except OSError:
+    except (OSError, UnicodeDecodeError):
         return None
 
 

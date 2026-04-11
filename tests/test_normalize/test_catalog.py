@@ -278,6 +278,27 @@ class ServiceDocsRenderTests(unittest.TestCase):
         self.assertIn("```bash", detail)
         self.assertIn("\n````\n", detail)
 
+    def test_invalid_utf8_snapshot_bytes_render_as_missing_snapshot(self) -> None:
+        self._write_snapshot_bytes(self.SNAPSHOT_PATH_PRIMARY, b"\xff\xfe\x80")
+        self._write_upstream_manifest(
+            {
+                "OpenAI": [
+                    {
+                        "source": "fixture",
+                        "rule_url": self.RULE_URL_PRIMARY,
+                        "readme_url": self.README_URL_PRIMARY,
+                        "status": "ok",
+                        "snapshot_path": self.SNAPSHOT_PATH_PRIMARY,
+                    }
+                ]
+            }
+        )
+
+        write_markdown_docs(self.root, self.catalog)
+
+        detail = self._read_detail_page("OpenAI")
+        self.assertIn("upstream README missing snapshot", detail)
+
     def _write_upstream_manifest(self, manifest: dict[str, list[dict[str, object]]]) -> None:
         manifest_path = self.root / "dist" / "manifests" / "upstream_docs.json"
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -290,6 +311,11 @@ class ServiceDocsRenderTests(unittest.TestCase):
         snapshot_file = self.root / relative_path
         snapshot_file.parent.mkdir(parents=True, exist_ok=True)
         snapshot_file.write_text(content, encoding="utf-8")
+
+    def _write_snapshot_bytes(self, relative_path: str, content: bytes) -> None:
+        snapshot_file = self.root / relative_path
+        snapshot_file.parent.mkdir(parents=True, exist_ok=True)
+        snapshot_file.write_bytes(content)
 
     def _read_detail_page(self, service_name: str) -> str:
         return (self.root / "docs" / "services" / f"{service_name}.md").read_text(

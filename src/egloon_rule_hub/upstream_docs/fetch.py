@@ -66,6 +66,13 @@ def fetch_readme(
             status="fetch_error",
             error=exc,
         )
+    except Exception as exc:
+        return ReadmeFetchResult(
+            rule_url=rule_url,
+            readme_url=readme_url,
+            status="fetch_error",
+            error=exc,
+        )
     return ReadmeFetchResult(
         rule_url=rule_url,
         readme_url=readme_url,

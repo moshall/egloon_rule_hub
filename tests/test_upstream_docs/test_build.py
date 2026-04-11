@@ -120,6 +120,18 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         self.assertEqual(entries[2]["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 2))
         self.assertNotEqual(entries[0]["entry_key"], entries[2]["entry_key"], "same URL should still get unique key per entry")
 
+    def test_rebuild_prunes_stale_snapshot_files(self) -> None:
+        first_manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
+
+        stale_snapshot = self.root / first_manifest["OpenAI"][2]["snapshot_path"]
+        self.assertTrue(stale_snapshot.exists())
+
+        self.catalog.services["OpenAI"].sources = self.catalog.services["OpenAI"].sources[:2]
+
+        build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
+
+        self.assertFalse(stale_snapshot.exists())
+
     def _fake_fetcher(self):
         def fetcher(url: str) -> bytes:
             return b"# README\n\nOriginal upstream text\n"

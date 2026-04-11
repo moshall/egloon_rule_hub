@@ -83,6 +83,23 @@ class TestFetchReadme(TestCase):
         self.assertIsNone(result.content)
         self.assertEqual(called, [self.README_URL])
 
+    def test_fetch_readme_fetch_error_on_unexpected_exception(self):
+        error = RuntimeError("boom")
+
+        called = []
+
+        def fetcher(url: str) -> bytes:
+            called.append(url)
+            raise error
+
+        result = fetch_readme(self.RULE_URL, fetcher=fetcher)
+
+        self.assertEqual(result.status, "fetch_error")
+        self.assertIs(result.error, error)
+        self.assertEqual(result.readme_url, self.README_URL)
+        self.assertIsNone(result.content)
+        self.assertEqual(called, [self.README_URL])
+
     def test_fetch_readme_success_status(self):
         called = []
 

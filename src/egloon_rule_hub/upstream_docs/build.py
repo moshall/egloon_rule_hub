@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import shutil
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -42,6 +43,8 @@ def build_upstream_docs(
     root = catalog.root
     docs_root = root / "dist" / "upstream-readmes"
     manifest_root = root / "dist" / "manifests"
+    if docs_root.exists():
+        shutil.rmtree(docs_root)
     docs_root.mkdir(parents=True, exist_ok=True)
     manifest_root.mkdir(parents=True, exist_ok=True)
 
