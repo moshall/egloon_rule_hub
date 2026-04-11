@@ -1,6 +1,6 @@
 # Services
 
-Total services: 98
+Total services: 99
 
 | Service | Enabled | Targets | Sources | Notes |
 | --- | --- | --- | --- | --- |
@@ -10,6 +10,7 @@ Total services: 98
 | AppStore | True | egern, loon, clash, quantumultx, shadowrocket | 4 | Upstream service |
 | Apple | True | egern, loon, clash, quantumultx, shadowrocket | 3 | Apple services |
 | AppleID | True | egern, loon, clash, quantumultx, shadowrocket | 4 | Upstream service |
+| AppleIntelligence | True | egern, loon, clash, quantumultx, shadowrocket | 0 | - |
 | AppleMusic | True | egern, loon, clash, quantumultx, shadowrocket | 4 | Upstream service |
 | AppleProxy | True | egern, loon, clash, quantumultx, shadowrocket | 4 | Upstream service |
 | AppleTV | True | egern, loon, clash, quantumultx, shadowrocket | 4 | Upstream service |
@@ -146,6 +147,13 @@ Total services: 98
   - [Rule/Loon/AppleID/README.md](Rule/Loon/AppleID/README.md)
   - [Rule/QuantumultX/AppleID/README.md](Rule/QuantumultX/AppleID/README.md)
   - [Rule/Shadowrocket/AppleID/README.md](Rule/Shadowrocket/AppleID/README.md)
+
+- AppleIntelligence
+  - [Rule/Clash/AppleIntelligence/README.md](Rule/Clash/AppleIntelligence/README.md)
+  - [Rule/Egern/AppleIntelligence/README.md](Rule/Egern/AppleIntelligence/README.md)
+  - [Rule/Loon/AppleIntelligence/README.md](Rule/Loon/AppleIntelligence/README.md)
+  - [Rule/QuantumultX/AppleIntelligence/README.md](Rule/QuantumultX/AppleIntelligence/README.md)
+  - [Rule/Shadowrocket/AppleIntelligence/README.md](Rule/Shadowrocket/AppleIntelligence/README.md)
 
 - AppleMusic
   - [Rule/Clash/AppleMusic/README.md](Rule/Clash/AppleMusic/README.md)
