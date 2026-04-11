@@ -9,9 +9,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Shadowrocket`
 
+## Published Variants
+
+### Xbox
+
+- File: [Xbox.list](./Xbox.list)
+- Primary variant: `yes`
+- Usage note: # 🧸 Xbox
+- Selected source family: `native`
+- Upstream native target: `Shadowrocket`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Xbox/Xbox.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Xbox/Xbox.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Xbox)
 
 - Upstream native target: `Shadowrocket`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Xbox/Xbox.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Xbox/Xbox.list)

@@ -4273,3 +4273,942 @@ services:
             format: clash_yaml
             priority: 100
     notes: "Media"
+  Direct:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Direct/Direct.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Direct/Direct.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Direct/Direct.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Direct/Direct.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Direct/Direct.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Direct/Direct.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Direct/Direct.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Direct/Direct.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Direct/Direct.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Direct/Direct.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Direct/Direct.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Direct/Direct.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Discord:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Discord/Discord.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Discord/Discord.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Discord/Discord.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Discord/Discord.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Discord/Discord.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Discord/Discord.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Discord/Discord.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Discord/Discord.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Discord/Discord.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Discord/Discord.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Discord/Discord.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Discord/Discord.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Disney:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Disney/Disney.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Disney/Disney.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Disney/Disney.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Disney/Disney.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Disney/Disney.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Disney/Disney.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Disney/Disney.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Disney/Disney.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Disney/Disney.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Disney/Disney.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Disney/Disney.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Disney/Disney.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Espn:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Espn/Espn.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Espn/Espn.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Espn/Espn.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Espn/Espn.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Espn/Espn.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Espn/Espn.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Espn/Espn.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Espn/Espn.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Espn/Espn.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Espn/Espn.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Espn/Espn.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Espn/Espn.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  JianGuoYun:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/JianGuoYun/JianGuoYun.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/JianGuoYun/JianGuoYun.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/JianGuoYun/JianGuoYun.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/JianGuoYun/JianGuoYun.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/JianGuoYun/JianGuoYun.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/JianGuoYun/JianGuoYun.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/JianGuoYun/JianGuoYun.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/JianGuoYun/JianGuoYun.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/JianGuoYun/JianGuoYun.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/JianGuoYun/JianGuoYun.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/JianGuoYun/JianGuoYun.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/JianGuoYun/JianGuoYun.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Notion:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Notion/Notion.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Notion/Notion.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Notion/Notion.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Notion/Notion.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Notion/Notion.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Notion/Notion.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Notion/Notion.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Notion/Notion.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Notion/Notion.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Notion/Notion.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Notion/Notion.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Notion/Notion.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  OKX:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/OKX/OKX.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/OKX/OKX.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/OKX/OKX.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/OKX/OKX.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/OKX/OKX.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/OKX/OKX.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/OKX/OKX.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/OKX/OKX.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/OKX/OKX.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/OKX/OKX.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/OKX/OKX.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/OKX/OKX.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  TIDAL:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TIDAL/TIDAL.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/TIDAL/TIDAL.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/TIDAL/TIDAL.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TIDAL/TIDAL.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/TIDAL/TIDAL.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/TIDAL/TIDAL.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TIDAL/TIDAL.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/TIDAL/TIDAL.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TIDAL/TIDAL.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/TIDAL/TIDAL.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/TIDAL/TIDAL.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/TIDAL/TIDAL.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  TestFlight:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TestFlight/TestFlight.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/TestFlight/TestFlight.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/TestFlight/TestFlight.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TestFlight/TestFlight.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/TestFlight/TestFlight.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/TestFlight/TestFlight.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TestFlight/TestFlight.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/TestFlight/TestFlight.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/TestFlight/TestFlight.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/TestFlight/TestFlight.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/TestFlight/TestFlight.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/TestFlight/TestFlight.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  iCloud:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/iCloud/iCloud.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/iCloud/iCloud.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/iCloud/iCloud.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/iCloud/iCloud.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/iCloud/iCloud.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/iCloud/iCloud.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/iCloud/iCloud.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/iCloud/iCloud.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/iCloud/iCloud.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/iCloud/iCloud.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/iCloud/iCloud.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/iCloud/iCloud.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  CMB:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CMB/CMB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CMB/CMB.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/CMB/CMB.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CMB/CMB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CMB/CMB.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/CMB/CMB.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CMB/CMB.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/CMB/CMB.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CMB/CMB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CMB/CMB.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/CMB/CMB.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/CMB/CMB.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  CEB:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CEB/CEB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CEB/CEB.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/CEB/CEB.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CEB/CEB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CEB/CEB.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/CEB/CEB.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CEB/CEB.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/CEB/CEB.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CEB/CEB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CEB/CEB.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/CEB/CEB.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/CEB/CEB.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  CCB:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CCB/CCB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CCB/CCB.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/CCB/CCB.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CCB/CCB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CCB/CCB.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/CCB/CCB.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CCB/CCB.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/CCB/CCB.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CCB/CCB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CCB/CCB.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/CCB/CCB.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/CCB/CCB.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  CGB:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CGB/CGB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CGB/CGB.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/CGB/CGB.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CGB/CGB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CGB/CGB.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/CGB/CGB.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CGB/CGB.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/CGB/CGB.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CGB/CGB.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CGB/CGB.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/CGB/CGB.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/CGB/CGB.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  CIBN:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CIBN/CIBN.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CIBN/CIBN.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/CIBN/CIBN.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CIBN/CIBN.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CIBN/CIBN.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/CIBN/CIBN.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CIBN/CIBN.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/CIBN/CIBN.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CIBN/CIBN.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CIBN/CIBN.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/CIBN/CIBN.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/CIBN/CIBN.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  CNN:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNN/CNN.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CNN/CNN.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/CNN/CNN.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNN/CNN.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CNN/CNN.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/CNN/CNN.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNN/CNN.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/CNN/CNN.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNN/CNN.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CNN/CNN.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/CNN/CNN.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/CNN/CNN.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  CNNIC:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNNIC/CNNIC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CNNIC/CNNIC.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/CNNIC/CNNIC.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNNIC/CNNIC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CNNIC/CNNIC.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/CNNIC/CNNIC.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNNIC/CNNIC.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/CNNIC/CNNIC.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/CNNIC/CNNIC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/CNNIC/CNNIC.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/CNNIC/CNNIC.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/CNNIC/CNNIC.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  BesTV:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BesTV/BesTV.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BesTV/BesTV.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/BesTV/BesTV.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BesTV/BesTV.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BesTV/BesTV.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/BesTV/BesTV.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BesTV/BesTV.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/BesTV/BesTV.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BesTV/BesTV.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BesTV/BesTV.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/BesTV/BesTV.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/BesTV/BesTV.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  BardAI:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BardAI/BardAI.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BardAI/BardAI.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/BardAI/BardAI.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BardAI/BardAI.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BardAI/BardAI.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/BardAI/BardAI.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BardAI/BardAI.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/BardAI/BardAI.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BardAI/BardAI.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BardAI/BardAI.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/BardAI/BardAI.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/BardAI/BardAI.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  BOC:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOC/BOC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BOC/BOC.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/BOC/BOC.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOC/BOC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BOC/BOC.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/BOC/BOC.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOC/BOC.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/BOC/BOC.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOC/BOC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BOC/BOC.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/BOC/BOC.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/BOC/BOC.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  BOCOM:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOCOM/BOCOM.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BOCOM/BOCOM.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/BOCOM/BOCOM.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOCOM/BOCOM.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BOCOM/BOCOM.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/BOCOM/BOCOM.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOCOM/BOCOM.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/BOCOM/BOCOM.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/BOCOM/BOCOM.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/BOCOM/BOCOM.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/BOCOM/BOCOM.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/BOCOM/BOCOM.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  AppleTV:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleTV/AppleTV.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleTV/AppleTV.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/AppleTV/AppleTV.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleTV/AppleTV.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleTV/AppleTV.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/AppleTV/AppleTV.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleTV/AppleTV.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/AppleTV/AppleTV.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleTV/AppleTV.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleTV/AppleTV.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/AppleTV/AppleTV.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleTV/AppleTV.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  AppleProxy:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleProxy/AppleProxy.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleProxy/AppleProxy.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/AppleProxy/AppleProxy.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleProxy/AppleProxy.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleProxy/AppleProxy.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/AppleProxy/AppleProxy.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleProxy/AppleProxy.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/AppleProxy/AppleProxy.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleProxy/AppleProxy.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleProxy/AppleProxy.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/AppleProxy/AppleProxy.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleProxy/AppleProxy.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  AppleMusic:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleMusic/AppleMusic.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleMusic/AppleMusic.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/AppleMusic/AppleMusic.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleMusic/AppleMusic.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleMusic/AppleMusic.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/AppleMusic/AppleMusic.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleMusic/AppleMusic.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/AppleMusic/AppleMusic.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleMusic/AppleMusic.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleMusic/AppleMusic.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/AppleMusic/AppleMusic.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleMusic/AppleMusic.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  AppleID:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleID/AppleID.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleID/AppleID.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/AppleID/AppleID.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleID/AppleID.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleID/AppleID.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/AppleID/AppleID.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleID/AppleID.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/AppleID/AppleID.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppleID/AppleID.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleID/AppleID.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/AppleID/AppleID.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/AppleID/AppleID.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  AppStore:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppStore/AppStore.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppStore/AppStore.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/AppStore/AppStore.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppStore/AppStore.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppStore/AppStore.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/AppStore/AppStore.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppStore/AppStore.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/AppStore/AppStore.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AppStore/AppStore.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AppStore/AppStore.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/AppStore/AppStore.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/AppStore/AppStore.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Apkpure:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Apkpure/Apkpure.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Apkpure/Apkpure.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Apkpure/Apkpure.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Apkpure/Apkpure.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Apkpure/Apkpure.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Apkpure/Apkpure.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Apkpure/Apkpure.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Apkpure/Apkpure.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Apkpure/Apkpure.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Apkpure/Apkpure.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Apkpure/Apkpure.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Apkpure/Apkpure.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Android:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Android/Android.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Android/Android.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Android/Android.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Android/Android.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Android/Android.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Android/Android.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Android/Android.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Android/Android.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Android/Android.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Android/Android.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Android/Android.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Android/Android.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  AirChina:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AirChina/AirChina.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AirChina/AirChina.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/AirChina/AirChina.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AirChina/AirChina.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AirChina/AirChina.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/AirChina/AirChina.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AirChina/AirChina.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/AirChina/AirChina.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/AirChina/AirChina.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/AirChina/AirChina.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/AirChina/AirChina.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/AirChina/AirChina.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  PSBC:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/PSBC/PSBC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/PSBC/PSBC.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/PSBC/PSBC.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/PSBC/PSBC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/PSBC/PSBC.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/PSBC/PSBC.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/PSBC/PSBC.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/PSBC/PSBC.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/PSBC/PSBC.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/PSBC/PSBC.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/PSBC/PSBC.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/PSBC/PSBC.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Tesla:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Tesla/Tesla.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Tesla/Tesla.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        native: [{source: blackmatrix7, path: rule/Loon/Tesla/Tesla.list, format: loon_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Tesla/Tesla.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Tesla/Tesla.yaml, format: clash_yaml, priority: 100}]
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Tesla/Tesla.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Tesla/Tesla.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Tesla/Tesla.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Tesla/Tesla.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Tesla/Tesla.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        native: [{source: blackmatrix7, path: rule/Shadowrocket/Tesla/Tesla.list, format: shadowrocket_list, priority: 95}]
+        shadowrocket: []
+        clash: [{source: blackmatrix7, path: rule/Clash/Tesla/Tesla.yaml, format: clash_yaml, priority: 100}]
+    notes: "Upstream service"
+  Naver:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Naver/Naver.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Naver/Naver.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        variants:
+          Naver:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Loon/Naver/Naver.list, format: loon_list, priority: 90}]
+            shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Naver/Naver.list, format: shadowrocket_list, priority: 95}]
+            clash: [{source: blackmatrix7, path: rule/Clash/Naver/Naver.yaml, format: clash_yaml, priority: 100}]
+          Naver_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Loon/Naver/Naver_Resolve.list, format: loon_list, priority: 90}]
+            shadowrocket: []
+            clash: []
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/Naver/Naver.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Naver/Naver.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/Naver/Naver.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/Naver/Naver.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/Naver/Naver.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        variants:
+          Naver:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/Naver/Naver.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: [{source: blackmatrix7, path: rule/Clash/Naver/Naver.yaml, format: clash_yaml, priority: 100}]
+          Naver_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/Naver/Naver_Resolve.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: []
+    notes: "Upstream service with manual variants"
+  MEGA:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/MEGA/MEGA.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/MEGA/MEGA.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        variants:
+          MEGA:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Loon/MEGA/MEGA.list, format: loon_list, priority: 90}]
+            shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/MEGA/MEGA.list, format: shadowrocket_list, priority: 95}]
+            clash: [{source: blackmatrix7, path: rule/Clash/MEGA/MEGA.yaml, format: clash_yaml, priority: 100}]
+          MEGA_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Loon/MEGA/MEGA_Resolve.list, format: loon_list, priority: 90}]
+            shadowrocket: []
+            clash: []
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/MEGA/MEGA.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/MEGA/MEGA.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/MEGA/MEGA.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/MEGA/MEGA.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/MEGA/MEGA.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        variants:
+          MEGA:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/MEGA/MEGA.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: [{source: blackmatrix7, path: rule/Clash/MEGA/MEGA.yaml, format: clash_yaml, priority: 100}]
+          MEGA_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/MEGA/MEGA_Resolve.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: []
+    notes: "Upstream service with manual variants"
+  GoogleFCM:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/GoogleFCM/GoogleFCM.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/GoogleFCM/GoogleFCM.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        variants:
+          GoogleFCM:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Loon/GoogleFCM/GoogleFCM.list, format: loon_list, priority: 90}]
+            shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/GoogleFCM/GoogleFCM.list, format: shadowrocket_list, priority: 95}]
+            clash: [{source: blackmatrix7, path: rule/Clash/GoogleFCM/GoogleFCM.yaml, format: clash_yaml, priority: 100}]
+          GoogleFCM_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Loon/GoogleFCM/GoogleFCM_Resolve.list, format: loon_list, priority: 90}]
+            shadowrocket: []
+            clash: []
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/GoogleFCM/GoogleFCM.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/GoogleFCM/GoogleFCM.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/GoogleFCM/GoogleFCM.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/GoogleFCM/GoogleFCM.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/GoogleFCM/GoogleFCM.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        variants:
+          GoogleFCM:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/GoogleFCM/GoogleFCM.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: [{source: blackmatrix7, path: rule/Clash/GoogleFCM/GoogleFCM.yaml, format: clash_yaml, priority: 100}]
+          GoogleFCM_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/GoogleFCM/GoogleFCM_Resolve.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: []
+    notes: "Upstream service with manual variants"
+  ChinaMedia:
+    enabled: true
+    outputs: *all_targets
+    target_sources:
+      egern:
+        native: []
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/ChinaMedia/ChinaMedia.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/ChinaMedia/ChinaMedia.yaml, format: clash_yaml, priority: 100}]
+      loon:
+        variants:
+          ChinaMedia:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Loon/ChinaMedia/ChinaMedia.list, format: loon_list, priority: 90}]
+            shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/ChinaMedia/ChinaMedia.list, format: shadowrocket_list, priority: 95}]
+            clash: [{source: blackmatrix7, path: rule/Clash/ChinaMedia/ChinaMedia.yaml, format: clash_yaml, priority: 100}]
+          ChinaMedia_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Loon/ChinaMedia/ChinaMedia_Resolve.list, format: loon_list, priority: 90}]
+            shadowrocket: []
+            clash: []
+      clash:
+        native: [{source: blackmatrix7, path: rule/Clash/ChinaMedia/ChinaMedia.yaml, format: clash_yaml, priority: 100}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/ChinaMedia/ChinaMedia.list, format: shadowrocket_list, priority: 95}]
+        clash: []
+      quantumultx:
+        native: [{source: blackmatrix7, path: rule/QuantumultX/ChinaMedia/ChinaMedia.list, format: quanx_list, priority: 90}]
+        shadowrocket: [{source: blackmatrix7, path: rule/Shadowrocket/ChinaMedia/ChinaMedia.list, format: shadowrocket_list, priority: 95}]
+        clash: [{source: blackmatrix7, path: rule/Clash/ChinaMedia/ChinaMedia.yaml, format: clash_yaml, priority: 100}]
+      shadowrocket:
+        variants:
+          ChinaMedia:
+            primary: true
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/ChinaMedia/ChinaMedia.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: [{source: blackmatrix7, path: rule/Clash/ChinaMedia/ChinaMedia.yaml, format: clash_yaml, priority: 100}]
+          ChinaMedia_Resolve:
+            primary: false
+            native: [{source: blackmatrix7, path: rule/Shadowrocket/ChinaMedia/ChinaMedia_Resolve.list, format: shadowrocket_list, priority: 95}]
+            shadowrocket: []
+            clash: []
+    notes: "Upstream service with manual variants"

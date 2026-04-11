@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### GoogleVoice
+
+- File: [GoogleVoice.lsr](./GoogleVoice.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 GoogleVoice
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleVoice/GoogleVoice.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleVoice/GoogleVoice.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / GoogleVoice)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleVoice/GoogleVoice.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleVoice/GoogleVoice.list)

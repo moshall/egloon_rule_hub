@@ -9,9 +9,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Shadowrocket`
 
+## Published Variants
+
+### ChinaDNS
+
+- File: [ChinaDNS.list](./ChinaDNS.list)
+- Primary variant: `yes`
+- Usage note: # 🧸 ChinaDNS
+- Selected source family: `native`
+- Upstream native target: `Shadowrocket`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaDNS/ChinaDNS.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaDNS/ChinaDNS.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / ChinaDNS)
 
 - Upstream native target: `Shadowrocket`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaDNS/ChinaDNS.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaDNS/ChinaDNS.list)

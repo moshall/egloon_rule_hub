@@ -9,9 +9,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 
+## Published Variants
+
+### HBO
+
+- File: [HBO.yaml](./HBO.yaml)
+- Primary variant: `yes`
+- Usage note: # 🧸 HBO
+- Selected source family: `native`
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBO/HBO.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBO/HBO.yaml)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / HBO)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBO/HBO.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBO/HBO.yaml)

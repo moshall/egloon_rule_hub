@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### FOXNOW
+
+- File: [FOXNOW.lsr](./FOXNOW.lsr)
+- Primary variant: `yes`
+- Usage note: FOXNOW.list 单独使用。
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXNOW/FOXNOW.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXNOW/FOXNOW.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / FOXNOW)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXNOW/FOXNOW.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXNOW/FOXNOW.list)

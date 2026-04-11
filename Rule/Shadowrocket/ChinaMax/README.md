@@ -9,9 +9,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Shadowrocket`
 
+## Published Variants
+
+### ChinaMax
+
+- File: [ChinaMax.list](./ChinaMax.list)
+- Primary variant: `yes`
+- Usage note: ChinaMax.list，请使用RULE-SET。
+- Selected source family: `native`
+- Upstream native target: `Shadowrocket`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMax/ChinaMax.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMax/ChinaMax.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / ChinaMax)
 
 - Upstream native target: `Shadowrocket`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMax/ChinaMax.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMax/ChinaMax.list)

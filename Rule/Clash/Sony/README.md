@@ -9,9 +9,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 
+## Published Variants
+
+### Sony
+
+- File: [Sony.yaml](./Sony.yaml)
+- Primary variant: `yes`
+- Usage note: # 🧸 Sony
+- Selected source family: `native`
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Sony/Sony.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Sony/Sony.yaml)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Sony)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Sony/Sony.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Sony/Sony.yaml)

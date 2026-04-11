@@ -9,9 +9,21 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 
+## Published Variants
+
+### OpenAI
+
+- File: [OpenAI.yaml](./OpenAI.yaml)
+- Primary variant: `yes`
+- Usage note: # 🧸 OpenAI
+- Selected source family: `native`
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml)
+- Rule file: [https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list](https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (acl4ssr)
+### Upstream Entry 1 (acl4ssr / OpenAI)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list](https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list)
@@ -20,7 +32,7 @@ This layout documents a direct upstream target.
 
 upstream README missing
 
-### Upstream Entry 2 (blackmatrix7)
+### Upstream Entry 2 (blackmatrix7 / OpenAI)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml)

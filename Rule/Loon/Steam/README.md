@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### Steam
+
+- File: [Steam.lsr](./Steam.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 Steam
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/Steam.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/Steam.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Steam)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/Steam.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Steam/Steam.list)

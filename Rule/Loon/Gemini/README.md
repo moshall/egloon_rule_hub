@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### Gemini
+
+- File: [Gemini.lsr](./Gemini.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 Gemini
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Gemini)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list)

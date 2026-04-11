@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### FOXPlus
+
+- File: [FOXPlus.lsr](./FOXPlus.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 FOXPlus
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXPlus/FOXPlus.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXPlus/FOXPlus.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / FOXPlus)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXPlus/FOXPlus.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/FOXPlus/FOXPlus.list)

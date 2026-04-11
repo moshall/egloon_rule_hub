@@ -3,8 +3,8 @@ name: sync-rules
 on:
   workflow_dispatch:
   schedule:
-    # GitHub Actions uses UTC. 19:00 UTC = 03:00 Asia/Shanghai next day.
-    - cron: "0 19 * * *"
+    # GitHub Actions uses UTC. 19:30 UTC = 03:30 Asia/Shanghai next day.
+    - cron: "30 19 * * *"
 
 permissions:
   contents: write

@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### GoogleEarth
+
+- File: [GoogleEarth.lsr](./GoogleEarth.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 GoogleEarth
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleEarth/GoogleEarth.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleEarth/GoogleEarth.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / GoogleEarth)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleEarth/GoogleEarth.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleEarth/GoogleEarth.list)

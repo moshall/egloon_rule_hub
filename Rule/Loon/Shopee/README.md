@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### Shopee
+
+- File: [Shopee.lsr](./Shopee.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 Shopee
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopee/Shopee.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopee/Shopee.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Shopee)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopee/Shopee.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopee/Shopee.list)

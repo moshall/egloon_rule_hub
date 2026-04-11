@@ -29,7 +29,54 @@ class CatalogTests(unittest.TestCase):
         catalog = load_catalog(root)
         self.assertIn("OpenAI", catalog.services)
         self.assertIn("China", catalog.services)
+        for service_name in (
+            "Direct",
+            "Discord",
+            "Disney",
+            "Naver",
+            "JianGuoYun",
+            "MEGA",
+            "Notion",
+            "OKX",
+            "TIDAL",
+            "TestFlight",
+            "iCloud",
+            "GoogleFCM",
+            "ChinaMedia",
+            "CMB",
+            "CEB",
+            "CCB",
+            "CGB",
+            "CIBN",
+            "CNN",
+            "CNNIC",
+            "BesTV",
+            "BardAI",
+            "BOC",
+            "BOCOM",
+            "AppleTV",
+            "AppleProxy",
+            "AppleMusic",
+            "AppleID",
+            "AppStore",
+            "Apkpure",
+            "Android",
+            "AirChina",
+            "PSBC",
+            "Tesla",
+        ):
+            self.assertIn(service_name, catalog.services)
+        self.assertNotIn("ChinaASN", catalog.services)
         self.assertIn("ai", catalog.bundles)
+        self.assertIn("china-bank", catalog.bundles)
+        self.assertEqual(
+            catalog.bundles["ai"].services,
+            ["OpenAI", "Claude", "Gemini", "BardAI", "Twitter", "Copilot"],
+        )
+        self.assertEqual(
+            catalog.bundles["china-bank"].services,
+            ["CCB", "CEB", "CGB", "CMB", "PSBC"],
+        )
         self.assertIn("egern", catalog.targets)
         self.assertIn("quantumultx", catalog.targets)
         self.assertNotIn("quanx", catalog.targets)

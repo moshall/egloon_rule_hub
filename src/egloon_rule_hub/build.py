@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from urllib.request import Request, urlopen
+import re
 import shutil
 
 import yaml
@@ -50,11 +51,25 @@ TARGET_DISPLAY_NAMES = {
     "shadowrocket": "Shadowrocket",
 }
 
+BUNDLE_DISPLAY_NAMES = {
+    "ai": "AI",
+}
+
 
 def fetch_text(url: str) -> str:
     request = Request(url, headers={"User-Agent": "egloon-rule-hub/0.1"})
     with urlopen(request, timeout=30) as response:  # noqa: S310
         return response.read().decode("utf-8")
+
+
+def _bundle_display_name(bundle_name: str) -> str:
+    explicit = BUNDLE_DISPLAY_NAMES.get(bundle_name)
+    if explicit:
+        return explicit
+    parts = [part for part in re.split(r"[^A-Za-z0-9]+", bundle_name) if part]
+    if not parts:
+        return bundle_name
+    return "".join(part[:1].upper() + part[1:] for part in parts)
 
 
 def _load_override(root: Path, override_path: str | None) -> dict:
@@ -331,6 +346,16 @@ def _prune_stale_service_variant_outputs(
                 candidate.unlink()
 
 
+def _prune_legacy_bundle_outputs(dist_dir: Path) -> None:
+    legacy_bundle_dir = dist_dir / "bundles"
+    if not legacy_bundle_dir.exists():
+        return
+    if legacy_bundle_dir.is_dir():
+        shutil.rmtree(legacy_bundle_dir)
+    else:
+        legacy_bundle_dir.unlink()
+
+
 def _render_target_output(
     service_name: str,
     target_name: str,
@@ -354,6 +379,7 @@ def render_rule_artifacts(
     dist_dir = root / "dist"
     _prune_legacy_rule_targets(root / "Rule", catalog.targets)
     _prune_legacy_dist_targets(dist_dir, catalog.targets)
+    _prune_legacy_bundle_outputs(dist_dir)
     dist_dir.mkdir(parents=True, exist_ok=True)
 
     for service_name, rules in service_rules.items():
@@ -383,24 +409,35 @@ def render_rule_artifacts(
     for bundle_name, bundle in catalog.bundles.items():
         if not bundle.enabled:
             continue
-        merged = merge_rule_streams(
-            [service_rules.get(service_name, []) for service_name in bundle.services]
-        )
-        if not merged:
-            continue
-        bundle_dir = dist_dir / "bundles" / bundle_name
-        bundle_dir.mkdir(parents=True, exist_ok=True)
+        bundle_display = _bundle_display_name(bundle_name)
         for target_name in bundle.targets:
             target = catalog.targets.get(target_name)
             renderer_info = TARGET_RENDERERS.get(target_name)
-            if target is None or not target.enabled or renderer_info is None:
+            display_target = TARGET_DISPLAY_NAMES.get(target_name)
+            if (
+                target is None
+                or not target.enabled
+                or renderer_info is None
+                or display_target is None
+            ):
                 continue
+            bundle_dir = root / "Rule" / display_target / bundle_display
+            merged = merge_rule_streams(
+                [service_rules.get(service_name, []) for service_name in bundle.services]
+            )
+            if not merged:
+                _prune_stale_service_variant_outputs(bundle_dir, set(), target_name, target)
+                continue
+            bundle_dir.mkdir(parents=True, exist_ok=True)
             ext = _target_output_ext(target_name, target)
-            output_path = bundle_dir / f"{target_name}.{ext}"
+            output_path = bundle_dir / f"{bundle_display}.{ext}"
             _prune_stale_output_variants(output_path, target_name, target)
             output_path.write_text(
-                _render_target_output(bundle_name, target_name, target, merged),
+                _render_target_output(bundle_display, target_name, target, merged),
                 encoding="utf-8",
+            )
+            _prune_stale_service_variant_outputs(
+                bundle_dir, {bundle_display}, target_name, target
             )
 
 
@@ -412,6 +449,7 @@ def render_target_artifacts(
     dist_dir = root / "dist"
     _prune_legacy_rule_targets(root / "Rule", catalog.targets)
     _prune_legacy_dist_targets(dist_dir, catalog.targets)
+    _prune_legacy_bundle_outputs(dist_dir)
     dist_dir.mkdir(parents=True, exist_ok=True)
 
     for service_name, service_targets in target_artifacts.items():
@@ -465,40 +503,54 @@ def render_target_artifacts(
     for bundle_name, bundle in catalog.bundles.items():
         if not bundle.enabled:
             continue
-        bundle_dir = dist_dir / "bundles" / bundle_name
-        bundle_dir.mkdir(parents=True, exist_ok=True)
+        bundle_display = _bundle_display_name(bundle_name)
         for target_name in bundle.targets:
+            target = catalog.targets.get(target_name)
+            renderer_info = TARGET_RENDERERS.get(target_name)
+            display_target = TARGET_DISPLAY_NAMES.get(target_name)
+            if (
+                target is None
+                or not target.enabled
+                or renderer_info is None
+                or display_target is None
+            ):
+                continue
+            bundle_dir = root / "Rule" / display_target / bundle_display
             merged = merge_rule_streams(
                 [
                     target_artifacts.get(service_name, {})
-                    .get(target_name, TargetArtifact(
-                        service=service_name,
-                        target=target_name,
-                        selected_family="",
-                        selected_native_target=target_name,
-                        publish_mode=None,
-                        is_native=False,
-                        is_converted=False,
-                        conversion_path=None,
-                        rules=[],
-                        selected_entries=[],
-                    ))
+                    .get(
+                        target_name,
+                        TargetArtifact(
+                            service=service_name,
+                            target=target_name,
+                            selected_family="",
+                            selected_native_target=target_name,
+                            publish_mode=None,
+                            is_native=False,
+                            is_converted=False,
+                            conversion_path=None,
+                            rules=[],
+                            selected_entries=[],
+                        ),
+                    )
                     .rules
                     for service_name in bundle.services
                 ]
             )
             if not merged:
+                _prune_stale_service_variant_outputs(bundle_dir, set(), target_name, target)
                 continue
-            target = catalog.targets.get(target_name)
-            renderer_info = TARGET_RENDERERS.get(target_name)
-            if target is None or not target.enabled or renderer_info is None:
-                continue
+            bundle_dir.mkdir(parents=True, exist_ok=True)
             ext = _target_output_ext(target_name, target)
-            output_path = bundle_dir / f"{target_name}.{ext}"
+            output_path = bundle_dir / f"{bundle_display}.{ext}"
             _prune_stale_output_variants(output_path, target_name, target)
             output_path.write_text(
-                _render_target_output(bundle_name, target_name, target, merged),
+                _render_target_output(bundle_display, target_name, target, merged),
                 encoding="utf-8",
+            )
+            _prune_stale_service_variant_outputs(
+                bundle_dir, {bundle_display}, target_name, target
             )
 
 

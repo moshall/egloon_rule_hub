@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### Linux
+
+- File: [Linux.lsr](./Linux.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 Linux
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Linux/Linux.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Linux/Linux.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Linux)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Linux/Linux.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Linux/Linux.list)

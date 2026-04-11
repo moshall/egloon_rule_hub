@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### Nvidia
+
+- File: [Nvidia.lsr](./Nvidia.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 Nvidia
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Nvidia/Nvidia.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Nvidia/Nvidia.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Nvidia)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Nvidia/Nvidia.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Nvidia/Nvidia.list)

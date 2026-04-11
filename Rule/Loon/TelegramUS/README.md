@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### TelegramUS
+
+- File: [TelegramUS.lsr](./TelegramUS.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 TelegramUS
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / TelegramUS)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list)

@@ -14,7 +14,7 @@
     "file_ext": "lsr",
     "publish_mode": "lsr"
   },
-  "quanx": {
+  "quantumultx": {
     "enabled": true,
     "file_ext": "list",
     "publish_mode": null

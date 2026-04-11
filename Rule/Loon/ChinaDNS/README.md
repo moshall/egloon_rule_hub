@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### ChinaDNS
+
+- File: [ChinaDNS.lsr](./ChinaDNS.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 ChinaDNS
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaDNS/ChinaDNS.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaDNS/ChinaDNS.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / ChinaDNS)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaDNS/ChinaDNS.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaDNS/ChinaDNS.list)

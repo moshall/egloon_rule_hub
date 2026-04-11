@@ -9,9 +9,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 
+## Published Variants
+
+### SkyGO
+
+- File: [SkyGO.yaml](./SkyGO.yaml)
+- Primary variant: `yes`
+- Usage note: # 🧸 SkyGO
+- Selected source family: `native`
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SkyGO/SkyGO.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SkyGO/SkyGO.yaml)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / SkyGO)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SkyGO/SkyGO.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SkyGO/SkyGO.yaml)

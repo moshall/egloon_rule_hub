@@ -9,9 +9,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 
+## Published Variants
+
+### YYeTs
+
+- File: [YYeTs.yaml](./YYeTs.yaml)
+- Primary variant: `yes`
+- Usage note: YYeTs.yaml，请使用 behavior: "classical"。
+- Selected source family: `native`
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YYeTs/YYeTs.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YYeTs/YYeTs.yaml)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / YYeTs)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YYeTs/YYeTs.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YYeTs/YYeTs.yaml)

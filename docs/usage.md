@@ -9,21 +9,24 @@ Expected artifact layout:
 - `Rule/Clash/OpenAI/OpenAI.yaml`
 - `Rule/Loon/OpenAI/OpenAI.lsr`
 - `Rule/Egern/OpenAI/OpenAI.yaml`
-- `Rule/QuanX/OpenAI/OpenAI.list`
+- `Rule/QuantumultX/OpenAI/OpenAI.list`
 - `Rule/Shadowrocket/OpenAI/OpenAI.list`
-- `dist/bundles/<bundle>/<target>.<ext>`
+- `Rule/Clash/AI/AI.yaml`
+- `Rule/Loon/AI/AI.lsr`
+- `Rule/QuantumultX/ChinaBank/ChinaBank.list`
 
 Example raw URL pattern after publishing the repository:
 
 ```text
 https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Clash/OpenAI/OpenAI.yaml
 https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Loon/OpenAI/OpenAI.lsr
-https://raw.githubusercontent.com/<owner>/<repo>/<branch>/dist/bundles/ai/loon.lsr
+https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Loon/AI/AI.lsr
 ```
 
 Selection policy: choose the first non-empty family in `native -> shadowrocket -> clash`, then merge only within that selected family.
+Bundle policy: merge only the primary published variant from each member service, then normalize and deduplicate the combined stream.
 
-Current bundles: ai, china, commerce, gaming, google, social, streaming
+Current bundles: ai, china, china-bank, commerce, gaming, google, social, streaming
 
 Use `python -m egloon_rule_hub render-rules` to refresh rule artifacts only.
 

@@ -1,4 +1,164 @@
 {
+  "AirChina": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Android": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Apkpure": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "AppStore": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
   "Apple": {
     "enabled": true,
     "fallback_order": [],
@@ -20,7 +180,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -35,15 +195,15 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
-  "China": {
+  "AppleID": {
     "enabled": true,
     "fallback_order": [],
-    "notes": "Regional routing",
-    "source_count": 3,
+    "notes": "Upstream service",
+    "source_count": 4,
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -60,7 +220,603 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "AppleMusic": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "AppleProxy": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "AppleTV": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "BOC": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "BOCOM": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "BardAI": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "BesTV": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "CCB": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "CEB": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "CGB": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "CIBN": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "CMB": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "CNN": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "CNNIC": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "China": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Regional routing",
+    "source_count": 5,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {},
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -75,7 +831,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -100,7 +856,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -115,7 +871,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -140,7 +896,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 0,
         "native": 0,
         "shadowrocket": 1
@@ -155,7 +911,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -180,7 +936,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 0,
         "native": 0,
         "shadowrocket": 1
@@ -195,7 +951,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -220,7 +976,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -235,7 +991,39 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "ChinaMedia": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service with manual variants",
+    "source_count": 6,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {},
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {}
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -260,7 +1048,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -275,7 +1063,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -300,7 +1088,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -315,7 +1103,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -340,7 +1128,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -355,7 +1143,127 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Direct": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Discord": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Disney": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -380,7 +1288,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -395,7 +1303,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -420,7 +1328,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -435,7 +1343,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -460,7 +1368,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -475,7 +1383,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -500,7 +1408,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -515,7 +1423,47 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Espn": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -540,7 +1488,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -555,7 +1503,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -580,7 +1528,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -595,7 +1543,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -620,7 +1568,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -635,7 +1583,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -649,7 +1597,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -674,7 +1622,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -689,7 +1637,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -714,7 +1662,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -729,7 +1677,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -754,7 +1702,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -769,7 +1717,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -794,7 +1742,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 2,
         "native": 0,
         "shadowrocket": 1
@@ -809,7 +1757,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -834,7 +1782,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -849,7 +1797,39 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "GoogleFCM": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service with manual variants",
+    "source_count": 6,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {},
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {}
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -874,7 +1854,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -889,7 +1869,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -914,7 +1894,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -929,7 +1909,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -954,7 +1934,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -969,7 +1949,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -994,7 +1974,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1009,7 +1989,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1034,7 +2014,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1049,7 +2029,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1074,7 +2054,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1089,7 +2069,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1114,7 +2094,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1129,7 +2109,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1143,7 +2123,47 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "JianGuoYun": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1168,7 +2188,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1183,7 +2203,71 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "MEGA": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service with manual variants",
+    "source_count": 6,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {},
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {}
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Naver": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service with manual variants",
+    "source_count": 6,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {},
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {}
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1208,7 +2292,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1223,7 +2307,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1248,7 +2332,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1263,7 +2347,47 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Notion": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1288,7 +2412,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1303,7 +2427,47 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "OKX": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1328,7 +2492,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 2,
         "native": 0,
         "shadowrocket": 1
@@ -1343,7 +2507,47 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "PSBC": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1368,7 +2572,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1383,7 +2587,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1408,7 +2612,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1423,7 +2627,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1448,7 +2652,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1463,7 +2667,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1488,7 +2692,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1503,7 +2707,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1528,7 +2732,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1543,7 +2747,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1568,7 +2772,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1583,7 +2787,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1608,7 +2812,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1623,7 +2827,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1648,7 +2852,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1663,7 +2867,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1688,7 +2892,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1703,7 +2907,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1728,7 +2932,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1743,7 +2947,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1768,7 +2972,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1783,7 +2987,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1808,7 +3012,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1823,7 +3027,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1848,7 +3052,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1863,7 +3067,47 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "TIDAL": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1888,7 +3132,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 2,
         "native": 0,
         "shadowrocket": 1
@@ -1903,7 +3147,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1928,7 +3172,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1943,7 +3187,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -1968,7 +3212,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -1983,7 +3227,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2008,7 +3252,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2023,7 +3267,87 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Tesla": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "TestFlight": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2048,7 +3372,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2063,7 +3387,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2088,7 +3412,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2103,7 +3427,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2128,7 +3452,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2143,7 +3467,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2168,7 +3492,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2183,7 +3507,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2208,7 +3532,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2223,7 +3547,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2248,7 +3572,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2263,7 +3587,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2288,7 +3612,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2303,7 +3627,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2328,7 +3652,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2343,7 +3667,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2368,7 +3692,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 2,
         "native": 0,
         "shadowrocket": 1
@@ -2383,7 +3707,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2408,7 +3732,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2423,7 +3747,7 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
       "shadowrocket"
     ]
   },
@@ -2448,7 +3772,7 @@
         "native": 1,
         "shadowrocket": 1
       },
-      "quanx": {
+      "quantumultx": {
         "clash": 1,
         "native": 0,
         "shadowrocket": 1
@@ -2463,7 +3787,47 @@
       "egern",
       "loon",
       "clash",
-      "quanx",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "iCloud": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Upstream service",
+    "source_count": 4,
+    "target_sources": {
+      "clash": {
+        "clash": 0,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "egern": {
+        "clash": 1,
+        "native": 0,
+        "shadowrocket": 1
+      },
+      "loon": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "quantumultx": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 1
+      },
+      "shadowrocket": {
+        "clash": 1,
+        "native": 1,
+        "shadowrocket": 0
+      }
+    },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
       "shadowrocket"
     ]
   }

@@ -268,6 +268,59 @@ class BuildPipelineTests(unittest.TestCase):
             ],
         )
 
+    def test_build_all_target_artifacts_parses_loon_domain_only_lines(self) -> None:
+        domain_only_path = self.root / "domain-only.list"
+        domain_only_path.write_text(
+            ".example.com\n"
+            "sub.example.org\n"
+            ".qq.xn--fiqs8s\n",
+            encoding="utf-8",
+        )
+
+        catalog = Catalog(
+            root=self.root,
+            sources={"fixture": SourceDef(name="fixture", kind="remote")},
+            targets={
+                "loon": TargetDef(name="loon", enabled=True, file_ext="lsr", publish_mode="lsr"),
+            },
+            services={
+                "DomainOnly": ServiceDef(
+                    name="DomainOnly",
+                    enabled=True,
+                    targets=["loon"],
+                    target_sources={
+                        "loon": ServiceTargetDef(
+                            name="loon",
+                            families={
+                                "native": [
+                                    SourceRef(
+                                        source="fixture",
+                                        url=domain_only_path.as_uri(),
+                                        format="loon_list",
+                                        priority=100,
+                                    )
+                                ],
+                                "shadowrocket": [],
+                                "clash": [],
+                            },
+                        )
+                    },
+                )
+            },
+            bundles={},
+        )
+
+        artifacts = build_all_target_artifacts(catalog)
+
+        self.assertEqual(
+            [(rule.type, rule.value) for rule in artifacts["DomainOnly"]["loon"].rules],
+            [
+                ("DOMAIN-SUFFIX", "example.com"),
+                ("DOMAIN-SUFFIX", "sub.example.org"),
+                ("DOMAIN-SUFFIX", "qq.xn--fiqs8s"),
+            ],
+        )
+
     def test_render_rule_artifacts_writes_service_and_bundle_outputs(self) -> None:
         service_rules = {
             "OpenAI": build_service_rules(self.catalog, "OpenAI"),
@@ -285,9 +338,9 @@ class BuildPipelineTests(unittest.TestCase):
         self.assertTrue(
             (self.root / "Rule" / "Egern" / "OpenAI" / "OpenAI.yaml").exists()
         )
-        self.assertTrue((self.root / "dist" / "bundles" / "ai" / "loon.list").exists())
+        self.assertTrue((self.root / "Rule" / "Loon" / "AI" / "AI.list").exists())
 
-        loon_bundle = (self.root / "dist" / "bundles" / "ai" / "loon.list").read_text(
+        loon_bundle = (self.root / "Rule" / "Loon" / "AI" / "AI.list").read_text(
             encoding="utf-8"
         )
         self.assertIn("DOMAIN,openai.com", loon_bundle)
@@ -307,7 +360,7 @@ class BuildPipelineTests(unittest.TestCase):
 
         self.assertFalse(legacy_target_dir.exists())
         self.assertTrue(
-            (self.root / "dist" / "bundles" / "ai" / "loon.list").exists()
+            (self.root / "Rule" / "Loon" / "AI" / "AI.list").exists()
         )
 
     def test_render_rule_artifacts_requires_target_display_name(self) -> None:
@@ -379,7 +432,7 @@ class BuildPipelineTests(unittest.TestCase):
         )
         self.assertIn(
             "shadowrocket.example",
-            (self.root / "dist" / "bundles" / "ai" / "egern.yaml").read_text(
+            (self.root / "Rule" / "Egern" / "AI" / "AI.yaml").read_text(
                 encoding="utf-8"
             ),
         )
@@ -393,10 +446,10 @@ class BuildPipelineTests(unittest.TestCase):
         fresh_service_unrelated.parent.mkdir(parents=True, exist_ok=True)
         fresh_service_unrelated.write_text("keep me", encoding="utf-8")
 
-        stale_bundle_output = self.root / "dist" / "bundles" / "ai" / "loon.list"
+        stale_bundle_output = self.root / "Rule" / "Loon" / "AI" / "AI.list"
         stale_bundle_output.parent.mkdir(parents=True, exist_ok=True)
         stale_bundle_output.write_text("stale bundle list", encoding="utf-8")
-        unrelated_bundle_output = self.root / "dist" / "bundles" / "social" / "loon.list"
+        unrelated_bundle_output = self.root / "Rule" / "Loon" / "Social" / "Social.list"
         unrelated_bundle_output.parent.mkdir(parents=True, exist_ok=True)
         unrelated_bundle_output.write_text("keep me too", encoding="utf-8")
 
@@ -406,7 +459,7 @@ class BuildPipelineTests(unittest.TestCase):
         self.assertTrue((self.root / "Rule" / "Loon" / "OpenAI" / "OpenAI.lsr").exists())
         self.assertTrue(fresh_service_unrelated.exists())
         self.assertFalse(stale_bundle_output.exists())
-        self.assertTrue((self.root / "dist" / "bundles" / "ai" / "loon.lsr").exists())
+        self.assertTrue((self.root / "Rule" / "Loon" / "AI" / "AI.lsr").exists())
         self.assertTrue(unrelated_bundle_output.exists())
 
     def test_build_all_target_artifacts_self_maintained_emits_all_targets(self) -> None:
@@ -529,6 +582,9 @@ class BuildPipelineTests(unittest.TestCase):
 
         self.assertTrue(
             (self.root / "Rule" / "QuantumultX" / "OpenAI" / "OpenAI.list").exists()
+        )
+        self.assertTrue(
+            (self.root / "Rule" / "QuantumultX" / "AI" / "AI.list").exists()
         )
         self.assertFalse((self.root / "Rule" / "QuanX").exists())
 
@@ -677,7 +733,7 @@ class BuildPipelineTests(unittest.TestCase):
         self.assertTrue((self.root / "Rule" / "Loon" / "China" / "China_Domain.lsr").exists())
         self.assertTrue((self.root / "Rule" / "Loon" / "China" / "China_Resolve.lsr").exists())
 
-        bundle_text = (self.root / "dist" / "bundles" / "regional" / "loon.lsr").read_text(
+        bundle_text = (self.root / "Rule" / "Loon" / "Regional" / "Regional.lsr").read_text(
             encoding="utf-8"
         )
         self.assertIn("china-primary.example", bundle_text)

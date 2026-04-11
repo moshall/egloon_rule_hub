@@ -248,10 +248,20 @@ class BootstrapCLITest(TestCase):
                 root / "Rule" / "Clash" / "OpenAI" / "README.md",
                 root / "Rule" / "Egern" / "OpenAI" / "OpenAI.yaml",
                 root / "Rule" / "Egern" / "OpenAI" / "README.md",
+                root / "Rule" / "Clash" / "Minimal" / "Minimal.yaml",
+                root / "Rule" / "Clash" / "Minimal" / "README.md",
+                root / "Rule" / "Egern" / "Minimal" / "Minimal.yaml",
+                root / "Rule" / "Egern" / "Minimal" / "README.md",
             ]
             for path in expected_paths:
                 with self.subTest(path=path):
                     self.assertTrue(path.exists(), f"{path} is missing from bootstrap output")
+
+            bundle_readme = (root / "Rule" / "Clash" / "Minimal" / "README.md").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("./Minimal.yaml", bundle_readme)
+            self.assertIn("../OpenAI/README.md", bundle_readme)
 
     def test_bootstrap_generates_variant_files_and_variant_readme_links(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -298,6 +308,14 @@ class BootstrapCLITest(TestCase):
                 encoding="utf-8",
             )
             (catalog_dir / "bundles.yaml").write_text("bundles: {}\n", encoding="utf-8")
+            (catalog_dir / "bundles.yaml").write_text(
+                "bundles:\n"
+                "  regional:\n"
+                "    enabled: true\n"
+                "    targets: [loon]\n"
+                "    services: [China]\n",
+                encoding="utf-8",
+            )
 
             generated_artifacts = {
                 "China": {
@@ -461,12 +479,19 @@ class BootstrapCLITest(TestCase):
             self.assertEqual(status, 0)
             self.assertTrue((root / "Rule" / "Loon" / "China" / "China.lsr").exists())
             self.assertTrue((root / "Rule" / "Loon" / "China" / "China_Domain.lsr").exists())
+            self.assertTrue((root / "Rule" / "Loon" / "Regional" / "Regional.lsr").exists())
             readme = (root / "Rule" / "Loon" / "China" / "README.md").read_text(
                 encoding="utf-8"
             )
             self.assertIn("./China_Domain.lsr", readme)
             self.assertIn("China_Resolve", readme)
             self.assertIn("rule/Loon/China/China_Domain.list", readme)
+            bundle_readme = (root / "Rule" / "Loon" / "Regional" / "README.md").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn("../China/README.md", bundle_readme)
+            self.assertIn("China (primary variant: `China`)", bundle_readme)
+            self.assertIn("Additional manual variants remain available: `China_Domain`, `China_Resolve`", bundle_readme)
 
     def test_bootstrap_writes_quantumultx_and_prunes_quanx_directory(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -584,6 +609,9 @@ class BootstrapCLITest(TestCase):
             self.assertTrue(
                 (root / "Rule" / "QuantumultX" / "OpenAI" / "OpenAI.list").exists()
             )
+            self.assertTrue(
+                (root / "Rule" / "QuantumultX" / "AI" / "AI.list").exists()
+            )
             self.assertFalse((root / "Rule" / "QuanX").exists())
 
     def test_render_manifests_uses_distinct_target_source_count(self) -> None:
@@ -602,6 +630,13 @@ class BootstrapCLITest(TestCase):
 
 
 class WorkflowConfigTests(TestCase):
+    def test_sync_workflow_runs_at_beijing_0330(self) -> None:
+        workflow_path = (
+            Path(__file__).resolve().parents[2] / ".github" / "workflows" / "sync-rules.yml"
+        )
+        workflow_text = workflow_path.read_text(encoding="utf-8")
+        self.assertIn('cron: "30 19 * * *"', workflow_text)
+
     def test_sync_workflow_stages_rule_directory(self) -> None:
         workflow_path = (
             Path(__file__).resolve().parents[2] / ".github" / "workflows" / "sync-rules.yml"

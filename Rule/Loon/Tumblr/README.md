@@ -10,9 +10,20 @@ This layout documents a direct upstream target.
 - Upstream native target: `Loon`
 - Publish mode: `lsr`
 
+## Published Variants
+
+### Tumblr
+
+- File: [Tumblr.lsr](./Tumblr.lsr)
+- Primary variant: `yes`
+- Usage note: # 🧸 Tumblr
+- Selected source family: `native`
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list)
+
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7)
+### Upstream Entry 1 (blackmatrix7 / Tumblr)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list)

@@ -4,7 +4,7 @@ bundles:
   ai:
     enabled: true
     targets: *all_targets
-    services: [OpenAI, Claude, Gemini, Copilot]
+    services: [OpenAI, Claude, Gemini, BardAI, Twitter, Copilot]
 
   google:
     enabled: true
@@ -36,3 +36,7 @@ bundles:
     targets: *all_targets
     services: [China, ChinaDNS, ChinaIPs, ChinaIPsBGP, ChinaMax]
 
+  china-bank:
+    enabled: true
+    targets: *all_targets
+    services: [CCB, CEB, CGB, CMB, PSBC]

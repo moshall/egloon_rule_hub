@@ -8,7 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from egloon_rule_hub.model.catalog import Catalog, ServiceDef, SourceRef
+from egloon_rule_hub.model.catalog import Catalog, ServiceDef, SourceRef, TargetDef
 from egloon_rule_hub.model.publish import TargetArtifact
 
 TARGET_DISPLAY_NAMES = {
@@ -19,9 +19,23 @@ TARGET_DISPLAY_NAMES = {
     "shadowrocket": "Shadowrocket",
 }
 
+BUNDLE_DISPLAY_NAMES = {
+    "ai": "AI",
+}
+
 
 def _target_display_name(target: str) -> str:
     return TARGET_DISPLAY_NAMES.get(target, target.capitalize())
+
+
+def _bundle_display_name(bundle_name: str) -> str:
+    explicit = BUNDLE_DISPLAY_NAMES.get(bundle_name)
+    if explicit:
+        return explicit
+    parts = [part for part in re.split(r"[^A-Za-z0-9]+", bundle_name) if part]
+    if not parts:
+        return bundle_name
+    return "".join(part[:1].upper() + part[1:] for part in parts)
 
 
 def _source_ref_key(source_ref: SourceRef) -> tuple[str, str | None, str | None, str | None]:
@@ -119,17 +133,20 @@ def _usage_markdown(catalog: Catalog) -> str:
         "- `Rule/Egern/OpenAI/OpenAI.yaml`",
         "- `Rule/QuantumultX/OpenAI/OpenAI.list`",
         "- `Rule/Shadowrocket/OpenAI/OpenAI.list`",
-        "- `dist/bundles/<bundle>/<target>.<ext>`",
+        "- `Rule/Clash/AI/AI.yaml`",
+        "- `Rule/Loon/AI/AI.lsr`",
+        "- `Rule/QuantumultX/ChinaBank/ChinaBank.list`",
         "",
         "Example raw URL pattern after publishing the repository:",
         "",
         "```text",
         "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Clash/OpenAI/OpenAI.yaml",
         "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Loon/OpenAI/OpenAI.lsr",
-        "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/dist/bundles/ai/loon.lsr",
+        "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Loon/AI/AI.lsr",
         "```",
         "",
         "Selection policy: choose the first non-empty family in `native -> shadowrocket -> clash`, then merge only within that selected family.",
+        "Bundle policy: merge only the primary published variant from each member service, then normalize and deduplicate the combined stream.",
         "",
         f"Current bundles: {bundle_names}",
         "",
@@ -281,6 +298,46 @@ def _artifact_output_ext(target: str, publish_mode: str | None) -> str:
         "quantumultx": "list",
         "shadowrocket": "list",
     }.get(target, "list")
+
+
+def _bundle_output_file(bundle_name: str, target: str, publish_mode: str | None) -> str:
+    bundle_display = _bundle_display_name(bundle_name)
+    return f"{bundle_display}.{_artifact_output_ext(target, publish_mode)}"
+
+
+def _bundle_service_variant_details(
+    catalog: Catalog,
+    service_name: str,
+    target_name: str,
+    target_artifacts: dict[str, dict[str, TargetArtifact]] | None,
+) -> tuple[str, list[str]]:
+    artifact = None
+    if target_artifacts is not None:
+        artifact = target_artifacts.get(service_name, {}).get(target_name)
+    if artifact is not None:
+        primary_variant = artifact.primary_variant_name or service_name
+        extra_variants = [
+            variant_name
+            for variant_name in artifact.variants
+            if variant_name != primary_variant
+        ]
+        return primary_variant, extra_variants
+
+    service = catalog.services.get(service_name)
+    if service is None:
+        return service_name, []
+    target_source = service.target_sources.get(target_name)
+    if target_source is None:
+        return service_name, []
+    variants = target_source.normalized_variants(service_name)
+    primary_variant = next(
+        (variant.name for variant in variants.values() if variant.primary),
+        service_name,
+    )
+    extra_variants = [
+        variant.name for variant in variants.values() if variant.name != primary_variant
+    ]
+    return primary_variant, extra_variants
 
 
 def _entry_variant_name(entry: dict[str, Any], service_name: str) -> str:
@@ -594,6 +651,50 @@ def _self_maintained_target_readme_markdown(
     return "\n".join(lines)
 
 
+def _bundle_target_readme_markdown(
+    catalog: Catalog,
+    bundle_name: str,
+    target_name: str,
+    target_dir: str,
+    target: TargetDef,
+    target_artifacts: dict[str, dict[str, TargetArtifact]] | None,
+) -> str:
+    bundle = catalog.bundles[bundle_name]
+    bundle_display = _bundle_display_name(bundle_name)
+    bundle_file = _bundle_output_file(bundle_name, target_name, target.publish_mode)
+
+    lines = [
+        f"# {bundle_display} for {target_dir}",
+        "",
+        f"This README documents the merged {target_dir} bundle artifact for {bundle_display}.",
+        "",
+        f"- Bundle file: [{bundle_file}](./{bundle_file})",
+        "- Merge strategy: normalized and deduplicated merge of primary published variants only",
+        "",
+        "## Included Services",
+        "",
+    ]
+
+    for service_name in bundle.services:
+        service_link = f"../{service_name}/README.md"
+        primary_variant, extra_variants = _bundle_service_variant_details(
+            catalog, service_name, target_name, target_artifacts
+        )
+        line = (
+            f"- {service_name} (primary variant: `{primary_variant}`)"
+            f" - [README]({service_link})"
+        )
+        if extra_variants:
+            line += (
+                ". Additional manual variants remain available: "
+                + ", ".join(f"`{variant_name}`" for variant_name in extra_variants)
+            )
+        lines.append(line)
+
+    lines.append("")
+    return "\n".join(lines)
+
+
 def _group_manifest_entries_by_service_target(
     manifest: dict[str, list[dict[str, Any]]]
 ) -> dict[tuple[str, str], list[dict[str, Any]]]:
@@ -746,6 +847,47 @@ def _prune_stale_target_readmes(root: Path, live_readme_paths: set[Path]) -> Non
             path.rmdir()
 
 
+def _write_bundle_readmes(
+    root: Path,
+    catalog: Catalog,
+    target_artifacts: dict[str, dict[str, TargetArtifact]] | None,
+) -> set[Path]:
+    rule_root = root / "Rule"
+    live_readme_paths: set[Path] = set()
+
+    for bundle_name, bundle in sorted(catalog.bundles.items()):
+        if not bundle.enabled:
+            continue
+        bundle_display = _bundle_display_name(bundle_name)
+        for target_name in bundle.targets:
+            target = catalog.targets.get(target_name)
+            if target is None or not target.enabled:
+                continue
+            target_dir = _target_display_name(target_name)
+            bundle_dir = rule_root / target_dir / bundle_display
+            bundle_file = bundle_dir / _bundle_output_file(
+                bundle_name, target_name, target.publish_mode
+            )
+            if not bundle_file.exists():
+                continue
+            bundle_dir.mkdir(parents=True, exist_ok=True)
+            readme_path = bundle_dir / "README.md"
+            readme_path.write_text(
+                _bundle_target_readme_markdown(
+                    catalog,
+                    bundle_name,
+                    target_name,
+                    target_dir,
+                    target,
+                    target_artifacts,
+                ),
+                encoding="utf-8",
+            )
+            live_readme_paths.add(readme_path)
+
+    return live_readme_paths
+
+
 def write_markdown_docs(
     root: Path,
     catalog: Catalog,
@@ -781,6 +923,7 @@ def write_markdown_docs(
         service_readme_paths, live_readme_paths = _write_target_readmes_from_artifacts(
             root, target_artifacts, upstream_docs_manifest
         )
+    live_readme_paths |= _write_bundle_readmes(root, catalog, target_artifacts)
     _prune_stale_target_readmes(root, live_readme_paths)
     (docs_dir / "services.md").write_text(
         _services_markdown(catalog, service_readme_paths), encoding="utf-8"
