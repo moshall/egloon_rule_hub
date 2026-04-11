@@ -13,8 +13,9 @@ The project goal is simple:
 
 This repository can be published as a public GitHub repository.
 
-- upstream attribution is tracked in [docs/attribution.md](/home/dev/dev/repos/egloon_rule_hub/docs/attribution.md)
-- upstream README snapshots are generated during `bootstrap` so source provenance stays visible over time
+- upstream attribution is tracked in [docs/attribution.md](docs/attribution.md)
+- upstream README tracking outputs are generated during `bootstrap` in [dist/manifests/upstream_docs.json](dist/manifests/upstream_docs.json) and [dist/upstream-readmes/](dist/upstream-readmes/)
+- when an upstream README is unavailable, the manifest records `status: missing` with `snapshot_path: null`
 - generated artifacts in `dist/` are transformed outputs built from upstream rule sources
 - the repository should continue to keep upstream references visible in both the README and generated docs
 
@@ -96,4 +97,4 @@ This is enough to validate the first real end-to-end generation path for per-ser
 - mihomo rule-providers: https://wiki.metacubex.one/en/config/rule-providers/content/
 - Quantumult X repo: https://github.com/kjfx/QuantumultX
 - blackmatrix7 rules: https://github.com/blackmatrix7/ios_rule_script/tree/master/rule
-- upstream attribution record: [docs/attribution.md](/home/dev/dev/repos/egloon_rule_hub/docs/attribution.md)
+- upstream attribution record: [docs/attribution.md](docs/attribution.md)
