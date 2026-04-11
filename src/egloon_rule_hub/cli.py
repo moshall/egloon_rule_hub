@@ -7,6 +7,7 @@ from pathlib import Path
 from egloon_rule_hub.build import build_all_service_rules, render_rule_artifacts
 from egloon_rule_hub.docs.render import write_markdown_docs
 from egloon_rule_hub.model.catalog import Catalog, load_catalog
+from egloon_rule_hub.upstream_docs.build import build_upstream_docs
 
 
 def _repo_root(path: str | None) -> Path:
@@ -114,6 +115,7 @@ def main(argv: list[str] | None = None) -> int:
         service_rules = build_all_service_rules(catalog)
         render_rule_artifacts(root, catalog, service_rules)
         _render_manifests(root, catalog)
+        build_upstream_docs(catalog)
         write_markdown_docs(root, catalog)
         print("Bootstrap complete")
         return 0
