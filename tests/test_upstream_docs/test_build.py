@@ -46,13 +46,15 @@ class BuildUpstreamDocsTests(unittest.TestCase):
                 "fixture": SourceDef(name="fixture", kind="remote"),
             },
             targets={
-                "dummy": TargetDef(name="dummy", enabled=True, file_ext="yaml"),
+                "clash": TargetDef(name="clash", enabled=True, file_ext="yaml"),
+                "loon": TargetDef(name="loon", enabled=True, file_ext="list"),
+                "egern": TargetDef(name="egern", enabled=True, file_ext="yaml"),
             },
             services={
                 "OpenAI": ServiceDef(
                     name="OpenAI",
                     enabled=True,
-                    targets=["dummy"],
+                    targets=["clash", "loon", "egern"],
                     sources=[
                         SourceRef(
                             source="fixture",
@@ -85,10 +87,19 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
 
         self.assertIn("OpenAI", manifest)
-        entry = manifest["OpenAI"][0]
-        self.assertEqual(entry["status"], "ok")
+        entries = manifest["OpenAI"]
+        clash_entry = next(entry for entry in entries if entry["target"] == "clash")
+        self.assertEqual(clash_entry["status"], "ok")
+        self.assertEqual(clash_entry["target_dir"], "Clash")
+        self.assertFalse(clash_entry["is_converted"])
+        self.assertEqual(clash_entry["service"], "OpenAI")
+        self.assertEqual(clash_entry["readme_url"], "https://example.com/rule/Clash/OpenAI/README.md")
+        self.assertEqual(
+            clash_entry["entry_key"],
+            _expected_entry_key(100, "fixture", self.RULE_URL, 0),
+        )
 
-        snapshot_path = self.root / entry["snapshot_path"]
+        snapshot_path = self.root / clash_entry["snapshot_path"]
         self.assertTrue(snapshot_path.exists())
         self.assertTrue(snapshot_path.is_file())
         self.assertEqual(snapshot_path.read_bytes(), b"# README\n\nOriginal upstream text\n")
@@ -99,12 +110,16 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         file_manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
         self.assertEqual(file_manifest, manifest)
 
-        self.assertEqual(entry["readme_url"], "https://example.com/rule/Clash/OpenAI/README.md")
-        self.assertEqual(entry["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 0))
+        converted_entry = next(
+            entry for entry in entries if entry["target"] == "egern" and entry["rule_url"] == self.RULE_URL
+        )
+        self.assertEqual(converted_entry["target_dir"], "Egern")
+        self.assertTrue(converted_entry["is_converted"])
+        self.assertEqual(converted_entry["service"], "OpenAI")
 
     def test_manifest_snapshot_path_is_relative_to_root(self) -> None:
         manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
-        entry = manifest["OpenAI"][0]
+        entry = next(entry for entry in manifest["OpenAI"] if entry.get("snapshot_path"))
         snapshot_rel = Path(entry["snapshot_path"])
 
         self.assertFalse(snapshot_rel.is_absolute())
@@ -115,15 +130,32 @@ class BuildUpstreamDocsTests(unittest.TestCase):
         entries = manifest["OpenAI"]
 
         self.assertGreater(len(entries), 2)
-        self.assertEqual(entries[0]["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 0))
-        self.assertEqual(entries[1]["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL_ALT, 1))
-        self.assertEqual(entries[2]["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 2))
-        self.assertNotEqual(entries[0]["entry_key"], entries[2]["entry_key"], "same URL should still get unique key per entry")
+        clash_entry = next(
+            entry for entry in entries if entry["target"] == "clash" and entry["rule_url"] == self.RULE_URL
+        )
+        loon_entry = next(
+            entry for entry in entries if entry["target"] == "loon" and entry["rule_url"] == self.RULE_URL_ALT
+        )
+        converted_entry = next(
+            entry for entry in entries
+            if entry["target"] == "egern" and entry["entry_key"] == _expected_entry_key(100, "fixture", self.RULE_URL, 2)
+        )
+
+        self.assertEqual(clash_entry["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 0))
+        self.assertEqual(loon_entry["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL_ALT, 1))
+        self.assertEqual(converted_entry["entry_key"], _expected_entry_key(100, "fixture", self.RULE_URL, 2))
+        self.assertNotEqual(
+            clash_entry["entry_key"],
+            converted_entry["entry_key"],
+            "same URL should still get unique key per entry",
+        )
 
     def test_rebuild_prunes_stale_snapshot_files(self) -> None:
         first_manifest = build_upstream_docs(self.catalog, fetcher=self._fake_fetcher())
 
-        stale_snapshot = self.root / first_manifest["OpenAI"][2]["snapshot_path"]
+        key = _expected_entry_key(100, "fixture", self.RULE_URL, 2)
+        stale_entry = next(entry for entry in first_manifest["OpenAI"] if entry["entry_key"] == key)
+        stale_snapshot = self.root / stale_entry["snapshot_path"]
         self.assertTrue(stale_snapshot.exists())
 
         self.catalog.services["OpenAI"].sources = self.catalog.services["OpenAI"].sources[:2]
