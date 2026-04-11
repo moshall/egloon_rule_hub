@@ -36,7 +36,7 @@
 - `catalog/services.yaml`
   - Add variant-aware source entries where needed, replace every `quanx` target block/output with `quantumultx`, update native source paths to `rule/QuantumultX/...`, and add the newly approved strict-source services.
 - `catalog/bundles.yaml`
-  - Rename bundle target references to `quantumultx`, expand `ai`, add `china-bank`, and define bundle README/index expectations against primary service artifacts.
+  - Rename bundle target references to `quantumultx`, expand `ai`, add `china-bank`, and define bundle README/index expectations against primary service artifacts published under `Rule/<Target>/<BundleDisplayName>/`.
 - `catalog/sources.yaml`
   - Add icon upstream source metadata if the icon sync implementation needs a first-class catalog source entry.
 - `src/egloon_rule_hub/model/catalog.py`
@@ -44,9 +44,9 @@
 - `src/egloon_rule_hub/model/publish.py`
   - Extend publication models so one service/target can represent multiple published artifact variants and one primary artifact for bundle merging.
 - `src/egloon_rule_hub/build.py`
-  - Teach target rendering, stale-output pruning, bundle primary-artifact selection, and display names about variant-aware service directories and `Rule/QuantumultX/`.
+  - Teach target rendering, stale-output pruning, bundle primary-artifact selection, and display names about variant-aware service directories and bundle publication under `Rule/<Target>/<BundleDisplayName>/`.
 - `src/egloon_rule_hub/docs/render.py`
-  - Remove dependence on top-level `docs/` as a public output, add variant and icon lines into per-service READMEs, emit bundle README/index files, and write root-level attribution instead of `docs/attribution.md`.
+  - Remove dependence on top-level `docs/` as a public output, add variant and icon lines into per-service READMEs, emit bundle README/index files under `Rule/<Target>/<BundleDisplayName>/`, and write root-level attribution instead of `docs/attribution.md`.
 - `src/egloon_rule_hub/upstream_docs/build.py`
   - Update target display names and manifest target-dir emission for `QuantumultX`, plus variant-aware upstream README manifest records.
 - `src/egloon_rule_hub/cli.py`
@@ -228,7 +228,7 @@ Add or update tests to assert:
 - self-maintained TXT defaults use `quantumultx`, not `quanx`
 - generated directories are `Rule/QuantumultX/<Service>/`
 - stale `Rule/QuanX/` directories are pruned during render
-- stale bundle files such as `dist/bundles/ai/quanx.list` are pruned during render
+- stale bundle files such as `Rule/QuanX/AI/AI.list` are pruned during render
 - upstream-doc manifests emit `target_dir == "QuantumultX"` for that target
 
 Use assertions like:
@@ -238,7 +238,7 @@ self.assertIn("quantumultx", catalog.targets)
 self.assertNotIn("quanx", catalog.targets)
 self.assertTrue((root / "Rule" / "QuantumultX" / "OpenAI" / "OpenAI.list").exists())
 self.assertFalse((root / "Rule" / "QuanX").exists())
-self.assertFalse((root / "dist" / "bundles" / "ai" / "quanx.list").exists())
+self.assertFalse((root / "Rule" / "QuanX" / "AI" / "AI.list").exists())
 ```
 
 - [ ] **Step 2: Run targeted tests to verify they fail**
@@ -271,7 +271,7 @@ Make the rename in one coherent slice:
 - update `TARGET_RENDERERS`, `TARGET_DISPLAY_NAMES`, and stale-prune logic in `src/egloon_rule_hub/build.py`
 - update `TARGET_DISPLAY_NAMES`, usage examples, and path rendering in `src/egloon_rule_hub/docs/render.py`
 - update target-dir labeling in `src/egloon_rule_hub/upstream_docs/build.py`
-- prune stale bundle outputs that still use the old `quanx` target filename pattern
+- prune stale bundle outputs that still use the old `QuanX` directory and filename pattern
 - keep the existing parser/emitter modules (`parsers/quanx.py`, `emitters/quanx.py`) as implementation details; do not rename them yet unless the code requires it
 
 - [ ] **Step 4: Run tests to verify the rename passes**
@@ -320,8 +320,8 @@ Add catalog/build tests that assert:
 - `ChinaASN` is not added
 - `ai` includes `BardAI`
 - `china-bank` exists and contains `CCB`, `CEB`, `CGB`, `CMB`, `PSBC`
-- bundle builds for `quantumultx` emit `dist/bundles/china-bank/quantumultx.list` or the target-appropriate filename
-- each bundle directory emits `README.md`
+- bundle builds publish merged files under `Rule/<Target>/<BundleDisplayName>/`, for example `Rule/QuantumultX/AI/AI.list`
+- each published bundle directory emits `README.md`
 - bundle README links to member service directories under `Rule/<Target>/<Service>/`
 - when a member service has additional variants, bundle README explains which primary artifact is merged and which extra variants remain available for manual control
 
@@ -375,11 +375,14 @@ Update `catalog/bundles.yaml`:
 
 Update bundle publishing:
 
-- keep one merged artifact per target under `dist/bundles/<bundle>/`
-- generate `dist/bundles/<bundle>/README.md`
+- keep one merged artifact per target under `Rule/<Target>/<BundleDisplayName>/`
+- generate `Rule/<Target>/<BundleDisplayName>/README.md`
 - document that merged bundle outputs are deduplicated normalized merges, not raw concatenation
 - link each member service directory from the bundle README
 - when a service has multiple variants, state which primary artifact participates in the merged bundle and list the additional variants for manual selection
+- use public bundle display names in both directory and filename:
+  - `Rule/Loon/AI/AI.lsr`
+  - `Rule/Clash/ChinaBank/ChinaBank.yaml`
 
 - [ ] **Step 4: Run tests to verify catalog and bundles pass**
 
@@ -515,7 +518,7 @@ Update tests to assert:
 
 - `bootstrap` writes root `ATTRIBUTION.md`
 - `bootstrap` no longer relies on top-level `docs/services.md`, `docs/sources.md`, or `docs/usage.md` as public outputs
-- `bootstrap` keeps writing per-service README files and per-bundle `README.md` index files as public outputs
+- `bootstrap` keeps writing per-service README files and per-bundle merged files plus `README.md` index files under `Rule/` as public outputs
 - `validate.yml` no longer executes `python -m unittest ...`
 - `sync-rules.yml` no longer executes `python -m unittest ...`
 - `sync-rules.yml` stages only public paths and does not stage `docs` or `tests`
@@ -548,7 +551,7 @@ Expected:
 Update `src/egloon_rule_hub/docs/render.py` so it:
 
 - continues writing per-service README files under `Rule/<Target>/<Service>/`
-- continues writing per-bundle `README.md` files under `dist/bundles/<bundle>/`
+- continues writing per-bundle merged artifact files and `README.md` files under `Rule/<Target>/<BundleDisplayName>/`
 - writes root `ATTRIBUTION.md`
 - stops producing `docs/services.md`, `docs/sources.md`, and `docs/usage.md` as required public artifacts
 - prunes stale top-level `docs/` outputs if they still exist

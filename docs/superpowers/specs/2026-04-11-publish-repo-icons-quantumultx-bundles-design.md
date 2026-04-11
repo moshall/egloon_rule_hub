@@ -513,7 +513,7 @@ Under strict mode they may only be added later when real upstream rule directori
 
 ## Bundle Expansion
 
-The repository already supports grouped bundle outputs under `dist/bundles/<bundle>/`.
+The repository already supports grouped bundle outputs conceptually, but the final public publish surface for bundles should live under `Rule/`, not `dist/bundles/`.
 
 This slice should add or update the following groups.
 
@@ -554,9 +554,9 @@ Services:
 - `CMB`
 - `PSBC`
 
-The bundle path should remain filesystem-stable and lowercase:
+The internal bundle slug may stay lowercase for config/runtime identity, but the public published directory should use the display name:
 
-- `dist/bundles/china-bank/`
+- `Rule/<Target>/ChinaBank/`
 
 ## Bundle Directory Design
 
@@ -564,11 +564,13 @@ Bundles should contain two layers:
 
 ### 1. Merged target artifacts
 
-Each bundle still publishes one merged artifact per target, for example:
+Each bundle still publishes one merged artifact per target, but the final public file lives under `Rule/<Target>/<BundleDisplayName>/`, for example:
 
-- `dist/bundles/ai/clash.yaml`
-- `dist/bundles/ai/loon.lsr`
-- `dist/bundles/ai/quantumultx.list`
+- `Rule/Clash/AI/AI.yaml`
+- `Rule/Loon/AI/AI.lsr`
+- `Rule/QuantumultX/AI/AI.list`
+- `Rule/Clash/ChinaBank/ChinaBank.yaml`
+- `Rule/Loon/ChinaBank/ChinaBank.lsr`
 
 Those merged artifacts are produced by:
 
@@ -595,13 +597,9 @@ This gives users two clear modes:
 ### Example bundle layout
 
 ```text
-dist/bundles/ai/
+Rule/Loon/AI/
   README.md
-  clash.yaml
-  egern.yaml
-  loon.lsr
-  quantumultx.list
-  shadowrocket.list
+  AI.lsr
 ```
 
 ## README and Public Documentation Behavior
@@ -610,7 +608,7 @@ The repository will no longer publish `docs/` in the final public form, so publi
 
 - root `README.md`
 - per-service `Rule/<Target>/<Service>/README.md`
-- per-bundle `dist/bundles/<bundle>/README.md`
+- per-bundle `Rule/<Target>/<BundleDisplayName>/README.md`
 - generated manifests under `dist/manifests/`
 
 That means:
@@ -726,13 +724,9 @@ Rule/Loon/China/
 ### Bundle directory with index
 
 ```text
-dist/bundles/ai/
+Rule/Loon/AI/
   README.md
-  clash.yaml
-  egern.yaml
-  loon.lsr
-  quantumultx.list
-  shadowrocket.list
+  AI.lsr
 ```
 
 ## Migration Notes
@@ -763,7 +757,7 @@ After `python -m egloon_rule_hub bootstrap`:
 - `dist/manifests/icons.json` exists
 - the `ai` bundle includes `BardAI`
 - the `china-bank` bundle exists and contains the requested bank services
-- bundle directories publish `README.md` index files that link to member service directories and explain merged versus manual usage
+- bundle directories under `Rule/<Target>/<BundleDisplayName>/` publish merged bundle files and `README.md` index files that link to member service directories and explain merged versus manual usage
 - public repository staging excludes `docs/` and `tests/`
 
 ## Risks
