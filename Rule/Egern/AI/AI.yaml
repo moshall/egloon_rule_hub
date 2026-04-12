@@ -91,6 +91,16 @@ domain_suffix_set:
 - edgeservices.bing.com
 - manus.im
 - manuscdn.com
+- google
+- goog
+- googlezip.net
+- goo.gle
+- securegateway.goog
+- geminicli.com
+- labs.google
+- notebooklm.google
+- claudeusercontent.com
+- claudemcpcontent.com
 domain_keyword_set:
 - openai
 - colab

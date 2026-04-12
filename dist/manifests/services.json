@@ -1081,6 +1081,20 @@
       "shadowrocket"
     ]
   },
+  "ClaudeExtended": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "",
+    "source_count": 0,
+    "target_sources": {},
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
   "Cloudflare": {
     "enabled": true,
     "fallback_order": [],

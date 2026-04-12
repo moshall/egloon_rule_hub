@@ -4,7 +4,7 @@ bundles:
   ai:
     enabled: true
     targets: *all_targets
-    services: [OpenAI, Claude, Gemini, BardAI, Twitter, Copilot, Manus]
+    services: [OpenAI, Claude, Gemini, BardAI, Twitter, Copilot, Manus, GoogleExtended, ClaudeExtended]
 
   google:
     enabled: true
