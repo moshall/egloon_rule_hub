@@ -8,6 +8,7 @@ This layout documents a direct upstream target.
 
 - Selected source family: `native`
 - Upstream native target: `Loon`
+- Icon: unavailable (strict upstream match not found)
 - Publish mode: `lsr`
 
 ## Published Variants

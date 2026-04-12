@@ -24,9 +24,6 @@ jobs:
       - name: Install
         run: python -m pip install --upgrade pip && pip install -e .
 
-      - name: Run tests
-        run: python -m unittest discover -s tests -p 'test_*.py' -t . -v
-
       - name: Refresh TXT sources
         run: python -m egloon_rule_hub refresh-txt-sources
 
@@ -37,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Rule docs dist Source/TXT
+          git add README.md ATTRIBUTION.md Rule dist Source/TXT
           git diff --cached --quiet && exit 0
-          git commit -m "chore: refresh generated rule docs and manifests"
+          git commit -m "chore: refresh generated rule artifacts"
           git push

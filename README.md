@@ -1,6 +1,6 @@
 # egloon_rule_hub
 
-Target-first proxy rule hub for Egern, Loon, Clash, QuanX, and Shadowrocket.
+Target-first proxy rule hub for Egern, Loon, Clash, QuantumultX, and Shadowrocket.
 
 The project goal is simple:
 
@@ -15,11 +15,13 @@ The project goal is simple:
 
 This repository can be published as a public GitHub repository.
 
-- upstream attribution is tracked in [docs/attribution.md](docs/attribution.md)
+- upstream attribution is tracked in [ATTRIBUTION.md](ATTRIBUTION.md)
 - upstream README tracking outputs are generated during `bootstrap` in [dist/manifests/upstream_docs.json](dist/manifests/upstream_docs.json) and [dist/upstream-readmes/](dist/upstream-readmes/)
+- icon sync outputs are generated during `bootstrap` in [dist/manifests/icons.json](dist/manifests/icons.json)
 - when an upstream README is unavailable, the manifest records `status: missing` with `snapshot_path: null`
+- when an upstream icon is unavailable, the manifest records `matched: false` with a strict reason instead of guessing
 - generated artifacts in `dist/` are transformed outputs built from upstream rule sources or self-maintained TXT inputs
-- the repository should continue to keep upstream references visible in both the README and generated docs
+- the repository keeps upstream references visible in both the README and `ATTRIBUTION.md`
 
 ## Current Stage
 
@@ -45,14 +47,14 @@ The current implementation fetches and renders the seeded real service artifacts
 
 ## Published Layout
 
-Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing the service README with the published file and selected-family provenance (for example `Rule/Clash/OpenAI/OpenAI.yaml`, `Rule/Loon/OpenAI/OpenAI.lsr`, and `Rule/Egern/OpenAI/OpenAI.yaml`). Bundles continue to publish under `dist/bundles/<bundle>/<target>.<ext>` so automation can refresh documentation and bundle outputs together.
+Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing the service README with the published file, `icon.png` when a strict upstream match exists, and selected-family provenance (for example `Rule/Clash/OpenAI/OpenAI.yaml`, `Rule/Loon/OpenAI/OpenAI.lsr`, and `Rule/Egern/OpenAI/OpenAI.yaml`). Bundles publish under the same `Rule/<TargetDir>/<Bundle>/` layout.
 
 ## Supported Target Formats
 
 - Egern rule-set YAML
 - Loon `.lsr` by default
 - Clash / mihomo classical rule-provider YAML
-- QuanX `.list`
+- QuantumultX `.list`
 - Shadowrocket `.list`
 
 ## Catalog Files
@@ -61,7 +63,7 @@ Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing th
 - `catalog/targets.yaml`: enabled output clients
 - `catalog/services.yaml`: service catalog grouped by output target and source family
 - `catalog/bundles.yaml`: grouped rule bundles
-- `Source/TXT/`: self-maintained service sources that publish to the preferred target allowlist intersected with configured targets (`egern`, `loon`, `clash`, `quanx`, `shadowrocket`)
+- `Source/TXT/`: self-maintained service sources that publish to the preferred target allowlist intersected with configured targets (`egern`, `loon`, `clash`, `quantumultx`, `shadowrocket`)
 
 ## CLI
 
@@ -78,11 +80,11 @@ python -m egloon_rule_hub bootstrap
 
 `refresh-txt-sources` updates generated TXT inputs under `Source/TXT/`, currently including the official Feishu whitelist snapshot at `Source/TXT/Feishu.txt`.
 
-`render-docs` is docs-only: it renders upstream-backed READMEs from the available upstream manifest data and renders self-maintained TXT READMEs from catalog origin metadata without rebuilding rule artifacts.
+`render-docs` is publish-docs-only: it renders target README files plus root attribution metadata without rebuilding rule artifacts.
 
-`bootstrap` renders fresh target artifacts first, then uses that artifact graph to render target READMEs. Upstream-backed services still attach upstream README manifest data when available, while self-maintained TXT services render README metadata directly from `Source/TXT/<Service>.txt`.
+`bootstrap` renders fresh target artifacts first, syncs strict upstream icons, then uses that artifact graph to render target READMEs. Upstream-backed services still attach upstream README manifest data when available, while self-maintained TXT services render README metadata directly from `Source/TXT/<Service>.txt`.
 
-`bootstrap` runs validation, target-artifact build/render, manifest rendering, upstream README snapshot rendering, and markdown doc rendering in one pass.
+`bootstrap` runs validation, target-artifact build/render, manifest rendering, upstream README snapshot rendering, icon sync, and public README/attribution rendering in one pass.
 
 ## Seeded Real Sources
 
@@ -113,4 +115,4 @@ This is enough to validate the real end-to-end generation path for per-service f
 - mihomo rule-providers: https://wiki.metacubex.one/en/config/rule-providers/content/
 - Quantumult X repo: https://github.com/kjfx/QuantumultX
 - blackmatrix7 rules: https://github.com/blackmatrix7/ios_rule_script/tree/master/rule
-- upstream attribution record: [docs/attribution.md](docs/attribution.md)
+- upstream attribution record: [ATTRIBUTION.md](ATTRIBUTION.md)

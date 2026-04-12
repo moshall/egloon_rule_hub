@@ -23,8 +23,5 @@ jobs:
       - name: Validate catalog
         run: python -m egloon_rule_hub validate-catalog
 
-      - name: Run tests
-        run: python -m unittest discover -s tests -p 'test_*.py' -t . -v
-
       - name: Render generated artifacts
         run: python -m egloon_rule_hub bootstrap

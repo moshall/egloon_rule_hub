@@ -8,6 +8,7 @@ This layout documents a direct upstream target.
 
 - Selected source family: `native`
 - Upstream native target: `Clash`
+- Icon: unavailable (strict upstream match not found)
 
 ## Published Variants
 

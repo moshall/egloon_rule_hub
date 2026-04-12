@@ -6,6 +6,7 @@ from pathlib import Path
 
 from egloon_rule_hub.build import build_all_target_artifacts, render_target_artifacts
 from egloon_rule_hub.docs.render import service_source_count, write_markdown_docs
+from egloon_rule_hub.icons.sync import sync_service_icons
 from egloon_rule_hub.model.catalog import Catalog, load_catalog
 from egloon_rule_hub.txt_sources import refresh_txt_sources
 from egloon_rule_hub.upstream_docs.build import build_upstream_docs
@@ -124,7 +125,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "render-docs":
         catalog = _run_validate(root)
         write_markdown_docs(root, catalog)
-        print(f"Rendered docs to {root / 'docs'}")
+        print(f"Rendered target READMEs and attribution to {root}")
         return 0
 
     if args.command == "refresh-txt-sources":
@@ -138,6 +139,7 @@ def main(argv: list[str] | None = None) -> int:
         render_target_artifacts(root, catalog, target_artifacts)
         _render_manifests(root, catalog)
         build_upstream_docs(catalog, target_artifacts)
+        sync_service_icons(root, catalog, target_artifacts)
         write_markdown_docs(root, catalog, target_artifacts)
         print("Bootstrap complete")
         return 0

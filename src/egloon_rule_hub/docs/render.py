@@ -161,8 +161,23 @@ def _usage_markdown(catalog: Catalog) -> str:
 def _attribution_markdown(catalog: Catalog) -> str:
     source_to_services: dict[str, set[str]] = {name: set() for name in catalog.sources}
     for service_name, service in sorted(catalog.services.items()):
-        for source_ref in service.sources:
-            source_to_services.setdefault(source_ref.source, set()).add(service_name)
+        seen_sources: set[str] = set()
+        if service.target_sources:
+            for target_source in service.target_sources.values():
+                for variant in target_source.normalized_variants(service.name).values():
+                    for family_sources in variant.families.values():
+                        for source_ref in family_sources:
+                            if source_ref.source not in seen_sources:
+                                source_to_services.setdefault(source_ref.source, set()).add(
+                                    service_name
+                                )
+                                seen_sources.add(source_ref.source)
+        else:
+            for source_ref in service.sources:
+                if source_ref.source in seen_sources:
+                    continue
+                source_to_services.setdefault(source_ref.source, set()).add(service_name)
+                seen_sources.add(source_ref.source)
 
     lines = [
         "# Attribution",
@@ -234,6 +249,26 @@ def _load_upstream_docs_manifest(root: Path) -> dict[str, list[dict[str, Any]]]:
             entry for entry in entries if isinstance(entry, dict)
         ]
     return manifest
+
+
+def _load_icons_manifest(root: Path) -> dict[str, dict[str, Any]]:
+    manifest_file = root / "dist" / "manifests" / "icons.json"
+    if not manifest_file.exists():
+        return {}
+
+    try:
+        payload = json.loads(manifest_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    if not isinstance(payload, dict):
+        return {}
+
+    return {
+        service_name: entry
+        for service_name, entry in payload.items()
+        if isinstance(service_name, str) and isinstance(entry, dict)
+    }
 
 
 def _read_snapshot_text(root: Path, snapshot_path: str | None) -> str | None:
@@ -370,6 +405,25 @@ def _variant_usage_note(snapshot_text: str | None, variant_name: str, primary: b
     return "Additional published variant for manual selection."
 
 
+def _icon_line(icon_manifest: dict[str, dict[str, Any]], service_name: str) -> str:
+    icon_entry = icon_manifest.get(service_name)
+    if not icon_entry:
+        return "- Icon: unavailable"
+
+    if bool(icon_entry.get("matched")):
+        source_url = icon_entry.get("source_url")
+        if isinstance(source_url, str) and source_url.strip():
+            return f"- Icon: [icon.png](./icon.png) ([upstream source]({source_url}))"
+        return "- Icon: [icon.png](./icon.png)"
+
+    reason = icon_entry.get("reason")
+    reason_text = {
+        "strict_match_not_found": "strict upstream match not found",
+        "icon_sync_source_unavailable": "icon sync source unavailable",
+    }.get(reason, "unavailable")
+    return f"- Icon: unavailable ({reason_text})"
+
+
 def _target_readme_markdown(
     root: Path,
     target: str,
@@ -377,6 +431,7 @@ def _target_readme_markdown(
     service_name: str,
     entries: list[dict[str, Any]],
     artifact: TargetArtifact | None = None,
+    icon_manifest: dict[str, dict[str, Any]] | None = None,
 ) -> str:
     primary_entry = next(
         (entry for entry in entries if entry.get("variant_primary")),
@@ -450,6 +505,8 @@ def _target_readme_markdown(
             f"- Upstream native target: `{selected_native_target_dir}`",
         ]
     )
+    if icon_manifest is not None:
+        lines.append(_icon_line(icon_manifest, service_name))
     if publish_mode:
         lines.append(f"- Publish mode: `{publish_mode}`")
     if conversion_path:
@@ -621,6 +678,7 @@ def _self_maintained_target_readme_markdown(
     target_dir: str,
     service_name: str,
     artifact: TargetArtifact,
+    icon_manifest: dict[str, dict[str, Any]] | None = None,
 ) -> str:
     source_link = None
     if artifact.origin_source_path:
@@ -637,6 +695,8 @@ def _self_maintained_target_readme_markdown(
         "",
         "- Source type: `self_maintained`",
     ]
+    if icon_manifest is not None:
+        lines.append(_icon_line(icon_manifest, service_name))
     if artifact.origin_source_path and source_link:
         lines.append(f"- TXT source: [{artifact.origin_source_path}]({source_link})")
     if artifact.origin_source_url:
@@ -719,6 +779,7 @@ def _write_target_readmes_from_artifacts(
     root: Path,
     target_artifacts: dict[str, dict[str, TargetArtifact]],
     manifest: dict[str, list[dict[str, Any]]],
+    icon_manifest: dict[str, dict[str, Any]],
 ) -> tuple[dict[str, list[str]], set[Path]]:
     manifest_by_service_target = _group_manifest_entries_by_service_target(manifest)
     rule_root = root / "Rule"
@@ -739,11 +800,17 @@ def _write_target_readmes_from_artifacts(
             readme_path = service_dir / "README.md"
             if artifact.origin_kind == "self_maintained":
                 readme_text = _self_maintained_target_readme_markdown(
-                    target_dir, service_name, artifact
+                    target_dir, service_name, artifact, icon_manifest
                 )
             else:
                 readme_text = _target_readme_markdown(
-                    root, target_name, target_dir, service_name, manifest_entries, artifact
+                    root,
+                    target_name,
+                    target_dir,
+                    service_name,
+                    manifest_entries,
+                    artifact,
+                    icon_manifest,
                 )
             readme_path.write_text(readme_text, encoding="utf-8")
             live_readme_paths.add(readme_path)
@@ -801,7 +868,9 @@ def _merge_service_readme_paths(
 
 
 def _write_target_readmes(
-    root: Path, manifest: dict[str, list[dict[str, Any]]]
+    root: Path,
+    manifest: dict[str, list[dict[str, Any]]],
+    icon_manifest: dict[str, dict[str, Any]],
 ) -> tuple[dict[str, list[str]], set[Path]]:
     grouped = _group_manifest_entries_by_target(manifest)
     if not grouped:
@@ -815,7 +884,9 @@ def _write_target_readmes(
         service_dir.mkdir(parents=True, exist_ok=True)
         readme_path = service_dir / "README.md"
         readme_path.write_text(
-            _target_readme_markdown(root, target, target_dir, service_name, entries),
+            _target_readme_markdown(
+                root, target, target_dir, service_name, entries, icon_manifest=icon_manifest
+            ),
             encoding="utf-8",
         )
         live_readme_paths.add(readme_path)
@@ -900,12 +971,12 @@ def write_markdown_docs(
             shutil.rmtree(legacy_services_dir)
         else:
             legacy_services_dir.unlink()
-    docs_dir.mkdir(parents=True, exist_ok=True)
     upstream_docs_manifest = _load_upstream_docs_manifest(root)
+    icons_manifest = _load_icons_manifest(root)
 
     if target_artifacts is None:
         service_readme_paths, live_readme_paths = _write_target_readmes(
-            root, upstream_docs_manifest
+            root, upstream_docs_manifest, icons_manifest
         )
         self_maintained_artifacts = _self_maintained_target_artifacts_from_catalog(catalog)
         if self_maintained_artifacts:
@@ -913,7 +984,7 @@ def write_markdown_docs(
                 self_maintained_readme_paths,
                 self_maintained_live_paths,
             ) = _write_target_readmes_from_artifacts(
-                root, self_maintained_artifacts, upstream_docs_manifest
+                root, self_maintained_artifacts, upstream_docs_manifest, icons_manifest
             )
             service_readme_paths = _merge_service_readme_paths(
                 service_readme_paths, self_maintained_readme_paths
@@ -921,15 +992,20 @@ def write_markdown_docs(
             live_readme_paths |= self_maintained_live_paths
     else:
         service_readme_paths, live_readme_paths = _write_target_readmes_from_artifacts(
-            root, target_artifacts, upstream_docs_manifest
+            root, target_artifacts, upstream_docs_manifest, icons_manifest
         )
     live_readme_paths |= _write_bundle_readmes(root, catalog, target_artifacts)
     _prune_stale_target_readmes(root, live_readme_paths)
-    (docs_dir / "services.md").write_text(
-        _services_markdown(catalog, service_readme_paths), encoding="utf-8"
-    )
-    (docs_dir / "sources.md").write_text(_sources_markdown(catalog), encoding="utf-8")
-    (docs_dir / "usage.md").write_text(_usage_markdown(catalog), encoding="utf-8")
-    (docs_dir / "attribution.md").write_text(
-        _attribution_markdown(catalog), encoding="utf-8"
-    )
+    for legacy_path in (
+        docs_dir / "services.md",
+        docs_dir / "sources.md",
+        docs_dir / "usage.md",
+        docs_dir / "attribution.md",
+    ):
+        if legacy_path.exists():
+            legacy_path.unlink()
+    if docs_dir.exists():
+        for path in sorted(docs_dir.rglob("*"), reverse=True):
+            if path.is_dir() and not any(path.iterdir()):
+                path.rmdir()
+    (root / "ATTRIBUTION.md").write_text(_attribution_markdown(catalog), encoding="utf-8")

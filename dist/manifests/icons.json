@@ -1,0 +1,833 @@
+{
+  "AirChina": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Android": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Apkpure": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "AppStore": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Apple": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Apple/icon.png",
+      "Rule/Egern/Apple/icon.png",
+      "Rule/Loon/Apple/icon.png",
+      "Rule/QuantumultX/Apple/icon.png",
+      "Rule/Shadowrocket/Apple/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Apple.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Apple.png"
+  },
+  "AppleID": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "AppleIntelligence": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "AppleMusic": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "AppleProxy": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "AppleTV": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "BOC": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "BOCOM": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "BardAI": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "BesTV": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "CCB": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "CEB": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "CGB": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "CIBN": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "CMB": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "CNN": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "CNNIC": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "China": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "ChinaDNS": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "ChinaIPs": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "ChinaIPsBGP": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "ChinaMax": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "ChinaMedia": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Claude": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Claude/icon.png",
+      "Rule/Egern/Claude/icon.png",
+      "Rule/Loon/Claude/icon.png",
+      "Rule/QuantumultX/Claude/icon.png",
+      "Rule/Shadowrocket/Claude/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Claude.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Claude.png"
+  },
+  "Cloudflare": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Copilot": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Copilot/icon.png",
+      "Rule/Egern/Copilot/icon.png",
+      "Rule/Loon/Copilot/icon.png",
+      "Rule/QuantumultX/Copilot/icon.png",
+      "Rule/Shadowrocket/Copilot/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Copilot.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Copilot.png"
+  },
+  "Direct": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Discord": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Discord/icon.png",
+      "Rule/Egern/Discord/icon.png",
+      "Rule/Loon/Discord/icon.png",
+      "Rule/QuantumultX/Discord/icon.png",
+      "Rule/Shadowrocket/Discord/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Discord.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Discord.png"
+  },
+  "Disney": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Duolingo": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "EA": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "ESPN": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Emby": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Emby/icon.png",
+      "Rule/Egern/Emby/icon.png",
+      "Rule/Loon/Emby/icon.png",
+      "Rule/QuantumultX/Emby/icon.png",
+      "Rule/Shadowrocket/Emby/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Emby.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Emby.png"
+  },
+  "Espn": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "FOXNOW": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "FOXPlus": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Facebook": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Facebook/icon.png",
+      "Rule/Egern/Facebook/icon.png",
+      "Rule/Loon/Facebook/icon.png",
+      "Rule/QuantumultX/Facebook/icon.png",
+      "Rule/Shadowrocket/Facebook/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Facebook.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Facebook.png"
+  },
+  "Feishu": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Fox": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Gemini": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Gemini/icon.png",
+      "Rule/Egern/Gemini/icon.png",
+      "Rule/Loon/Gemini/icon.png",
+      "Rule/QuantumultX/Gemini/icon.png",
+      "Rule/Shadowrocket/Gemini/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Gemini.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Gemini.png"
+  },
+  "GitHub": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/GitHub/icon.png",
+      "Rule/Egern/GitHub/icon.png",
+      "Rule/Loon/GitHub/icon.png",
+      "Rule/QuantumultX/GitHub/icon.png",
+      "Rule/Shadowrocket/GitHub/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/GitHub.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/GitHub.png"
+  },
+  "Google": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Google/icon.png",
+      "Rule/Egern/Google/icon.png",
+      "Rule/Loon/Google/icon.png",
+      "Rule/QuantumultX/Google/icon.png",
+      "Rule/Shadowrocket/Google/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Google.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Google.png"
+  },
+  "GoogleEarth": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "GoogleFCM": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "GoogleSearch": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "GoogleVoice": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "HBO": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "HBOAsia": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "HBOHK": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "HBOUSA": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Instagram": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "IyfTv": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "JianGuoYun": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Linux": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "MEGA": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Naver": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Netflix": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Netflix/icon.png",
+      "Rule/Egern/Netflix/icon.png",
+      "Rule/Loon/Netflix/icon.png",
+      "Rule/QuantumultX/Netflix/icon.png",
+      "Rule/Shadowrocket/Netflix/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Netflix.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Netflix.png"
+  },
+  "Nintendo": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Notion": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Notion/icon.png",
+      "Rule/Egern/Notion/icon.png",
+      "Rule/Loon/Notion/icon.png",
+      "Rule/QuantumultX/Notion/icon.png",
+      "Rule/Shadowrocket/Notion/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Notion.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Notion.png"
+  },
+  "Nvidia": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "OKX": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/OKX/icon.png",
+      "Rule/Egern/OKX/icon.png",
+      "Rule/Loon/OKX/icon.png",
+      "Rule/QuantumultX/OKX/icon.png",
+      "Rule/Shadowrocket/OKX/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/OKX.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/OKX.png"
+  },
+  "OpenAI": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "PSBC": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "PayPal": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/PayPal/icon.png",
+      "Rule/Egern/PayPal/icon.png",
+      "Rule/Loon/PayPal/icon.png",
+      "Rule/QuantumultX/PayPal/icon.png",
+      "Rule/Shadowrocket/PayPal/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/PayPal.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/PayPal.png"
+  },
+  "PikPak": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Proxy": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Rakuten": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Reddit": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Reddit/icon.png",
+      "Rule/Egern/Reddit/icon.png",
+      "Rule/Loon/Reddit/icon.png",
+      "Rule/QuantumultX/Reddit/icon.png",
+      "Rule/Shadowrocket/Reddit/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Reddit.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Reddit.png"
+  },
+  "Shopee": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Shopify": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "SkyGO": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Sony": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Spotify": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Spotify/icon.png",
+      "Rule/Egern/Spotify/icon.png",
+      "Rule/Loon/Spotify/icon.png",
+      "Rule/QuantumultX/Spotify/icon.png",
+      "Rule/Shadowrocket/Spotify/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Spotify.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Spotify.png"
+  },
+  "Steam": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Steam/icon.png",
+      "Rule/Egern/Steam/icon.png",
+      "Rule/Loon/Steam/icon.png",
+      "Rule/QuantumultX/Steam/icon.png",
+      "Rule/Shadowrocket/Steam/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Steam.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Steam.png"
+  },
+  "SteamCN": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Stripe": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "TIDAL": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Telegram": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Telegram/icon.png",
+      "Rule/Egern/Telegram/icon.png",
+      "Rule/Loon/Telegram/icon.png",
+      "Rule/QuantumultX/Telegram/icon.png",
+      "Rule/Shadowrocket/Telegram/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Telegram.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Telegram.png"
+  },
+  "TelegramNL": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "TelegramSG": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "TelegramUS": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Tesla": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "TestFlight": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "TikTok": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/TikTok/icon.png",
+      "Rule/Egern/TikTok/icon.png",
+      "Rule/Loon/TikTok/icon.png",
+      "Rule/QuantumultX/TikTok/icon.png",
+      "Rule/Shadowrocket/TikTok/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/TikTok.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/TikTok.png"
+  },
+  "Tumblr": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Twitch": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Twitter": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "WhatsApp": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/WhatsApp/icon.png",
+      "Rule/Egern/WhatsApp/icon.png",
+      "Rule/Loon/WhatsApp/icon.png",
+      "Rule/QuantumultX/WhatsApp/icon.png",
+      "Rule/Shadowrocket/WhatsApp/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/WhatsApp.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/WhatsApp.png"
+  },
+  "Wikipedia": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Wikipedia/icon.png",
+      "Rule/Egern/Wikipedia/icon.png",
+      "Rule/Loon/Wikipedia/icon.png",
+      "Rule/QuantumultX/Wikipedia/icon.png",
+      "Rule/Shadowrocket/Wikipedia/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Wikipedia.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Wikipedia.png"
+  },
+  "Xbox": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Xbox/icon.png",
+      "Rule/Egern/Xbox/icon.png",
+      "Rule/Loon/Xbox/icon.png",
+      "Rule/QuantumultX/Xbox/icon.png",
+      "Rule/Shadowrocket/Xbox/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Xbox.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Xbox.png"
+  },
+  "YYeTs": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "YouTube": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/YouTube/icon.png",
+      "Rule/Egern/YouTube/icon.png",
+      "Rule/Loon/YouTube/icon.png",
+      "Rule/QuantumultX/YouTube/icon.png",
+      "Rule/Shadowrocket/YouTube/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/YouTube.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/YouTube.png"
+  },
+  "YouTubeMusic": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "eBay": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "iCloud": {
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/iCloud/icon.png",
+      "Rule/Egern/iCloud/icon.png",
+      "Rule/Loon/iCloud/icon.png",
+      "Rule/QuantumultX/iCloud/icon.png",
+      "Rule/Shadowrocket/iCloud/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/iCloud.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/iCloud.png"
+  }
+}
