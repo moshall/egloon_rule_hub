@@ -18,10 +18,6 @@ services:
             path: rule/Clash/OpenAI/OpenAI.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/OpenAi.list
-            format: clash_list
-            priority: 80
       loon:
         native:
           - source: blackmatrix7
@@ -38,20 +34,12 @@ services:
             path: rule/Clash/OpenAI/OpenAI.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/OpenAi.list
-            format: clash_list
-            priority: 80
       clash:
         native:
           - source: blackmatrix7
             path: rule/Clash/OpenAI/OpenAI.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/OpenAi.list
-            format: clash_list
-            priority: 80
         shadowrocket:
           - source: blackmatrix7
             path: rule/Shadowrocket/OpenAI/OpenAI.list
@@ -70,10 +58,6 @@ services:
             path: rule/Clash/OpenAI/OpenAI.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/OpenAi.list
-            format: clash_list
-            priority: 80
       shadowrocket:
         native:
           - source: blackmatrix7
@@ -86,10 +70,6 @@ services:
             path: rule/Clash/OpenAI/OpenAI.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/OpenAi.list
-            format: clash_list
-            priority: 80
     override: overrides/services/OpenAI.yaml
     notes: "AI service"
   Claude:
@@ -384,10 +364,6 @@ services:
             path: rule/Clash/YouTube/YouTube.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/YouTube.list
-            format: clash_list
-            priority: 80
       loon:
         native:
           - source: blackmatrix7
@@ -404,20 +380,12 @@ services:
             path: rule/Clash/YouTube/YouTube.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/YouTube.list
-            format: clash_list
-            priority: 80
       clash:
         native:
           - source: blackmatrix7
             path: rule/Clash/YouTube/YouTube.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/YouTube.list
-            format: clash_list
-            priority: 80
         shadowrocket:
           - source: blackmatrix7
             path: rule/Shadowrocket/YouTube/YouTube.list
@@ -436,10 +404,6 @@ services:
             path: rule/Clash/YouTube/YouTube.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/YouTube.list
-            format: clash_list
-            priority: 80
       shadowrocket:
         native:
           - source: blackmatrix7
@@ -452,10 +416,6 @@ services:
             path: rule/Clash/YouTube/YouTube.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/YouTube.list
-            format: clash_list
-            priority: 80
     notes: "Streaming media"
   Google:
     enabled: true
@@ -473,10 +433,6 @@ services:
             path: rule/Clash/Google/Google.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Google.list
-            format: clash_list
-            priority: 80
       loon:
         native:
           - source: blackmatrix7
@@ -493,20 +449,12 @@ services:
             path: rule/Clash/Google/Google.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Google.list
-            format: clash_list
-            priority: 80
       clash:
         native:
           - source: blackmatrix7
             path: rule/Clash/Google/Google.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Google.list
-            format: clash_list
-            priority: 80
         shadowrocket:
           - source: blackmatrix7
             path: rule/Shadowrocket/Google/Google.list
@@ -525,10 +473,6 @@ services:
             path: rule/Clash/Google/Google.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Google.list
-            format: clash_list
-            priority: 80
       shadowrocket:
         native:
           - source: blackmatrix7
@@ -541,10 +485,6 @@ services:
             path: rule/Clash/Google/Google.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Google.list
-            format: clash_list
-            priority: 80
     notes: "Google main services"
   GoogleVoice:
     enabled: true
@@ -2839,10 +2779,6 @@ services:
             path: rule/Clash/Telegram/Telegram.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Telegram.list
-            format: clash_list
-            priority: 80
       loon:
         native:
           - source: blackmatrix7
@@ -2859,20 +2795,12 @@ services:
             path: rule/Clash/Telegram/Telegram.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Telegram.list
-            format: clash_list
-            priority: 80
       clash:
         native:
           - source: blackmatrix7
             path: rule/Clash/Telegram/Telegram.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Telegram.list
-            format: clash_list
-            priority: 80
         shadowrocket:
           - source: blackmatrix7
             path: rule/Shadowrocket/Telegram/Telegram.list
@@ -2891,10 +2819,6 @@ services:
             path: rule/Clash/Telegram/Telegram.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Telegram.list
-            format: clash_list
-            priority: 80
       shadowrocket:
         native:
           - source: blackmatrix7
@@ -2907,10 +2831,6 @@ services:
             path: rule/Clash/Telegram/Telegram.yaml
             format: clash_yaml
             priority: 100
-          - source: acl4ssr
-            path: Clash/Ruleset/Telegram.list
-            format: clash_list
-            priority: 80
     notes: "Messaging"
   TelegramNL:
     enabled: true

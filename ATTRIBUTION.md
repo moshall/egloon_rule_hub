@@ -5,15 +5,6 @@ Keep this file in public repositories so the upstream relationship stays visible
 
 ## Upstream Sources
 
-### acl4ssr
-
-- Kind: `acl4ssr_repo`
-- Repo: `ACL4SSR/ACL4SSR`
-- Branch: `master`
-- Base raw URL: `https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master`
-- Referenced by services: 4
-- Services: Google, OpenAI, Telegram, YouTube
-
 ### blackmatrix7
 
 - Kind: `blackmatrix7_repo`

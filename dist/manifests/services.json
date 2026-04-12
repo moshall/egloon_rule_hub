@@ -1739,30 +1739,30 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "Google main services",
-    "source_count": 4,
+    "source_count": 3,
     "target_sources": {
       "clash": {
         "clash": 0,
-        "native": 2,
+        "native": 1,
         "shadowrocket": 1
       },
       "egern": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "loon": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 1
       },
       "quantumultx": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "shadowrocket": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 0
       }
@@ -2489,30 +2489,30 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "AI service",
-    "source_count": 4,
+    "source_count": 3,
     "target_sources": {
       "clash": {
         "clash": 0,
-        "native": 2,
+        "native": 1,
         "shadowrocket": 1
       },
       "egern": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "loon": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 1
       },
       "quantumultx": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "shadowrocket": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 0
       }
@@ -3129,30 +3129,30 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "Messaging",
-    "source_count": 4,
+    "source_count": 3,
     "target_sources": {
       "clash": {
         "clash": 0,
-        "native": 2,
+        "native": 1,
         "shadowrocket": 1
       },
       "egern": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "loon": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 1
       },
       "quantumultx": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "shadowrocket": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 0
       }
@@ -3689,30 +3689,30 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 4,
+    "source_count": 3,
     "target_sources": {
       "clash": {
         "clash": 0,
-        "native": 2,
+        "native": 1,
         "shadowrocket": 1
       },
       "egern": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "loon": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 1
       },
       "quantumultx": {
-        "clash": 2,
+        "clash": 1,
         "native": 0,
         "shadowrocket": 1
       },
       "shadowrocket": {
-        "clash": 2,
+        "clash": 1,
         "native": 1,
         "shadowrocket": 0
       }

@@ -34,8 +34,6 @@ payload:
 - IP-CIDR,24.199.123.28/32
 - IP-CIDR,64.23.132.171/32
 - IP-ASN,20473
-- DOMAIN-SUFFIX,challenges.cloudflare.com
-- DOMAIN-SUFFIX,sora.com
 - DOMAIN,cdn.usefathom.com
 - DOMAIN-SUFFIX,anthropic.com
 - DOMAIN-SUFFIX,claude.ai
@@ -102,6 +100,7 @@ payload:
 - DOMAIN,www.bing.com
 - DOMAIN-SUFFIX,api.microsoftapp.net
 - DOMAIN-SUFFIX,bing-shopping.microsoft-falcon.io
+- DOMAIN-SUFFIX,challenges.cloudflare.com
 - DOMAIN-SUFFIX,edgeservices.bing.com
 - DOMAIN-KEYWORD,openaicom-api
 - IP-ASN,14061

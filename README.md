@@ -91,14 +91,12 @@ python -m egloon_rule_hub bootstrap
 The catalog is now wired to real upstreams:
 
 - `blackmatrix7` as the main source for the current service set
-- `ACL4SSR` as a second source for `OpenAI`, `Google`, `Telegram`, and `YouTube`
 
 Current state:
 
 - all cataloged services publish target-first artifacts
 - Loon publishes `.lsr` by default, preserving selected-family headings/comments when available
 - bundle artifacts are generated for `ai`, `china`, `commerce`, `gaming`, `google`, `social`, and `streaming`
-- within-family multi-source merge remains active on the seeded overlap services listed above
 
 This is enough to validate the real end-to-end generation path for per-service files, bundle files, selected-family provenance, and target adaptation behavior.
 

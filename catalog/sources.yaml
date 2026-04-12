@@ -5,12 +5,6 @@ sources:
     branch: master
     base_raw_url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master
 
-  acl4ssr:
-    kind: acl4ssr_repo
-    repo: ACL4SSR/ACL4SSR
-    branch: master
-    base_raw_url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master
-
   generic_remote:
     kind: remote
 
