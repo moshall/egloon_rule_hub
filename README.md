@@ -1,73 +1,123 @@
 # egloon_rule_hub
 
-Target-first proxy rule hub for Egern, Loon, Clash, QuantumultX, and Shadowrocket.
+面向 Egern、Loon、Clash、QuantumultX、Shadowrocket 的目标优先代理规则仓库。
 
-The project goal is simple:
+这个项目不追求“全网最全”，而是追求“我们真正会用、能持续自动更新、来源清晰可追踪”。
 
-- track only the rule sets we actually use
-- keep a light internal model instead of hard-wiring one client format
-- publish stable per-service rule URLs and bundle URLs
-- publish one selected upstream family per service/target directory
-- support self-maintained TXT services under `Source/TXT/` as a first-class source path
-- run sync and validation in GitHub Actions instead of consuming VPS resources
+## 项目目标
 
-## Public Repo Note
+- 只跟踪实际需要的服务规则，不做无边界收录
+- 用统一的中间模型管理规则，而不是把某一个客户端格式写死
+- 为每个服务和每个合并包发布稳定的规则目录与文件路径
+- 每个 `目标客户端 + 服务目录` 只选择一个最终上游家族，避免来源混杂
+- 把 `Source/TXT/` 下的自维护规则作为一等输入源
+- 通过 GitHub Actions 执行同步、构建、校验，尽量不占用 VPS 资源
 
-This repository can be published as a public GitHub repository.
+## 仓库定位
 
-- upstream attribution is tracked in [ATTRIBUTION.md](ATTRIBUTION.md)
-- upstream README tracking outputs are generated during `bootstrap` in [dist/manifests/upstream_docs.json](dist/manifests/upstream_docs.json) and [dist/upstream-readmes/](dist/upstream-readmes/)
-- icon sync outputs are generated during `bootstrap` in [dist/manifests/icons.json](dist/manifests/icons.json)
-- when an upstream README is unavailable, the manifest records `status: missing` with `snapshot_path: null`
-- when an upstream icon is unavailable, the manifest records `matched: false` with a strict reason instead of guessing
-- generated artifacts in `dist/` are transformed outputs built from upstream rule sources or self-maintained TXT inputs
-- the repository keeps upstream references visible in both the README and `ATTRIBUTION.md`
+这是一个可公开发布的规则生成仓库。
 
-## Current Stage
+- 上游引用统一记录在 [ATTRIBUTION.md](ATTRIBUTION.md)
+- 上游 README 抓取结果记录在 [dist/manifests/upstream_docs.json](dist/manifests/upstream_docs.json) 和 `dist/upstream-readmes/`
+- 图标同步结果记录在 [dist/manifests/icons.json](dist/manifests/icons.json)
+- 如果上游 README 不可用，清单会标记 `status: missing`
+- 如果上游图标没有严格匹配成功，清单会保留未匹配原因，而不是猜测性补图
+- `dist/` 中的内容是由上游规则源或 `Source/TXT/` 自维护源转换得到的生成产物
 
-This repository is initialized with:
+## 核心设计
 
-- project structure
-- catalog files
-- a light Python CLI
-- basic parsers and emitters
-- real source fetching and rule rendering for an initial `blackmatrix7` subset
-- baseline GitHub Actions workflows
+### 1. 目标客户端优先
 
-The current implementation fetches and renders the seeded real service artifacts with strict family selection and target-aware publication. It does not yet implement full upstream coverage or every planned adapter.
+发布结果不是按“抓了哪些上游仓库”来组织，而是按“用户最终要给哪个客户端使用”来组织。最终产物统一落在：
 
-## Design Direction
+```text
+Rule/<Target>/<Service>/
+Rule/<Target>/<Bundle>/
+```
 
-- Multiple upstreams are supported, but each published service/target now selects exactly one source family.
-- Family selection is strict: `native -> shadowrocket -> clash`, stop at the first non-empty family, then merge only within that family.
-- Services are the main entrypoint, direct source paths and remote URLs are also supported.
-- Self-maintained services can also originate from `Source/TXT/<Service>.txt`; those TXT files are treated as canonical service inputs and generate target READMEs from current artifact metadata.
-- Rule-set metadata lives at the rule-set level, not on every rule line.
-- Bundles reference services instead of duplicating rules.
+例如：
 
-## Published Layout
+- `Rule/Egern/OpenAI/OpenAI.yaml`
+- `Rule/Loon/OpenAI/OpenAI.lsr`
+- `Rule/Clash/OpenAI/OpenAI.yaml`
+- `Rule/QuantumultX/OpenAI/OpenAI.list`
 
-Per-service artifacts now appear under `Rule/<TargetDir>/<Service>/`, pairing the service README with the published file, `icon.png` when a strict upstream match exists, and selected-family provenance (for example `Rule/Clash/OpenAI/OpenAI.yaml`, `Rule/Loon/OpenAI/OpenAI.lsr`, and `Rule/Egern/OpenAI/OpenAI.yaml`). Bundles publish under the same `Rule/<TargetDir>/<Bundle>/` layout.
+每个目录下会同时放：
 
-## Supported Target Formats
+- 规则文件
+- `README.md`
+- `icon.png`（仅当严格匹配到上游图标时生成）
 
-- Egern rule-set YAML
-- Loon `.lsr` by default
+### 2. 上游选择是严格的
+
+同一个服务在同一个目标客户端下，按固定优先级选择上游家族：
+
+```text
+native -> shadowrocket -> clash
+```
+
+规则是：
+
+- 命中第一个非空家族后停止
+- 只在该家族内部做合并和去重
+- 不跨家族混拼，避免把语义不同的规则源硬凑在一起
+
+这意味着仓库支持多上游，但每个最终发布目录的来源是单一且可解释的。
+
+### 3. 自维护 TXT 规则是一等输入
+
+除了远程上游，还支持在 `Source/TXT/<Service>.txt` 直接维护规则。
+
+这类 TXT 源会：
+
+- 作为服务的规范输入
+- 自动参与各客户端目标格式转换
+- 自动生成对应服务目录下的 `README.md`
+- 在 GitHub Actions 定时任务中被重新处理和发布
+
+当前这一路径已用于例如：
+
+- `Source/TXT/Feishu.txt`
+- `Source/TXT/IyfTv.txt`
+- `Source/TXT/AppleIntelligence.txt`
+
+### 4. Bundle 是合并产物，不是额外维护一套规则
+
+如 `AI`、`ChinaBank` 这类合并包，内部是基于已定义服务做聚合、去重、再发布。
+
+这样可以同时满足两类需求：
+
+- 直接使用合并后的大包
+- 继续按单个服务自由组合
+
+## 当前支持的目标格式
+
+- Egern `rule-set` YAML
+- Loon `.lsr`（当前默认输出为 `.lsr`）
 - Clash / mihomo classical rule-provider YAML
 - QuantumultX `.list`
 - Shadowrocket `.list`
 
-## Catalog Files
+## 目录说明
 
-- `catalog/sources.yaml`: upstream definitions
-- `catalog/targets.yaml`: enabled output clients
-- `catalog/services.yaml`: service catalog grouped by output target and source family
-- `catalog/bundles.yaml`: grouped rule bundles
-- `Source/TXT/`: self-maintained service sources that publish to the preferred target allowlist intersected with configured targets (`egern`, `loon`, `clash`, `quantumultx`, `shadowrocket`)
+- `catalog/sources.yaml`：上游源定义
+- `catalog/targets.yaml`：启用的目标客户端定义
+- `catalog/services.yaml`：服务清单，按目标和来源策略组织
+- `catalog/bundles.yaml`：合并包定义
+- `Source/TXT/`：自维护 TXT 规则源
+- `src/egloon_rule_hub/`：抓取、解析、归一化、转换、文档渲染主逻辑
+- `Rule/`：最终发布给各客户端直接引用的规则目录
+- `dist/`：构建清单、来源快照、追踪元数据
 
-## CLI
+## 本地使用
 
-After installing the package:
+安装：
+
+```bash
+pip install -e .
+```
+
+常用命令：
 
 ```bash
 python -m egloon_rule_hub validate-catalog
@@ -78,39 +128,48 @@ python -m egloon_rule_hub refresh-txt-sources
 python -m egloon_rule_hub bootstrap
 ```
 
-`refresh-txt-sources` updates generated TXT inputs under `Source/TXT/`, currently including the official Feishu whitelist snapshot at `Source/TXT/Feishu.txt`.
+命令说明：
 
-`render-docs` is publish-docs-only: it renders target README files plus root attribution metadata without rebuilding rule artifacts.
+- `validate-catalog`：校验目录配置是否完整、可解析
+- `render-rules`：生成规则文件
+- `render-manifests`：生成服务、目标、Bundle 等清单
+- `render-docs`：只重建 README 和归属说明，不重建规则文件
+- `refresh-txt-sources`：刷新 `Source/TXT/` 下的自动生成源，目前包含 Feishu 官方白名单抓取
+- `bootstrap`：一键执行校验、规则生成、README 跟踪、图标同步、公共说明渲染
 
-`bootstrap` renders fresh target artifacts first, syncs strict upstream icons, then uses that artifact graph to render target READMEs. Upstream-backed services still attach upstream README manifest data when available, while self-maintained TXT services render README metadata directly from `Source/TXT/<Service>.txt`.
+## 自动化更新
 
-`bootstrap` runs validation, target-artifact build/render, manifest rendering, upstream README snapshot rendering, icon sync, and public README/attribution rendering in one pass.
+仓库当前使用两个 GitHub Actions 工作流：
 
-## Seeded Real Sources
+- `.github/workflows/validate.yml`
+  - 在 `push`、`pull_request`、手动触发时运行
+  - 用于做基础校验和构建冒烟检查
+- `.github/workflows/sync-rules.yml`
+  - 支持手动触发
+  - 每日北京时间 `03:30` 定时执行一次
+  - 自动刷新 `Source/TXT/`
+  - 自动执行 `bootstrap`
+  - 自动提交 `README.md`、`ATTRIBUTION.md`、`Rule/`、`dist/`、`Source/TXT/` 的更新
 
-The catalog is now wired to real upstreams:
+## 当前状态
 
-- `blackmatrix7` as the main source for the current service set
+当前仓库已经具备这些真实能力：
 
-Current state:
+- 已接入真实上游规则源，并以 `blackmatrix7` 为当前主来源
+- 已支持目标客户端优先的发布目录结构
+- 已支持 Bundle 规则输出
+- 已支持上游 README 跟踪与归属记录
+- 已支持严格图标匹配与同步
+- 已支持自维护 TXT 规则源自动转写与发布
 
-- all cataloged services publish target-first artifacts
-- Loon publishes `.lsr` by default, preserving selected-family headings/comments when available
-- bundle artifacts are generated for `ai`, `china`, `commerce`, `gaming`, `google`, `social`, and `streaming`
+这意味着仓库已经能跑通“抓取上游 -> 归一化 -> 转换目标格式 -> 生成 README -> 发布目录 -> 定时自动更新”的完整链路。
 
-This is enough to validate the real end-to-end generation path for per-service files, bundle files, selected-family provenance, and target adaptation behavior.
+## 引用与说明
 
-## GitHub Actions
-
-- `validate.yml`: runs on push, pull request, and manual dispatch
-- `sync-rules.yml`: scheduled and manual sync workflow that refreshes generated TXT sources, runs bootstrap, and commits refreshed outputs
-
-## References
-
-- Egern rules docs: https://egernapp.com/zh-CN/docs/configuration/rules/
-- Loon docs index: https://nsloon.app/docs/category/%E8%A7%84%E5%88%99/
-- Loon subscription rules: https://nsloon.app/docs/Rule/sub_rule/
-- mihomo rule-providers: https://wiki.metacubex.one/en/config/rule-providers/content/
-- Quantumult X repo: https://github.com/kjfx/QuantumultX
-- blackmatrix7 rules: https://github.com/blackmatrix7/ios_rule_script/tree/master/rule
-- upstream attribution record: [ATTRIBUTION.md](ATTRIBUTION.md)
+- Egern 规则文档：https://egernapp.com/zh-CN/docs/configuration/rules/
+- Loon 文档索引：https://nsloon.app/docs/category/%E8%A7%84%E5%88%99/
+- Loon 订阅规则说明：https://nsloon.app/docs/Rule/sub_rule/
+- mihomo rule-providers：https://wiki.metacubex.one/en/config/rule-providers/content/
+- QuantumultX 仓库：https://github.com/kjfx/QuantumultX
+- blackmatrix7 规则仓库：https://github.com/blackmatrix7/ios_rule_script/tree/master/rule
+- 上游归属记录：[ATTRIBUTION.md](ATTRIBUTION.md)
