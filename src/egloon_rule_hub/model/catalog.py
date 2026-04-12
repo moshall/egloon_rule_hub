@@ -272,14 +272,6 @@ def load_catalog(root: Path) -> Catalog:
                     for family_name, family_payload in target_payload.items()
                     if family_name != "fallback_order"
                 }
-                variants = {
-                    name: ServiceTargetVariantDef(
-                        name=name,
-                        primary=True,
-                        families=families,
-                        fallback_order=target_fallback_order,
-                    )
-                }
                 for family_sources in families.values():
                     flat_sources.extend(family_sources)
             target_sources[target_name] = ServiceTargetDef(

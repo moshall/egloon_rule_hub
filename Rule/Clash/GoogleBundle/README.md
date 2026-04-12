@@ -8,8 +8,8 @@ This README documents the merged Clash bundle artifact for GoogleBundle.
 ## Included Services
 
 - Google (primary variant: `Google`) - [README](../Google/README.md). Additional manual variants remain available: `Google_No_Resolve`
-- GoogleVoice (primary variant: `GoogleVoice`) - [README](../GoogleVoice/README.md)
-- GoogleEarth (primary variant: `GoogleEarth`) - [README](../GoogleEarth/README.md)
-- GoogleSearch (primary variant: `GoogleSearch`) - [README](../GoogleSearch/README.md)
-- YouTube (primary variant: `YouTube`) - [README](../YouTube/README.md)
-- YouTubeMusic (primary variant: `YouTubeMusic`) - [README](../YouTubeMusic/README.md)
+- GoogleVoice (primary variant: `GoogleVoice`) - [README](../GoogleVoice/README.md). Additional manual variants remain available: `GoogleVoice_No_Resolve`
+- GoogleEarth (primary variant: `GoogleEarth`) - [README](../GoogleEarth/README.md). Additional manual variants remain available: `GoogleEarth_No_Resolve`
+- GoogleSearch (primary variant: `GoogleSearch`) - [README](../GoogleSearch/README.md). Additional manual variants remain available: `GoogleSearch_No_Resolve`
+- YouTube (primary variant: `YouTube`) - [README](../YouTube/README.md). Additional manual variants remain available: `YouTube_No_Resolve`
+- YouTubeMusic (primary variant: `YouTubeMusic`) - [README](../YouTubeMusic/README.md). Additional manual variants remain available: `YouTubeMusic_No_Resolve`

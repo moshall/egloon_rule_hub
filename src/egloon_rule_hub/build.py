@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
+from pathlib import PurePosixPath
 from urllib.request import Request, urlopen
 import re
 import shutil
@@ -42,6 +44,10 @@ TARGET_RENDERERS = {
     "shadowrocket": ("list", render_shadowrocket_rules),
 }
 
+GITHUB_TREE_SOURCE_KINDS = frozenset(
+    {"github_repo", "blackmatrix7_repo", "acl4ssr_repo", "shadowrocket_repo"}
+)
+
 
 TARGET_DISPLAY_NAMES = {
     "egern": "Egern",
@@ -55,11 +61,134 @@ BUNDLE_DISPLAY_NAMES = {
     "ai": "AI",
 }
 
+_REPO_TREE_CACHE: dict[tuple[str, str], list[str]] = {}
+
 
 def fetch_text(url: str) -> str:
     request = Request(url, headers={"User-Agent": "egloon-rule-hub/0.1"})
     with urlopen(request, timeout=30) as response:  # noqa: S310
         return response.read().decode("utf-8")
+
+
+def _fetch_repo_tree(source_def: SourceDef) -> list[str]:
+    if not source_def.repo or not source_def.branch:
+        return []
+    cache_key = (source_def.repo, source_def.branch)
+    cached = _REPO_TREE_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+
+    api_url = (
+        f"https://api.github.com/repos/{source_def.repo}/git/trees/"
+        f"{source_def.branch}?recursive=1"
+    )
+    request = Request(api_url, headers={"User-Agent": "egloon-rule-hub/0.1"})
+    with urlopen(request, timeout=30) as response:  # noqa: S310
+        payload = json.loads(response.read().decode("utf-8"))
+    tree = payload.get("tree", [])
+    repo_paths = [
+        str(item.get("path"))
+        for item in tree
+        if item.get("type") == "blob" and isinstance(item.get("path"), str)
+    ]
+    _REPO_TREE_CACHE[cache_key] = repo_paths
+    return repo_paths
+
+
+def _discover_source_ref_variants(
+    service_name: str,
+    source_def: SourceDef,
+    source_ref: SourceRef,
+    repo_paths: list[str],
+) -> dict[str, SourceRef]:
+    if source_def.kind not in GITHUB_TREE_SOURCE_KINDS or not source_ref.path:
+        return {service_name: source_ref}
+
+    base_path = PurePosixPath(source_ref.path)
+    base_dir = str(base_path.parent)
+    base_suffix = base_path.suffix
+    service_pattern = re.compile(rf"^{re.escape(service_name)}(?:[_.-].+)?$")
+
+    matches: list[str] = []
+    for repo_path in repo_paths:
+        repo_file = PurePosixPath(repo_path)
+        if str(repo_file.parent) != base_dir:
+            continue
+        if repo_file.suffix != base_suffix:
+            continue
+        if not service_pattern.fullmatch(repo_file.stem):
+            continue
+        matches.append(repo_path)
+
+    if not matches:
+        return {service_name: source_ref}
+
+    discovered: dict[str, SourceRef] = {}
+    for repo_path in sorted(matches, key=lambda value: (PurePosixPath(value).stem != service_name, value)):
+        variant_name = PurePosixPath(repo_path).stem
+        discovered[variant_name] = SourceRef(
+            source=source_ref.source,
+            path=repo_path,
+            url=source_ref.url,
+            format=source_ref.format,
+            priority=source_ref.priority,
+        )
+    return discovered
+
+
+def _auto_discovered_target_variants(
+    catalog: Catalog,
+    service: ServiceDef,
+    target_name: str,
+    target_config: ServiceTargetDef,
+    repo_tree_fetcher=_fetch_repo_tree,
+) -> dict[str, ServiceTargetVariantDef]:
+    if target_config.variants:
+        return target_config.normalized_variants(service.name)
+
+    default_variant = target_config.normalized_variants(service.name)[service.name]
+    selected_family, family_sources = _selected_family_sources(
+        catalog,
+        service,
+        target_name,
+        default_variant,
+        target_config.fallback_order,
+    )
+    if not selected_family or not family_sources:
+        return target_config.normalized_variants(service.name)
+
+    variant_sources: dict[str, list[SourceRef]] = {}
+    for source_ref in sorted(family_sources, key=lambda item: item.priority, reverse=True):
+        source_def = catalog.sources[source_ref.source]
+        repo_paths = repo_tree_fetcher(source_def)
+        discovered = _discover_source_ref_variants(
+            service.name,
+            source_def,
+            source_ref,
+            repo_paths,
+        )
+        for variant_name, variant_source_ref in discovered.items():
+            variant_sources.setdefault(variant_name, []).append(variant_source_ref)
+
+    if len(variant_sources) <= 1:
+        return target_config.normalized_variants(service.name)
+
+    primary_variant_name = (
+        service.name if service.name in variant_sources else sorted(variant_sources)[0]
+    )
+    ordered_variant_names = [
+        primary_variant_name,
+        *sorted(name for name in variant_sources if name != primary_variant_name),
+    ]
+    return {
+        variant_name: ServiceTargetVariantDef(
+            name=variant_name,
+            primary=variant_name == primary_variant_name,
+            families={selected_family: list(variant_sources[variant_name])},
+            fallback_order=[selected_family],
+        )
+        for variant_name in ordered_variant_names
+    }
 
 
 def _bundle_display_name(
@@ -205,9 +334,16 @@ def build_target_artifact(
     if target_config is None:
         return None
 
+    variant_defs = _auto_discovered_target_variants(
+        catalog,
+        service,
+        target_name,
+        target_config,
+    )
+
     variants: dict[str, TargetArtifactVariant] = {}
     primary_variant_name: str | None = None
-    for variant_name, variant_def in target_config.normalized_variants(service_name).items():
+    for variant_name, variant_def in variant_defs.items():
         family, source_refs = _selected_family_sources(
             catalog,
             service,

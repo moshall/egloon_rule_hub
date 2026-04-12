@@ -7,7 +7,7 @@ This README documents the merged Shadowrocket bundle artifact for Gaming.
 
 ## Included Services
 
-- Nintendo (primary variant: `Nintendo`) - [README](../Nintendo/README.md)
+- Nintendo (primary variant: `Nintendo`) - [README](../Nintendo/README.md). Additional manual variants remain available: `Nintendo_Resolve`
 - Nvidia (primary variant: `Nvidia`) - [README](../Nvidia/README.md)
 - Sony (primary variant: `Sony`) - [README](../Sony/README.md)
 - Steam (primary variant: `Steam`) - [README](../Steam/README.md)

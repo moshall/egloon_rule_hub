@@ -7,8 +7,8 @@ This README documents the merged Shadowrocket bundle artifact for Streaming.
 
 ## Included Services
 
-- Netflix (primary variant: `Netflix`) - [README](../Netflix/README.md)
-- Spotify (primary variant: `Spotify`) - [README](../Spotify/README.md)
+- Netflix (primary variant: `Netflix`) - [README](../Netflix/README.md). Additional manual variants remain available: `Netflix_Resolve`
+- Spotify (primary variant: `Spotify`) - [README](../Spotify/README.md). Additional manual variants remain available: `Spotify_Resolve`
 - HBO (primary variant: `HBO`) - [README](../HBO/README.md)
 - HBOAsia (primary variant: `HBOAsia`) - [README](../HBOAsia/README.md)
 - HBOHK (primary variant: `HBOHK`) - [README](../HBOHK/README.md)

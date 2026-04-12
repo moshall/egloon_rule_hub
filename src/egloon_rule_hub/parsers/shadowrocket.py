@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from egloon_rule_hub.model.rules import Rule
+from egloon_rule_hub.parsers.common import parse_standard_or_raw_rule
 
 
 def parse_shadowrocket_list(content: str) -> list[Rule]:
@@ -9,7 +10,5 @@ def parse_shadowrocket_list(content: str) -> list[Rule]:
         line = raw_line.strip()
         if not line or line.startswith("#"):
             continue
-        rule_type, value = line.split(",", 1)
-        rules.append(Rule(rule_type.strip().upper(), value.strip()))
+        rules.append(parse_standard_or_raw_rule(line))
     return rules
-

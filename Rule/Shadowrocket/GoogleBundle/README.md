@@ -11,5 +11,5 @@ This README documents the merged Shadowrocket bundle artifact for GoogleBundle.
 - GoogleVoice (primary variant: `GoogleVoice`) - [README](../GoogleVoice/README.md)
 - GoogleEarth (primary variant: `GoogleEarth`) - [README](../GoogleEarth/README.md)
 - GoogleSearch (primary variant: `GoogleSearch`) - [README](../GoogleSearch/README.md)
-- YouTube (primary variant: `YouTube`) - [README](../YouTube/README.md)
+- YouTube (primary variant: `YouTube`) - [README](../YouTube/README.md). Additional manual variants remain available: `YouTube_Resolve`
 - YouTubeMusic (primary variant: `YouTubeMusic`) - [README](../YouTubeMusic/README.md)

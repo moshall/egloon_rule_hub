@@ -434,69 +434,33 @@ services:
             format: clash_yaml
             priority: 100
       loon:
-        variants:
-          Google:
-            primary: true
-            native:
-              - source: blackmatrix7
-                path: rule/Loon/Google/Google.list
-                format: loon_list
-                priority: 90
-            shadowrocket:
-              - source: blackmatrix7
-                path: rule/Shadowrocket/Google/Google.list
-                format: shadowrocket_list
-                priority: 95
-            clash:
-              - source: blackmatrix7
-                path: rule/Clash/Google/Google.yaml
-                format: clash_yaml
-                priority: 100
-          Google_Resolve:
-            primary: false
-            native:
-              - source: blackmatrix7
-                path: rule/Loon/Google/Google_Resolve.list
-                format: loon_list
-                priority: 90
-            shadowrocket:
-              - source: blackmatrix7
-                path: rule/Shadowrocket/Google/Google_Resolve.list
-                format: shadowrocket_list
-                priority: 95
-            clash:
-              - source: blackmatrix7
-                path: rule/Clash/Google/Google_No_Resolve.yaml
-                format: clash_yaml
-                priority: 100
+        native:
+          - source: blackmatrix7
+            path: rule/Loon/Google/Google.list
+            format: loon_list
+            priority: 90
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
       clash:
-        variants:
-          Google:
-            primary: true
-            native:
-              - source: blackmatrix7
-                path: rule/Clash/Google/Google.yaml
-                format: clash_yaml
-                priority: 100
-            shadowrocket:
-              - source: blackmatrix7
-                path: rule/Shadowrocket/Google/Google.list
-                format: shadowrocket_list
-                priority: 95
-            clash: []
-          Google_No_Resolve:
-            primary: false
-            native:
-              - source: blackmatrix7
-                path: rule/Clash/Google/Google_No_Resolve.yaml
-                format: clash_yaml
-                priority: 100
-            shadowrocket:
-              - source: blackmatrix7
-                path: rule/Shadowrocket/Google/Google_Resolve.list
-                format: shadowrocket_list
-                priority: 95
-            clash: []
+        native:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
+        shadowrocket:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        clash: []
       quantumultx:
         native: []
         shadowrocket:
@@ -510,33 +474,17 @@ services:
             format: clash_yaml
             priority: 100
       shadowrocket:
-        variants:
-          Google:
-            primary: true
-            native:
-              - source: blackmatrix7
-                path: rule/Shadowrocket/Google/Google.list
-                format: shadowrocket_list
-                priority: 95
-            shadowrocket: []
-            clash:
-              - source: blackmatrix7
-                path: rule/Clash/Google/Google.yaml
-                format: clash_yaml
-                priority: 100
-          Google_Resolve:
-            primary: false
-            native:
-              - source: blackmatrix7
-                path: rule/Shadowrocket/Google/Google_Resolve.list
-                format: shadowrocket_list
-                priority: 95
-            shadowrocket: []
-            clash:
-              - source: blackmatrix7
-                path: rule/Clash/Google/Google_No_Resolve.yaml
-                format: clash_yaml
-                priority: 100
+        native:
+          - source: blackmatrix7
+            path: rule/Shadowrocket/Google/Google.list
+            format: shadowrocket_list
+            priority: 95
+        shadowrocket: []
+        clash:
+          - source: blackmatrix7
+            path: rule/Clash/Google/Google.yaml
+            format: clash_yaml
+            priority: 100
     notes: "Google main services"
   GoogleVoice:
     enabled: true
