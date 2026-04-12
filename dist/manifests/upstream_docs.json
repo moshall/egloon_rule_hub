@@ -4900,6 +4900,7 @@
       "variant_primary": true
     }
   ],
+  "GoogleExtended": [],
   "GoogleFCM": [
     {
       "conversion_path": "Shadowrocket -> Egern",
@@ -6162,6 +6163,7 @@
       "variant_primary": false
     }
   ],
+  "Manus": [],
   "Naver": [
     {
       "conversion_path": "Shadowrocket -> Egern",

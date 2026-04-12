@@ -1815,6 +1815,20 @@
       "shadowrocket"
     ]
   },
+  "GoogleExtended": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "",
+    "source_count": 0,
+    "target_sources": {},
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
   "GoogleFCM": {
     "enabled": true,
     "fallback_order": [],
@@ -2245,6 +2259,20 @@
       },
       "shadowrocket": {}
     },
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket"
+    ]
+  },
+  "Manus": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "",
+    "source_count": 0,
+    "target_sources": {},
     "targets": [
       "egern",
       "loon",

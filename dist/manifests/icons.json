@@ -382,6 +382,13 @@
     "source_path": null,
     "source_url": null
   },
+  "GoogleExtended": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
   "GoogleFCM": {
     "matched": false,
     "published_paths": [],
@@ -460,6 +467,13 @@
     "source_url": null
   },
   "MEGA": {
+    "matched": false,
+    "published_paths": [],
+    "reason": "strict_match_not_found",
+    "source_path": null,
+    "source_url": null
+  },
+  "Manus": {
     "matched": false,
     "published_paths": [],
     "reason": "strict_match_not_found",
