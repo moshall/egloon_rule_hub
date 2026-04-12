@@ -104,3 +104,5 @@ DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-SUFFIX,edgeservices.bing.com
 DOMAIN-KEYWORD,openaicom-api
 IP-ASN,14061,no-resolve
+DOMAIN-SUFFIX,manus.im
+DOMAIN-SUFFIX,manuscdn.com

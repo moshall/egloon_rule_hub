@@ -13,3 +13,4 @@ This README documents the merged Egern bundle artifact for AI.
 - BardAI (primary variant: `BardAI`) - [README](../BardAI/README.md)
 - Twitter (primary variant: `Twitter`) - [README](../Twitter/README.md)
 - Copilot (primary variant: `Copilot`) - [README](../Copilot/README.md)
+- Manus (primary variant: `Manus`) - [README](../Manus/README.md)

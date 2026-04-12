@@ -319,7 +319,6 @@ def load_catalog(root: Path) -> Catalog:
             defaults_doc.get("fallback_order", DEFAULT_FALLBACK_ORDER)
         ),
     )
-    catalog.validate()
 
     try:
         txt_snapshots = discover_txt_services(
@@ -363,4 +362,5 @@ def load_catalog(root: Path) -> Catalog:
             ),
         )
         catalog.self_maintained_rules[service_name] = list(snapshot.rules)
+    catalog.validate()
     return catalog

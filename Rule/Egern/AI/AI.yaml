@@ -89,6 +89,8 @@ domain_suffix_set:
 - bing-shopping.microsoft-falcon.io
 - challenges.cloudflare.com
 - edgeservices.bing.com
+- manus.im
+- manuscdn.com
 domain_keyword_set:
 - openai
 - colab
