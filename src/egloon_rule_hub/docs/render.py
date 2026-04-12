@@ -28,14 +28,21 @@ def _target_display_name(target: str) -> str:
     return TARGET_DISPLAY_NAMES.get(target, target.capitalize())
 
 
-def _bundle_display_name(bundle_name: str) -> str:
+def _bundle_display_name(
+    bundle_name: str,
+    service_names: set[str] | None = None,
+) -> str:
     explicit = BUNDLE_DISPLAY_NAMES.get(bundle_name)
     if explicit:
         return explicit
     parts = [part for part in re.split(r"[^A-Za-z0-9]+", bundle_name) if part]
     if not parts:
-        return bundle_name
-    return "".join(part[:1].upper() + part[1:] for part in parts)
+        display_name = bundle_name
+    else:
+        display_name = "".join(part[:1].upper() + part[1:] for part in parts)
+    if service_names and display_name in service_names:
+        return f"{display_name}Bundle"
+    return display_name
 
 
 def _source_ref_key(source_ref: SourceRef) -> tuple[str, str | None, str | None, str | None]:
@@ -335,8 +342,14 @@ def _artifact_output_ext(target: str, publish_mode: str | None) -> str:
     }.get(target, "list")
 
 
-def _bundle_output_file(bundle_name: str, target: str, publish_mode: str | None) -> str:
-    bundle_display = _bundle_display_name(bundle_name)
+def _bundle_output_file(
+    bundle_name: str,
+    target: str,
+    publish_mode: str | None,
+    catalog: Catalog | None = None,
+) -> str:
+    service_names = set(catalog.services) if catalog is not None else None
+    bundle_display = _bundle_display_name(bundle_name, service_names)
     return f"{bundle_display}.{_artifact_output_ext(target, publish_mode)}"
 
 
@@ -720,8 +733,11 @@ def _bundle_target_readme_markdown(
     target_artifacts: dict[str, dict[str, TargetArtifact]] | None,
 ) -> str:
     bundle = catalog.bundles[bundle_name]
-    bundle_display = _bundle_display_name(bundle_name)
-    bundle_file = _bundle_output_file(bundle_name, target_name, target.publish_mode)
+    service_names = set(catalog.services)
+    bundle_display = _bundle_display_name(bundle_name, service_names)
+    bundle_file = _bundle_output_file(
+        bundle_name, target_name, target.publish_mode, catalog
+    )
 
     lines = [
         f"# {bundle_display} for {target_dir}",
@@ -929,7 +945,7 @@ def _write_bundle_readmes(
     for bundle_name, bundle in sorted(catalog.bundles.items()):
         if not bundle.enabled:
             continue
-        bundle_display = _bundle_display_name(bundle_name)
+        bundle_display = _bundle_display_name(bundle_name, set(catalog.services))
         for target_name in bundle.targets:
             target = catalog.targets.get(target_name)
             if target is None or not target.enabled:
@@ -937,7 +953,7 @@ def _write_bundle_readmes(
             target_dir = _target_display_name(target_name)
             bundle_dir = rule_root / target_dir / bundle_display
             bundle_file = bundle_dir / _bundle_output_file(
-                bundle_name, target_name, target.publish_mode
+                bundle_name, target_name, target.publish_mode, catalog
             )
             if not bundle_file.exists():
                 continue

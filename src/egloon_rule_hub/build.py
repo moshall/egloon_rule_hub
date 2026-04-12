@@ -62,14 +62,21 @@ def fetch_text(url: str) -> str:
         return response.read().decode("utf-8")
 
 
-def _bundle_display_name(bundle_name: str) -> str:
+def _bundle_display_name(
+    bundle_name: str,
+    service_names: set[str] | None = None,
+) -> str:
     explicit = BUNDLE_DISPLAY_NAMES.get(bundle_name)
     if explicit:
         return explicit
     parts = [part for part in re.split(r"[^A-Za-z0-9]+", bundle_name) if part]
     if not parts:
-        return bundle_name
-    return "".join(part[:1].upper() + part[1:] for part in parts)
+        display_name = bundle_name
+    else:
+        display_name = "".join(part[:1].upper() + part[1:] for part in parts)
+    if service_names and display_name in service_names:
+        return f"{display_name}Bundle"
+    return display_name
 
 
 def _load_override(root: Path, override_path: str | None) -> dict:
@@ -406,10 +413,11 @@ def render_rule_artifacts(
                 encoding="utf-8",
             )
 
+    service_names = set(catalog.services)
     for bundle_name, bundle in catalog.bundles.items():
         if not bundle.enabled:
             continue
-        bundle_display = _bundle_display_name(bundle_name)
+        bundle_display = _bundle_display_name(bundle_name, service_names)
         for target_name in bundle.targets:
             target = catalog.targets.get(target_name)
             renderer_info = TARGET_RENDERERS.get(target_name)
@@ -500,10 +508,11 @@ def render_target_artifacts(
                 continue
             _prune_stale_service_variant_outputs(service_dir, set(), target_name, target)
 
+    service_names = set(catalog.services)
     for bundle_name, bundle in catalog.bundles.items():
         if not bundle.enabled:
             continue
-        bundle_display = _bundle_display_name(bundle_name)
+        bundle_display = _bundle_display_name(bundle_name, service_names)
         for target_name in bundle.targets:
             target = catalog.targets.get(target_name)
             renderer_info = TARGET_RENDERERS.get(target_name)
