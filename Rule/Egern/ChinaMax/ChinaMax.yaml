@@ -1,13 +1,14 @@
 domain_suffix_set:
-- alipay
-- alibaba
-- taobao
-- tmall
 - cn
 - ms
+- alibaba
+- alipay
 - baidu
 - citic
+- icbc
 - sohu
+- taobao
+- tmall
 - unicom
 - wang
 - xn--1qqw23a
@@ -42,7 +43,6 @@ domain_suffix_set:
 - xn--vuq861b
 - xn--xhq521b
 - xn--zfr164b
-- icbc
 domain_keyword_set:
 - .tmall.com
 - alicdn
@@ -53,10 +53,10 @@ domain_keyword_set:
 - officecdn
 - taobao
 - bilibili
+- qiyi
 - hnagroup
 - stripe
 - weibo
-- qiyi
 ip_cidr_set:
 - 0.0.0.0/32
 - 1.0.1.0/24
@@ -3596,7 +3596,6 @@ ip_cidr_set:
 - 145.14.86.0/24
 - 145.14.88.0/24
 - 145.14.90.0/24
-- 145.6.0.0/16
 - 146.196.112.0/21
 - 146.196.124.0/22
 - 146.196.56.0/22
@@ -3635,6 +3634,8 @@ ip_cidr_set:
 - 148.70.0.0/16
 - 149.11.64.232/29
 - 149.129.0.0/16
+- 149.134.148.0/24
+- 149.134.152.0/24
 - 149.14.156.96/29
 - 149.41.0.0/16
 - 149.6.36.20/32
@@ -11047,12 +11048,12 @@ ip_cidr_set:
 - 2a0f:1cc5:2600::/40
 - 2a0f:1cc5:2d01::/48
 - 2a0f:1cc5:2d03::/48
-- 2a0f:1cc5:3200::/46
-- 2a0f:1cc5:3204::/47
-- 2a0f:1cc5:3206::/48
+- 2a0f:1cc5:3200::/45
+- 2a0f:1cc5:3208::/47
 - 2a0f:1cc5:3222::/48
 - 2a0f:1cc5:600::/47
 - 2a0f:1cc5:603::/48
+- 2a0f:1cc5:642::/48
 - 2a0f:1cc5:645::/48
 - 2a0f:1cc5:661::/48
 - 2a0f:1cc5:662::/48
