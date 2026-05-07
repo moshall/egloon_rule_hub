@@ -1364,6 +1364,7 @@ payload:
 - IP-CIDR,103.164.178.0/23,no-resolve
 - IP-CIDR,103.164.226.0/23,no-resolve
 - IP-CIDR,103.164.32.0/23,no-resolve
+- IP-CIDR,103.164.32.0/24,no-resolve
 - IP-CIDR,103.164.4.0/23,no-resolve
 - IP-CIDR,103.164.40.0/22,no-resolve
 - IP-CIDR,103.164.40.0/23,no-resolve
@@ -3861,7 +3862,6 @@ payload:
 - IP-CIDR,103.51.62.0/23,no-resolve
 - IP-CIDR,103.52.100.0/22,no-resolve
 - IP-CIDR,103.52.104.0/22,no-resolve
-- IP-CIDR,103.52.104.0/23,no-resolve
 - IP-CIDR,103.52.160.0/21,no-resolve
 - IP-CIDR,103.52.160.0/22,no-resolve
 - IP-CIDR,103.52.164.0/22,no-resolve
@@ -22897,10 +22897,10 @@ payload:
 - IP-CIDR,99.77.241.0/24,no-resolve
 - IP-CIDR,99.83.96.0/24,no-resolve
 - DOMAIN-KEYWORD,bilibili
+- DOMAIN-KEYWORD,qiyi
 - DOMAIN-KEYWORD,hnagroup
 - DOMAIN-KEYWORD,stripe
 - DOMAIN-KEYWORD,weibo
-- DOMAIN-KEYWORD,qiyi
 - PROCESS-NAME,com.taobao.taobao
 - PROCESS-NAME,com.bilibili.app.blue
 - PROCESS-NAME,com.bilibili.app.in
