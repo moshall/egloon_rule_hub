@@ -93,19 +93,19 @@ This layout documents a direct upstream target.
 
 ## 规则统计
 
-最后更新时间：2026-05-18 02:25:40
+最后更新时间：2026-05-20 02:40:38
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 312  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 113462  | 
+| DOMAIN-SUFFIX | 113450  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8187  | 
+| IP-CIDR | 8188  | 
 | IP-CIDR6 | 4103  | 
 | USER-AGENT | 65  | 
-| TOTAL | 126143  | 
+| TOTAL | 126132  | 
 
 
 ## Loon 
@@ -566,19 +566,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-05-18 02:25:40
+最后更新时间：2026-05-20 02:40:38
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 312  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 113462  | 
+| DOMAIN-SUFFIX | 113450  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8187  | 
+| IP-CIDR | 8188  | 
 | IP-CIDR6 | 4103  | 
 | USER-AGENT | 65  | 
-| TOTAL | 126143  | 
+| TOTAL | 126132  | 
 
 
 ## Loon 
@@ -1039,19 +1039,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-05-18 02:25:40
+最后更新时间：2026-05-20 02:40:38
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 312  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 113462  | 
+| DOMAIN-SUFFIX | 113450  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8187  | 
+| IP-CIDR | 8188  | 
 | IP-CIDR6 | 4103  | 
 | USER-AGENT | 65  | 
-| TOTAL | 126143  | 
+| TOTAL | 126132  | 
 
 
 ## Loon 
@@ -1512,19 +1512,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-05-18 02:25:40
+最后更新时间：2026-05-20 02:40:38
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 312  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 113462  | 
+| DOMAIN-SUFFIX | 113450  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8187  | 
+| IP-CIDR | 8188  | 
 | IP-CIDR6 | 4103  | 
 | USER-AGENT | 65  | 
-| TOTAL | 126143  | 
+| TOTAL | 126132  | 
 
 
 ## Loon 
@@ -1985,19 +1985,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-05-18 02:25:40
+最后更新时间：2026-05-20 02:40:38
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 312  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 113462  | 
+| DOMAIN-SUFFIX | 113450  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8187  | 
+| IP-CIDR | 8188  | 
 | IP-CIDR6 | 4103  | 
 | USER-AGENT | 65  | 
-| TOTAL | 126143  | 
+| TOTAL | 126132  | 
 
 
 ## Loon 
