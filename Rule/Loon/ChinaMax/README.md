@@ -93,19 +93,19 @@ This layout documents a direct upstream target.
 
 ## 规则统计
 
-最后更新时间：2026-06-10 02:48:59
+最后更新时间：2026-06-12 03:04:49
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 304  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 112818  | 
+| DOMAIN-SUFFIX | 112826  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8197  | 
-| IP-CIDR6 | 4129  | 
+| IP-CIDR | 8218  | 
+| IP-CIDR6 | 4139  | 
 | USER-AGENT | 65  | 
-| TOTAL | 125527  | 
+| TOTAL | 125566  | 
 
 
 ## Loon 
@@ -566,19 +566,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-06-10 02:48:59
+最后更新时间：2026-06-12 03:04:49
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 304  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 112818  | 
+| DOMAIN-SUFFIX | 112826  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8197  | 
-| IP-CIDR6 | 4129  | 
+| IP-CIDR | 8218  | 
+| IP-CIDR6 | 4139  | 
 | USER-AGENT | 65  | 
-| TOTAL | 125527  | 
+| TOTAL | 125566  | 
 
 
 ## Loon 
@@ -1039,19 +1039,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-06-10 02:48:59
+最后更新时间：2026-06-12 03:04:49
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 304  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 112818  | 
+| DOMAIN-SUFFIX | 112826  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8197  | 
-| IP-CIDR6 | 4129  | 
+| IP-CIDR | 8218  | 
+| IP-CIDR6 | 4139  | 
 | USER-AGENT | 65  | 
-| TOTAL | 125527  | 
+| TOTAL | 125566  | 
 
 
 ## Loon 
@@ -1512,19 +1512,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-06-10 02:48:59
+最后更新时间：2026-06-12 03:04:49
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 304  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 112818  | 
+| DOMAIN-SUFFIX | 112826  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8197  | 
-| IP-CIDR6 | 4129  | 
+| IP-CIDR | 8218  | 
+| IP-CIDR6 | 4139  | 
 | USER-AGENT | 65  | 
-| TOTAL | 125527  | 
+| TOTAL | 125566  | 
 
 
 ## Loon 
@@ -1985,19 +1985,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-06-10 02:48:59
+最后更新时间：2026-06-12 03:04:49
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 304  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 112818  | 
+| DOMAIN-SUFFIX | 112826  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8197  | 
-| IP-CIDR6 | 4129  | 
+| IP-CIDR | 8218  | 
+| IP-CIDR6 | 4139  | 
 | USER-AGENT | 65  | 
-| TOTAL | 125527  | 
+| TOTAL | 125566  | 
 
 
 ## Loon 
