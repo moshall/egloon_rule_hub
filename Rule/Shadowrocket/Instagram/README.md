@@ -8,7 +8,7 @@ This layout documents a direct upstream target.
 
 - Selected source family: `native`
 - Upstream native target: `Shadowrocket`
-- Icon: unavailable (strict upstream match not found)
+- Icon: [icon.png](./icon.png) ([upstream source](https://raw.githubusercontent.com/Keviin560/icon/main/src/Instagram.png))
 
 ## Published Variants
 

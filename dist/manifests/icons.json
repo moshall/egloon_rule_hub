@@ -446,11 +446,17 @@
     "source_url": null
   },
   "Instagram": {
-    "matched": false,
-    "published_paths": [],
-    "reason": "strict_match_not_found",
-    "source_path": null,
-    "source_url": null
+    "matched": true,
+    "published_paths": [
+      "Rule/Clash/Instagram/icon.png",
+      "Rule/Egern/Instagram/icon.png",
+      "Rule/Loon/Instagram/icon.png",
+      "Rule/QuantumultX/Instagram/icon.png",
+      "Rule/Shadowrocket/Instagram/icon.png"
+    ],
+    "reason": null,
+    "source_path": "src/Instagram.png",
+    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Instagram.png"
   },
   "IyfTv": {
     "matched": false,
