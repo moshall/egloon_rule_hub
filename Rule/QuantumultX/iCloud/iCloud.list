@@ -9,6 +9,7 @@ HOST-SUFFIX,cdn-apple.com,iCloud
 HOST-SUFFIX,gc.apple.com,iCloud
 HOST-SUFFIX,icloud-apple.cn,iCloud
 HOST-SUFFIX,icloud-content.com,iCloud
+HOST-SUFFIX,icloud-content.com.cn,iCloud
 HOST-SUFFIX,icloud-isupport.com,iCloud
 HOST-SUFFIX,icloud-sandbox.com,iCloud
 HOST-SUFFIX,icloud.apple.com,iCloud

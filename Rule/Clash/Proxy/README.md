@@ -83,17 +83,17 @@ Proxy规则由《RULE GENERATOR 规则生成器》自动生成。
 
 ## 规则统计
 
-最后更新时间：2026-06-28 02:29:41
+最后更新时间：2026-06-30 02:45:14
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 9  | 
 | DOMAIN-KEYWORD | 26  | 
-| DOMAIN-SUFFIX | 6731  | 
+| DOMAIN-SUFFIX | 6746  | 
 | IP-CIDR | 93  | 
 | IP-CIDR6 | 4  | 
-| TOTAL | 6863  | 
+| TOTAL | 6878  | 
 
 
 ## Clash 
@@ -224,17 +224,17 @@ Proxy规则由《RULE GENERATOR 规则生成器》自动生成。
 
 ## 规则统计
 
-最后更新时间：2026-06-28 02:29:41
+最后更新时间：2026-06-30 02:45:14
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 9  | 
 | DOMAIN-KEYWORD | 26  | 
-| DOMAIN-SUFFIX | 6731  | 
+| DOMAIN-SUFFIX | 6746  | 
 | IP-CIDR | 93  | 
 | IP-CIDR6 | 4  | 
-| TOTAL | 6863  | 
+| TOTAL | 6878  | 
 
 
 ## Clash 
@@ -365,17 +365,17 @@ Proxy规则由《RULE GENERATOR 规则生成器》自动生成。
 
 ## 规则统计
 
-最后更新时间：2026-06-28 02:29:41
+最后更新时间：2026-06-30 02:45:14
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 9  | 
 | DOMAIN-KEYWORD | 26  | 
-| DOMAIN-SUFFIX | 6731  | 
+| DOMAIN-SUFFIX | 6746  | 
 | IP-CIDR | 93  | 
 | IP-CIDR6 | 4  | 
-| TOTAL | 6863  | 
+| TOTAL | 6878  | 
 
 
 ## Clash 
@@ -506,17 +506,17 @@ Proxy规则由《RULE GENERATOR 规则生成器》自动生成。
 
 ## 规则统计
 
-最后更新时间：2026-06-28 02:29:41
+最后更新时间：2026-06-30 02:45:14
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 9  | 
 | DOMAIN-KEYWORD | 26  | 
-| DOMAIN-SUFFIX | 6731  | 
+| DOMAIN-SUFFIX | 6746  | 
 | IP-CIDR | 93  | 
 | IP-CIDR6 | 4  | 
-| TOTAL | 6863  | 
+| TOTAL | 6878  | 
 
 
 ## Clash 
@@ -647,17 +647,17 @@ Proxy规则由《RULE GENERATOR 规则生成器》自动生成。
 
 ## 规则统计
 
-最后更新时间：2026-06-28 02:29:41
+最后更新时间：2026-06-30 02:45:14
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 9  | 
 | DOMAIN-KEYWORD | 26  | 
-| DOMAIN-SUFFIX | 6731  | 
+| DOMAIN-SUFFIX | 6746  | 
 | IP-CIDR | 93  | 
 | IP-CIDR6 | 4  | 
-| TOTAL | 6863  | 
+| TOTAL | 6878  | 
 
 
 ## Clash 
