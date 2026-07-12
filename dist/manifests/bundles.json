@@ -17,7 +17,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   },
   "china": {
@@ -34,7 +36,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   },
   "china-bank": {
@@ -51,7 +55,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   },
   "commerce": {
@@ -69,7 +75,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   },
   "gaming": {
@@ -88,7 +96,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   },
   "google": {
@@ -106,7 +116,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   },
   "social": {
@@ -127,7 +139,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   },
   "streaming": {
@@ -150,7 +164,9 @@
       "loon",
       "clash",
       "quantumultx",
-      "shadowrocket"
+      "shadowrocket",
+      "surfboard",
+      "singbox"
     ]
   }
 }

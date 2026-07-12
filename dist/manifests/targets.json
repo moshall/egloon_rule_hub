@@ -2,26 +2,43 @@
   "clash": {
     "enabled": true,
     "file_ext": "yaml",
-    "publish_mode": null
+    "publish_mode": null,
+    "source_target": null
   },
   "egern": {
     "enabled": true,
     "file_ext": "yaml",
-    "publish_mode": null
+    "publish_mode": null,
+    "source_target": null
   },
   "loon": {
     "enabled": true,
     "file_ext": "lsr",
-    "publish_mode": "lsr"
+    "publish_mode": "lsr",
+    "source_target": null
   },
   "quantumultx": {
     "enabled": true,
     "file_ext": "list",
-    "publish_mode": null
+    "publish_mode": null,
+    "source_target": null
   },
   "shadowrocket": {
     "enabled": true,
     "file_ext": "list",
-    "publish_mode": null
+    "publish_mode": null,
+    "source_target": null
+  },
+  "singbox": {
+    "enabled": true,
+    "file_ext": "json",
+    "publish_mode": null,
+    "source_target": "shadowrocket"
+  },
+  "surfboard": {
+    "enabled": true,
+    "file_ext": "list",
+    "publish_mode": null,
+    "source_target": "shadowrocket"
   }
 }

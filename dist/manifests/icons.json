@@ -34,7 +34,9 @@
       "Rule/Egern/Apple/icon.png",
       "Rule/Loon/Apple/icon.png",
       "Rule/QuantumultX/Apple/icon.png",
-      "Rule/Shadowrocket/Apple/icon.png"
+      "Rule/Shadowrocket/Apple/icon.png",
+      "Rule/SingBox/Apple/icon.png",
+      "Rule/Surfboard/Apple/icon.png"
     ],
     "reason": null,
     "source_path": "src/Apple.png",
@@ -201,7 +203,9 @@
       "Rule/Egern/Claude/icon.png",
       "Rule/Loon/Claude/icon.png",
       "Rule/QuantumultX/Claude/icon.png",
-      "Rule/Shadowrocket/Claude/icon.png"
+      "Rule/Shadowrocket/Claude/icon.png",
+      "Rule/SingBox/Claude/icon.png",
+      "Rule/Surfboard/Claude/icon.png"
     ],
     "reason": null,
     "source_path": "src/Claude.png",
@@ -228,7 +232,9 @@
       "Rule/Egern/Copilot/icon.png",
       "Rule/Loon/Copilot/icon.png",
       "Rule/QuantumultX/Copilot/icon.png",
-      "Rule/Shadowrocket/Copilot/icon.png"
+      "Rule/Shadowrocket/Copilot/icon.png",
+      "Rule/SingBox/Copilot/icon.png",
+      "Rule/Surfboard/Copilot/icon.png"
     ],
     "reason": null,
     "source_path": "src/Copilot.png",
@@ -248,7 +254,9 @@
       "Rule/Egern/Discord/icon.png",
       "Rule/Loon/Discord/icon.png",
       "Rule/QuantumultX/Discord/icon.png",
-      "Rule/Shadowrocket/Discord/icon.png"
+      "Rule/Shadowrocket/Discord/icon.png",
+      "Rule/SingBox/Discord/icon.png",
+      "Rule/Surfboard/Discord/icon.png"
     ],
     "reason": null,
     "source_path": "src/Discord.png",
@@ -289,7 +297,9 @@
       "Rule/Egern/Emby/icon.png",
       "Rule/Loon/Emby/icon.png",
       "Rule/QuantumultX/Emby/icon.png",
-      "Rule/Shadowrocket/Emby/icon.png"
+      "Rule/Shadowrocket/Emby/icon.png",
+      "Rule/SingBox/Emby/icon.png",
+      "Rule/Surfboard/Emby/icon.png"
     ],
     "reason": null,
     "source_path": "src/Emby.png",
@@ -323,7 +333,9 @@
       "Rule/Egern/Facebook/icon.png",
       "Rule/Loon/Facebook/icon.png",
       "Rule/QuantumultX/Facebook/icon.png",
-      "Rule/Shadowrocket/Facebook/icon.png"
+      "Rule/Shadowrocket/Facebook/icon.png",
+      "Rule/SingBox/Facebook/icon.png",
+      "Rule/Surfboard/Facebook/icon.png"
     ],
     "reason": null,
     "source_path": "src/Facebook.png",
@@ -350,7 +362,9 @@
       "Rule/Egern/Gemini/icon.png",
       "Rule/Loon/Gemini/icon.png",
       "Rule/QuantumultX/Gemini/icon.png",
-      "Rule/Shadowrocket/Gemini/icon.png"
+      "Rule/Shadowrocket/Gemini/icon.png",
+      "Rule/SingBox/Gemini/icon.png",
+      "Rule/Surfboard/Gemini/icon.png"
     ],
     "reason": null,
     "source_path": "src/Gemini.png",
@@ -363,7 +377,9 @@
       "Rule/Egern/GitHub/icon.png",
       "Rule/Loon/GitHub/icon.png",
       "Rule/QuantumultX/GitHub/icon.png",
-      "Rule/Shadowrocket/GitHub/icon.png"
+      "Rule/Shadowrocket/GitHub/icon.png",
+      "Rule/SingBox/GitHub/icon.png",
+      "Rule/Surfboard/GitHub/icon.png"
     ],
     "reason": null,
     "source_path": "src/GitHub.png",
@@ -376,7 +392,9 @@
       "Rule/Egern/Google/icon.png",
       "Rule/Loon/Google/icon.png",
       "Rule/QuantumultX/Google/icon.png",
-      "Rule/Shadowrocket/Google/icon.png"
+      "Rule/Shadowrocket/Google/icon.png",
+      "Rule/SingBox/Google/icon.png",
+      "Rule/Surfboard/Google/icon.png"
     ],
     "reason": null,
     "source_path": "src/Google.png",
@@ -452,7 +470,9 @@
       "Rule/Egern/Instagram/icon.png",
       "Rule/Loon/Instagram/icon.png",
       "Rule/QuantumultX/Instagram/icon.png",
-      "Rule/Shadowrocket/Instagram/icon.png"
+      "Rule/Shadowrocket/Instagram/icon.png",
+      "Rule/SingBox/Instagram/icon.png",
+      "Rule/Surfboard/Instagram/icon.png"
     ],
     "reason": null,
     "source_path": "src/Instagram.png",
@@ -507,7 +527,9 @@
       "Rule/Egern/Netflix/icon.png",
       "Rule/Loon/Netflix/icon.png",
       "Rule/QuantumultX/Netflix/icon.png",
-      "Rule/Shadowrocket/Netflix/icon.png"
+      "Rule/Shadowrocket/Netflix/icon.png",
+      "Rule/SingBox/Netflix/icon.png",
+      "Rule/Surfboard/Netflix/icon.png"
     ],
     "reason": null,
     "source_path": "src/Netflix.png",
@@ -527,7 +549,9 @@
       "Rule/Egern/Notion/icon.png",
       "Rule/Loon/Notion/icon.png",
       "Rule/QuantumultX/Notion/icon.png",
-      "Rule/Shadowrocket/Notion/icon.png"
+      "Rule/Shadowrocket/Notion/icon.png",
+      "Rule/SingBox/Notion/icon.png",
+      "Rule/Surfboard/Notion/icon.png"
     ],
     "reason": null,
     "source_path": "src/Notion.png",
@@ -547,7 +571,9 @@
       "Rule/Egern/OKX/icon.png",
       "Rule/Loon/OKX/icon.png",
       "Rule/QuantumultX/OKX/icon.png",
-      "Rule/Shadowrocket/OKX/icon.png"
+      "Rule/Shadowrocket/OKX/icon.png",
+      "Rule/SingBox/OKX/icon.png",
+      "Rule/Surfboard/OKX/icon.png"
     ],
     "reason": null,
     "source_path": "src/OKX.png",
@@ -574,7 +600,9 @@
       "Rule/Egern/PayPal/icon.png",
       "Rule/Loon/PayPal/icon.png",
       "Rule/QuantumultX/PayPal/icon.png",
-      "Rule/Shadowrocket/PayPal/icon.png"
+      "Rule/Shadowrocket/PayPal/icon.png",
+      "Rule/SingBox/PayPal/icon.png",
+      "Rule/Surfboard/PayPal/icon.png"
     ],
     "reason": null,
     "source_path": "src/PayPal.png",
@@ -608,7 +636,9 @@
       "Rule/Egern/Reddit/icon.png",
       "Rule/Loon/Reddit/icon.png",
       "Rule/QuantumultX/Reddit/icon.png",
-      "Rule/Shadowrocket/Reddit/icon.png"
+      "Rule/Shadowrocket/Reddit/icon.png",
+      "Rule/SingBox/Reddit/icon.png",
+      "Rule/Surfboard/Reddit/icon.png"
     ],
     "reason": null,
     "source_path": "src/Reddit.png",
@@ -649,7 +679,9 @@
       "Rule/Egern/Spotify/icon.png",
       "Rule/Loon/Spotify/icon.png",
       "Rule/QuantumultX/Spotify/icon.png",
-      "Rule/Shadowrocket/Spotify/icon.png"
+      "Rule/Shadowrocket/Spotify/icon.png",
+      "Rule/SingBox/Spotify/icon.png",
+      "Rule/Surfboard/Spotify/icon.png"
     ],
     "reason": null,
     "source_path": "src/Spotify.png",
@@ -662,7 +694,9 @@
       "Rule/Egern/Steam/icon.png",
       "Rule/Loon/Steam/icon.png",
       "Rule/QuantumultX/Steam/icon.png",
-      "Rule/Shadowrocket/Steam/icon.png"
+      "Rule/Shadowrocket/Steam/icon.png",
+      "Rule/SingBox/Steam/icon.png",
+      "Rule/Surfboard/Steam/icon.png"
     ],
     "reason": null,
     "source_path": "src/Steam.png",
@@ -696,7 +730,9 @@
       "Rule/Egern/Telegram/icon.png",
       "Rule/Loon/Telegram/icon.png",
       "Rule/QuantumultX/Telegram/icon.png",
-      "Rule/Shadowrocket/Telegram/icon.png"
+      "Rule/Shadowrocket/Telegram/icon.png",
+      "Rule/SingBox/Telegram/icon.png",
+      "Rule/Surfboard/Telegram/icon.png"
     ],
     "reason": null,
     "source_path": "src/Telegram.png",
@@ -744,7 +780,9 @@
       "Rule/Egern/TikTok/icon.png",
       "Rule/Loon/TikTok/icon.png",
       "Rule/QuantumultX/TikTok/icon.png",
-      "Rule/Shadowrocket/TikTok/icon.png"
+      "Rule/Shadowrocket/TikTok/icon.png",
+      "Rule/SingBox/TikTok/icon.png",
+      "Rule/Surfboard/TikTok/icon.png"
     ],
     "reason": null,
     "source_path": "src/TikTok.png",
@@ -778,7 +816,9 @@
       "Rule/Egern/WhatsApp/icon.png",
       "Rule/Loon/WhatsApp/icon.png",
       "Rule/QuantumultX/WhatsApp/icon.png",
-      "Rule/Shadowrocket/WhatsApp/icon.png"
+      "Rule/Shadowrocket/WhatsApp/icon.png",
+      "Rule/SingBox/WhatsApp/icon.png",
+      "Rule/Surfboard/WhatsApp/icon.png"
     ],
     "reason": null,
     "source_path": "src/WhatsApp.png",
@@ -791,7 +831,9 @@
       "Rule/Egern/Wikipedia/icon.png",
       "Rule/Loon/Wikipedia/icon.png",
       "Rule/QuantumultX/Wikipedia/icon.png",
-      "Rule/Shadowrocket/Wikipedia/icon.png"
+      "Rule/Shadowrocket/Wikipedia/icon.png",
+      "Rule/SingBox/Wikipedia/icon.png",
+      "Rule/Surfboard/Wikipedia/icon.png"
     ],
     "reason": null,
     "source_path": "src/Wikipedia.png",
@@ -804,7 +846,9 @@
       "Rule/Egern/Xbox/icon.png",
       "Rule/Loon/Xbox/icon.png",
       "Rule/QuantumultX/Xbox/icon.png",
-      "Rule/Shadowrocket/Xbox/icon.png"
+      "Rule/Shadowrocket/Xbox/icon.png",
+      "Rule/SingBox/Xbox/icon.png",
+      "Rule/Surfboard/Xbox/icon.png"
     ],
     "reason": null,
     "source_path": "src/Xbox.png",
@@ -824,7 +868,9 @@
       "Rule/Egern/YouTube/icon.png",
       "Rule/Loon/YouTube/icon.png",
       "Rule/QuantumultX/YouTube/icon.png",
-      "Rule/Shadowrocket/YouTube/icon.png"
+      "Rule/Shadowrocket/YouTube/icon.png",
+      "Rule/SingBox/YouTube/icon.png",
+      "Rule/Surfboard/YouTube/icon.png"
     ],
     "reason": null,
     "source_path": "src/YouTube.png",
@@ -851,7 +897,9 @@
       "Rule/Egern/iCloud/icon.png",
       "Rule/Loon/iCloud/icon.png",
       "Rule/QuantumultX/iCloud/icon.png",
-      "Rule/Shadowrocket/iCloud/icon.png"
+      "Rule/Shadowrocket/iCloud/icon.png",
+      "Rule/SingBox/iCloud/icon.png",
+      "Rule/Surfboard/iCloud/icon.png"
     ],
     "reason": null,
     "source_path": "src/iCloud.png",

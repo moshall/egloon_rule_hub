@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "domain_suffix": [
+        "google",
+        "goog",
+        "googlezip.net",
+        "goo.gle",
+        "securegateway.goog",
+        "geminicli.com",
+        "deepmind.google",
+        "labs.google",
+        "notebooklm.google"
+      ]
+    }
+  ]
+}
