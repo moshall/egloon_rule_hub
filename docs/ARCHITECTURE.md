@@ -14,7 +14,7 @@
 
 1. 上游规则只是输入，不直接决定最终目录结构。
 2. 仓库内部先把不同来源解析成统一 `Rule(type, value)` 中间模型。
-3. 再按目标客户端重新发射为 `Egern / Loon / Clash / QuantumultX / Shadowrocket` 各自的规则文件。
+3. 再按目标客户端重新发射为 `Egern / Loon / Clash / QuantumultX / Shadowrocket / Surfboard / SingBox` 各自的规则文件。
 4. 同时为每个输出目录生成 README、上游追踪信息、图标和 manifest。
 
 最终发布目录固定落在：
@@ -109,6 +109,16 @@ Rule(type: str, value: str)
 - 每个变体对应哪些真实上游文件
 
 README 生成和产物追踪都依赖这些对象。
+
+### 4.1 派生目标
+
+`catalog/targets.yaml` 中的目标可通过 `source_target` 复用另一目标的上游选择配置。Surfboard 和 SingBox 当前都从 `shadowrocket` 目标继承选源，但仍从统一 `Rule(type, value)` 模型独立发射，不是对已生成 `.list` 文件做二次文本转换。
+
+这样可以保持：
+
+1. 近百个服务不需要重复声明相同的上游。
+2. 派生目标仍保留选中上游、变体和转换路径追踪。
+3. 各 emitter 可以对无法等价表达的规则类型做明确的兼容性取舍。
 
 ## 5. 不能破坏的设计约束
 

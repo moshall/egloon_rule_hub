@@ -1,6 +1,6 @@
 # egloon_rule_hub
 
-面向 Egern、Loon、Clash、QuantumultX、Shadowrocket 的目标优先代理规则仓库。
+面向 Egern、Loon、Clash、QuantumultX、Shadowrocket、Surfboard 和 sing-box 的目标优先代理规则仓库。
 
 这个项目不追求“全网最全”，而是追求“我们真正会用、能持续自动更新、来源清晰可追踪”。
 
@@ -41,6 +41,8 @@ Rule/<Target>/<Bundle>/
 - `Rule/Loon/OpenAI/OpenAI.lsr`
 - `Rule/Clash/OpenAI/OpenAI.yaml`
 - `Rule/QuantumultX/OpenAI/OpenAI.list`
+- `Rule/Surfboard/OpenAI/OpenAI.list`
+- `Rule/SingBox/OpenAI/OpenAI.json`
 
 每个目录下会同时放：
 
@@ -97,6 +99,45 @@ native -> shadowrocket -> clash
 - Clash / mihomo classical rule-provider YAML
 - QuantumultX `.list`
 - Shadowrocket `.list`
+- Surfboard remote `RULE-SET` `.list`
+- sing-box source rule-set JSON（`version: 1`）
+
+## Surfboard 使用
+
+`Rule/Surfboard/` 中的文件是不带策略名称的远程规则集，可在 Surfboard 配置的 `[Rule]` 中引用：
+
+```ini
+RULE-SET,https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/Surfboard/OpenAI/OpenAI.list,Proxy
+```
+
+转换器会将 `HOST` / `HOST-SUFFIX` / `HOST-KEYWORD` / `IP6-CIDR` 归一化为 Surfboard 官方格式，并保留官方文档明确支持的规则类型。`DOMAIN-REGEX` 和 `IP-ASN` 无安全等价映射，因此不会写入 Surfboard 产物。
+
+Surfboard 格式依据：
+
+- RULE-SET：https://getsurfboard.com/docs/profile-format/rule/ruleset/
+- Domain Rules：https://getsurfboard.com/docs/profile-format/rule/domain/
+- IP Rules：https://getsurfboard.com/docs/profile-format/rule/ip/
+- User-Agent Rules：https://getsurfboard.com/docs/profile-format/rule/user-agent/
+
+## sing-box / NekoBox 使用
+
+`Rule/SingBox/` 中的 JSON 是 sing-box source rule-set，可作为 `route.rule_set` 的本地或远程规则集。例如：
+
+```json
+{
+  "type": "remote",
+  "tag": "OpenAI",
+  "format": "source",
+  "url": "https://raw.githubusercontent.com/<owner>/<repo>/<branch>/Rule/SingBox/OpenAI/OpenAI.json"
+}
+```
+
+产物使用 `version: 1`，以兼容从 sing-box 1.8.0 开始的 rule-set 实现。当前映射 `DOMAIN`、`DOMAIN-SUFFIX`、`DOMAIN-KEYWORD`、`DOMAIN-REGEX`、`IP-CIDR` 和 `IP-CIDR6`；`USER-AGENT`、`IP-ASN` 和 `GEOIP` 无法在 source rule-set 内直接等价表达，因此不会写入。
+
+sing-box 格式依据：
+
+- Rule Set：https://sing-box.sagernet.org/configuration/rule-set/
+- Source Format：https://sing-box.sagernet.org/configuration/rule-set/source-format/
 
 ## 目录说明
 

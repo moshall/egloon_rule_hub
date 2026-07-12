@@ -23,6 +23,8 @@ TARGET_DISPLAY_NAMES = {
     "loon": "Loon",
     "quantumultx": "QuantumultX",
     "shadowrocket": "Shadowrocket",
+    "surfboard": "Surfboard",
+    "singbox": "SingBox",
 }
 
 def _target_display_name(target: str) -> str:
@@ -63,6 +65,8 @@ def _artifact_output_ext(target: str, publish_mode: str | None) -> str:
         "loon": "list",
         "quantumultx": "list",
         "shadowrocket": "list",
+        "surfboard": "list",
+        "singbox": "json",
     }.get(target, "list")
 
 

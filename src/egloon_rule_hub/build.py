@@ -15,6 +15,8 @@ from egloon_rule_hub.emitters.loon import render_loon_rules
 from egloon_rule_hub.emitters.loon_lsr import render_loon_lsr
 from egloon_rule_hub.emitters.quanx import render_quanx_rules
 from egloon_rule_hub.emitters.shadowrocket import render_shadowrocket_rules
+from egloon_rule_hub.emitters.singbox import render_singbox_rule_set
+from egloon_rule_hub.emitters.surfboard import render_surfboard_rules
 from egloon_rule_hub.model.catalog import Catalog, ServiceDef, ServiceTargetVariantDef, SourceRef, TargetDef
 from egloon_rule_hub.model.publish import SelectedSourceEntry, TargetArtifact, TargetArtifactVariant
 from egloon_rule_hub.model.rules import Rule
@@ -42,6 +44,8 @@ TARGET_RENDERERS = {
     "clash": ("yaml", render_clash_rule_provider),
     "quantumultx": ("list", render_quanx_rules),
     "shadowrocket": ("list", render_shadowrocket_rules),
+    "surfboard": ("list", render_surfboard_rules),
+    "singbox": ("json", render_singbox_rule_set),
 }
 
 GITHUB_TREE_SOURCE_KINDS = frozenset(
@@ -55,6 +59,8 @@ TARGET_DISPLAY_NAMES = {
     "clash": "Clash",
     "quantumultx": "QuantumultX",
     "shadowrocket": "Shadowrocket",
+    "surfboard": "Surfboard",
+    "singbox": "SingBox",
 }
 
 BUNDLE_DISPLAY_NAMES = {
@@ -298,6 +304,25 @@ def _family_native_target(target_name: str, family: str) -> str:
     return family
 
 
+def _target_source_config(
+    catalog: Catalog,
+    service: ServiceDef,
+    target_name: str,
+) -> tuple[str, ServiceTargetDef | None]:
+    source_target_name = target_name
+    visited: set[str] = set()
+    while source_target_name not in visited:
+        visited.add(source_target_name)
+        target_config = service.target_sources.get(source_target_name)
+        if target_config is not None:
+            return source_target_name, target_config
+        target = catalog.targets.get(source_target_name)
+        if target is None or target.source_target is None:
+            break
+        source_target_name = target.source_target
+    return source_target_name, None
+
+
 def build_target_artifact(
     catalog: Catalog,
     service_name: str,
@@ -330,14 +355,16 @@ def build_target_artifact(
             primary_variant_name=service_name,
         )
 
-    target_config = service.target_sources.get(target_name)
+    source_target_name, target_config = _target_source_config(
+        catalog, service, target_name
+    )
     if target_config is None:
         return None
 
     variant_defs = _auto_discovered_target_variants(
         catalog,
         service,
-        target_name,
+        source_target_name,
         target_config,
     )
 
@@ -347,7 +374,7 @@ def build_target_artifact(
         family, source_refs = _selected_family_sources(
             catalog,
             service,
-            target_name,
+            source_target_name,
             variant_def,
             target_config.fallback_order,
         )
@@ -379,8 +406,8 @@ def build_target_artifact(
 
         merged = merge_rule_streams(streams)
         merged = _apply_override(catalog.root, merged, service.override)
-        selected_native_target = _family_native_target(target_name, family)
-        is_native = family == "native"
+        selected_native_target = _family_native_target(source_target_name, family)
+        is_native = family == "native" and source_target_name == target_name
         conversion_path = None
         if not is_native:
             conversion_path = (

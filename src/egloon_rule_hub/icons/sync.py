@@ -18,6 +18,8 @@ TARGET_DISPLAY_NAMES = {
     "loon": "Loon",
     "quantumultx": "QuantumultX",
     "shadowrocket": "Shadowrocket",
+    "surfboard": "Surfboard",
+    "singbox": "SingBox",
 }
 
 IconPathLister = Callable[[], list[str]]

@@ -10,7 +10,15 @@ from egloon_rule_hub.txt_sources import discover_txt_services
 
 DEFAULT_FALLBACK_ORDER = ["native", "shadowrocket", "clash"]
 ALLOWED_SOURCE_FAMILIES = frozenset(DEFAULT_FALLBACK_ORDER)
-DEFAULT_TXT_TARGETS = ["egern", "loon", "clash", "quantumultx", "shadowrocket"]
+DEFAULT_TXT_TARGETS = [
+    "egern",
+    "loon",
+    "clash",
+    "quantumultx",
+    "shadowrocket",
+    "surfboard",
+    "singbox",
+]
 
 
 @dataclass(slots=True)
@@ -115,6 +123,7 @@ class TargetDef:
     enabled: bool
     file_ext: str
     publish_mode: str | None = None
+    source_target: str | None = None
 
 
 @dataclass(slots=True)
@@ -131,6 +140,23 @@ class Catalog:
     def validate(self) -> None:
         known_targets = set(self.targets)
         known_sources = set(self.sources)
+
+        for target in self.targets.values():
+            if target.source_target is None:
+                continue
+            if target.source_target not in known_targets:
+                raise ValueError(
+                    f"Target {target.name} references unknown source_target: {target.source_target}"
+                )
+            visited = {target.name}
+            source_target = target.source_target
+            while source_target is not None:
+                if source_target in visited:
+                    raise ValueError(
+                        f"Target {target.name} has a circular source_target chain"
+                    )
+                visited.add(source_target)
+                source_target = self.targets[source_target].source_target
 
         for service in self.services.values():
             unknown_targets = sorted(set(service.targets) - known_targets)

@@ -1,4 +1,4 @@
-all_targets: &all_targets [egern, loon, clash, quantumultx, shadowrocket]
+all_targets: &all_targets [egern, loon, clash, quantumultx, shadowrocket, surfboard, singbox]
 defaults:
   fallback_order: [native, shadowrocket, clash]
 services:

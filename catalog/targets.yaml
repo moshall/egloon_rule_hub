@@ -15,3 +15,11 @@ targets:
   shadowrocket:
     enabled: true
     file_ext: list
+  surfboard:
+    enabled: true
+    file_ext: list
+    source_target: shadowrocket
+  singbox:
+    enabled: true
+    file_ext: json
+    source_target: shadowrocket

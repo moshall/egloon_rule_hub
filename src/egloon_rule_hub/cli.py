@@ -50,6 +50,7 @@ def _render_manifests(root: Path, catalog: Catalog) -> None:
             "enabled": target.enabled,
             "file_ext": target.file_ext,
             "publish_mode": target.publish_mode,
+            "source_target": target.source_target,
         }
         for name, target in catalog.targets.items()
     }
