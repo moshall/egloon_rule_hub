@@ -22828,10 +22828,10 @@ payload:
 - IP-CIDR,61.10.224.0/19,no-resolve
 - IP-CIDR,61.18.64.0/19,no-resolve
 - DOMAIN-KEYWORD,bilibili
+- DOMAIN-KEYWORD,qiyi
 - DOMAIN-KEYWORD,hnagroup
 - DOMAIN-KEYWORD,stripe
 - DOMAIN-KEYWORD,weibo
-- DOMAIN-KEYWORD,qiyi
 - PROCESS-NAME,com.taobao.taobao
 - PROCESS-NAME,com.bilibili.app.blue
 - PROCESS-NAME,com.bilibili.app.in
