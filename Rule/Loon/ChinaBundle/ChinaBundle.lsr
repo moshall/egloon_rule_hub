@@ -1169,6 +1169,7 @@ IP-CIDR,103.144.136.0/23,no-resolve
 IP-CIDR,103.144.148.0/23,no-resolve
 IP-CIDR,103.144.158.0/23,no-resolve
 IP-CIDR,103.144.240.0/23,no-resolve
+IP-CIDR,103.144.244.0/24,no-resolve
 IP-CIDR,103.144.40.0/23,no-resolve
 IP-CIDR,103.144.52.0/23,no-resolve
 IP-CIDR,103.144.66.0/23,no-resolve
@@ -8715,7 +8716,6 @@ IP-CIDR,14.22.0.0/24,no-resolve
 IP-CIDR,14.22.33.0/24,no-resolve
 IP-CIDR,14.22.4.0/24,no-resolve
 IP-CIDR,14.22.5.0/24,no-resolve
-IP-CIDR,14.241.232.0/21,no-resolve
 IP-CIDR,14.255.16.0/24,no-resolve
 IP-CIDR,14.255.238.0/24,no-resolve
 IP-CIDR,14.255.254.0/24,no-resolve
@@ -9429,6 +9429,8 @@ IP-CIDR,165.154.128.0/18,no-resolve
 IP-CIDR,165.154.192.0/19,no-resolve
 IP-CIDR,165.156.30.0/24,no-resolve
 IP-CIDR,165.99.4.0/24,no-resolve
+IP-CIDR,166.0.100.0/24,no-resolve
+IP-CIDR,166.0.97.0/24,no-resolve
 IP-CIDR,166.111.0.0/16,no-resolve
 IP-CIDR,166.118.227.88/32,no-resolve
 IP-CIDR,167.139.0.0/16,no-resolve
@@ -16512,6 +16514,7 @@ IP-CIDR,45.82.241.0/24,no-resolve
 IP-CIDR,45.87.53.0/24,no-resolve
 IP-CIDR,45.87.54.0/24,no-resolve
 IP-CIDR,45.9.11.0/24,no-resolve
+IP-CIDR,45.91.139.0/24,no-resolve
 IP-CIDR,46.102.251.0/25,no-resolve
 IP-CIDR,46.151.180.0/23,no-resolve
 IP-CIDR,46.151.181.0/24,no-resolve
@@ -22909,6 +22912,7 @@ IP-CIDR,124.14.7.0/24,no-resolve
 IP-CIDR,124.14.8.0/21,no-resolve
 IP-CIDR,124.47.58.0/23,no-resolve
 IP-CIDR,124.47.60.0/23,no-resolve
+IP-CIDR,14.241.232.0/21,no-resolve
 IP-CIDR,182.80.0.0/16,no-resolve
 IP-CIDR,187.54.48.0/23,no-resolve
 IP-CIDR,192.193.73.0/24,no-resolve
@@ -22946,10 +22950,10 @@ IP-CIDR,61.10.96.0/20,no-resolve
 IP-CIDR,61.15.0.0/18,no-resolve
 IP-CIDR,61.18.0.0/18,no-resolve
 IP-CIDR,61.18.64.0/19,no-resolve
+DOMAIN-SUFFIX,alipay
 DOMAIN-SUFFIX,alibaba
 DOMAIN-SUFFIX,taobao
 DOMAIN-SUFFIX,tmall
-DOMAIN-SUFFIX,alipay
 DOMAIN-SUFFIX,anquan
 DOMAIN-SUFFIX,baidu
 DOMAIN-SUFFIX,citic
@@ -23000,7 +23004,6 @@ DOMAIN-KEYWORD,qiyi
 DOMAIN-KEYWORD,hnagroup
 DOMAIN-KEYWORD,stripe
 DOMAIN-KEYWORD,weibo
-USER-AGENT,AcFun*
 USER-AGENT,*bili*
 USER-AGENT,Bilibili*
 USER-AGENT,bili*
@@ -23009,6 +23012,7 @@ USER-AGENT,TikTok*
 USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90
 USER-AGENT,%E9%85%B7%E6%88%91%E9%9F%B3%E4%B9%90*
 USER-AGENT,*QIYI*
+USER-AGENT,AcFun*
 USER-AGENT,DomesticMedia*
 USER-AGENT,MGTV*
 USER-AGENT,MOO*
@@ -23017,7 +23021,6 @@ USER-AGENT,QIYI*
 USER-AGENT,QQ%e9%9f%b3%e4%b9%90*
 USER-AGENT,QQMusic*
 USER-AGENT,QYPlayer*
-USER-AGENT,baiduyinyue
 USER-AGENT,bilibili*
 USER-AGENT,iQiYi*
 USER-AGENT,iQiyi*
@@ -23025,6 +23028,7 @@ USER-AGENT,youku*
 USER-AGENT,Himalaya*
 USER-AGENT,%E5%92%AA%E5%92%95%E8%A7%86%E9%A2%91
 USER-AGENT,MiguVideo*
+USER-AGENT,baiduyinyue
 USER-AGENT,MOO%E9%9F%B3%E4%B9%90*
 USER-AGENT,QQ%E9%9F%B3%E4%B9%90
 USER-AGENT,TencentMidasConnect*
@@ -23091,7 +23095,6 @@ IP-CIDR,141.11.51.0/24,no-resolve
 IP-CIDR,147.139.0.0/16,no-resolve
 IP-CIDR,149.129.0.0/16,no-resolve
 IP-CIDR,150.116.92.250/32,no-resolve
-IP-CIDR,154.203.244.0/23,no-resolve
 IP-CIDR,154.84.180.0/24,no-resolve
 IP-CIDR,155.102.0.0/16,no-resolve
 IP-CIDR,157.185.172.0/24,no-resolve
@@ -24119,7 +24122,6 @@ IP-CIDR,61.244.22.4/32,no-resolve
 IP-CIDR,64.96.4.0/24,no-resolve
 IP-CIDR,72.254.0.0/16,no-resolve
 IP-CIDR,8.208.0.0/12,no-resolve
-IP-CIDR,82.38.46.0/23,no-resolve
 IP-CIDR6,2001:dcc:501::/48,no-resolve
 IP-CIDR6,2400:9380:90c0::/44,no-resolve
 IP-CIDR6,2400:9380:91c0::/44,no-resolve
@@ -24137,11 +24139,18 @@ IP-CIDR6,2400:9380:9cc0::/44,no-resolve
 IP-CIDR6,2400:9380:9dc0::/44,no-resolve
 IP-CIDR6,2400:9380:9ec0::/44,no-resolve
 IP-CIDR6,2400:9380:9fc0::/44,no-resolve
+IP-CIDR6,2402:5920::/48,no-resolve
+IP-CIDR6,2406:840:eb00::/46,no-resolve
 IP-CIDR6,2406:840:fa00::/41,no-resolve
 IP-CIDR6,2408:8000::/20,no-resolve
 IP-CIDR6,2409:2000::/22,no-resolve
 IP-CIDR6,2a00:8a05::/44,no-resolve
+IP-CIDR6,2a0a:6040:d630::/48,no-resolve
+IP-CIDR6,2a0f:1cc5:1041::/48,no-resolve
+IP-CIDR6,2a0f:1cc5:1902::/48,no-resolve
 IP-CIDR6,2a13:aac4::/32,no-resolve
+IP-CIDR6,2a14:67c1:b588::/47,no-resolve
+IP-CIDR6,2a14:67c2:a80::/47,no-resolve
 IP-CIDR6,::ffff:113.248.172.245/128,no-resolve
 IP-CIDR6,::ffff:114.235.96.186/128,no-resolve
 IP-CIDR6,::ffff:115.236.128.112/128,no-resolve
