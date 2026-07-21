@@ -8972,6 +8972,7 @@ IP-CIDR,150.242.96.0/22,no-resolve
 IP-CIDR,150.248.0.0/16,no-resolve
 IP-CIDR,150.255.0.0/16,no-resolve
 IP-CIDR,151.243.189.0/24,no-resolve
+IP-CIDR,151.244.135.0/24,no-resolve
 IP-CIDR,151.246.184.0/24,no-resolve
 IP-CIDR,151.247.148.0/23,no-resolve
 IP-CIDR,151.249.90.0/23,no-resolve
@@ -22035,7 +22036,6 @@ IP-CIDR,45.82.241.0/24,no-resolve
 IP-CIDR,45.87.53.0/24,no-resolve
 IP-CIDR,45.87.54.0/24,no-resolve
 IP-CIDR,45.9.11.0/24,no-resolve
-IP-CIDR,45.91.139.0/24,no-resolve
 IP-CIDR,46.102.251.0/25,no-resolve
 IP-CIDR,46.151.180.0/23,no-resolve
 IP-CIDR,46.151.181.0/24,no-resolve
@@ -22667,7 +22667,6 @@ IP-CIDR,61.176.0.0/16,no-resolve
 IP-CIDR,61.177.0.0/16,no-resolve
 IP-CIDR,61.178.0.0/16,no-resolve
 IP-CIDR,61.179.0.0/16,no-resolve
-IP-CIDR,61.18.64.0/20,no-resolve
 IP-CIDR,61.180.0.0/17,no-resolve
 IP-CIDR,61.180.128.0/17,no-resolve
 IP-CIDR,61.181.0.0/16,no-resolve
@@ -22949,10 +22948,10 @@ IP-CIDR,61.10.96.0/20,no-resolve
 IP-CIDR,61.15.0.0/18,no-resolve
 IP-CIDR,61.18.0.0/18,no-resolve
 IP-CIDR,61.18.64.0/19,no-resolve
-DOMAIN-SUFFIX,alipay
 DOMAIN-SUFFIX,alibaba
 DOMAIN-SUFFIX,taobao
 DOMAIN-SUFFIX,tmall
+DOMAIN-SUFFIX,alipay
 DOMAIN-SUFFIX,anquan
 DOMAIN-SUFFIX,baidu
 DOMAIN-SUFFIX,citic
@@ -23020,6 +23019,7 @@ USER-AGENT,QIYI*
 USER-AGENT,QQ%e9%9f%b3%e4%b9%90*
 USER-AGENT,QQMusic*
 USER-AGENT,QYPlayer*
+USER-AGENT,Youku*
 USER-AGENT,bilibili*
 USER-AGENT,iQiYi*
 USER-AGENT,iQiyi*
@@ -23035,7 +23035,6 @@ USER-AGENT,live4iphone*
 USER-AGENT,qqlive4iphone*
 USER-AGENT,walkman*
 USER-AGENT,xiami*
-USER-AGENT,Youku*
 USER-AGENT,iQIYI*
 IP-CIDR,0.0.0.0/32,no-resolve
 IP-CIDR,1.116.0.0/14,no-resolve
@@ -23089,7 +23088,6 @@ IP-CIDR,128.1.62.200/31,no-resolve
 IP-CIDR,139.95.0.0/16,no-resolve
 IP-CIDR,14.1.112.0/22,no-resolve
 IP-CIDR,14.255.249.0/24,no-resolve
-IP-CIDR,141.11.51.0/24,no-resolve
 IP-CIDR,147.139.0.0/16,no-resolve
 IP-CIDR,149.129.0.0/16,no-resolve
 IP-CIDR,150.116.92.250/32,no-resolve
@@ -24100,6 +24098,7 @@ IP-CIDR,2409:2000::/22,no-resolve
 IP-CIDR,2a00:8a05::/44,no-resolve
 IP-CIDR,2a0a:6040:d630::/48,no-resolve
 IP-CIDR,2a0f:1cc5:1041::/48,no-resolve
+IP-CIDR,2a0f:1cc5:140::/42,no-resolve
 IP-CIDR,2a0f:1cc5:1902::/48,no-resolve
 IP-CIDR,2a13:aac4::/32,no-resolve
 IP-CIDR,2a14:67c1:b588::/47,no-resolve
@@ -24123,6 +24122,7 @@ IP-CIDR,43.250.168.0/21,no-resolve
 IP-CIDR,43.250.96.0/20,no-resolve
 IP-CIDR,43.251.8.0/21,no-resolve
 IP-CIDR,43.88.0.0/14,no-resolve
+IP-CIDR,44.30.131.0/24,no-resolve
 IP-CIDR,45.251.136.0/21,no-resolve
 IP-CIDR,45.254.0.0/19,no-resolve
 IP-CIDR,45.255.0.0/17,no-resolve
