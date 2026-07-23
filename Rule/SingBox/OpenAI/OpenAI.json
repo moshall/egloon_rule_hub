@@ -37,7 +37,12 @@
         "segment.io",
         "sentry.io",
         "stripe.com",
-        "turn.livekit.cloud"
+        "turn.livekit.cloud",
+        "chat.com",
+        "chatgpt.site",
+        "crixet.com",
+        "oaistatsig.com",
+        "sora.com"
       ]
     },
     {
@@ -49,6 +54,11 @@
       "ip_cidr": [
         "24.199.123.28/32",
         "64.23.132.171/32"
+      ]
+    },
+    {
+      "domain_regex": [
+        "^chatgpt-async-webps-prod-\\S+-\\d+\\.webpubsub\\.azure\\.com$"
       ]
     }
   ]

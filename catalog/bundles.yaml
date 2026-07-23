@@ -6,6 +6,11 @@ bundles:
     targets: *all_targets
     services: [OpenAI, Claude, Gemini, BardAI, Twitter, Copilot, Manus, GoogleExtended, ClaudeExtended]
 
+  x-full:
+    enabled: true
+    targets: *all_targets
+    services: [Twitter, Grok]
+
   google:
     enabled: true
     targets: *all_targets

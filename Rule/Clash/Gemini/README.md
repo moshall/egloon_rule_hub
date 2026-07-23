@@ -20,6 +20,8 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind)
 
 ### Gemini_No_Resolve
 
@@ -29,10 +31,48 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini_No_Resolve.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Gemini)
+### Upstream Entry 1 (v2fly_domain_list / Gemini)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / Gemini)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (v2fly_domain_list / Gemini_No_Resolve)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 4 (v2fly_domain_list / Gemini_No_Resolve)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 5 (blackmatrix7 / Gemini)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml)
@@ -127,7 +167,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 2 (blackmatrix7 / Gemini_No_Resolve)
+### Upstream Entry 6 (blackmatrix7 / Gemini_No_Resolve)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini_No_Resolve.yaml)

@@ -20,6 +20,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
 
 ### Netflix_Classical
 
@@ -29,6 +30,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
 
 ### Netflix_Classical_No_Resolve
 
@@ -38,6 +40,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical_No_Resolve.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
 
 ### Netflix_IP
 
@@ -47,6 +50,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_IP.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_IP.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
 
 ### Netflix_No_Resolve
 
@@ -56,10 +60,56 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_No_Resolve.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Netflix)
+### Upstream Entry 1 (v2fly_domain_list / Netflix)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / Netflix_Classical)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (v2fly_domain_list / Netflix_Classical_No_Resolve)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 4 (v2fly_domain_list / Netflix_IP)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 5 (v2fly_domain_list / Netflix_No_Resolve)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 6 (blackmatrix7 / Netflix)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml)
@@ -206,7 +256,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 2 (blackmatrix7 / Netflix_Classical)
+### Upstream Entry 7 (blackmatrix7 / Netflix_Classical)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical.yaml)
@@ -353,7 +403,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 3 (blackmatrix7 / Netflix_Classical_No_Resolve)
+### Upstream Entry 8 (blackmatrix7 / Netflix_Classical_No_Resolve)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical_No_Resolve.yaml)
@@ -500,7 +550,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 4 (blackmatrix7 / Netflix_IP)
+### Upstream Entry 9 (blackmatrix7 / Netflix_IP)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_IP.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_IP.yaml)
@@ -647,7 +697,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 5 (blackmatrix7 / Netflix_No_Resolve)
+### Upstream Entry 10 (blackmatrix7 / Netflix_No_Resolve)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_No_Resolve.yaml)

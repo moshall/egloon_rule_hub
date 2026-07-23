@@ -1155,3 +1155,7 @@ IP-CIDR,99.79.20.192/26,no-resolve
 IP-CIDR,99.80.34.48/28,no-resolve
 IP-CIDR,99.80.34.64/26,no-resolve
 IP-CIDR,99.80.88.0/25,no-resolve
+DOMAIN-REGEX,(^|\.)apiproxy-device-prod-nlb-.+\.amazonaws\.com$
+DOMAIN-REGEX,(^|\.)apiproxy-website-nlb-prod-.+\.amazonaws\.com$
+DOMAIN-REGEX,(^|\.)dualstack\.apiproxy-.+\.amazonaws\.com$
+DOMAIN-REGEX,(^|\.)dualstack\.ichnaea-web-.+\.amazonaws\.com$

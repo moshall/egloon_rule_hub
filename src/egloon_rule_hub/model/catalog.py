@@ -98,6 +98,7 @@ class ServiceDef:
     enabled: bool
     targets: list[str]
     sources: list[SourceRef] = field(default_factory=list)
+    supplements: list[SourceRef] = field(default_factory=list)
     target_sources: dict[str, ServiceTargetDef] = field(default_factory=dict)
     fallback_order: list[str] = field(default_factory=list)
     override: str | None = None
@@ -223,6 +224,17 @@ class Catalog:
                         f"Service {service.name} source {source_ref.source}"
                         " must define path or url"
                     )
+            for source_ref in service.supplements:
+                if source_ref.source not in known_sources:
+                    raise ValueError(
+                        f"Service {service.name} references unknown supplement source:"
+                        f" {source_ref.source}"
+                    )
+                if not source_ref.path and not source_ref.url:
+                    raise ValueError(
+                        f"Service {service.name} supplement {source_ref.source}"
+                        " must define path or url"
+                    )
 
         for bundle in self.bundles.values():
             unknown_targets = sorted(set(bundle.targets) - known_targets)
@@ -254,6 +266,9 @@ def load_catalog(root: Path) -> Catalog:
     sources_doc = _load_yaml(catalog_dir / "sources.yaml").get("sources", {})
     targets_doc = _load_yaml(catalog_dir / "targets.yaml").get("targets", {})
     services_payload = _load_yaml(catalog_dir / "services.yaml")
+    supplements_doc = _load_yaml(catalog_dir / "supplements.yaml").get(
+        "supplements", {}
+    )
     services_doc = services_payload.get("services", {})
     bundles_doc = _load_yaml(catalog_dir / "bundles.yaml").get("bundles", {})
     defaults_doc = services_payload.get("defaults", {})
@@ -311,6 +326,7 @@ def load_catalog(root: Path) -> Catalog:
             enabled=bool(payload.get("enabled", True)),
             targets=list(payload.get("outputs", payload.get("targets", []))),
             sources=flat_sources,
+            supplements=[],
             target_sources=target_sources,
             fallback_order=list(payload.get("fallback_order", [])),
             override=payload.get("override"),
@@ -380,5 +396,15 @@ def load_catalog(root: Path) -> Catalog:
             ),
         )
         catalog.self_maintained_rules[service_name] = list(snapshot.rules)
+
+    for service_name, supplement_payload in supplements_doc.items():
+        service = catalog.services.get(service_name)
+        if service is None:
+            raise ValueError(
+                f"Supplements reference unknown service: {service_name}"
+            )
+        service.supplements = [
+            SourceRef(**item) for item in supplement_payload
+        ]
     catalog.validate()
     return catalog

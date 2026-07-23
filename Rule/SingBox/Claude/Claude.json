@@ -3,13 +3,19 @@
   "rules": [
     {
       "domain": [
-        "cdn.usefathom.com"
+        "cdn.usefathom.com",
+        "servd-anthropic-website.b-cdn.net"
       ]
     },
     {
       "domain_suffix": [
         "anthropic.com",
-        "claude.ai"
+        "claude.ai",
+        "clau.de",
+        "claude.com",
+        "claudemcpclient.com",
+        "claudemcpcontent.com",
+        "claudeusercontent.com"
       ]
     }
   ]

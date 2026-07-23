@@ -20,6 +20,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Shadowrocket`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter)
 
 ### Twitter_Resolve
 
@@ -29,10 +30,29 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Shadowrocket`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter_Resolve.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter_Resolve.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Twitter)
+### Upstream Entry 1 (v2fly_domain_list / Twitter)
+
+- Upstream native target: `Shadowrocket`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / Twitter_Resolve)
+
+- Upstream native target: `Shadowrocket`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/twitter)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (blackmatrix7 / Twitter)
 
 - Upstream native target: `Shadowrocket`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list)
@@ -137,7 +157,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 2 (blackmatrix7 / Twitter_Resolve)
+### Upstream Entry 4 (blackmatrix7 / Twitter_Resolve)
 
 - Upstream native target: `Shadowrocket`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter_Resolve.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter_Resolve.list)

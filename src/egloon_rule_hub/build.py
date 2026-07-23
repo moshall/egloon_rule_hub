@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from pathlib import Path
 from pathlib import PurePosixPath
 from urllib.request import Request, urlopen
 import re
 import shutil
+import time
+from urllib.error import URLError
 
 import yaml
 
@@ -22,11 +25,13 @@ from egloon_rule_hub.model.publish import SelectedSourceEntry, TargetArtifact, T
 from egloon_rule_hub.model.rules import Rule
 from egloon_rule_hub.normalize.dedupe import dedupe_rules
 from egloon_rule_hub.normalize.merge import merge_rule_streams
+from egloon_rule_hub.normalize.supplement import append_missing_rules
 from egloon_rule_hub.parsers.clash import parse_clash_rule_provider
 from egloon_rule_hub.parsers.egern import parse_egern_rule_set
 from egloon_rule_hub.parsers.loon import parse_loon_list
 from egloon_rule_hub.parsers.quanx import parse_quanx_list
 from egloon_rule_hub.parsers.shadowrocket import parse_shadowrocket_list
+from egloon_rule_hub.parsers.v2fly import parse_v2fly_domain_list
 from egloon_rule_hub.sources.registry import resolve_source_ref
 
 FORMAT_PARSERS = {
@@ -70,10 +75,19 @@ BUNDLE_DISPLAY_NAMES = {
 _REPO_TREE_CACHE: dict[tuple[str, str], list[str]] = {}
 
 
+@lru_cache(maxsize=None)
 def fetch_text(url: str) -> str:
     request = Request(url, headers={"User-Agent": "egloon-rule-hub/0.1"})
-    with urlopen(request, timeout=30) as response:  # noqa: S310
-        return response.read().decode("utf-8")
+    last_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            with urlopen(request, timeout=30) as response:  # noqa: S310
+                return response.read().decode("utf-8")
+        except (TimeoutError, URLError) as exc:
+            last_error = exc
+            if attempt < 2:
+                time.sleep(2**attempt)
+    raise RuntimeError(f"Failed to fetch rule source after retries: {url}") from last_error
 
 
 def _fetch_repo_tree(source_def: SourceDef) -> list[str]:
@@ -246,6 +260,97 @@ def _apply_override(root: Path, rules: list[Rule], override_path: str | None) ->
     return dedupe_rules(filtered + appended)
 
 
+def _build_v2fly_supplement(
+    catalog: Catalog,
+    source_ref: SourceRef,
+    fetcher,
+    visited_paths: set[tuple[str, str]],
+) -> tuple[list[Rule], list[SelectedSourceEntry]]:
+    if not source_ref.path:
+        raise ValueError("v2fly supplements must define a repository path")
+    visit_key = (source_ref.source, source_ref.path)
+    if visit_key in visited_paths:
+        return [], []
+    visited_paths.add(visit_key)
+
+    source_def = catalog.sources[source_ref.source]
+    resolved = resolve_source_ref(source_def, source_ref)
+    raw_text = fetcher(resolved.url)
+    parsed = parse_v2fly_domain_list(raw_text)
+    rules = list(parsed.rules)
+    selected_entries = [
+        SelectedSourceEntry(
+            source_name=resolved.source_name,
+            family="supplement",
+            format="v2fly_domain_list",
+            url=resolved.url,
+            priority=resolved.priority,
+            # Loon headings are derived only from native Loon source text.
+            raw_text="",
+        )
+    ]
+
+    parent = PurePosixPath(source_ref.path).parent
+    for include_name in parsed.includes:
+        include_ref = SourceRef(
+            source=source_ref.source,
+            path=str(parent / include_name),
+            format="v2fly_domain_list",
+            priority=source_ref.priority,
+        )
+        include_rules, include_entries = _build_v2fly_supplement(
+            catalog,
+            include_ref,
+            fetcher,
+            visited_paths,
+        )
+        rules.extend(include_rules)
+        selected_entries.extend(include_entries)
+    return dedupe_rules(rules), selected_entries
+
+
+def build_service_supplements(
+    catalog: Catalog,
+    service_name: str,
+    fetcher=fetch_text,
+) -> tuple[list[Rule], list[SelectedSourceEntry]]:
+    service = catalog.services[service_name]
+    rules: list[Rule] = []
+    selected_entries: list[SelectedSourceEntry] = []
+    visited_paths: set[tuple[str, str]] = set()
+    for source_ref in sorted(
+        service.supplements, key=lambda item: item.priority, reverse=True
+    ):
+        supplement_rules, supplement_entries = _build_v2fly_supplement(
+            catalog,
+            source_ref,
+            fetcher,
+            visited_paths,
+        )
+        rules.extend(supplement_rules)
+        selected_entries.extend(supplement_entries)
+    return dedupe_rules(rules), selected_entries
+
+
+def _supplements_for_variant(
+    variant_name: str, supplement_rules: list[Rule]
+) -> list[Rule]:
+    normalized_name = variant_name.lower()
+    if normalized_name.endswith("_ip"):
+        return [
+            rule
+            for rule in supplement_rules
+            if rule.type in {"IP-CIDR", "IP-CIDR6", "IP-ASN", "GEOIP"}
+        ]
+    if normalized_name.endswith("_domain"):
+        return [
+            rule
+            for rule in supplement_rules
+            if rule.type.startswith("DOMAIN")
+        ]
+    return supplement_rules
+
+
 def build_service_rules(
     catalog: Catalog,
     service_name: str,
@@ -338,6 +443,12 @@ def build_target_artifact(
         canonical_rules = catalog.self_maintained_rules.get(service_name)
         if not canonical_rules:
             return None
+        supplement_rules, supplement_entries = build_service_supplements(
+            catalog, service_name, fetcher=fetcher
+        )
+        canonical_rules = append_missing_rules(
+            list(canonical_rules), supplement_rules
+        )
         return TargetArtifact(
             service=service_name,
             target=target_name,
@@ -350,8 +461,8 @@ def build_target_artifact(
             origin_kind=service.origin.kind,
             origin_source_path=service.origin.source_path,
             origin_source_url=service.origin.source_url,
-            rules=list(canonical_rules),
-            selected_entries=[],
+            rules=canonical_rules,
+            selected_entries=supplement_entries,
             primary_variant_name=service_name,
         )
 
@@ -359,7 +470,29 @@ def build_target_artifact(
         catalog, service, target_name
     )
     if target_config is None:
-        return None
+        if not service.supplements:
+            return None
+        supplement_rules, supplement_entries = build_service_supplements(
+            catalog, service_name, fetcher=fetcher
+        )
+        if not supplement_rules:
+            return None
+        target_display_name = TARGET_DISPLAY_NAMES.get(
+            target_name, target_name.capitalize()
+        )
+        return TargetArtifact(
+            service=service_name,
+            target=target_name,
+            selected_family="supplement",
+            selected_native_target="v2fly",
+            publish_mode=target.publish_mode,
+            is_native=False,
+            is_converted=True,
+            conversion_path=f"v2fly -> {target_display_name}",
+            rules=supplement_rules,
+            selected_entries=supplement_entries,
+            primary_variant_name=service_name,
+        )
 
     variant_defs = _auto_discovered_target_variants(
         catalog,
@@ -406,6 +539,14 @@ def build_target_artifact(
 
         merged = merge_rule_streams(streams)
         merged = _apply_override(catalog.root, merged, service.override)
+        supplement_rules, supplement_entries = build_service_supplements(
+            catalog, service_name, fetcher=fetcher
+        )
+        merged = append_missing_rules(
+            merged,
+            _supplements_for_variant(variant_name, supplement_rules),
+        )
+        selected_entries.extend(supplement_entries)
         selected_native_target = _family_native_target(source_target_name, family)
         is_native = family == "native" and source_target_name == target_name
         conversion_path = None

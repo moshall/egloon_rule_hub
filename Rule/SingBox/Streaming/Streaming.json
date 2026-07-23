@@ -1594,6 +1594,14 @@
         "104.154.127.126/32",
         "35.186.224.47/32"
       ]
+    },
+    {
+      "domain_regex": [
+        "(^|\\.)apiproxy-device-prod-nlb-.+\\.amazonaws\\.com$",
+        "(^|\\.)apiproxy-website-nlb-prod-.+\\.amazonaws\\.com$",
+        "(^|\\.)dualstack\\.apiproxy-.+\\.amazonaws\\.com$",
+        "(^|\\.)dualstack\\.ichnaea-web-.+\\.amazonaws\\.com$"
+      ]
     }
   ]
 }

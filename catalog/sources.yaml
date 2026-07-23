@@ -5,6 +5,12 @@ sources:
     branch: master
     base_raw_url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master
 
+  v2fly_domain_list:
+    kind: github_repo
+    repo: v2fly/domain-list-community
+    branch: master
+    base_raw_url: https://raw.githubusercontent.com/v2fly/domain-list-community/master
+
   generic_remote:
     kind: remote
 

@@ -458,6 +458,11 @@ domain_keyword_set:
 - emby.wtf
 - jmsooo
 - odysseyplus
+domain_regex_set:
+- (^|\.)apiproxy-device-prod-nlb-.+\.amazonaws\.com$
+- (^|\.)apiproxy-website-nlb-prod-.+\.amazonaws\.com$
+- (^|\.)dualstack\.apiproxy-.+\.amazonaws\.com$
+- (^|\.)dualstack\.ichnaea-web-.+\.amazonaws\.com$
 ip_cidr_set:
 - 103.87.204.0/22
 - 107.23.255.0/26

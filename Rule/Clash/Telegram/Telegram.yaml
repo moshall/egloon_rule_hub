@@ -45,3 +45,6 @@ payload:
 - IP-ASN,59930
 - IP-ASN,62014
 - IP-ASN,62041
+- DOMAIN-SUFFIX,fragment.com
+- DOMAIN-SUFFIX,ton.org
+- DOMAIN-SUFFIX,toncenter.com

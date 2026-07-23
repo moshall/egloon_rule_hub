@@ -1,0 +1,48 @@
+supplements:
+  OpenAI:
+    - source: v2fly_domain_list
+      path: data/openai
+      format: v2fly_domain_list
+      priority: 10
+
+  Claude:
+    - source: v2fly_domain_list
+      path: data/anthropic
+      format: v2fly_domain_list
+      priority: 10
+
+  Telegram:
+    - source: v2fly_domain_list
+      path: data/telegram
+      format: v2fly_domain_list
+      priority: 10
+
+  Gemini:
+    - source: v2fly_domain_list
+      path: data/google-gemini
+      format: v2fly_domain_list
+      priority: 10
+
+  Netflix:
+    - source: v2fly_domain_list
+      path: data/netflix
+      format: v2fly_domain_list
+      priority: 10
+
+  Feishu:
+    - source: v2fly_domain_list
+      path: data/feishu
+      format: v2fly_domain_list
+      priority: 10
+
+  Twitter:
+    - source: v2fly_domain_list
+      path: data/twitter
+      format: v2fly_domain_list
+      priority: 10
+
+  Grok:
+    - source: v2fly_domain_list
+      path: data/xai
+      format: v2fly_domain_list
+      priority: 10

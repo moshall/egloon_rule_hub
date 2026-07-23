@@ -21,6 +21,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
 
 ### Netflix_Resolve
 
@@ -30,10 +31,29 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix_Resolve.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix_Resolve.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Netflix)
+### Upstream Entry 1 (v2fly_domain_list / Netflix)
+
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / Netflix_Resolve)
+
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/netflix)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (blackmatrix7 / Netflix)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list)
@@ -139,7 +159,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 2 (blackmatrix7 / Netflix_Resolve)
+### Upstream Entry 4 (blackmatrix7 / Netflix_Resolve)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix_Resolve.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix_Resolve.list)
