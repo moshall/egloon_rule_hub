@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterable
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import re
 from urllib.request import Request, urlopen
@@ -15,6 +16,15 @@ FEISHU_ARTICLE_URL = (
 
 _WILDCARD_DOMAIN_PATTERN = re.compile(r"\*\.([A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z]{2,})")
 _CIDR_PATTERN = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}/\d{1,2}\b")
+_UPDATE_TIME_PATTERNS = (
+    re.compile(r"\bupdateTime\s*:\s*(\d{10,13})\b"),
+    re.compile(r'(?:\\?")updateTime(?:\\?")\s*:\s*(\d{10,13})\b'),
+)
+_STORED_UPDATE_TIME_PATTERN = re.compile(
+    r"^#\s*@upstream-update-time:\s*(\d+)\s*$",
+    re.MULTILINE,
+)
+_CHINA_STANDARD_TIME = timezone(timedelta(hours=8))
 
 
 def _dedupe_preserving_order(items: Iterable[str]) -> list[str]:
@@ -35,6 +45,27 @@ def fetch_feishu_article(url: str = FEISHU_ARTICLE_URL) -> str:
     )
     with urlopen(request, timeout=30) as response:  # noqa: S310
         return response.read().decode("utf-8")
+
+
+def extract_feishu_update_time(html: str) -> int:
+    for pattern in _UPDATE_TIME_PATTERNS:
+        if match := pattern.search(html):
+            raw_value = int(match.group(1))
+            return raw_value // 1000 if raw_value >= 10**12 else raw_value
+    raise ValueError("Failed to extract Feishu upstream update time")
+
+
+def _stored_feishu_update_time(text: str) -> int | None:
+    if match := _STORED_UPDATE_TIME_PATTERN.search(text):
+        return int(match.group(1))
+    return None
+
+
+def _format_feishu_update_time(update_time: int) -> str:
+    return datetime.fromtimestamp(
+        update_time,
+        tz=timezone.utc,
+    ).astimezone(_CHINA_STANDARD_TIME).isoformat(timespec="seconds")
 
 
 def _domain_section(html: str) -> str:
@@ -73,10 +104,17 @@ def extract_mainland_cidrs(html: str) -> list[str]:
     return _dedupe_preserving_order(mainland_cidrs)
 
 
-def render_feishu_txt(domains: list[str], mainland_cidrs: list[str]) -> str:
+def render_feishu_txt(
+    domains: list[str],
+    mainland_cidrs: list[str],
+    update_time: int,
+) -> str:
     lines = [
         "# 数据来源: Feishu 官方帮助中心",
         f"# 原文链接: {FEISHU_ARTICLE_URL}",
+        f"# @upstream-update-time: {update_time}",
+        f"# @upstream-updated-at: {_format_feishu_update_time(update_time)}",
+        "# @upstream-region: 中国大陆",
         "# 规则名称: Feishu-域名",
     ]
     lines.extend(f"DOMAIN-SUFFIX,{domain}" for domain in domains)
@@ -91,15 +129,25 @@ def refresh_feishu_txt(
 ) -> Path:
     fetcher = fetcher or fetch_feishu_article
     html = fetcher(FEISHU_ARTICLE_URL)
+    update_time = extract_feishu_update_time(html)
+    output_path = root / "Source" / "TXT" / "Feishu.txt"
+    if output_path.exists():
+        current_text = output_path.read_text(encoding="utf-8")
+        if _stored_feishu_update_time(current_text) == update_time:
+            return output_path
+
     domains = extract_feishu_domains(html)
     mainland_cidrs = extract_mainland_cidrs(html)
     if not domains or not mainland_cidrs:
         raise ValueError("Failed to extract Feishu domains or mainland CIDRs")
 
-    output_path = root / "Source" / "TXT" / "Feishu.txt"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
-        render_feishu_txt(domains=domains, mainland_cidrs=mainland_cidrs),
+        render_feishu_txt(
+            domains=domains,
+            mainland_cidrs=mainland_cidrs,
+            update_time=update_time,
+        ),
         encoding="utf-8",
     )
     return output_path

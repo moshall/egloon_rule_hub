@@ -180,7 +180,7 @@ python -m egloon_rule_hub bootstrap
 
 ## 自动化更新
 
-仓库当前使用两个 GitHub Actions 工作流：
+仓库当前使用三个 GitHub Actions 工作流：
 
 - `.github/workflows/validate.yml`
   - 在 `push`、`pull_request`、手动触发时运行
@@ -188,9 +188,14 @@ python -m egloon_rule_hub bootstrap
 - `.github/workflows/sync-rules.yml`
   - 支持手动触发
   - 每日北京时间 `03:30` 定时执行一次
-  - 自动刷新 `Source/TXT/`
   - 自动执行 `bootstrap`
-  - 自动提交 `README.md`、`ATTRIBUTION.md`、`Rule/`、`dist/`、`Source/TXT/` 的更新
+  - 自动提交 `README.md`、`ATTRIBUTION.md`、`Rule/`、`dist/` 的上游更新
+- `.github/workflows/sync-feishu.yml`
+  - 支持手动触发
+  - 每 7 天（每周一北京时间 `03:30`）检查一次飞书官方白名单页面
+  - 以页面 `updateTime` 为版本标识；未变化时不改文件、不执行构建
+  - 变化时只提取公共域名和国家/地区属于“中国大陆”的 IP 段
+  - 自动更新现有 `Feishu` 规则集及所有客户端产物，订阅名称和路径保持不变
 
 ## 当前状态
 

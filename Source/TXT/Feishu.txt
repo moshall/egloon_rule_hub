@@ -1,5 +1,8 @@
 # 数据来源: Feishu 官方帮助中心
 # 原文链接: https://www.feishu.cn/hc/zh-CN/articles/360044683233-%E9%85%8D%E7%BD%AE%E4%BC%81%E4%B8%9A%E5%86%85%E7%BD%91%E9%98%B2%E7%81%AB%E5%A2%99%E5%9F%9F%E5%90%8D%E5%92%8C-ip-%E7%99%BD%E5%90%8D%E5%8D%95
+# @upstream-update-time: 1772767058
+# @upstream-updated-at: 2026-03-06T11:17:38+08:00
+# @upstream-region: 中国大陆
 # 规则名称: Feishu-域名
 DOMAIN-SUFFIX,feishu.net
 DOMAIN-SUFFIX,feishu.cn
