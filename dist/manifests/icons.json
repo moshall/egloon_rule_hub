@@ -386,19 +386,11 @@
     "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/GitHub.png"
   },
   "Google": {
-    "matched": true,
-    "published_paths": [
-      "Rule/Clash/Google/icon.png",
-      "Rule/Egern/Google/icon.png",
-      "Rule/Loon/Google/icon.png",
-      "Rule/QuantumultX/Google/icon.png",
-      "Rule/Shadowrocket/Google/icon.png",
-      "Rule/SingBox/Google/icon.png",
-      "Rule/Surfboard/Google/icon.png"
-    ],
-    "reason": null,
-    "source_path": "src/Google.png",
-    "source_url": "https://raw.githubusercontent.com/Keviin560/icon/main/src/Google.png"
+    "matched": false,
+    "published_paths": [],
+    "reason": "icon_sync_source_unavailable",
+    "source_path": null,
+    "source_url": null
   },
   "GoogleEarth": {
     "matched": false,
