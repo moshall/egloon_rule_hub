@@ -643,6 +643,9 @@ domain_suffix_set:
 - tg.dev
 - tx.me
 - usercontent.dev
+- fragment.com
+- ton.org
+- toncenter.com
 - bintray.com
 domain_keyword_set:
 - twitter

@@ -4,6 +4,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -46,6 +47,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -88,6 +90,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -130,6 +133,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -172,6 +176,7 @@
     "fallback_order": [],
     "notes": "Apple services",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -214,6 +219,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -256,6 +262,7 @@
     "fallback_order": [],
     "notes": "",
     "source_count": 0,
+    "supplements": [],
     "target_sources": {},
     "targets": [
       "egern",
@@ -272,6 +279,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -314,6 +322,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -356,6 +365,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -398,6 +408,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -440,6 +451,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -482,6 +494,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -524,6 +537,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -566,6 +580,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -608,6 +623,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -650,6 +666,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -692,6 +709,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -734,6 +752,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -776,6 +795,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -818,6 +838,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -860,6 +881,7 @@
     "fallback_order": [],
     "notes": "Regional routing",
     "source_count": 5,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -898,6 +920,7 @@
     "fallback_order": [],
     "notes": "Regional routing",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -940,6 +963,7 @@
     "fallback_order": [],
     "notes": "Regional routing",
     "source_count": 2,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -982,6 +1006,7 @@
     "fallback_order": [],
     "notes": "Regional routing",
     "source_count": 2,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1024,6 +1049,7 @@
     "fallback_order": [],
     "notes": "Regional routing",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1066,6 +1092,7 @@
     "fallback_order": [],
     "notes": "Upstream service with manual variants",
     "source_count": 6,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1099,7 +1126,15 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "AI service",
-    "source_count": 3,
+    "source_count": 4,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/anthropic",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1142,6 +1177,7 @@
     "fallback_order": [],
     "notes": "",
     "source_count": 0,
+    "supplements": [],
     "target_sources": {},
     "targets": [
       "egern",
@@ -1158,6 +1194,7 @@
     "fallback_order": [],
     "notes": "Infrastructure and CDN service",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1200,6 +1237,7 @@
     "fallback_order": [],
     "notes": "AI service",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1242,6 +1280,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1284,6 +1323,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1326,6 +1366,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1368,6 +1409,7 @@
     "fallback_order": [],
     "notes": "Education",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1410,6 +1452,7 @@
     "fallback_order": [],
     "notes": "Gaming",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1452,6 +1495,7 @@
     "fallback_order": [],
     "notes": "Sports media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1494,6 +1538,7 @@
     "fallback_order": [],
     "notes": "Media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1536,6 +1581,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1578,6 +1624,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1620,6 +1667,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1662,6 +1710,7 @@
     "fallback_order": [],
     "notes": "Social service",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1703,7 +1752,15 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "",
-    "source_count": 0,
+    "source_count": 1,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/feishu",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
     "target_sources": {},
     "targets": [
       "egern",
@@ -1720,6 +1777,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1761,7 +1819,15 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "Google AI service",
-    "source_count": 3,
+    "source_count": 4,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/google-gemini",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1804,6 +1870,7 @@
     "fallback_order": [],
     "notes": "Developer platform",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1846,6 +1913,7 @@
     "fallback_order": [],
     "notes": "Google main services",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1888,6 +1956,7 @@
     "fallback_order": [],
     "notes": "Google Earth",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1930,6 +1999,7 @@
     "fallback_order": [],
     "notes": "",
     "source_count": 0,
+    "supplements": [],
     "target_sources": {},
     "targets": [
       "egern",
@@ -1946,6 +2016,7 @@
     "fallback_order": [],
     "notes": "Upstream service with manual variants",
     "source_count": 6,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -1980,6 +2051,7 @@
     "fallback_order": [],
     "notes": "Google Search",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2022,6 +2094,7 @@
     "fallback_order": [],
     "notes": "Google Voice",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2059,11 +2132,36 @@
       "singbox"
     ]
   },
+  "Grok": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "xAI Grok service",
+    "source_count": 1,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/xai",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
+    "target_sources": {},
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket",
+      "surfboard",
+      "singbox"
+    ]
+  },
   "HBO": {
     "enabled": true,
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2106,6 +2204,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2148,6 +2247,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2190,6 +2290,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2232,6 +2333,7 @@
     "fallback_order": [],
     "notes": "Social service",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2274,6 +2376,7 @@
     "fallback_order": [],
     "notes": "",
     "source_count": 0,
+    "supplements": [],
     "target_sources": {},
     "targets": [
       "egern",
@@ -2290,6 +2393,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2332,6 +2436,7 @@
     "fallback_order": [],
     "notes": "Linux ecosystems",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2374,6 +2479,7 @@
     "fallback_order": [],
     "notes": "Upstream service with manual variants",
     "source_count": 6,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2408,6 +2514,7 @@
     "fallback_order": [],
     "notes": "",
     "source_count": 0,
+    "supplements": [],
     "target_sources": {},
     "targets": [
       "egern",
@@ -2424,6 +2531,7 @@
     "fallback_order": [],
     "notes": "Upstream service with manual variants",
     "source_count": 6,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2457,7 +2565,15 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "Streaming media",
-    "source_count": 3,
+    "source_count": 4,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/netflix",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2500,6 +2616,7 @@
     "fallback_order": [],
     "notes": "Gaming",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2542,6 +2659,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2584,6 +2702,7 @@
     "fallback_order": [],
     "notes": "Gaming and cloud",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2626,6 +2745,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2667,7 +2787,15 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "AI service",
-    "source_count": 3,
+    "source_count": 4,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/openai",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2710,6 +2838,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2752,6 +2881,7 @@
     "fallback_order": [],
     "notes": "Payments",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2794,6 +2924,7 @@
     "fallback_order": [],
     "notes": "Cloud storage",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2836,6 +2967,7 @@
     "fallback_order": [],
     "notes": "Proxy related rules",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2878,6 +3010,7 @@
     "fallback_order": [],
     "notes": "Commerce",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2920,6 +3053,7 @@
     "fallback_order": [],
     "notes": "Social service",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -2962,6 +3096,7 @@
     "fallback_order": [],
     "notes": "Commerce",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3004,6 +3139,7 @@
     "fallback_order": [],
     "notes": "Commerce",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3046,6 +3182,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3088,6 +3225,7 @@
     "fallback_order": [],
     "notes": "Gaming and media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3130,6 +3268,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3172,6 +3311,7 @@
     "fallback_order": [],
     "notes": "Gaming",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3214,6 +3354,7 @@
     "fallback_order": [],
     "notes": "Gaming",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3256,6 +3397,7 @@
     "fallback_order": [],
     "notes": "Payments",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3298,6 +3440,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3339,7 +3482,15 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "Messaging",
-    "source_count": 3,
+    "source_count": 4,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/telegram",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3382,6 +3533,7 @@
     "fallback_order": [],
     "notes": "Messaging",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3424,6 +3576,7 @@
     "fallback_order": [],
     "notes": "Messaging",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3466,6 +3619,7 @@
     "fallback_order": [],
     "notes": "Messaging",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3508,6 +3662,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3550,6 +3705,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3592,6 +3748,7 @@
     "fallback_order": [],
     "notes": "Social service",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3634,6 +3791,7 @@
     "fallback_order": [],
     "notes": "Social service",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3676,6 +3834,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3717,7 +3876,15 @@
     "enabled": true,
     "fallback_order": [],
     "notes": "Social service",
-    "source_count": 3,
+    "source_count": 4,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/twitter",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3760,6 +3927,7 @@
     "fallback_order": [],
     "notes": "Messaging",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3802,6 +3970,7 @@
     "fallback_order": [],
     "notes": "Knowledge",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3844,6 +4013,7 @@
     "fallback_order": [],
     "notes": "Gaming",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3886,6 +4056,7 @@
     "fallback_order": [],
     "notes": "Media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3928,6 +4099,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -3970,6 +4142,7 @@
     "fallback_order": [],
     "notes": "Streaming media",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -4012,6 +4185,7 @@
     "fallback_order": [],
     "notes": "Commerce",
     "source_count": 3,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,
@@ -4054,6 +4228,7 @@
     "fallback_order": [],
     "notes": "Upstream service",
     "source_count": 4,
+    "supplements": [],
     "target_sources": {
       "clash": {
         "clash": 0,

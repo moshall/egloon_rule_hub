@@ -20,6 +20,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic)
 
 ### Claude_No_Resolve
 
@@ -29,10 +30,29 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude_No_Resolve.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Claude)
+### Upstream Entry 1 (v2fly_domain_list / Claude)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / Claude_No_Resolve)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (blackmatrix7 / Claude)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml)
@@ -123,7 +143,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 2 (blackmatrix7 / Claude_No_Resolve)
+### Upstream Entry 4 (blackmatrix7 / Claude_No_Resolve)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude_No_Resolve.yaml)

@@ -24,6 +24,9 @@ domain_suffix_set:
 - tg.dev
 - tx.me
 - usercontent.dev
+- fragment.com
+- ton.org
+- toncenter.com
 domain_keyword_set:
 - nicegram
 ip_cidr_set:

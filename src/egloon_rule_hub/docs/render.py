@@ -67,6 +67,8 @@ def service_source_count(service: ServiceDef) -> int:
     else:
         for source_ref in service.sources:
             distinct_refs.add(_source_ref_key(source_ref))
+    for source_ref in service.supplements:
+        distinct_refs.add(_source_ref_key(source_ref))
     return len(distinct_refs)
 
 

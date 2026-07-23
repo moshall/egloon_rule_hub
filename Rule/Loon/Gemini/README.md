@@ -21,10 +21,30 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Gemini)
+### Upstream Entry 1 (v2fly_domain_list / Gemini)
+
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-gemini)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / Gemini)
+
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/google-deepmind)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (blackmatrix7 / Gemini)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list)

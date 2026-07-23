@@ -26,6 +26,15 @@ def _render_manifests(root: Path, catalog: Catalog) -> None:
             "targets": service.outputs,
             "source_count": service_source_count(service),
             "fallback_order": service.fallback_order,
+            "supplements": [
+                {
+                    "source": source_ref.source,
+                    "path": source_ref.path,
+                    "url": source_ref.url,
+                    "format": source_ref.format,
+                }
+                for source_ref in service.supplements
+            ],
             "target_sources": {
                 target_name: {
                     family: len(entries)

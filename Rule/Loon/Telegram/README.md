@@ -21,6 +21,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram)
 
 ### Telegram_Resolve
 
@@ -30,10 +31,29 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram_Resolve.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram_Resolve.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Telegram)
+### Upstream Entry 1 (v2fly_domain_list / Telegram)
+
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / Telegram_Resolve)
+
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/telegram)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (blackmatrix7 / Telegram)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list)
@@ -146,7 +166,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 2 (blackmatrix7 / Telegram_Resolve)
+### Upstream Entry 4 (blackmatrix7 / Telegram_Resolve)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram_Resolve.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram_Resolve.list)

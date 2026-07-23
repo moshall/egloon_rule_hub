@@ -168,5 +168,21 @@
       "surfboard",
       "singbox"
     ]
+  },
+  "x-full": {
+    "enabled": true,
+    "services": [
+      "Twitter",
+      "Grok"
+    ],
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket",
+      "surfboard",
+      "singbox"
+    ]
   }
 }

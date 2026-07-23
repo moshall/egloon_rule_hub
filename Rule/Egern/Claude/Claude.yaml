@@ -1,5 +1,11 @@
 domain_set:
 - cdn.usefathom.com
+- servd-anthropic-website.b-cdn.net
 domain_suffix_set:
 - anthropic.com
 - claude.ai
+- clau.de
+- claude.com
+- claudemcpclient.com
+- claudemcpcontent.com
+- claudeusercontent.com

@@ -1172,6 +1172,14 @@
         "99.80.34.64/26",
         "99.80.88.0/25"
       ]
+    },
+    {
+      "domain_regex": [
+        "(^|\\.)apiproxy-device-prod-nlb-.+\\.amazonaws\\.com$",
+        "(^|\\.)apiproxy-website-nlb-prod-.+\\.amazonaws\\.com$",
+        "(^|\\.)dualstack\\.apiproxy-.+\\.amazonaws\\.com$",
+        "(^|\\.)dualstack\\.ichnaea-web-.+\\.amazonaws\\.com$"
+      ]
     }
   ]
 }

@@ -1156,3 +1156,7 @@ payload:
 - IP-CIDR6,2a00:86c0::/32
 - IP-CIDR6,2a03:5640::/32
 - PROCESS-NAME,com.netflix.mediaclient
+- DOMAIN-REGEX,(^|\.)apiproxy-device-prod-nlb-.+\.amazonaws\.com$
+- DOMAIN-REGEX,(^|\.)apiproxy-website-nlb-prod-.+\.amazonaws\.com$
+- DOMAIN-REGEX,(^|\.)dualstack\.apiproxy-.+\.amazonaws\.com$
+- DOMAIN-REGEX,(^|\.)dualstack\.ichnaea-web-.+\.amazonaws\.com$

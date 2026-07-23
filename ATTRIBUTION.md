@@ -32,6 +32,15 @@ Keep this file in public repositories so the upstream relationship stays visible
 - Referenced by services: 0
 - Services: none yet
 
+### v2fly_domain_list
+
+- Kind: `github_repo`
+- Repo: `v2fly/domain-list-community`
+- Branch: `master`
+- Base raw URL: `https://raw.githubusercontent.com/v2fly/domain-list-community/master`
+- Referenced by services: 0
+- Services: none yet
+
 ## Public Repository Note
 
 - This repository should keep upstream attribution visible in the README and this file.

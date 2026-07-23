@@ -21,10 +21,20 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Claude/Claude.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Claude/Claude.list)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / Claude)
+### Upstream Entry 1 (v2fly_domain_list / Claude)
+
+- Upstream native target: `Loon`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (blackmatrix7 / Claude)
 
 - Upstream native target: `Loon`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Claude/Claude.list](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Claude/Claude.list)

@@ -20,6 +20,7 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai)
 
 ### OpenAI_No_Resolve
 
@@ -29,10 +30,29 @@ This layout documents a direct upstream target.
 - Selected source family: `native`
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml)
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai)
 
 ## Upstream README Sources
 
-### Upstream Entry 1 (blackmatrix7 / OpenAI)
+### Upstream Entry 1 (v2fly_domain_list / OpenAI)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 2 (v2fly_domain_list / OpenAI_No_Resolve)
+
+- Upstream native target: `Clash`
+- Rule file: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/openai)
+- README: [https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/README.md)
+- Status: `missing`
+
+upstream README missing
+
+### Upstream Entry 3 (blackmatrix7 / OpenAI)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml)
@@ -132,7 +152,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 请不要对外宣传本项目。
 ```
 
-### Upstream Entry 2 (blackmatrix7 / OpenAI_No_Resolve)
+### Upstream Entry 4 (blackmatrix7 / OpenAI_No_Resolve)
 
 - Upstream native target: `Clash`
 - Rule file: [https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml)

@@ -141,6 +141,10 @@ services:
             format: clash_yaml
             priority: 100
     notes: "AI service"
+  Grok:
+    enabled: true
+    outputs: *all_targets
+    notes: "xAI Grok service"
   Twitter:
     enabled: true
     outputs: *all_targets
