@@ -128,7 +128,7 @@ This layout documents a direct upstream target.
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -137,10 +137,10 @@ This layout documents a direct upstream target.
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -693,7 +693,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -702,10 +702,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -1258,7 +1258,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -1267,10 +1267,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -1823,7 +1823,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -1832,10 +1832,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -2388,7 +2388,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -2397,10 +2397,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -2953,7 +2953,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -2962,10 +2962,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -3518,7 +3518,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -3527,10 +3527,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -4083,7 +4083,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -4092,10 +4092,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
@@ -4648,7 +4648,7 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-07-24 03:07:12
+最后更新时间：2026-07-26 03:01:18
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
@@ -4657,10 +4657,10 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 | DOMAIN-KEYWORD | 13  | 
 | DOMAIN-SUFFIX | 111903  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 8229  | 
-| IP-CIDR6 | 4214  | 
+| IP-CIDR | 8237  | 
+| IP-CIDR6 | 4200  | 
 | PROCESS-NAME | 14  | 
-| TOTAL | 124669  | 
+| TOTAL | 124663  | 
 
 
 ## Clash 
