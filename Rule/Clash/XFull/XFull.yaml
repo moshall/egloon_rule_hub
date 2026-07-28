@@ -33,4 +33,5 @@ payload:
 - IP-CIDR,209.237.192.0/19
 - IP-CIDR,69.195.160.0/19
 - DOMAIN-SUFFIX,grok.x.com
+- DOMAIN-SUFFIX,grokipedia.com
 - DOMAIN-SUFFIX,x.ai
