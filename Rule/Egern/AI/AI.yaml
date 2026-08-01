@@ -86,6 +86,7 @@ domain_suffix_set:
 - aistudio.google.com
 - gemini.google
 - gemini.gstatic.com
+- notebook.google.com
 - notebooklm.google
 - notebooklm.google.com
 - jules.google
