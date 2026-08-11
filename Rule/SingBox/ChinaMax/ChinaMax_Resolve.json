@@ -3,13 +3,14 @@
   "rules": [
     {
       "domain_suffix": [
-        "alipay",
         "cn",
         "ms",
         "alibaba",
+        "alipay",
         "anquan",
         "baidu",
         "citic",
+        "icbc",
         "shouji",
         "sina",
         "sohu",
@@ -52,8 +53,7 @@
         "xn--vuq861b",
         "xn--xhq521b",
         "xn--zfr164b",
-        "yun",
-        "icbc"
+        "yun"
       ]
     },
     {

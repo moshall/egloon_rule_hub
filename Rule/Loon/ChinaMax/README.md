@@ -93,19 +93,19 @@ This layout documents a direct upstream target.
 
 ## 规则统计
 
-最后更新时间：2026-08-10 02:31:46
+最后更新时间：2026-08-12 02:55:37
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 297  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 111324  | 
+| DOMAIN-SUFFIX | 111327  | 
 | IP-ASN | 1  | 
 | IP-CIDR | 8247  | 
 | IP-CIDR6 | 4198  | 
 | USER-AGENT | 65  | 
-| TOTAL | 124145  | 
+| TOTAL | 124148  | 
 
 
 ## Loon 
@@ -566,19 +566,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-08-10 02:31:46
+最后更新时间：2026-08-12 02:55:37
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 297  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 111324  | 
+| DOMAIN-SUFFIX | 111327  | 
 | IP-ASN | 1  | 
 | IP-CIDR | 8247  | 
 | IP-CIDR6 | 4198  | 
 | USER-AGENT | 65  | 
-| TOTAL | 124145  | 
+| TOTAL | 124148  | 
 
 
 ## Loon 
@@ -1039,19 +1039,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-08-10 02:31:46
+最后更新时间：2026-08-12 02:55:37
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 297  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 111324  | 
+| DOMAIN-SUFFIX | 111327  | 
 | IP-ASN | 1  | 
 | IP-CIDR | 8247  | 
 | IP-CIDR6 | 4198  | 
 | USER-AGENT | 65  | 
-| TOTAL | 124145  | 
+| TOTAL | 124148  | 
 
 
 ## Loon 
@@ -1512,19 +1512,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-08-10 02:31:46
+最后更新时间：2026-08-12 02:55:37
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 297  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 111324  | 
+| DOMAIN-SUFFIX | 111327  | 
 | IP-ASN | 1  | 
 | IP-CIDR | 8247  | 
 | IP-CIDR6 | 4198  | 
 | USER-AGENT | 65  | 
-| TOTAL | 124145  | 
+| TOTAL | 124148  | 
 
 
 ## Loon 
@@ -1985,19 +1985,19 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-08-10 02:31:46
+最后更新时间：2026-08-12 02:55:37
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 297  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 111324  | 
+| DOMAIN-SUFFIX | 111327  | 
 | IP-ASN | 1  | 
 | IP-CIDR | 8247  | 
 | IP-CIDR6 | 4198  | 
 | USER-AGENT | 65  | 
-| TOTAL | 124145  | 
+| TOTAL | 124148  | 
 
 
 ## Loon 
