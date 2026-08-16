@@ -33,6 +33,12 @@ DOMAIN-SUFFIX,ibytedapm.com
 DOMAIN-SUFFIX,larkenterprise.com
 DOMAIN-SUFFIX,aiforce.cloud
 DOMAIN-SUFFIX,aiforce.run
+DOMAIN-SUFFIX,basevibepage.com
+DOMAIN-SUFFIX,doubao.com
+DOMAIN-SUFFIX,bytetcc.com
+DOMAIN-SUFFIX,mssdk.bytedance.com
+DOMAIN-SUFFIX,douyinvod.com
+DOMAIN-SUFFIX,byteacctimg.com
 IP-CIDR,39.105.254.0/24
 IP-CIDR,39.105.247.0/25
 IP-CIDR,47.113.76.128/25
