@@ -8418,6 +8418,8 @@ IP-CIDR,125.210.0.0/16,no-resolve
 IP-CIDR,125.211.0.0/16,no-resolve
 IP-CIDR,125.213.0.0/17,no-resolve
 IP-CIDR,125.213.32.0/20,no-resolve
+IP-CIDR,125.214.104.0/21,no-resolve
+IP-CIDR,125.214.112.0/20,no-resolve
 IP-CIDR,125.214.96.0/19,no-resolve
 IP-CIDR,125.215.0.0/18,no-resolve
 IP-CIDR,125.215.36.0/23,no-resolve
@@ -10158,6 +10160,7 @@ IP-CIDR,192.171.224.0/21,no-resolve
 IP-CIDR,192.197.113.0/24,no-resolve
 IP-CIDR,192.23.191.0/24,no-resolve
 IP-CIDR,192.232.97.0/24,no-resolve
+IP-CIDR,192.51.172.0/23,no-resolve
 IP-CIDR,192.51.173.0/24,no-resolve
 IP-CIDR,192.51.188.0/24,no-resolve
 IP-CIDR,192.55.10.0/23,no-resolve
@@ -22555,8 +22558,6 @@ IP-CIDR,8.162.0.0/18,no-resolve
 IP-CIDR,8.162.64.0/19,no-resolve
 DOMAIN-SUFFIX,alipay
 DOMAIN-SUFFIX,alibaba
-DOMAIN-SUFFIX,taobao
-DOMAIN-SUFFIX,tmall
 DOMAIN-SUFFIX,anquan
 DOMAIN-SUFFIX,baidu
 DOMAIN-SUFFIX,citic
@@ -22564,6 +22565,8 @@ DOMAIN-SUFFIX,icbc
 DOMAIN-SUFFIX,shouji
 DOMAIN-SUFFIX,sina
 DOMAIN-SUFFIX,sohu
+DOMAIN-SUFFIX,taobao
+DOMAIN-SUFFIX,tmall
 DOMAIN-SUFFIX,unicom
 DOMAIN-SUFFIX,wang
 DOMAIN-SUFFIX,weibo
@@ -22634,12 +22637,12 @@ USER-AGENT,iQiYi*
 USER-AGENT,iQiyi*
 USER-AGENT,live4iphone*
 USER-AGENT,qqlive4iphone*
-USER-AGENT,walkman*
-USER-AGENT,xiami*
 USER-AGENT,youku*
 USER-AGENT,Himalaya*
 USER-AGENT,%E5%92%AA%E5%92%95%E8%A7%86%E9%A2%91
 USER-AGENT,MiguVideo*
+USER-AGENT,walkman*
+USER-AGENT,xiami*
 USER-AGENT,iQIYI*
 IP-CIDR,0.0.0.0/32,no-resolve
 IP-CIDR,1.116.0.0/14,no-resolve
@@ -22693,7 +22696,7 @@ IP-CIDR,128.1.62.200/31,no-resolve
 IP-CIDR,139.95.0.0/16,no-resolve
 IP-CIDR,14.1.112.0/22,no-resolve
 IP-CIDR,14.255.249.0/24,no-resolve
-IP-CIDR,141.11.50.0/23,no-resolve
+IP-CIDR,141.11.51.0/24,no-resolve
 IP-CIDR,147.139.0.0/16,no-resolve
 IP-CIDR,149.129.0.0/16,no-resolve
 IP-CIDR,150.116.92.250/32,no-resolve
