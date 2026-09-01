@@ -1,14 +1,13 @@
 domain_suffix_set:
+- alipay
 - alibaba
 - taobao
 - tmall
 - cn
 - ms
-- alipay
 - anquan
 - baidu
 - citic
-- icbc
 - shouji
 - sina
 - sohu
@@ -50,6 +49,7 @@ domain_suffix_set:
 - xn--xhq521b
 - xn--zfr164b
 - yun
+- icbc
 domain_keyword_set:
 - .tmall.com
 - alicdn
@@ -204,7 +204,6 @@ ip_cidr_set:
 - 101.76.0.0/15
 - 101.78.0.0/22
 - 101.78.32.0/19
-- 101.79.220.0/24
 - 101.80.0.0/12
 - 101.96.0.0/21
 - 101.96.128.0/17
