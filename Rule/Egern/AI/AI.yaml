@@ -13,6 +13,8 @@ domain_set:
 - makersuite.google.com
 - alkalicore-pa.clients6.google.com
 - webchannel-alkalimakersuite-pa.clients6.google.com
+- geminiweb-pa.clients.google.com
+- geminiweb-pa.clients6.google.com
 - cloudaicompanion.googleapis.com
 - cloudcode-pa.googleapis.com
 - daily-cloudcode-pa.googleapis.com
@@ -86,6 +88,7 @@ domain_suffix_set:
 - aistudio.google.com
 - gemini.google
 - gemini.gstatic.com
+- labstailwind.pa.googleapis.com
 - notebook.google
 - notebook.google.com
 - notebooklm.google
