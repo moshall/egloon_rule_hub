@@ -8,10 +8,10 @@
         "dns.alidns.com",
         "doh.360.cn",
         "doh.pub",
+        "alipay",
         "alibaba",
         "taobao",
         "tmall",
-        "alipay",
         "anquan",
         "baidu",
         "citic",
@@ -71,10 +71,10 @@
         "officecdn",
         "taobao",
         "bilibili",
-        "qiyi",
         "hnagroup",
         "stripe",
-        "weibo"
+        "weibo",
+        "qiyi"
       ]
     },
     {
