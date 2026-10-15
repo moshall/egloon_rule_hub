@@ -74,18 +74,18 @@ This layout documents a direct upstream target.
 
 ## 规则统计
 
-最后更新时间：2026-10-14 06:12:10
+最后更新时间：2026-10-16 04:52:15
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 269  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 110851  | 
+| DOMAIN-SUFFIX | 110564  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 12561  | 
+| IP-CIDR | 12559  | 
 | USER-AGENT | 65  | 
-| TOTAL | 123760  | 
+| TOTAL | 123471  | 
 
 
 ## Shadowrocket 
@@ -547,18 +547,18 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-10-14 06:12:10
+最后更新时间：2026-10-16 04:52:15
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 269  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 110851  | 
+| DOMAIN-SUFFIX | 110564  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 12561  | 
+| IP-CIDR | 12559  | 
 | USER-AGENT | 65  | 
-| TOTAL | 123760  | 
+| TOTAL | 123471  | 
 
 
 ## Shadowrocket 
@@ -1020,18 +1020,18 @@ https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_scri
 
 ## 规则统计
 
-最后更新时间：2026-10-14 06:12:10
+最后更新时间：2026-10-16 04:52:15
 
 各类型规则统计：
 | 类型 | 数量(条)  | 
 | ---- | ----  |
 | DOMAIN | 269  | 
 | DOMAIN-KEYWORD | 13  | 
-| DOMAIN-SUFFIX | 110851  | 
+| DOMAIN-SUFFIX | 110564  | 
 | IP-ASN | 1  | 
-| IP-CIDR | 12561  | 
+| IP-CIDR | 12559  | 
 | USER-AGENT | 65  | 
-| TOTAL | 123760  | 
+| TOTAL | 123471  | 
 
 
 ## Shadowrocket 
