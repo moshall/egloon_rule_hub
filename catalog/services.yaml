@@ -2,6 +2,10 @@ all_targets: &all_targets [egern, loon, clash, quantumultx, shadowrocket, surfbo
 defaults:
   fallback_order: [native, shadowrocket, clash]
 services:
+  Muse:
+    enabled: true
+    outputs: *all_targets
+    notes: "Full Meta family for Muse / Meta AI: recursively includes Facebook, Instagram, Messenger, WhatsApp, Threads, Oculus, and developer domains from v2fly data/meta. Domain rules only; intentionally broader than AI endpoints."
   OpenAI:
     enabled: true
     outputs: *all_targets

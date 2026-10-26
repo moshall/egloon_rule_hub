@@ -2526,6 +2526,30 @@
       "singbox"
     ]
   },
+  "Muse": {
+    "enabled": true,
+    "fallback_order": [],
+    "notes": "Full Meta family for Muse / Meta AI: recursively includes Facebook, Instagram, Messenger, WhatsApp, Threads, Oculus, and developer domains from v2fly data/meta. Domain rules only; intentionally broader than AI endpoints.",
+    "source_count": 1,
+    "supplements": [
+      {
+        "format": "v2fly_domain_list",
+        "path": "data/meta",
+        "source": "v2fly_domain_list",
+        "url": null
+      }
+    ],
+    "target_sources": {},
+    "targets": [
+      "egern",
+      "loon",
+      "clash",
+      "quantumultx",
+      "shadowrocket",
+      "surfboard",
+      "singbox"
+    ]
+  },
   "Naver": {
     "enabled": true,
     "fallback_order": [],

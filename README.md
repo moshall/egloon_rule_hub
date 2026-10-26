@@ -180,6 +180,24 @@ python -m egloon_rule_hub bootstrap
 
 ## 自动化更新
 
+### Muse 全 Meta 系规则
+
+`Muse` 按完整 Meta 域名体系发布，覆盖 Muse / Meta AI，以及 Facebook、Instagram、Messenger、WhatsApp、Threads、Oculus 和开发者相关域名。统一来源为 [v2fly 的 data/meta](https://github.com/v2fly/domain-list-community/blob/master/data/meta)，构建时递归展开其 `include:` 引用并去重。
+
+- Egern：[`Rule/Egern/Muse/Muse.yaml`](Rule/Egern/Muse/Muse.yaml)
+- Loon：[`Rule/Loon/Muse/Muse.lsr`](Rule/Loon/Muse/Muse.lsr)
+- Clash / mihomo：[`Rule/Clash/Muse/Muse.yaml`](Rule/Clash/Muse/Muse.yaml)
+- QuantumultX：[`Rule/QuantumultX/Muse/Muse.list`](Rule/QuantumultX/Muse/Muse.list)
+- Shadowrocket：[`Rule/Shadowrocket/Muse/Muse.list`](Rule/Shadowrocket/Muse/Muse.list)
+- Surfboard：[`Rule/Surfboard/Muse/Muse.list`](Rule/Surfboard/Muse/Muse.list)
+- sing-box：[`Rule/SingBox/Muse/Muse.json`](Rule/SingBox/Muse/Muse.json)
+
+这是覆盖整个 Meta 系的域名规则集，不限于 AI 请求；没有加入共享 IP 网段。若 Muse 使用单独的出口策略，请把它放在 Facebook、Instagram、WhatsApp 等重叠规则之前。`meta.ai` 的后缀规则同时覆盖 `api.meta.ai`、`dev.meta.ai` 等子域名。
+
+现有 `sync-rules` 每日同步会自动刷新 Muse；独立发布的 Muse 未加入 AI 合并包，避免该合并包连带接管整个 Meta 社交网络。上游调查与接入设计见 [Muse 上游调查](docs/plans/2026-10-26-muse-upstream-design.md)。
+
+### 定时工作流
+
 仓库当前使用三个 GitHub Actions 工作流：
 
 - `.github/workflows/validate.yml`

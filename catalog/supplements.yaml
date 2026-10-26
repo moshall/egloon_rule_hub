@@ -1,4 +1,10 @@
 supplements:
+  Muse:
+    - source: v2fly_domain_list
+      path: data/meta
+      format: v2fly_domain_list
+      priority: 10
+
   OpenAI:
     - source: v2fly_domain_list
       path: data/openai
