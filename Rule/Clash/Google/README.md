@@ -8,7 +8,7 @@ This layout documents a direct upstream target.
 
 - Selected source family: `native`
 - Upstream native target: `Clash`
-- Icon: [icon.png](./icon.png) ([upstream source](https://raw.githubusercontent.com/Keviin560/icon/main/src/Google.png))
+- Icon: unavailable (icon sync source unavailable)
 
 ## Published Variants
 

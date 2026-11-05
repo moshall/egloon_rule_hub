@@ -8,7 +8,7 @@ This layout documents a direct upstream target.
 
 - Selected source family: `native`
 - Upstream native target: `Shadowrocket`
-- Icon: unavailable (strict upstream match not found)
+- Icon: unavailable (icon sync source unavailable)
 
 ## Published Variants
 
