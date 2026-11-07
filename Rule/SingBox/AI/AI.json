@@ -12,6 +12,8 @@
         "static.cloudflareinsights.com",
         "cdn.usefathom.com",
         "servd-anthropic-website.b-cdn.net",
+        "http-intake.logs.us5.datadoghq.com",
+        "o1158394.ingest.us.sentry.io",
         "ai.google.dev",
         "alkalimakersuite-pa.clients6.google.com",
         "makersuite.google.com",

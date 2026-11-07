@@ -4,7 +4,9 @@
     {
       "domain": [
         "cdn.usefathom.com",
-        "servd-anthropic-website.b-cdn.net"
+        "servd-anthropic-website.b-cdn.net",
+        "http-intake.logs.us5.datadoghq.com",
+        "o1158394.ingest.us.sentry.io"
       ]
     },
     {
