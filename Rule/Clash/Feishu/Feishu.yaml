@@ -41,6 +41,10 @@ payload:
 - DOMAIN-SUFFIX,douyinvod.com
 - DOMAIN-SUFFIX,byteacctimg.com
 - DOMAIN-SUFFIX,doubaocdn.com
+- DOMAIN-SUFFIX,doubao.link
+- DOMAIN-SUFFIX,doubaoapps.com
+- DOMAIN-SUFFIX,feishu.link
+- DOMAIN-SUFFIX,feishuapp.com
 - IP-CIDR,39.105.254.0/24
 - IP-CIDR,39.105.247.0/25
 - IP-CIDR,47.113.76.128/25
@@ -342,7 +346,6 @@ payload:
 - DOMAIN-SUFFIX,feishu-psc.cn
 - DOMAIN-SUFFIX,feishu-staging.cn
 - DOMAIN-SUFFIX,feishuapp-cdn.net
-- DOMAIN-SUFFIX,feishuapp.com
 - DOMAIN-SUFFIX,feishudoc.cn
 - DOMAIN-SUFFIX,feishudoc.com
 - DOMAIN-SUFFIX,feishuhuiyi.cn

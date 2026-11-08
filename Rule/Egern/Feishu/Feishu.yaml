@@ -41,6 +41,10 @@ domain_suffix_set:
 - douyinvod.com
 - byteacctimg.com
 - doubaocdn.com
+- doubao.link
+- doubaoapps.com
+- feishu.link
+- feishuapp.com
 - anycross.com
 - blmpb.com
 - bytedancehermestest.com
@@ -53,7 +57,6 @@ domain_suffix_set:
 - feishu-psc.cn
 - feishu-staging.cn
 - feishuapp-cdn.net
-- feishuapp.com
 - feishudoc.cn
 - feishudoc.com
 - feishuhuiyi.cn
