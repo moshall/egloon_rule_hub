@@ -1,0 +1,73 @@
+{
+  "route_06": {
+    "source": "https://gist.githubusercontent.com/moshall/bdcaaca288bad5adfe5d2c9a926de873/raw/79f842b8eda7bec3b26a923790992c120b695f2d/picopi_inner_rule_set.yaml",
+    "source_format": "egern",
+    "domain_only": false,
+    "count": 6,
+    "skipped": {},
+    "sha256": "e9745378a2912e901ee7edf10ff465a5e597ba56f94e4f36b18e8bb76e797090"
+  },
+  "route_31": {
+    "source": "https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_direct_list.module",
+    "source_format": "shadowrocket",
+    "domain_only": false,
+    "count": 110192,
+    "skipped": {
+      "URL-REGEX": 8
+    },
+    "sha256": "48fda2e353eaab6cc51c4824ddef2a760812f45d79b0df37366d3841e302485b"
+  },
+  "route_32": {
+    "source": "https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Egern/Rules/Lan.yaml",
+    "source_format": "egern",
+    "domain_only": false,
+    "count": 14,
+    "skipped": {},
+    "sha256": "0a752d8397f84a0cc7ec6cca987ebad06d6a8e5fedef5e0568c9becac4e366d0"
+  },
+  "dns_forward_0": {
+    "source": "https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Egern/Rules/Lan.yaml",
+    "source_format": "egern",
+    "domain_only": true,
+    "count": 3,
+    "skipped": {
+      "ip_cidr_set": 8,
+      "ip_cidr6_set": 3
+    },
+    "sha256": "09d05a1be3624aba73f484d5976b933cf2fe27e956d69e4520fd9fb7d166b90f"
+  },
+  "dns_forward_1": {
+    "source": "https://raw.githubusercontent.com/Repcz/EgernRules/refs/heads/X/Rules/China/China_All.yaml",
+    "source_format": "egern",
+    "domain_only": true,
+    "count": 3700,
+    "skipped": {
+      "ip_cidr_set": 17,
+      "ip_cidr6_set": 4,
+      "user_agent_set": 31
+    },
+    "sha256": "99e6d3fdc603b11d691d139d70a1706c7829a0c0abc52ec01ede39a7f342b916"
+  },
+  "dns_forward_4": {
+    "source": "https://raw.githubusercontent.com/Repcz/EgernRules/refs/heads/X/Rules/Global/Global_All.yaml",
+    "source_format": "egern",
+    "domain_only": true,
+    "count": 35158,
+    "skipped": {
+      "ip_cidr_set": 115,
+      "ip_cidr6_set": 4,
+      "user_agent_set": 46
+    },
+    "sha256": "32c4ad281218291afe1a67751e4723ba6845590a9bbf8143e65d3a2cf65513c9"
+  },
+  "dns_forward_2": {
+    "source": "original domain condition",
+    "count": 1,
+    "sha256": "429bdf348009d95f0ccb9e4fd5041f0fc35a52bf974a93bc0cfc1e88bdc1aeb0"
+  },
+  "dns_forward_3": {
+    "source": "original domain condition",
+    "count": 1,
+    "sha256": "f738c2a6c8589ff2a3b35de39b489477d5ab0add47e7b497d37eab4d65216dcd"
+  }
+}

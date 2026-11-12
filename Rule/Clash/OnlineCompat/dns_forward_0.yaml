@@ -1,0 +1,4 @@
+payload:
+- DOMAIN-SUFFIX,home
+- DOMAIN-SUFFIX,lan
+- DOMAIN-SUFFIX,local
