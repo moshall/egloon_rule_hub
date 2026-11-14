@@ -11,11 +11,11 @@
     "source": "https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_direct_list.module",
     "source_format": "shadowrocket",
     "domain_only": false,
-    "count": 110192,
+    "count": 110291,
     "skipped": {
       "URL-REGEX": 8
     },
-    "sha256": "6502669b9118b84de02842cf9926a06644d61974e1127e8ced19afdc2d5eacc2"
+    "sha256": "76e61c925675934910cca40cde0fc3790d208d8abefe1fef53b7cd93989adcae"
   },
   "route_32": {
     "source": "https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Egern/Rules/Lan.yaml",
