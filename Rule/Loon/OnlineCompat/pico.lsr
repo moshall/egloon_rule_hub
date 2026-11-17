@@ -1,0 +1,7 @@
+# Public source converted to Loon; no proxy credentials.
+DOMAIN,superset.picopi.cn
+DOMAIN,supersetv4.picopi.cn
+DOMAIN,metabase.picopi.cn
+DOMAIN,cms.picopi.cn
+DOMAIN,zabbix.xintiaotime.com
+IP-CIDR,43.138.9.30/32

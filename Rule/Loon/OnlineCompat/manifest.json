@@ -1,0 +1,43 @@
+{
+  "sources": {
+    "pico": "https://gist.githubusercontent.com/moshall/bdcaaca288bad5adfe5d2c9a926de873/raw/79f842b8eda7bec3b26a923790992c120b695f2d/picopi_inner_rule_set.yaml",
+    "lan": "https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Egern/Rules/Lan.yaml",
+    "direct": "https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_direct_list.module",
+    "china_dns": "https://raw.githubusercontent.com/Repcz/EgernRules/refs/heads/X/Rules/China/China_All.yaml",
+    "global_dns": "https://raw.githubusercontent.com/Repcz/EgernRules/refs/heads/X/Rules/Global/Global_All.yaml"
+  },
+  "counts": {
+    "pico.lsr": 6,
+    "lan.lsr": 14,
+    "direct.lsr": 110254,
+    "cn.lsr": 1
+  },
+  "dns_host_mappings": 77486,
+  "dns_skipped": {
+    "China": {
+      "domain_keyword_set": 9,
+      "ip_cidr_set": 17,
+      "ip_cidr6_set": 4,
+      "user_agent_set": 31
+    },
+    "Global": {
+      "domain_keyword_set": 36,
+      "ip_cidr_set": 115,
+      "ip_cidr6_set": 4,
+      "user_agent_set": 46
+    }
+  },
+  "dns_limitations": [
+    "Only domain and suffix conditions converted; keywords and regexes not approximated.",
+    "Host specificity and matching order follow Loon, not Egern forward first-match.",
+    "One fixed DoH per category replaces the Egern upstream pools.",
+    "Does not configure or guarantee a proxy egress for encrypted DNS."
+  ],
+  "sha256": {
+    "pico.lsr": "26c0d06c21066e74d7f321bcaff10817843d0e86a6a194f3f0d131072be29c9f",
+    "lan.lsr": "92735b0adcb9efce7d15fd07e823534c55ba8a4d2261eb254b7214951d1e1be7",
+    "direct.lsr": "a1e0182bdc2e9112dd454c0ef3ab736d4ec5c46f4fa6c5fce99429129644478f",
+    "cn.lsr": "43341fa4638733f18bc69a1ed241859f8c736286a105bcde754797c2499e3c15",
+    "dns_mapping.lpx": "2d323a66e0bc17f3146c957fa1bb4c38e9d00a8050d0511f8992d84d65e8ba42"
+  }
+}
