@@ -1,5 +1,7 @@
 {
   "sources": {
+    "openai_lsr": "https://raw.githubusercontent.com/moshall/egloon_rule_hub/main/Rule/Loon/OpenAI/OpenAI.lsr",
+    "netflix_lsr": "https://raw.githubusercontent.com/moshall/egloon_rule_hub/main/Rule/Loon/Netflix/Netflix.lsr",
     "pico": "https://gist.githubusercontent.com/moshall/bdcaaca288bad5adfe5d2c9a926de873/raw/79f842b8eda7bec3b26a923790992c120b695f2d/picopi_inner_rule_set.yaml",
     "lan": "https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Egern/Rules/Lan.yaml",
     "direct": "https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_direct_list.module",
@@ -10,7 +12,9 @@
     "pico.lsr": 6,
     "lan.lsr": 14,
     "direct.lsr": 110254,
-    "cn.lsr": 1
+    "cn.lsr": 1,
+    "openai.lsr": 40,
+    "netflix.lsr": 1157
   },
   "dns_host_mappings": 77486,
   "dns_skipped": {
@@ -27,6 +31,17 @@
       "user_agent_set": 46
     }
   },
+  "unsupported_domain_regex": {
+    "openai": [
+      "DOMAIN-REGEX,^chatgpt-async-webps-prod-\\S+-\\d+\\.webpubsub\\.azure\\.com$"
+    ],
+    "netflix": [
+      "DOMAIN-REGEX,(^|\\.)apiproxy-device-prod-nlb-.+\\.amazonaws\\.com$",
+      "DOMAIN-REGEX,(^|\\.)apiproxy-website-nlb-prod-.+\\.amazonaws\\.com$",
+      "DOMAIN-REGEX,(^|\\.)dualstack\\.apiproxy-.+\\.amazonaws\\.com$",
+      "DOMAIN-REGEX,(^|\\.)dualstack\\.ichnaea-web-.+\\.amazonaws\\.com$"
+    ]
+  },
   "dns_limitations": [
     "Only domain and suffix conditions converted; keywords and regexes not approximated.",
     "Host specificity and matching order follow Loon, not Egern forward first-match.",
@@ -38,6 +53,8 @@
     "lan.lsr": "92735b0adcb9efce7d15fd07e823534c55ba8a4d2261eb254b7214951d1e1be7",
     "direct.lsr": "a1e0182bdc2e9112dd454c0ef3ab736d4ec5c46f4fa6c5fce99429129644478f",
     "cn.lsr": "43341fa4638733f18bc69a1ed241859f8c736286a105bcde754797c2499e3c15",
+    "openai.lsr": "3a8bc556ba46dedf0362e6727d69a56c9ba7e65239f95e569a080b23fbf80811",
+    "netflix.lsr": "cbe5d9afa94e0857b50754a996ce9344a5c728c7ac036b39e35d23c3183b35b4",
     "dns_mapping.lpx": "2d323a66e0bc17f3146c957fa1bb4c38e9d00a8050d0511f8992d84d65e8ba42"
   }
 }
