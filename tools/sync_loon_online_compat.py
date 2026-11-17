@@ -10,6 +10,8 @@ import yaml
 BASE = Path(__file__).resolve().parents[1]
 OUT = BASE / 'Rule/Loon/OnlineCompat'
 SOURCES = {
+    'openai_lsr': 'https://raw.githubusercontent.com/moshall/egloon_rule_hub/main/Rule/Loon/OpenAI/OpenAI.lsr',
+    'netflix_lsr': 'https://raw.githubusercontent.com/moshall/egloon_rule_hub/main/Rule/Loon/Netflix/Netflix.lsr',
     'pico': 'https://gist.githubusercontent.com/moshall/bdcaaca288bad5adfe5d2c9a926de873/raw/79f842b8eda7bec3b26a923790992c120b695f2d/picopi_inner_rule_set.yaml',
     'lan': 'https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Egern/Rules/Lan.yaml',
     'direct': 'https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_direct_list.module',
@@ -70,6 +72,18 @@ def build():
     with concurrent.futures.ThreadPoolExecutor(5) as pool:sources=dict(pool.map(fetch,SOURCES.items()))
     rules={'pico.lsr':egern_rules(sources['pico']), 'lan.lsr':egern_rules(sources['lan']),
            'direct.lsr':sr_rules(sources['direct']), 'cn.lsr':['GEOIP,CN']}
+    skipped_route_regex = {}
+    for name in ('openai', 'netflix'):
+        rows=[];excluded=[]
+        for raw in sources[name+'_lsr'].splitlines():
+            line=raw.strip()
+            if not line or line.startswith('#'):continue
+            if line.startswith('DOMAIN-REGEX,'):excluded.append(line);continue
+            assert line.split(',',1)[0] in {'DOMAIN','DOMAIN-SUFFIX','DOMAIN-KEYWORD','IP-CIDR','IP-CIDR6','IP-ASN','USER-AGENT'}
+            rows.append(line)
+        assert rows
+        rules[name+'.lsr']=rows
+        skipped_route_regex[name]=excluded
     # Preserve precedence for identical host patterns; wildcard specificity remains Loon's own behavior.
     mappings={}
     for name in ('home','lan','local'):
@@ -86,7 +100,7 @@ def build():
     contents={n:'# Public source converted to Loon; no proxy credentials.\n'+'\n'.join(rows)+'\n' for n,rows in rules.items()}
     contents['dns_mapping.lpx']='\n'.join(plugin)+'\n'
     metadata={'sources':SOURCES,'counts':{n:len(rows) for n,rows in rules.items()},'dns_host_mappings':len(mappings),
-              'dns_skipped':skipped,'dns_limitations':['Only domain and suffix conditions converted; keywords and regexes not approximated.',
+              'dns_skipped':skipped,'unsupported_domain_regex':skipped_route_regex,'dns_limitations':['Only domain and suffix conditions converted; keywords and regexes not approximated.',
               'Host specificity and matching order follow Loon, not Egern forward first-match.',
               'One fixed DoH per category replaces the Egern upstream pools.',
               'Does not configure or guarantee a proxy egress for encrypted DNS.'],
