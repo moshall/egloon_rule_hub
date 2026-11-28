@@ -15,7 +15,7 @@
     "skipped": {
       "URL-REGEX": 8
     },
-    "sha256": "37e4b4ce93fdad9af81836e7f8879869e15c7f1f2ba5c5e8925c8ead2440ddef"
+    "sha256": "ff2236a83c0fa277048f99aa491466435cd80e704b1453ec6b258a138932467c"
   },
   "route_32": {
     "source": "https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Egern/Rules/Lan.yaml",
